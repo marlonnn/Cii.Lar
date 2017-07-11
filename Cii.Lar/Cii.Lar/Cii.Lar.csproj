@@ -54,12 +54,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UI\SettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SettingForm.designer.cs">
+      <DependentUpon>SettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FunctionCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\FunctionCtrl.Designer.cs">
+      <DependentUpon>FunctionCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PictureBoxZoom.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EmptyForm.cs">
@@ -68,6 +81,31 @@
     <Compile Include="EmptyForm.designer.cs">
       <DependentUpon>EmptyForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\PictureTracker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\PictureTracker.Designer.cs">
+      <DependentUpon>PictureTracker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ScalablePictureBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\ScalablePictureBox.Designer.cs">
+      <DependentUpon>ScalablePictureBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ScalablePictureBoxImp.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\ScalablePictureBoxImp.Designer.cs">
+      <DependentUpon>ScalablePictureBoxImp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Util.cs" />
+    <EmbeddedResource Include="UI\SettingForm.resx">
+      <DependentUpon>SettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FunctionCtrl.resx">
+      <DependentUpon>FunctionCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -84,6 +122,15 @@
     <EmbeddedResource Include="EmptyForm.resx">
       <DependentUpon>EmptyForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\PictureTracker.resx">
+      <DependentUpon>PictureTracker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ScalablePictureBox.resx">
+      <DependentUpon>ScalablePictureBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ScalablePictureBoxImp.resx">
+      <DependentUpon>ScalablePictureBoxImp.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -98,15 +145,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\1.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\capture.png" />
     <Content Include="Resources\files.png" />
     <Content Include="Resources\laser.png" />
     <Content Include="Resources\lens.png" />
     <Content Include="Resources\logo.ico" />
+    <Content Include="Resources\Zoom in.png" />
+    <Content Include="Resources\Zoom out.png" />
+    <None Include="Resources\scale.png" />
     <Content Include="Resources\measure.png" />
     <Content Include="Resources\setting.png" />
     <Content Include="Resources\video.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
