@@ -23,9 +23,23 @@ namespace Cii.Lar.SysClass
             }
         }
 
+        private string[] languages;
+        public string[] Languages
+        {
+            get
+            {
+                return languages;
+            }
+            set
+            {
+                this.languages = value;
+            }
+        }
+
         public SysConfig()
         {
             this.storagePath = string.Format("{0}\\Archive",System.Environment.CurrentDirectory);
+            languages = new string[] { "English", "简体中文"};
         }
 
         public static SysConfig GetSysConfig()

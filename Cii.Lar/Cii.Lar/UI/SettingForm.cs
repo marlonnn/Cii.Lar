@@ -11,12 +11,15 @@ namespace Cii.Lar.UI
 {
     public partial class SettingForm : DevComponents.DotNetBar.Office2007Form
     {
+        private SystemInfoForm systemInfoForm;
         private SysConfig sysConfig;
         public SettingForm()
         {
             InitializeComponent();
             sysConfig = SysConfig.GetSysConfig();
             this.textBoxItemStoragePath.Text = sysConfig.StorePath;
+            this.comboBoxItemLanguage.Items.AddRange(sysConfig.Languages);
+            this.comboBoxItemLanguage.SelectedIndex = 0;
         }
 
         private void buttonSelect_Click(object sender, EventArgs e)
@@ -36,6 +39,12 @@ namespace Cii.Lar.UI
         private void buttonSave_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonSysInfo_Click(object sender, EventArgs e)
+        {
+            systemInfoForm = new SystemInfoForm();
+            systemInfoForm.ShowDialog();
         }
     }
 }

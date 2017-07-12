@@ -203,6 +203,7 @@ namespace Cii.Lar.UI
             this.buttonSysInfo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonSysInfo.TabIndex = 5;
             this.buttonSysInfo.Text = "System Information";
+            this.buttonSysInfo.Click += new System.EventHandler(this.buttonSysInfo_Click);
             // 
             // SettingForm
             // 
@@ -213,6 +214,7 @@ namespace Cii.Lar.UI
             this.Controls.Add(this.itemPanelCamera);
             this.Controls.Add(this.itemPanel2);
             this.Controls.Add(this.itemPanel1);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;

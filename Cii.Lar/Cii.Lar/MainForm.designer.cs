@@ -89,7 +89,6 @@ namespace Cii.Lar
             this.functionCtrl.Name = "functionCtrl";
             this.functionCtrl.Size = new System.Drawing.Size(740, 23);
             this.functionCtrl.TabIndex = 2;
-            this.functionCtrl.ToolStripClickHandler += new System.EventHandler(ToolStripClickHandler);
             // 
             // MainForm
             // 

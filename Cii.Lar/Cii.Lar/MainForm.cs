@@ -23,6 +23,7 @@ namespace Cii.Lar
             InitializeComponent();
             //this.WindowState = FormWindowState.Maximized;
             this.Load += MainForm_Load;
+            this.functionCtrl.ToolStripClickHandler += new System.EventHandler(ToolStripClickHandler);
         }
 
         private void CaptureImage()
