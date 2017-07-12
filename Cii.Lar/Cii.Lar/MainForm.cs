@@ -8,17 +8,41 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevComponents.DotNetBar.Metro.ColorTables;
 using DevComponents.DotNetBar;
+using Cii.Lar.UI;
+using Cii.Lar.SysClass;
+using System.Drawing.Imaging;
 
 namespace Cii.Lar
 {
     public partial class MainForm : DevComponents.DotNetBar.Office2007Form
     {
         private int CurrentScalePercent = 100;
+        private SettingForm settingForm;
         public MainForm()
         {
             InitializeComponent();
             //this.WindowState = FormWindowState.Maximized;
             this.Load += MainForm_Load;
+        }
+
+        private void CaptureImage()
+        {
+            try
+            {
+                using (Bitmap bitmap = new Bitmap(this.scalablePictureBox.PictureBox.Image.Width,
+                    this.scalablePictureBox.PictureBox.Image.Height))
+                {
+                    Rectangle rect = new Rectangle(0, 0, this.scalablePictureBox.PictureBox.Image.Width, 
+                        this.scalablePictureBox.PictureBox.Image.Height);
+                    this.scalablePictureBox.PictureBox.DrawToBitmap(bitmap, rect);
+                    string fileName = string.Format("{0}\\{1}.png", SysConfig.GetSysConfig().StorePath, DateTime.Now.ToString("yyyyMMddHHmmsss"));
+                    bitmap.Save(fileName, ImageFormat.Png);
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -34,6 +58,9 @@ namespace Cii.Lar
             var toolStripButton = sender as ToolStripButton;
             switch (toolStripButton.Text)
             {
+                case "toolStripButtonCapture":
+                    CaptureImage();
+                    break;
                 case "toolStripButtonZoomOut":
                     if (CurrentScalePercent == 60)
                     {
@@ -49,6 +76,10 @@ namespace Cii.Lar
                     }
                     CurrentScalePercent += 10;
                     this.scalablePictureBox.CurrentScalePercent = CurrentScalePercent;
+                    break;
+                case "toolStripButtonSetting":
+                    settingForm = new SettingForm();
+                    settingForm.ShowDialog();
                     break;
             }
         }

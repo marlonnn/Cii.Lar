@@ -100,6 +100,7 @@ namespace Cii.Lar.UI
 
             // Enable auto scroll of this control
             this.AutoScroll = true;
+            _zoom = 1;
         }
 
         /// <summary>
@@ -205,16 +206,16 @@ namespace Cii.Lar.UI
                 int top = (this.ClientSize.Height - this.pictureBox.Height) / 2;
                 int left = (this.ClientSize.Width - this.pictureBox.Width) / 2;
 
-                if (top < 0)
-                {
-                    top = this.AutoScrollPosition.Y;
-                }
-                if (left < 0)
-                {
-                    left = this.AutoScrollPosition.X;
-                }
-                this.pictureBox.Left = left;
-                this.pictureBox.Top = top;
+                //if (top < 0)
+                //{
+                //    top = this.AutoScrollPosition.Y;
+                //}
+                //if (left < 0)
+                //{
+                //    left = this.AutoScrollPosition.X;
+                //}
+                //this.pictureBox.Left = left;
+                //this.pictureBox.Top = top;
 
                 this.AutoScroll = true;
             }
@@ -295,22 +296,32 @@ namespace Cii.Lar.UI
             return (int)(minScalePercent * 100.0f);
         }
 
+        private float _zoom;
+        public float ZoomFactor { get { return _zoom; } }
+
         private void PictureBox_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            int delta = e.Delta;
-            if (delta > 0)
+            if (ModifierKeys == Keys.Control)
             {
-                //Zoom in
-                this.currentScalePercent += delta / 12;
+                int delta = e.Delta;
+                float scale = 1;
+                if (delta > 0)
+                {
+                    //Zoom in
+                    this.currentScalePercent += delta / 12;
+                    scale = 0.1f * currentScalePercent + 1;
+                }
+                else if (delta < 0)
+                {
+                    //Zoom out
+                    this.currentScalePercent -= (delta) / (-12);
+                    scale = -0.1f * currentScalePercent + 1;
+                }
+
+                //this.pictureBox.Left = (int)(e.X - scale * (e.X - pictureBox.Left));
+                //this.pictureBox.Top = (int)(e.Y - scale * (e.Y - pictureBox.Top));
+                this.ImageSizeMode = PictureBoxSizeMode.Normal;
             }
-            else if (delta < 0)
-            {
-                //Zoom out
-                this.currentScalePercent -= (delta) / (-12);
-            }
-            //this.pictureBox.Left = (int)(e.X - (this.currentScalePercent / 100) * e.X - pictureBox.Left);
-            //this.pictureBox.Top = (int)(e.Y - (this.currentScalePercent / 100) * e.Y - pictureBox.Top);
-            this.ImageSizeMode = PictureBoxSizeMode.Normal;
         }
 
         /// <summary>
