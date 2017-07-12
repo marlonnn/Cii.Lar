@@ -55,6 +55,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SysClass\SysConfig.cs" />
+    <Compile Include="UI\FilesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FilesForm.designer.cs">
+      <DependentUpon>FilesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\SystemInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +113,9 @@
       <DependentUpon>ScalablePictureBoxImp.cs</DependentUpon>
     </Compile>
     <Compile Include="Util.cs" />
+    <EmbeddedResource Include="UI\FilesForm.resx">
+      <DependentUpon>FilesForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\SystemInfoForm.resx">
       <DependentUpon>SystemInfoForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -162,10 +171,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\capture.png" />
+    <Content Include="Resources\copy.png" />
+    <Content Include="Resources\delete.png" />
     <Content Include="Resources\files.png" />
+    <Content Include="Resources\assign.png" />
     <Content Include="Resources\laser.png" />
     <Content Include="Resources\lens.png" />
     <Content Include="Resources\logo.ico" />
+    <Content Include="Resources\print.png" />
     <Content Include="Resources\Zoom in.png" />
     <Content Include="Resources\Zoom out.png" />
     <None Include="Resources\scale.png" />
@@ -173,7 +186,12 @@
     <Content Include="Resources\setting.png" />
     <Content Include="Resources\video.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ImageListView\ImageListView.csproj">
+      <Project>{0c295fb8-c6c6-4a40-9f19-05a43f353a04}</Project>
+      <Name>ImageListView</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

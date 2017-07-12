@@ -18,6 +18,7 @@ namespace Cii.Lar
     {
         private int CurrentScalePercent = 100;
         private SettingForm settingForm;
+        private FilesForm filesForm;
         public MainForm()
         {
             InitializeComponent();
@@ -61,6 +62,10 @@ namespace Cii.Lar
             {
                 case "toolStripButtonCapture":
                     CaptureImage();
+                    break;
+                case "toolStripFiles":
+                    filesForm = new FilesForm();
+                    filesForm.ShowDialog();
                     break;
                 case "toolStripButtonZoomOut":
                     if (CurrentScalePercent == 60)
