@@ -66,6 +66,7 @@ namespace Cii.Lar
             this.toolStripButtonDelete.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonDelete.Text = "toolStripButton1";
             this.toolStripButtonDelete.ToolTipText = "Delete";
+            this.toolStripButtonDelete.Click += new System.EventHandler(this.toolStripButtonDelete_Click);
             // 
             // toolStripButtonAssign
             // 
@@ -96,6 +97,7 @@ namespace Cii.Lar
             this.toolStripButtonPrint.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonPrint.Text = "toolStripButtonPrint";
             this.toolStripButtonPrint.ToolTipText = "Print";
+            this.toolStripButtonPrint.Click += new System.EventHandler(this.toolStripButtonPrint_Click);
             // 
             // toolStripSeparator1
             // 
@@ -105,7 +107,7 @@ namespace Cii.Lar
             // toolStripLabelSelectByID
             // 
             this.toolStripLabelSelectByID.Name = "toolStripLabelSelectByID";
-            this.toolStripLabelSelectByID.Size = new System.Drawing.Size(123, 22);
+            this.toolStripLabelSelectByID.Size = new System.Drawing.Size(111, 22);
             this.toolStripLabelSelectByID.Text = "Select Patient by ID:";
             // 
             // toolStripComboBox1
@@ -118,7 +120,7 @@ namespace Cii.Lar
             this.imageListView.DefaultImage = ((System.Drawing.Image)(resources.GetObject("imageListView.DefaultImage")));
             this.imageListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.imageListView.ErrorImage = ((System.Drawing.Image)(resources.GetObject("imageListView.ErrorImage")));
-            this.imageListView.HeaderFont = new System.Drawing.Font("ËÎÌו", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.imageListView.HeaderFont = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.imageListView.Location = new System.Drawing.Point(0, 25);
             this.imageListView.Name = "imageListView";
             this.imageListView.Size = new System.Drawing.Size(726, 535);
@@ -132,11 +134,10 @@ namespace Cii.Lar
             this.ClientSize = new System.Drawing.Size(726, 560);
             this.Controls.Add(this.imageListView);
             this.Controls.Add(this.toolStrip1);
-            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "FilesForm";
             this.ShowIcon = false;
-            this.Text = "toolStripButtonAssign";
+            this.Text = "Fils";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);

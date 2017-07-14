@@ -54,12 +54,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExpClass\Report.cs" />
+    <Compile Include="ExpClass\ReportItemBase.cs" />
+    <Compile Include="ExpClass\ReportPage.cs" />
+    <Compile Include="ExpClass\ReportPictureItem.cs" />
     <Compile Include="SysClass\SysConfig.cs" />
+    <Compile Include="UI\ArrayChangedEventArgs.cs" />
+    <Compile Include="UI\ReportCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\ReportCtrl.Designer.cs">
+      <DependentUpon>ReportCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportCtrlPicture.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\ReportCtrlPicture.Designer.cs">
+      <DependentUpon>ReportCtrlPicture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ReportForm.designer.cs">
+      <DependentUpon>ReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\FilesForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\FilesForm.designer.cs">
       <DependentUpon>FilesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportLayout.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\ReportLayout.Designer.cs">
+      <DependentUpon>ReportLayout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportPageUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\ReportPageUI.Designer.cs">
+      <DependentUpon>ReportPageUI.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\SystemInfoForm.cs">
       <SubType>Form</SubType>
@@ -112,8 +147,20 @@
       <DependentUpon>ScalablePictureBoxImp.cs</DependentUpon>
     </Compile>
     <Compile Include="Util.cs" />
+    <EmbeddedResource Include="UI\ReportCtrl.resx">
+      <DependentUpon>ReportCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ReportCtrlPicture.resx">
+      <DependentUpon>ReportCtrlPicture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ReportForm.resx">
+      <DependentUpon>ReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\FilesForm.resx">
       <DependentUpon>FilesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ReportPageUI.resx">
+      <DependentUpon>ReportPageUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\SystemInfoForm.resx">
       <DependentUpon>SystemInfoForm.cs</DependentUpon>
@@ -180,6 +227,7 @@
     <Content Include="Resources\print.png" />
     <Content Include="Resources\Zoom in.png" />
     <Content Include="Resources\Zoom out.png" />
+    <Content Include="Resources\zoom.png" />
     <None Include="Resources\scale.png" />
     <Content Include="Resources\measure.png" />
     <Content Include="Resources\setting.png" />
@@ -191,6 +239,7 @@
       <Name>ImageListView</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
