@@ -31,14 +31,10 @@ namespace Cii.Lar
         {
             try
             {
-                using (Bitmap bitmap = new Bitmap(this.scalablePictureBox.PictureBox.Image.Width,
-                    this.scalablePictureBox.PictureBox.Image.Height))
+                using (Bitmap bitmap = new Bitmap(this.scalablePictureBox.PictureBox.Image))
                 {
-                    Rectangle rect = new Rectangle(0, 0, this.scalablePictureBox.PictureBox.Image.Width, 
-                        this.scalablePictureBox.PictureBox.Image.Height);
-                    this.scalablePictureBox.PictureBox.DrawToBitmap(bitmap, rect);
                     string fileName = string.Format("{0}\\{1}.png", SysConfig.GetSysConfig().StorePath, DateTime.Now.ToString("yyyyMMddHHmmsss"));
-                    bitmap.Save(fileName, ImageFormat.Png);
+                    bitmap.Save(fileName);
                 }
             }
             catch (Exception e)
