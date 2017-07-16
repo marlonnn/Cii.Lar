@@ -144,11 +144,6 @@ namespace Cii.Lar.UI
 
         private void InitialPageSize()
         {
-            //Graphics g = this.CreateGraphics();
-            //float dpix = g.DpiX;    // DPI of printer is 100
-            //_pageWidth = 827; //(int)Math.Round(dpix / 2.54 * 21);
-            //_pageHeight = 1169; //(int)Math.Round(dpix / 2.54 * 29.7);
-            //if (this.Width < _pageWidth) this.Width = _pageWidth;
 
             float coefficent = report.Factor / 100;
 
@@ -198,8 +193,90 @@ namespace Cii.Lar.UI
             ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
             if (tsmi != null)
             {
+                UncheckZoomItem();
+                tsmi.Checked = true;
+                this.report.Factor = Convert.ToSingle(tsmi.Tag.ToString());
 
+                Zoom();
             }
+        }
+
+        private void UncheckZoomItem()
+        {
+            tsmi500.Checked = false;
+            tsmi200.Checked = false;
+            tsmi150.Checked = false;
+            tsmi100.Checked = false;
+        }
+
+        private void Zoom()
+        {
+            float coefficent = report.Factor;
+
+            if (report.Landscape)
+            {
+                this.pageHeight = (int)(PAGE_WIDTH * coefficent); ;
+                this.pageWidth = (int)(PAGE_HEIGHT * coefficent);
+            }
+            else
+            {
+                this.pageHeight = (int)(PAGE_HEIGHT * coefficent);
+                this.pageWidth = (int)(PAGE_WIDTH * coefficent);
+            }
+
+            AdjustPagePosition();
+
+            foreach (ReportPageUI rpu in pages)
+            {
+                foreach (Control con in rpu.Controls)
+                {
+                    ReportCtrl rc = con as ReportCtrl;
+                    if (rc != null)
+                    {
+                        ZoomControl(rc, coefficent);
+                    }
+                }
+            }
+
+            UncheckZoomItem();
+            GetZoomTool((int)report.Factor).Checked = true;
+        }
+
+        private void AdjustPagePosition()
+        {
+            for (int i = 0; i < pages.Count; i++)
+            {
+                SetPageBounds(pages[i], i + 1);
+                foreach (var item in pages[i].Controls)
+                {
+                    ReportCtrl rc = item as ReportCtrl;
+                    if (rc != null)
+                    {
+                        rc.ResetSubCtrlLocation();
+                    }
+                }
+            }
+        }
+
+        private ToolStripMenuItem GetZoomTool(int factor)
+        {
+            ToolStripMenuItem item = null;
+            switch (factor)
+            {
+                case 500:
+                    item = tsmi500;
+                    break;
+                case 200:
+                    item = tsmi200;
+                    break;
+                case 150:
+                    item = tsmi150;
+                    break;
+                case 100:
+                    item = tsmi100;
+                    break;
+            }
+            return item;
         }
     }
 }

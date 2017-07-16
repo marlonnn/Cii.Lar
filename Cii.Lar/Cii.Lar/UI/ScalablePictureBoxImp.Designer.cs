@@ -41,7 +41,7 @@
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
             this.pictureBox.LocationChanged += new System.EventHandler(this.PictureBox_LocationChanged);
-            this.pictureBox.Click += new System.EventHandler(PictureBox_Click);
+            //this.pictureBox.Click += new System.EventHandler(PictureBox_Click);
             this.pictureBox.MouseWheel += PictureBox_MouseWheel;
             this.pictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.PictureBox_Paint);
             // 

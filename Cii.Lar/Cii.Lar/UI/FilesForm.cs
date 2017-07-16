@@ -2,6 +2,7 @@ using Cii.Lar.ExpClass;
 using Cii.Lar.SysClass;
 using Cii.Lar.UI;
 using DevComponents.DotNetBar;
+using Manina.Windows.Forms;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -85,6 +86,33 @@ namespace Cii.Lar
             }
             reportFrom = new ReportForm(report);
             reportFrom.ShowDialog();
+        }
+
+        private void timerStatus_Tick(object sender, EventArgs e)
+        {
+            UpdateStatus();
+            timerStatus.Enabled = false;
+        }
+
+        private void imageListView_SelectionChanged(object sender, EventArgs e)
+        {
+            UpdateStatus();
+        }
+
+        private void UpdateStatus()
+        {
+            if (imageListView.Items.Count == 0)
+                UpdateStatus("Ready");
+            else if (imageListView.SelectedItems.Count == 0)
+                UpdateStatus(string.Format("{0} images", imageListView.Items.Count));
+            else
+                UpdateStatus(string.Format("{0} images ({1} selected)", imageListView.Items.Count, 
+                    imageListView.SelectedItems.Count));
+        }
+
+        private void UpdateStatus(string text)
+        {
+            toolStripStatusLabel.Text = text;
         }
     }
 }

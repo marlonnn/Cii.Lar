@@ -196,5 +196,11 @@ namespace Cii.Lar.UI
             //_subctrl.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
             this.Controls.Add(subCtrl);
         }
+
+        public void ResetSubCtrlLocation()
+        {
+            if (subCtrl == null) return;
+            subCtrl.Location = new Point(BORDER_SIZE, BORDER_SIZE);
+        }
     }
 }

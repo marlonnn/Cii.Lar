@@ -24,7 +24,6 @@ namespace Cii.Lar
             InitializeComponent();
             //this.WindowState = FormWindowState.Maximized;
             this.Load += MainForm_Load;
-            this.functionCtrl.ToolStripClickHandler += new System.EventHandler(ToolStripClickHandler);
         }
 
         private void CaptureImage()
@@ -35,12 +34,20 @@ namespace Cii.Lar
                 {
                     string fileName = string.Format("{0}\\{1}.png", SysConfig.GetSysConfig().StorePath, DateTime.Now.ToString("yyyyMMddHHmmsss"));
                     bitmap.Save(fileName);
+                    ShowToastNotification();
                 }
             }
             catch (Exception e)
             {
 
             }
+        }
+
+        private void ShowToastNotification()
+        {
+            ToastNotification.Show(this, "Screenshot success", 
+                global::Cii.Lar.Properties.Resources.capture, 1000, eToastGlowColor.Blue,
+                eToastPosition.MiddleCenter);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -99,6 +106,53 @@ namespace Cii.Lar
                 this.WindowState = FormWindowState.Normal;
                 this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             }
+        }
+
+        private void toolStripButtonCapture_Click(object sender, EventArgs e)
+        {
+            CaptureImage();
+        }
+
+        private void toolStripButtonVideo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripFiles_Click(object sender, EventArgs e)
+        {
+            filesForm = new FilesForm();
+            filesForm.ShowDialog();
+        }
+
+        private void toolStripButtonZoomOut_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButtonZoomIn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButtonScale_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButtonMeasure_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButtonLaser_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButtonSetting_Click(object sender, EventArgs e)
+        {
+            settingForm = new SettingForm();
+            settingForm.ShowDialog();
         }
     }
 }

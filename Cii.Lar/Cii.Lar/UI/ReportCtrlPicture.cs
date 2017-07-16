@@ -13,8 +13,6 @@ namespace Cii.Lar.UI
 {
     public partial class ReportCtrlPicture : ReportCtrl
     {
-        private Size pictureSizeAfterZoom;
-
         public PictureBox SubCtrl
         {
             get { return subCtrl as PictureBox; }
@@ -63,6 +61,23 @@ namespace Cii.Lar.UI
         }
 
         public override void Draw(Graphics g, Rectangle bounds)
+        {
+            Point p = bounds.Location;
+            p.Offset(SubCtrl.Location);
+
+            if (oldBounds.Size.Width == 0 || oldBounds.Size.Height == 0)
+            {
+                oldBounds.Size = this.Size;
+            }
+
+            Rectangle rectSrc = new Rectangle(new Point(0, 0), PictureItem.OldImageSize);
+
+            Rectangle rectDec = new Rectangle(p, SubCtrl.Size);
+
+            g.DrawImage(SubCtrl.Image, rectDec, rectSrc, GraphicsUnit.Pixel);
+        }
+
+        private void ScaleImage()
         {
 
         }

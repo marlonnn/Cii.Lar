@@ -216,6 +216,7 @@
     <Content Include="Resources\1.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\camera.png" />
     <Content Include="Resources\capture.png" />
     <Content Include="Resources\copy.png" />
     <Content Include="Resources\delete.png" />

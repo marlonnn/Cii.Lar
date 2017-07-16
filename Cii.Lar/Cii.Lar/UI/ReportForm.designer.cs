@@ -37,9 +37,9 @@ namespace Cii.Lar.UI
             this.tsmi200 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi150 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi100 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tslPages = new System.Windows.Forms.ToolStripLabel();
             this.reportLayout = new Cii.Lar.UI.ReportLayout(this.components);
             this.pnlSpace = new System.Windows.Forms.Panel();
-            this.tslPages = new System.Windows.Forms.ToolStripLabel();
             this.toolStrip.SuspendLayout();
             this.reportLayout.SuspendLayout();
             this.SuspendLayout();
@@ -88,30 +88,41 @@ namespace Cii.Lar.UI
             // tsmi500
             // 
             this.tsmi500.Name = "tsmi500";
-            this.tsmi500.Size = new System.Drawing.Size(102, 22);
+            this.tsmi500.Size = new System.Drawing.Size(152, 22);
+            this.tsmi500.Tag = "500";
             this.tsmi500.Text = "500%";
             this.tsmi500.Click += new System.EventHandler(this.tssbZoom_Click);
             // 
             // tsmi200
             // 
             this.tsmi200.Name = "tsmi200";
-            this.tsmi200.Size = new System.Drawing.Size(102, 22);
+            this.tsmi200.Size = new System.Drawing.Size(152, 22);
+            this.tsmi200.Tag = "200";
             this.tsmi200.Text = "200%";
             this.tsmi200.Click += new System.EventHandler(this.tssbZoom_Click);
             // 
             // tsmi150
             // 
             this.tsmi150.Name = "tsmi150";
-            this.tsmi150.Size = new System.Drawing.Size(102, 22);
+            this.tsmi150.Size = new System.Drawing.Size(152, 22);
+            this.tsmi150.Tag = "150";
             this.tsmi150.Text = "150%";
             this.tsmi150.Click += new System.EventHandler(this.tssbZoom_Click);
             // 
             // tsmi100
             // 
             this.tsmi100.Name = "tsmi100";
-            this.tsmi100.Size = new System.Drawing.Size(102, 22);
+            this.tsmi100.Size = new System.Drawing.Size(152, 22);
+            this.tsmi100.Tag = "100";
             this.tsmi100.Text = "100%";
             this.tsmi100.Click += new System.EventHandler(this.tssbZoom_Click);
+            // 
+            // tslPages
+            // 
+            this.tslPages.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tslPages.Name = "tslPages";
+            this.tslPages.Size = new System.Drawing.Size(63, 22);
+            this.tslPages.Text = "Page: 1/1";
             // 
             // reportLayout
             // 
@@ -138,13 +149,6 @@ namespace Cii.Lar.UI
             this.pnlSpace.Size = new System.Drawing.Size(81, 15);
             this.pnlSpace.TabIndex = 0;
             // 
-            // tslPages
-            // 
-            this.tslPages.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tslPages.Name = "tslPages";
-            this.tslPages.Size = new System.Drawing.Size(56, 22);
-            this.tslPages.Text = "Page: 1/1";
-            // 
             // ReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -152,6 +156,7 @@ namespace Cii.Lar.UI
             this.ClientSize = new System.Drawing.Size(901, 609);
             this.Controls.Add(this.reportLayout);
             this.Controls.Add(this.toolStrip);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.KeyPreview = true;
             this.Name = "ReportForm";
