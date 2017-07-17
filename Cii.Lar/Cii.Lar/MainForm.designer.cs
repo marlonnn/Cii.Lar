@@ -36,18 +36,26 @@ namespace Cii.Lar
             this.metroStatusBar1 = new DevComponents.DotNetBar.Metro.MetroStatusBar();
             this.labelItem1 = new DevComponents.DotNetBar.LabelItem();
             this.styleManager1 = new DevComponents.DotNetBar.StyleManager(this.components);
-            this.scalablePictureBox = new Cii.Lar.UI.ScalablePictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonCapture = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonVideo = new System.Windows.Forms.ToolStripButton();
             this.toolStripFiles = new System.Windows.Forms.ToolStripButton();
-            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripButtonZoomOut = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonZoomIn = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonScale = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonMeasure = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonElliptical = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonRectangle = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonPolygon = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonLaser = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSetting = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.scalablePictureBox = new Cii.Lar.UI.ScalablePictureBox();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,9 +73,9 @@ namespace Cii.Lar
             this.metroStatusBar1.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.labelItem1});
             this.metroStatusBar1.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-            this.metroStatusBar1.Location = new System.Drawing.Point(0, 503);
+            this.metroStatusBar1.Location = new System.Drawing.Point(0, 545);
             this.metroStatusBar1.Name = "metroStatusBar1";
-            this.metroStatusBar1.Size = new System.Drawing.Size(740, 20);
+            this.metroStatusBar1.Size = new System.Drawing.Size(740, 22);
             this.metroStatusBar1.TabIndex = 1;
             this.metroStatusBar1.Text = "metroStatusBar1";
             // 
@@ -81,16 +89,6 @@ namespace Cii.Lar
             this.styleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Metro;
             this.styleManager1.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255))))), System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64))))));
             // 
-            // scalablePictureBox
-            // 
-            this.scalablePictureBox.BackColor = System.Drawing.Color.White;
-            this.scalablePictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scalablePictureBox.ForeColor = System.Drawing.Color.Black;
-            this.scalablePictureBox.Location = new System.Drawing.Point(0, 0);
-            this.scalablePictureBox.Name = "scalablePictureBox";
-            this.scalablePictureBox.Size = new System.Drawing.Size(740, 503);
-            this.scalablePictureBox.TabIndex = 3;
-            // 
             // toolStrip1
             // 
             this.toolStrip1.BackColor = System.Drawing.Color.White;
@@ -98,11 +96,19 @@ namespace Cii.Lar
             this.toolStripButtonCapture,
             this.toolStripButtonVideo,
             this.toolStripFiles,
+            this.toolStripSeparator1,
             this.toolStripComboBox1,
+            this.toolStripSeparator2,
             this.toolStripButtonZoomOut,
             this.toolStripButtonZoomIn,
+            this.toolStripSeparator3,
             this.toolStripButtonScale,
+            this.toolStripSeparator4,
             this.toolStripButtonMeasure,
+            this.toolStripButtonRectangle,
+            this.toolStripButtonElliptical,
+            this.toolStripButtonPolygon,
+            this.toolStripSeparator5,
             this.toolStripButtonLaser,
             this.toolStripButtonSetting});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -110,6 +116,31 @@ namespace Cii.Lar
             this.toolStrip1.Size = new System.Drawing.Size(740, 25);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripComboBox1
+            // 
+            this.toolStripComboBox1.Name = "toolStripComboBox1";
+            this.toolStripComboBox1.Size = new System.Drawing.Size(80, 25);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // toolStripButtonCapture
             // 
@@ -143,11 +174,6 @@ namespace Cii.Lar
             this.toolStripFiles.Text = "toolStripFiles";
             this.toolStripFiles.ToolTipText = "File Archiving";
             this.toolStripFiles.Click += new System.EventHandler(this.toolStripFiles_Click);
-            // 
-            // toolStripComboBox1
-            // 
-            this.toolStripComboBox1.Name = "toolStripComboBox1";
-            this.toolStripComboBox1.Size = new System.Drawing.Size(80, 25);
             // 
             // toolStripButtonZoomOut
             // 
@@ -189,9 +215,39 @@ namespace Cii.Lar
             this.toolStripButtonMeasure.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonMeasure.Name = "toolStripButtonMeasure";
             this.toolStripButtonMeasure.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonMeasure.Text = "toolStripButtonMeasure";
+            this.toolStripButtonMeasure.Text = "toolStripButtonLine";
             this.toolStripButtonMeasure.ToolTipText = "Measure";
-            this.toolStripButtonMeasure.Click += new System.EventHandler(this.toolStripButtonMeasure_Click);
+            this.toolStripButtonMeasure.Click += new System.EventHandler(this.toolStripButtonLine_Click);
+            // 
+            // toolStripButtonElliptical
+            // 
+            this.toolStripButtonElliptical.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonElliptical.Image = global::Cii.Lar.Properties.Resources.elliptical;
+            this.toolStripButtonElliptical.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonElliptical.Name = "toolStripButtonElliptical";
+            this.toolStripButtonElliptical.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonElliptical.Text = "Elliptical";
+            this.toolStripButtonElliptical.Click += new System.EventHandler(this.toolStripButtonElliptical_Click);
+            // 
+            // toolStripButtonRectangle
+            // 
+            this.toolStripButtonRectangle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonRectangle.Image = global::Cii.Lar.Properties.Resources.rectangular;
+            this.toolStripButtonRectangle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonRectangle.Name = "toolStripButtonRectangle";
+            this.toolStripButtonRectangle.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonRectangle.Text = "Rectangle";
+            this.toolStripButtonRectangle.Click += new System.EventHandler(this.toolStripButtonRectangle_Click);
+            // 
+            // toolStripButtonPolygon
+            // 
+            this.toolStripButtonPolygon.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonPolygon.Image = global::Cii.Lar.Properties.Resources.polygon;
+            this.toolStripButtonPolygon.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonPolygon.Name = "toolStripButtonPolygon";
+            this.toolStripButtonPolygon.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonPolygon.Text = "Polygon";
+            this.toolStripButtonPolygon.Click += new System.EventHandler(this.toolStripButtonPolygon_Click);
             // 
             // toolStripButtonLaser
             // 
@@ -215,16 +271,30 @@ namespace Cii.Lar
             this.toolStripButtonSetting.ToolTipText = "Setting";
             this.toolStripButtonSetting.Click += new System.EventHandler(this.toolStripButtonSetting_Click);
             // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
+            // 
+            // scalablePictureBox
+            // 
+            this.scalablePictureBox.BackColor = System.Drawing.Color.White;
+            this.scalablePictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scalablePictureBox.ForeColor = System.Drawing.Color.Black;
+            this.scalablePictureBox.Location = new System.Drawing.Point(0, 0);
+            this.scalablePictureBox.Name = "scalablePictureBox";
+            this.scalablePictureBox.Size = new System.Drawing.Size(740, 545);
+            this.scalablePictureBox.TabIndex = 3;
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(740, 523);
+            this.ClientSize = new System.Drawing.Size(740, 567);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.scalablePictureBox);
             this.Controls.Add(this.metroStatusBar1);
-            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.ShowIcon = false;
@@ -252,6 +322,14 @@ namespace Cii.Lar
         private System.Windows.Forms.ToolStripButton toolStripButtonMeasure;
         private System.Windows.Forms.ToolStripButton toolStripButtonLaser;
         private System.Windows.Forms.ToolStripButton toolStripButtonSetting;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripButton toolStripButtonElliptical;
+        private System.Windows.Forms.ToolStripButton toolStripButtonRectangle;
+        private System.Windows.Forms.ToolStripButton toolStripButtonPolygon;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
     }
 }
 

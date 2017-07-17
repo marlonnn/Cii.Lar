@@ -54,7 +54,6 @@ namespace Cii.Lar.UI
         private void LoadForm()
         {
             //SetReportName();
-            // A4 ÷Ω¥Û–°
             InitialPageSize();
             pages.Clear();
             RemoveReportControl();
@@ -211,11 +210,11 @@ namespace Cii.Lar.UI
 
         private void Zoom()
         {
-            float coefficent = report.Factor;
+            float coefficent = report.Factor / 100;
 
             if (report.Landscape)
             {
-                this.pageHeight = (int)(PAGE_WIDTH * coefficent); ;
+                this.pageHeight = (int)(PAGE_WIDTH * coefficent);
                 this.pageWidth = (int)(PAGE_HEIGHT * coefficent);
             }
             else

@@ -139,12 +139,27 @@ namespace Cii.Lar
 
         }
 
-        private void toolStripButtonMeasure_Click(object sender, EventArgs e)
+        private void toolStripButtonLine_Click(object sender, EventArgs e)
         {
 
         }
 
         private void toolStripButtonLaser_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButtonRectangle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButtonElliptical_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButtonPolygon_Click(object sender, EventArgs e)
         {
 
         }

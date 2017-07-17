@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cii.Lar.ExpClass;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 
 namespace Cii.Lar.UI
 {
@@ -51,7 +53,7 @@ namespace Cii.Lar.UI
         {
             InitializeComponent();
             subCtrl = new PictureBox();
-            SubCtrl.Image = PictureItem.Picture;
+            SubCtrl.Image = ScaleFitPage((Bitmap)PictureItem.Picture, ReportForm.PAGE_HEIGHT, ReportForm.PAGE_WIDTH);
         }
 
         protected override void ReportCtrl_Load(object sender, EventArgs e)
@@ -77,9 +79,54 @@ namespace Cii.Lar.UI
             g.DrawImage(SubCtrl.Image, rectDec, rectSrc, GraphicsUnit.Pixel);
         }
 
-        private void ScaleImage()
+        /// <summary>
+        /// scale image to fit current page
+        /// </summary>
+        /// <param name="b">source image</param>
+        /// <param name="destHeight">page height</param>
+        /// <param name="destWidth">page width</param>
+        /// <returns></returns>
+        public Bitmap ScaleFitPage(Bitmap b, int destHeight, int destWidth)
         {
-
+            System.Drawing.Image imgSource = b;
+            System.Drawing.Imaging.ImageFormat thisFormat = imgSource.RawFormat;
+            int sW = 0, sH = 0;
+            // equal scale          
+            int sWidth = imgSource.Width;
+            int sHeight = imgSource.Height;
+            if (sHeight > destHeight || sWidth > destWidth)
+            {
+                if ((sWidth * destHeight) > (sHeight * destWidth))
+                {
+                    sW = destWidth;
+                    sH = (destWidth * sHeight) / sWidth;
+                }
+                else
+                {
+                    sH = destHeight;
+                    sW = (sWidth * destHeight) / sHeight;
+                }
+            }
+            else
+            {
+                sW = sWidth;
+                sH = sHeight;
+            }
+            Bitmap outBmp = new Bitmap(destWidth, destHeight);
+            Graphics g = Graphics.FromImage(outBmp);
+            g.Clear(Color.Transparent);      
+            g.CompositingQuality = CompositingQuality.HighQuality;
+            g.SmoothingMode = SmoothingMode.HighQuality;
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            g.DrawImage(imgSource, new Rectangle((destWidth - sW) / 2, (destHeight - sH) / 2, sW, sH), 0, 0, imgSource.Width, imgSource.Height, GraphicsUnit.Pixel);
+            g.Dispose();   
+            EncoderParameters encoderParams = new EncoderParameters();
+            long[] quality = new long[1];
+            quality[0] = 100;
+            EncoderParameter encoderParam = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality);
+            encoderParams.Param[0] = encoderParam;
+            imgSource.Dispose();
+            return outBmp;
         }
     }
 }
