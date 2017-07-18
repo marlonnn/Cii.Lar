@@ -88,6 +88,7 @@ namespace Cii.Lar.UI
 
             }
         }
+        public bool IsPrint { set; get; }
         public virtual void Scale(double factor)
         {
             if (factor < 0) return;

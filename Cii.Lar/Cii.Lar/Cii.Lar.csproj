@@ -254,6 +254,7 @@
     <Content Include="Resources\lens.png" />
     <Content Include="Resources\logo.ico" />
     <Content Include="Resources\polygon.png" />
+    <Content Include="Resources\print preview.png" />
     <Content Include="Resources\print.png" />
     <Content Include="Resources\rectangular.png" />
     <Content Include="Resources\Zoom in.png" />

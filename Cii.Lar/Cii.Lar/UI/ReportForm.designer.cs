@@ -31,6 +31,7 @@ namespace Cii.Lar.UI
             this.components = new System.ComponentModel.Container();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonPrint = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonPreview = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButtonZoom = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsmi500 = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,6 +49,7 @@ namespace Cii.Lar.UI
             // 
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonPrint,
+            this.toolStripButtonPreview,
             this.toolStripSeparator1,
             this.toolStripDropDownButtonZoom,
             this.tslPages});
@@ -64,7 +66,18 @@ namespace Cii.Lar.UI
             this.toolStripButtonPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonPrint.Name = "toolStripButtonPrint";
             this.toolStripButtonPrint.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonPrint.Text = "toolStripButton1";
+            this.toolStripButtonPrint.Text = "Print";
+            this.toolStripButtonPrint.Click += new System.EventHandler(this.toolStripButtonPrint_Click);
+            // 
+            // toolStripButtonPreview
+            // 
+            this.toolStripButtonPreview.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonPreview.Image = global::Cii.Lar.Properties.Resources.print_preview;
+            this.toolStripButtonPreview.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonPreview.Name = "toolStripButtonPreview";
+            this.toolStripButtonPreview.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonPreview.Text = "Preview";
+            this.toolStripButtonPreview.Click += new System.EventHandler(this.toolStripButtonPreview_Click);
             // 
             // toolStripSeparator1
             // 
@@ -88,7 +101,7 @@ namespace Cii.Lar.UI
             // tsmi500
             // 
             this.tsmi500.Name = "tsmi500";
-            this.tsmi500.Size = new System.Drawing.Size(152, 22);
+            this.tsmi500.Size = new System.Drawing.Size(102, 22);
             this.tsmi500.Tag = "500";
             this.tsmi500.Text = "500%";
             this.tsmi500.Click += new System.EventHandler(this.tssbZoom_Click);
@@ -96,7 +109,7 @@ namespace Cii.Lar.UI
             // tsmi200
             // 
             this.tsmi200.Name = "tsmi200";
-            this.tsmi200.Size = new System.Drawing.Size(152, 22);
+            this.tsmi200.Size = new System.Drawing.Size(102, 22);
             this.tsmi200.Tag = "200";
             this.tsmi200.Text = "200%";
             this.tsmi200.Click += new System.EventHandler(this.tssbZoom_Click);
@@ -104,7 +117,7 @@ namespace Cii.Lar.UI
             // tsmi150
             // 
             this.tsmi150.Name = "tsmi150";
-            this.tsmi150.Size = new System.Drawing.Size(152, 22);
+            this.tsmi150.Size = new System.Drawing.Size(102, 22);
             this.tsmi150.Tag = "150";
             this.tsmi150.Text = "150%";
             this.tsmi150.Click += new System.EventHandler(this.tssbZoom_Click);
@@ -112,7 +125,7 @@ namespace Cii.Lar.UI
             // tsmi100
             // 
             this.tsmi100.Name = "tsmi100";
-            this.tsmi100.Size = new System.Drawing.Size(152, 22);
+            this.tsmi100.Size = new System.Drawing.Size(102, 22);
             this.tsmi100.Tag = "100";
             this.tsmi100.Text = "100%";
             this.tsmi100.Click += new System.EventHandler(this.tssbZoom_Click);
@@ -121,7 +134,7 @@ namespace Cii.Lar.UI
             // 
             this.tslPages.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tslPages.Name = "tslPages";
-            this.tslPages.Size = new System.Drawing.Size(63, 22);
+            this.tslPages.Size = new System.Drawing.Size(56, 22);
             this.tslPages.Text = "Page: 1/1";
             // 
             // reportLayout
@@ -156,7 +169,6 @@ namespace Cii.Lar.UI
             this.ClientSize = new System.Drawing.Size(901, 609);
             this.Controls.Add(this.reportLayout);
             this.Controls.Add(this.toolStrip);
-            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.KeyPreview = true;
             this.Name = "ReportForm";
@@ -184,6 +196,7 @@ namespace Cii.Lar.UI
         private ReportLayout reportLayout;
         private System.Windows.Forms.Panel pnlSpace;
         private System.Windows.Forms.ToolStripLabel tslPages;
+        private System.Windows.Forms.ToolStripButton toolStripButtonPreview;
     }
 }
 

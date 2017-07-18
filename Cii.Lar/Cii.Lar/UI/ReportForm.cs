@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Text;
 using System.Windows.Forms;
 
@@ -38,9 +39,27 @@ namespace Cii.Lar.UI
         private int pageLeft;
         private int pageTop;
 
+        private PrintDocument printDocument;
+        private int pagesIndex = 0;
+        private int lastPrintPage = 0; // use can select a page rang to print
+        private bool isPDFPrint = false;
+        private bool isShowPrintDialog = false;
+        private bool isPrinting = false;
+        private PrintPreviewDialog MyPrintPreviewDg;
+        private Timer timer;
+        private string printDocName = "Cii Lar-100 Report";
+
         public ReportForm()
         {
             InitializeComponent();
+            printDocument = new PrintDocument();
+            printDocument.PrintPage += new PrintPageEventHandler(printDocument_PrintPage);
+            printDocument.BeginPrint += new PrintEventHandler(printDocument_BeginPrint);
+            printDocument.EndPrint += new PrintEventHandler(printDocument_EndPrint);
+            printDocument.PrintController = new StandardPrintController();
+            timer = new System.Windows.Forms.Timer();
+            timer.Interval = 100;
+            timer.Tick += new EventHandler(Time_Tick);
         }
 
         public ReportForm(Report report) : this()
@@ -78,6 +97,134 @@ namespace Cii.Lar.UI
                 NewReportPage();
             }
         }
+
+        private void Time_Tick(object sender, EventArgs e)
+        {
+            timer.Stop();
+            PrintButtonClick();
+        }
+
+        private void printDocument_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            PrintPage(e);
+        }
+
+        private void printDocument_BeginPrint(object sender, PrintEventArgs e)
+        {
+            IsComplete = false;
+
+            // set start page and end page
+            if (printDocument.PrinterSettings.PrintRange == PrintRange.CurrentPage)
+            {
+                int selectedPage = 0;
+                for (int i = 0; i < pages.Count; i++) if (pages[i].IsSelected) selectedPage = i;
+                pagesIndex = selectedPage;
+                lastPrintPage = selectedPage;
+            }
+            else if (printDocument.PrinterSettings.PrintRange == PrintRange.SomePages)
+            {
+                int from = printDocument.PrinterSettings.FromPage;
+                int to = printDocument.PrinterSettings.ToPage;
+                if (from <= 0) from = 1;
+                if (from > pages.Count) from = pages.Count;
+                if (to < from) to = from;
+                if (to > pages.Count) to = pages.Count;
+
+                pagesIndex = from - 1;
+                lastPrintPage = to - 1;
+            }
+            else
+            {
+                pagesIndex = 0;
+                lastPrintPage = pages.Count - 1;
+            }
+
+            if (isShowPrintDialog && !isPDFPrint)
+            {
+                PrintDialog MyPrintDg = new PrintDialog();
+                MyPrintDg.UseEXDialog = true;
+                MyPrintDg.Document = printDocument;
+                printDocument.DefaultPageSettings.Landscape = report.Landscape;
+                try { printDocument.DefaultPageSettings.PaperSize.RawKind = (int)PaperKind.A4; }
+                catch { }   // will throw exception when no default printer is set
+                if (MyPrintDg.ShowDialog() == DialogResult.OK)
+                {
+
+                    if (MyPrintPreviewDg != null)
+                    {
+                        MyPrintPreviewDg.Dispose();
+                    }
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+                MyPrintDg.Dispose();
+            }
+        }
+
+        public bool IsComplete
+        {
+            set;
+            get;
+        }
+
+        private void printDocument_EndPrint(object sender, PrintEventArgs e)
+        {
+            if (!isPDFPrint)
+                isShowPrintDialog = true;
+
+            IsComplete = true;
+        }
+
+        private void PrintPage(PrintPageEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            if (pagesIndex > lastPrintPage) return;
+
+            if (pagesIndex % 27 == 0)
+            { //if pages index is too large, refresh report
+                reportLayout.AutoScrollPosition = new Point(0, -(pagesIndex * 1169));
+                AdjustPagePosition();
+                //ReportOperateManage.SetSeletectedPage();
+            }
+
+            PrintReport(g, pages[pagesIndex]);
+            //   PrintFooter(g);
+
+            if (pagesIndex == lastPrintPage)
+            {
+                e.HasMorePages = false;
+                pagesIndex = 0;
+            }
+            else
+            {
+                e.HasMorePages = true;
+                pagesIndex++;
+            }
+        }
+
+        private void PrintReport(Graphics g, ReportPageUI reportPageUI)
+        {
+            isPrinting = true;
+            this.Invoke(new Action(() =>
+            {
+                //reportPageUI.DrawPageHeadAndTail(g);
+
+                for (int i = reportPageUI.Controls.Count - 1; i >= 0; i--)
+                {
+                    ReportCtrl rCtrl = reportPageUI.Controls[i] as ReportCtrl;
+                    if (rCtrl != null)
+                    {
+                        rCtrl.IsPrint = true;
+                        rCtrl.Draw(g, rCtrl.ReportItem.Bounds);
+                        rCtrl.IsPrint = false;
+                    }
+                }
+            }));
+            isPrinting = false;
+        }
+
 
         private void NewReportPage()
         {
@@ -276,6 +423,78 @@ namespace Cii.Lar.UI
                     break;
             }
             return item;
+        }
+
+        private void toolStripButtonPreview_Click(object sender, EventArgs e)
+        {
+            pagesIndex = 0;
+            isPDFPrint = false;
+            isShowPrintDialog = false;
+            MyPrintPreviewDg = new PrintPreviewDialog();
+            MyPrintPreviewDg.ShowIcon = false;
+            MyPrintPreviewDg.UseAntiAlias = true;
+            try
+            {
+                printDocument.DefaultPageSettings.PaperSize.RawKind = (int)PaperKind.A4;
+            }
+            catch
+            {
+            } // will throw exception when no default printer is set
+            printDocument.DefaultPageSettings.Landscape = report.Landscape;
+            MyPrintPreviewDg.Document = printDocument;
+            try
+            {
+                MyPrintPreviewDg.ShowDialog();
+                MyPrintPreviewDg.Dispose();
+            }
+            catch
+            {
+                printDocument.PrintController.OnEndPrint(printDocument, new System.Drawing.Printing.PrintEventArgs());
+            }
+        }
+
+        public void PrintButtonClick()
+        {
+            pagesIndex = 0;
+            isPDFPrint = false;
+            isShowPrintDialog = false;
+            PrintDialog MyPrintDg = new PrintDialog();
+            MyPrintDg.UseEXDialog = true;
+            MyPrintDg.AllowSomePages = true;
+            MyPrintDg.AllowCurrentPage = true;
+            MyPrintDg.Document = printDocument;
+            printDocument.DefaultPageSettings.Margins = new Margins(0, 0, 0, 0);
+            printDocument.OriginAtMargins = true;  // ignore printer hardware margin
+
+            MyPrintDg.PrinterSettings.FromPage = 1;
+            MyPrintDg.PrinterSettings.ToPage = pages.Count;
+            printDocument.DefaultPageSettings.Landscape = report.Landscape;
+            try
+            {
+                printDocument.DefaultPageSettings.PaperSize.RawKind = (int)PaperKind.A4;
+            }
+            catch
+            {
+            }   // will throw exception when no default printer is set
+            printDocument.DocumentName = printDocName;
+            if (MyPrintDg.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    printDocument.Print();
+                }
+                catch
+                {
+
+                    printDocument.PrintController.OnEndPrint(printDocument, new System.Drawing.Printing.PrintEventArgs());
+                }
+            }
+            MyPrintDg.Dispose();
+        }
+
+        private void toolStripButtonPrint_Click(object sender, EventArgs e)
+        {
+            timer.Start();
         }
     }
 }
