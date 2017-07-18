@@ -60,6 +60,9 @@
     <Compile Include="ExpClass\ReportItemBase.cs" />
     <Compile Include="ExpClass\ReportPage.cs" />
     <Compile Include="ExpClass\ReportPictureItem.cs" />
+    <Compile Include="MessageBoxManager.cs" />
+    <Compile Include="MiniDump.cs" />
+    <Compile Include="NativeMethods.cs" />
     <Compile Include="SysClass\SysConfig.cs" />
     <Compile Include="UI\ArrayChangedEventArgs.cs" />
     <Compile Include="UI\DrawArea.cs">
@@ -67,6 +70,12 @@
     </Compile>
     <Compile Include="UI\DrawArea.Designer.cs">
       <DependentUpon>DrawArea.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProblemReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ProblemReportForm.designer.cs">
+      <DependentUpon>ProblemReportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\MovableObjectHost.cs">
       <SubType>UserControl</SubType>
@@ -158,6 +167,13 @@
       <DependentUpon>ScalablePictureBoxImp.cs</DependentUpon>
     </Compile>
     <Compile Include="Util.cs" />
+    <EmbeddedResource Include="MainForm.zh-CN.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.zh-CN.resx" />
+    <EmbeddedResource Include="UI\ProblemReportForm.resx">
+      <DependentUpon>ProblemReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\ReportCtrl.resx">
       <DependentUpon>ReportCtrl.cs</DependentUpon>
     </EmbeddedResource>

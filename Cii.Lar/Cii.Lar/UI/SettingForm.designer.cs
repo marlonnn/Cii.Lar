@@ -42,6 +42,8 @@ namespace Cii.Lar.UI
             this.itemContainer3 = new DevComponents.DotNetBar.ItemContainer();
             this.buttonItemSimulator = new DevComponents.DotNetBar.ButtonX();
             this.buttonSysInfo = new DevComponents.DotNetBar.ButtonX();
+            this.comboItem1 = new DevComponents.Editors.ComboItem();
+            this.comboItem2 = new DevComponents.Editors.ComboItem();
             this.itemPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,13 +69,17 @@ namespace Cii.Lar.UI
             // labelItemLanguage
             // 
             this.labelItemLanguage.Name = "labelItemLanguage";
-            this.labelItemLanguage.Text = "Language";
+            this.labelItemLanguage.Text = global::Cii.Lar.Properties.Resources.labelItemLanguageStr;
             // 
             // comboBoxItemLanguage
             // 
             this.comboBoxItemLanguage.DropDownHeight = 106;
             this.comboBoxItemLanguage.ItemHeight = 16;
+            this.comboBoxItemLanguage.Items.AddRange(new object[] {
+            this.comboItem1,
+            this.comboItem2});
             this.comboBoxItemLanguage.Name = "comboBoxItemLanguage";
+            this.comboBoxItemLanguage.SelectedIndexChanged += new System.EventHandler(this.ComboBoxItemLanguage_SelectedIndexChanged);
             // 
             // itemPanel2
             // 
@@ -105,7 +111,7 @@ namespace Cii.Lar.UI
             this.buttonSelect.Size = new System.Drawing.Size(41, 21);
             this.buttonSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonSelect.TabIndex = 1;
-            this.buttonSelect.Text = "Select";
+            this.buttonSelect.Text = global::Cii.Lar.Properties.Resources.buttonSelectStr;
             this.buttonSelect.Click += new System.EventHandler(this.buttonSelect_Click);
             // 
             // buttonSave
@@ -117,13 +123,13 @@ namespace Cii.Lar.UI
             this.buttonSave.Size = new System.Drawing.Size(41, 21);
             this.buttonSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonSave.TabIndex = 5;
-            this.buttonSave.Text = "Save";
+            this.buttonSave.Text = global::Cii.Lar.Properties.Resources.buttonSaveStr;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // labelItemStoragePath
             // 
             this.labelItemStoragePath.Name = "labelItemStoragePath";
-            this.labelItemStoragePath.Text = "Storage Path";
+            this.labelItemStoragePath.Text = global::Cii.Lar.Properties.Resources.labelItemStoragePathStr;
             // 
             // itemContainer1
             // 
@@ -202,8 +208,18 @@ namespace Cii.Lar.UI
             this.buttonSysInfo.Size = new System.Drawing.Size(157, 23);
             this.buttonSysInfo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonSysInfo.TabIndex = 5;
-            this.buttonSysInfo.Text = "System Information";
+            this.buttonSysInfo.Text = global::Cii.Lar.Properties.Resources.buttonSysInfoStr;
             this.buttonSysInfo.Click += new System.EventHandler(this.buttonSysInfo_Click);
+            // 
+            // comboItem1
+            // 
+            this.comboItem1.Text = "English";
+            this.comboItem1.Value = "en-US";
+            // 
+            // comboItem2
+            // 
+            this.comboItem2.Text = "¼òÌåÖÐÎÄ";
+            this.comboItem2.Value = "zh-CN";
             // 
             // SettingForm
             // 
@@ -214,13 +230,12 @@ namespace Cii.Lar.UI
             this.Controls.Add(this.itemPanelCamera);
             this.Controls.Add(this.itemPanel2);
             this.Controls.Add(this.itemPanel1);
-            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SettingForm";
             this.ShowIcon = false;
-            this.Text = "Setting";
+            this.Text = global::Cii.Lar.Properties.Resources.settingFormTitleStr;
             this.itemPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -241,6 +256,8 @@ namespace Cii.Lar.UI
         private DevComponents.DotNetBar.ButtonX buttonSelect;
         private DevComponents.DotNetBar.ButtonX buttonSave;
         private DevComponents.DotNetBar.ButtonX buttonSysInfo;
+        private DevComponents.Editors.ComboItem comboItem1;
+        private DevComponents.Editors.ComboItem comboItem2;
     }
 }
 

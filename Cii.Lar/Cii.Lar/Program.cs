@@ -14,6 +14,8 @@ namespace Cii.Lar
         [STAThread]
         static void Main()
         {
+            MiniDump.Init();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());

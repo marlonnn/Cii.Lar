@@ -118,7 +118,7 @@ namespace Cii.Lar
             // 
             // 
             this.itemContainer1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.itemContainer1.ItemSpacing = 26;
+            this.itemContainer1.ItemSpacing = 29;
             this.itemContainer1.Name = "itemContainer1";
             this.itemContainer1.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.labelItemType,
@@ -145,7 +145,7 @@ namespace Cii.Lar
             // 
             // 
             this.itemContainer2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.itemContainer2.ItemSpacing = 41;
+            this.itemContainer2.ItemSpacing = 43;
             this.itemContainer2.Name = "itemContainer2";
             this.itemContainer2.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.labelItemFrm,
@@ -224,7 +224,7 @@ namespace Cii.Lar
             // 
             // 
             this.itemContainer5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.itemContainer5.ItemSpacing = 18;
+            this.itemContainer5.ItemSpacing = 16;
             this.itemContainer5.Name = "itemContainer5";
             this.itemContainer5.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.labelItemS,
@@ -300,7 +300,6 @@ namespace Cii.Lar
             this.Controls.Add(this.itemPanel3);
             this.Controls.Add(this.itemPanel2);
             this.Controls.Add(this.itemPanel1);
-            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "SystemInfoForm";
             this.ShowIcon = false;

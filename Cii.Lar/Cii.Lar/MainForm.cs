@@ -16,6 +16,9 @@ namespace Cii.Lar
 {
     public partial class MainForm : DevComponents.DotNetBar.Office2007Form
     {
+        private ComponentResourceManager resources;
+        private SysConfig sysConfig;
+
         private int CurrentScalePercent = 100;
         private SettingForm settingForm;
         private FilesForm filesForm;
@@ -23,6 +26,8 @@ namespace Cii.Lar
         {
             InitializeComponent();
             //this.WindowState = FormWindowState.Maximized;
+            resources = new ComponentResourceManager(typeof(MainForm));
+            sysConfig = SysConfig.GetSysConfig();
             this.Load += MainForm_Load;
         }
 
@@ -56,6 +61,16 @@ namespace Cii.Lar
             string defaultImage = string.Format("{0}\\Resources\\1.bmp", System.Environment.CurrentDirectory);
             this.scalablePictureBox.Picture = new Bitmap(defaultImage);
             this.ActiveControl = this.scalablePictureBox.PictureBox;
+
+            sysConfig.PropertyChanged += MainForm_PropertyChanged;
+        }
+
+        private void MainForm_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == sysConfig.GetPropertyName(() => sysConfig.UICulture))
+            {
+                sysConfig.RefreshUICulture(resources, this);
+            }
         }
 
         private void ToolStripClickHandler(object sender, EventArgs e)

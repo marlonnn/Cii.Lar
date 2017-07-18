@@ -71,6 +71,33 @@ namespace Cii.Lar.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string buttonSaveStr {
+            get {
+                return ResourceManager.GetString("buttonSaveStr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select.
+        /// </summary>
+        internal static string buttonSelectStr {
+            get {
+                return ResourceManager.GetString("buttonSelectStr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to System Infomation.
+        /// </summary>
+        internal static string buttonSysInfoStr {
+            get {
+                return ResourceManager.GetString("buttonSysInfoStr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap camera {
@@ -127,6 +154,33 @@ namespace Cii.Lar.Properties {
             get {
                 object obj = ResourceManager.GetObject("files", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready.
+        /// </summary>
+        internal static string labelItem1Str {
+            get {
+                return ResourceManager.GetString("labelItem1Str", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        internal static string labelItemLanguageStr {
+            get {
+                return ResourceManager.GetString("labelItemLanguageStr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Storage Path.
+        /// </summary>
+        internal static string labelItemStoragePathStr {
+            get {
+                return ResourceManager.GetString("labelItemStoragePathStr", resourceCulture);
             }
         }
         
@@ -197,6 +251,168 @@ namespace Cii.Lar.Properties {
             get {
                 object obj = ResourceManager.GetObject("setting", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Setting.
+        /// </summary>
+        internal static string settingFormTitleStr {
+            get {
+                return ResourceManager.GetString("settingFormTitleStr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click Report to create a Technical Support Request..
+        /// </summary>
+        internal static string StrCreateReport {
+            get {
+                return ResourceManager.GetString("StrCreateReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        internal static string StrOK {
+            get {
+                return ResourceManager.GetString("StrOK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Program may run out of memory, please restart the program..
+        /// </summary>
+        internal static string StrOutOfMemory {
+            get {
+                return ResourceManager.GetString("StrOutOfMemory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report.
+        /// </summary>
+        internal static string StrReport {
+            get {
+                return ResourceManager.GetString("StrReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encountered an unknown error. Please restart the program..
+        /// </summary>
+        internal static string StrUnknownErrorMsg {
+            get {
+                return ResourceManager.GetString("StrUnknownErrorMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Capture Screen.
+        /// </summary>
+        internal static string toolStripButtonCaptureStr {
+            get {
+                return ResourceManager.GetString("toolStripButtonCaptureStr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Elliptical.
+        /// </summary>
+        internal static string toolStripButtonEllipticalStr {
+            get {
+                return ResourceManager.GetString("toolStripButtonEllipticalStr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Laser.
+        /// </summary>
+        internal static string toolStripButtonLaserStr {
+            get {
+                return ResourceManager.GetString("toolStripButtonLaserStr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Line.
+        /// </summary>
+        internal static string toolStripButtonLineStr {
+            get {
+                return ResourceManager.GetString("toolStripButtonLineStr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ploygon.
+        /// </summary>
+        internal static string toolStripButtonPolygonStr {
+            get {
+                return ResourceManager.GetString("toolStripButtonPolygonStr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rectangle.
+        /// </summary>
+        internal static string toolStripButtonRectangleStr {
+            get {
+                return ResourceManager.GetString("toolStripButtonRectangleStr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scale.
+        /// </summary>
+        internal static string toolStripButtonScaleStr {
+            get {
+                return ResourceManager.GetString("toolStripButtonScaleStr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Setting.
+        /// </summary>
+        internal static string toolStripButtonSettingStr {
+            get {
+                return ResourceManager.GetString("toolStripButtonSettingStr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Capture Video.
+        /// </summary>
+        internal static string toolStripButtonVideoStr {
+            get {
+                return ResourceManager.GetString("toolStripButtonVideoStr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zoom In.
+        /// </summary>
+        internal static string toolStripButtonZoomInStr {
+            get {
+                return ResourceManager.GetString("toolStripButtonZoomInStr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zoom Out.
+        /// </summary>
+        internal static string toolStripButtonZoomOutStr {
+            get {
+                return ResourceManager.GetString("toolStripButtonZoomOutStr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Archiving.
+        /// </summary>
+        internal static string toolStripFilesStr {
+            get {
+                return ResourceManager.GetString("toolStripFilesStr", resourceCulture);
             }
         }
         
