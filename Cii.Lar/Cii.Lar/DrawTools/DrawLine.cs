@@ -16,10 +16,10 @@ namespace Cii.Lar.DrawTools
 
         public DrawLine()
         {
-            this.Color = Color.DarkGray;
+            this.Color = Color.DarkGreen;
         }
 
-        public DrawLine(CursorPictureBox pictureBox, int x1, int y1, int x2, int y2) : base()
+        public DrawLine(CursorPictureBox pictureBox, int x1, int y1, int x2, int y2) : this()
         {
             startDataPoint = new Point(x1, y1);
             endDataPoint = new Point(x2, y2);
@@ -29,7 +29,7 @@ namespace Cii.Lar.DrawTools
         {
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            using (Pen pen = new Pen(Color, PenWidth))
+            using (Pen pen = new Pen(this.Color, PenWidth))
             {
                 g.DrawLine(pen, startDataPoint.X, startDataPoint.Y, endDataPoint.X, endDataPoint.Y);
             }

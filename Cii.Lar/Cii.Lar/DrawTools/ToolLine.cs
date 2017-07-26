@@ -23,7 +23,7 @@ namespace Cii.Lar.DrawTools
 
         public override void OnMouseDown(CursorPictureBox pictureBox, MouseEventArgs e)
         {
-            AddNewObject(pictureBox, new DrawRectangle(pictureBox, e.X, e.Y, e.X + 1, e.Y + 1));
+            AddNewObject(pictureBox, new DrawLine(pictureBox, e.X, e.Y, e.X + 1, e.Y + 1));
         }
 
         public override void OnMouseMove(CursorPictureBox pictureBox, MouseEventArgs e)

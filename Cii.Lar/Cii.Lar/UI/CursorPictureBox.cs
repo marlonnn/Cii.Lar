@@ -71,6 +71,64 @@ namespace Cii.Lar.UI
         public CursorPictureBox()
         {
             InitializeComponent();
+            this.MouseDown += this.CursorPictureBox_MouseDown;
+            this.MouseMove += this.CursorPictureBox_MouseMove;
+            this.MouseUp += this.CursorPictureBox_MouseUp;
         }
+
+        private void CursorPictureBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                tools[(int)activeTool].OnMouseUp(this, e);
+            }
+        }
+
+        private void CursorPictureBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left || e.Button == MouseButtons.None)
+            {
+                tools[(int)activeTool].OnMouseMove(this, e);
+            }
+            else
+            {
+                this.Cursor = Cursors.Default;
+            }
+        }
+
+        private void CursorPictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                tools[(int)activeTool].OnMouseDown(this, e);
+            }
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            if (GraphicsList != null)
+            {
+                e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                GraphicsList.Draw(e.Graphics, this);
+            }
+        }
+
+        //private void DrawNetSelection(Graphics graphics)
+        //{
+        //    if (RectNetSelection.IsEmpty) return;
+
+        //    System.Drawing.Drawing2D.SmoothingMode mode = graphics.SmoothingMode;
+        //    graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
+
+        //    Pen pen = new Pen(Color.DimGray, 1);
+        //    pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+
+        //    RectNetSelection = DrawRectangle.GetNormalizedRectangle(RectNetSelection);
+        //    graphics.DrawRectangle(pen, RectNetSelection);
+
+        //    pen.Dispose();
+        //    graphics.SmoothingMode = mode;
+        //}
     }
 }
