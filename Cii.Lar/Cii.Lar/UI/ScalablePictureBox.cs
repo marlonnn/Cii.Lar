@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Cii.Lar.DrawTools;
 
 /// <summary>
 /// This is public domain software - that is, you can do whatever you want
@@ -25,6 +26,40 @@ namespace Cii.Lar.UI
     /// </summary>
     public partial class ScalablePictureBox : UserControl
     {
+        public DrawToolType ActiveTool
+        {
+            get
+            {
+                return this.scalablePictureBoxImp.ActiveTool;
+            }
+            set
+            {
+                this.scalablePictureBoxImp.ActiveTool = value;
+            }
+        }
+
+
+        public GraphicsList GraphicsList
+        {
+            get
+            {
+                return this.scalablePictureBoxImp.GraphicsList;
+            }
+
+            private set
+            {
+                this.scalablePictureBoxImp.GraphicsList = value;
+            }
+        }
+
+        public bool CreatingDrawObject
+        {
+            get
+            {
+                return this.scalablePictureBoxImp.CreatingDrawObject;
+            }
+        }
+
         /// <summary>
         /// indicating mouse dragging mode of picture tracker control
         /// </summary>

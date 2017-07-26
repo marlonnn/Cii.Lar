@@ -16,9 +16,9 @@ namespace Cii.Lar.DrawTools
         /// <summary>
         /// Left nous button is pressed
         /// </summary>
-        /// <param name="drawArea"></param>
+        /// <param name="pictureBox"></param>
         /// <param name="e"></param>
-        public virtual void OnMouseDown(DrawArea drawArea, MouseEventArgs e)
+        public virtual void OnMouseDown(CursorPictureBox pictureBox, MouseEventArgs e)
         {
         }
 
@@ -26,12 +26,12 @@ namespace Cii.Lar.DrawTools
         /// <summary>
         /// Mouse is moved, left mouse button is pressed or none button is pressed
         /// </summary>
-        /// <param name="drawArea"></param>
+        /// <param name="pictureBox"></param>
         /// <param name="e"></param>
-        public virtual void OnMouseMove(DrawArea drawArea, MouseEventArgs e)
+        public virtual void OnMouseMove(CursorPictureBox pictureBox, MouseEventArgs e)
         {
         }
-        public virtual void OnMouseMoveZoom(DrawArea drawArea, MouseEventArgs e)
+        public virtual void OnMouseMoveZoom(CursorPictureBox pictureBox, MouseEventArgs e)
         {
         }
 
@@ -40,10 +40,10 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="drawArea"></param>
         /// <param name="e"></param>
-        public virtual void OnMouseUp(DrawArea drawArea, MouseEventArgs e)
+        public virtual void OnMouseUp(CursorPictureBox pictureBox, MouseEventArgs e)
         {
         }
-        public virtual void OnMouseUpZoom(DrawArea drawArea, MouseEventArgs e)
+        public virtual void OnMouseUpZoom(CursorPictureBox pictureBox, MouseEventArgs e)
         {
         }
 
@@ -52,7 +52,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="drawArea"></param>
         /// <param name="e"></param>
-        public virtual void OnMouseLeave(DrawArea drawArea, EventArgs e)
+        public virtual void OnMouseLeave(CursorPictureBox pictureBox, EventArgs e)
         {
 
         }
@@ -62,23 +62,23 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="drawArea"></param>
         /// <param name="e"></param>
-        public virtual void OnDoubleClick(DrawArea drawArea, MouseEventArgs e)
+        public virtual void OnDoubleClick(CursorPictureBox pictureBox, MouseEventArgs e)
         {
         }
 
         /// <summary>
         /// call when press "Escape" key
         /// </summary>
-        public virtual void OnCancel(DrawArea drawArea, bool cancelSelection)
+        public virtual void OnCancel(CursorPictureBox pictureBox, bool cancelSelection)
         {
         }
 
-        public virtual void OnKeyMove(DrawArea drawArea, Keys keyData, bool isPressCtrl)
+        public virtual void OnKeyMove(CursorPictureBox pictureBox, Keys keyData, bool isPressCtrl)
         {
 
         }
 
-        public virtual void OnKeyUp(DrawArea drawArea, Keys keyData, bool isPressCtrl)
+        public virtual void OnKeyUp(CursorPictureBox pictureBox, Keys keyData, bool isPressCtrl)
         {
 
         }

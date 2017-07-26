@@ -453,6 +453,9 @@ namespace Cii.Lar.UI
             }
         }
 
+        /// <summary>
+        /// print button click
+        /// </summary>
         public void PrintButtonClick()
         {
             pagesIndex = 0;

@@ -1,6 +1,6 @@
 ﻿namespace Cii.Lar.UI
 {
-    partial class DrawArea
+    partial class CursorPictureBox
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         }
 
         #endregion

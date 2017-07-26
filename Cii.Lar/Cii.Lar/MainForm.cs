@@ -14,6 +14,15 @@ using System.Drawing.Imaging;
 
 namespace Cii.Lar
 {
+    public enum MeasureTools
+    {
+        Scale,
+        Pointer,
+        Line,
+        Rectangular,
+        Elliptical,
+        Polygon,
+    }
     public partial class MainForm : DevComponents.DotNetBar.Office2007Form
     {
         private ComponentResourceManager resources;
@@ -25,10 +34,20 @@ namespace Cii.Lar
         public MainForm()
         {
             InitializeComponent();
+            InitializeToolStrip();
             //this.WindowState = FormWindowState.Maximized;
             resources = new ComponentResourceManager(typeof(MainForm));
             sysConfig = SysConfig.GetSysConfig();
             this.Load += MainForm_Load;
+        }
+
+        private void InitializeToolStrip()
+        {
+            toolStripButtonScale.Tag = MeasureTools.Scale;
+            toolStripButtonLine.Tag = MeasureTools.Line;
+            toolStripButtonRectangle.Tag = MeasureTools.Rectangular;
+            toolStripButtonElliptical.Tag = MeasureTools.Elliptical;
+            toolStripButtonPolygon.Tag = MeasureTools.Polygon;
         }
 
         private void CaptureImage()
@@ -156,17 +175,26 @@ namespace Cii.Lar
 
         private void toolStripButtonLine_Click(object sender, EventArgs e)
         {
-
+            ClickEventArgs clickEventArgs = new ClickEventArgs();
+            clickEventArgs.IsDoubleClick = false;
+            ToolStripItem item = sender as ToolStripItem;
+            MeasureTools measureTool = (MeasureTools)item.Tag;
+            SetMeasureTool(measureTool);
         }
 
         private void toolStripButtonLaser_Click(object sender, EventArgs e)
         {
-
+            ClickEventArgs clickEventArgs = new ClickEventArgs();
+            clickEventArgs.IsDoubleClick = false;
         }
 
         private void toolStripButtonRectangle_Click(object sender, EventArgs e)
         {
-
+            ClickEventArgs clickEventArgs = new ClickEventArgs();
+            clickEventArgs.IsDoubleClick = false;
+            ToolStripItem item = sender as ToolStripItem;
+            MeasureTools measureTool = (MeasureTools)item.Tag;
+            SetMeasureTool(measureTool);
         }
 
         private void toolStripButtonElliptical_Click(object sender, EventArgs e)
@@ -184,5 +212,50 @@ namespace Cii.Lar
             settingForm = new SettingForm();
             settingForm.ShowDialog();
         }
+
+        private void SetMeasureTool(MeasureTools measureTool)
+        {
+            if (measureTool == MeasureTools.Line)
+            {
+                CommandLine();
+            }
+            else if (measureTool == MeasureTools.Rectangular)
+            {
+                CommandRectangle();
+            }
+            else if (measureTool == MeasureTools.Elliptical)
+            {
+                CommandEllipse();
+            }
+            else if (measureTool == MeasureTools.Polygon)
+            {
+                CommandPolygon();
+            }
+        }
+
+        private void CommandLine()
+        {
+            this.scalablePictureBox.ActiveTool = DrawToolType.Line;
+        }
+
+        private void CommandRectangle()
+        {
+            this.scalablePictureBox.ActiveTool = DrawToolType.Rectangle;
+        }
+
+        private void CommandEllipse()
+        {
+            this.scalablePictureBox.ActiveTool = DrawToolType.Ellipse;
+        }
+
+        private void CommandPolygon()
+        {
+            this.scalablePictureBox.ActiveTool = DrawToolType.Polygon;
+        }
+    }
+
+    public class ClickEventArgs : EventArgs
+    {
+        public bool IsDoubleClick;
     }
 }

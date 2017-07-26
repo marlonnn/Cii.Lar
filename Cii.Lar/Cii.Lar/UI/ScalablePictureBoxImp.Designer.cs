@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.pictureBox = new CursorPictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,6 +61,6 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox;
+        private CursorPictureBox pictureBox;
     }
 }

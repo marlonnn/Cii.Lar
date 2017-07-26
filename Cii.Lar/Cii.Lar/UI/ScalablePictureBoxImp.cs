@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Cii.Lar.DrawTools;
 
 /// <summary>
 /// This is public domain software - that is, you can do whatever you want
@@ -17,6 +18,16 @@ using System.Windows.Forms;
 /// </summary>
 namespace Cii.Lar.UI
 {
+    public enum DrawToolType
+    {
+        None,
+        Pointer,
+        Line,
+        Rectangle,
+        Ellipse,
+        Polygon,
+        NumberOfDrawTools
+    };
     /// <summary>
     /// A scrollable, zoomable and scalable picture box.
     /// It is data aware, and creates zoom rate context menu dynamically.
@@ -25,6 +36,50 @@ namespace Cii.Lar.UI
     /// </summary>
     public partial class ScalablePictureBoxImp : UserControl
     {
+        public Tool[] Tools
+        {
+            get
+            {
+                return this.pictureBox.Tools;
+            }
+            set
+            {
+                this.pictureBox.Tools = value;
+            }
+        }
+
+        public DrawToolType ActiveTool
+        {
+            get
+            {
+                return this.pictureBox.ActiveTool;
+            }
+            set
+            {
+                this.pictureBox.ActiveTool = value;
+            }
+        }
+
+        public GraphicsList GraphicsList
+        {
+            get
+            {
+                return this.pictureBox.GraphicsList;
+            }
+
+            set
+            {
+                this.pictureBox.GraphicsList = value;
+            }
+        }
+        public bool CreatingDrawObject
+        {
+            get
+            {
+                return this.pictureBox.CreatingDrawObject;
+            }
+        }
+
         /// <summary>
         /// Maximum scale percent(100%)
         /// </summary>
@@ -94,6 +149,9 @@ namespace Cii.Lar.UI
         public ScalablePictureBoxImp()
         {
             InitializeComponent();
+            Initialize();
+            GraphicsList = new GraphicsList();
+            this.GraphicsList.DrawObjsChanged += GraphicsList_DrawObjsChanged;
 
             // set size mode of picture box to zoom mode
             this.pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
@@ -101,6 +159,31 @@ namespace Cii.Lar.UI
             // Enable auto scroll of this control
             this.AutoScroll = true;
             _zoom = 1;
+        }
+
+        private void Initialize()
+        {
+            Tools = new Tool[(int)DrawToolType.NumberOfDrawTools];
+            Tools[(int)DrawToolType.None] = new Tool();
+            Tools[(int)DrawToolType.Pointer] = new ToolPointer();
+            Tools[(int)DrawToolType.Line] = new ToolLine();
+            Tools[(int)DrawToolType.Rectangle] = new ToolRectangle();
+            Tools[(int)DrawToolType.Ellipse] = new ToolEllipse();
+            Tools[(int)DrawToolType.Polygon] = new ToolPolygon();
+        }
+
+
+        private void GraphicsList_DrawObjsChanged(object sender, ArrayChangedEventArgs<DrawObject> e)
+        {
+            if (e.ChangeType == ArrayChangedType.ItemAdded)
+            {
+                Refresh();
+            }
+            else if (e.ChangeType == ArrayChangedType.ItemRemoved)
+            {
+                Cursor = Cursors.Default;
+                Refresh();
+            }
         }
 
         /// <summary>

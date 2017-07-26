@@ -1,6 +1,7 @@
 ﻿using Cii.Lar.UI;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace Cii.Lar.DrawTools
     /// <summary>
     /// Base class for all tools which create new graphic object
     /// </summary>
-    abstract class ToolObject :Tool
+    public abstract class ToolObject : Tool
     {
         private Cursor cursor;
 
@@ -36,16 +37,38 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="drawArea"></param>
         /// <param name="e"></param>
-        public override void OnMouseUp(DrawArea drawArea, MouseEventArgs e)
+        public override void OnMouseUp(CursorPictureBox pictureBox, MouseEventArgs e)
         {
 
         }
 
-        public override void OnMouseLeave(DrawArea drawArea, EventArgs e)
+        public override void OnMouseLeave(CursorPictureBox pictureBox, EventArgs e)
         {
-            OnMouseUp(drawArea, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0));
+            OnMouseUp(pictureBox, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0));
         }
 
+        /// <summary>
+        /// call when press "Escape" key
+        /// </summary>
+        /// <param name="drawArea"></param>
+        /// <param name="cancelSelection"></param>
+        public override void OnCancel(CursorPictureBox pictureBox, bool cancelSelection)
+        {
+            // cancel adding 
+            //if (drawArea.GraphicsList.Count > 0 && drawArea.GraphicsList[0].Creating)
+            //{
+            //    drawArea.GraphicsList.DeleteLastAddedObject();
+            //}
+        }
 
+        protected void AddNewObject(CursorPictureBox pictureBox, DrawObject o)
+        {
+            pictureBox.GraphicsList.UnselectAll();
+
+            o.Selected = true;
+            o.Creating = true;
+
+            pictureBox.GraphicsList.Add(o);
+        }
     }
 }
