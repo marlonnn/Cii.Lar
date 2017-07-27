@@ -218,7 +218,7 @@ namespace Cii.Lar
             }
             else if (measureTool == MeasureTools.Polygon)
             {
-                CommandPolygon();
+                CommandPolyLine();
             }
             else
             {
@@ -253,9 +253,9 @@ namespace Cii.Lar
             this.scalablePictureBox.ActiveTool = DrawToolType.Ellipse;
         }
 
-        private void CommandPolygon()
+        private void CommandPolyLine()
         {
-            this.scalablePictureBox.ActiveTool = DrawToolType.Polygon;
+            this.scalablePictureBox.ActiveTool = DrawToolType.PolyLine;
         }
 
         private void CommandPointer()

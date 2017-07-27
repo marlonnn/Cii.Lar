@@ -42,30 +42,31 @@ namespace Cii.Lar.DrawTools
         {
             pictureBox.Cursor = Cursor;
 
+            if (e.Button != MouseButtons.Left)
+            {
+                return;
+            }
             if (newPolygon == null)
             {
                 return;
             }
-            if (e.Button == MouseButtons.Left)
-            {
-                Point point = new Point(e.X, e.Y);
-                int distance = (e.X - lastX) * (e.X - lastX) + (e.Y - lastY) * (e.Y - lastY);
+            Point point = new Point(e.X, e.Y);
+            int distance = (e.X - lastX) * (e.X - lastX) + (e.Y - lastY) * (e.Y - lastY);
 
-                if (distance < minDistance)
-                {
-                    // Distance between last two points is less than minimum -
-                    // move last point
-                    newPolygon.MoveHandleTo(pictureBox, point, newPolygon.PointCount);
-                }
-                else
-                {
-                    // Add new point
-                    newPolygon.AddPoint(pictureBox, point, false);
-                    lastX = e.X;
-                    lastY = e.Y;
-                }
-                pictureBox.Refresh();
+            if (distance < minDistance)
+            {
+                // Distance between last two points is less than minimum -
+                // move last point
+                newPolygon.MoveHandleTo(pictureBox, point, newPolygon.PointCount);
             }
+            else
+            {
+                // Add new point
+                newPolygon.AddPoint(pictureBox, point, false);
+                lastX = e.X;
+                lastY = e.Y;
+            }
+            pictureBox.Refresh();
         }
 
         public override void OnMouseUp(CursorPictureBox pictureBox, MouseEventArgs e)

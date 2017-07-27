@@ -58,6 +58,7 @@
     <Compile Include="DrawTools\DrawLine.cs" />
     <Compile Include="DrawTools\DrawObject.cs" />
     <Compile Include="DrawTools\DrawPolygon.cs" />
+    <Compile Include="DrawTools\DrawPolyLine.cs" />
     <Compile Include="DrawTools\DrawRectangle.cs" />
     <Compile Include="DrawTools\GraphicsList.cs" />
     <Compile Include="DrawTools\Tool.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="DrawTools\ToolObject.cs" />
     <Compile Include="DrawTools\ToolPointer.cs" />
     <Compile Include="DrawTools\ToolPolygon.cs" />
+    <Compile Include="DrawTools\ToolPolyLine.cs" />
     <Compile Include="DrawTools\ToolRectangle.cs" />
     <Compile Include="ExpClass\Plot.cs" />
     <Compile Include="ExpClass\Report.cs" />

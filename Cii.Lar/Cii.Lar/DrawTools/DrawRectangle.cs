@@ -30,6 +30,7 @@ namespace Cii.Lar.DrawTools
         public DrawRectangle(CursorPictureBox pictureBox, int x, int y, int width, int height) : this()
         {
             rectangle = new Rectangle(x, y, width, height);
+            SetRectangle(rectangle);
         }
 
         /// <summary>
@@ -44,6 +45,12 @@ namespace Cii.Lar.DrawTools
             Rectangle r = GetNormalizedRectangle(GetRectangle());
             using (Pen pen = new Pen(this.Color, PenWidth))
             {
+                if (IsMoving)
+                {
+                    pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
+                    pen.DashPattern = new float[] { 4.0F, 2.8F };
+                }
+
                 rectangle.Offset(MovingOffset);
                 g.DrawRectangle(pen, r);
             }
@@ -79,6 +86,61 @@ namespace Cii.Lar.DrawTools
             }
 
             return new Rectangle(x1, y1, x2 - x1, y2 - y1);
+        }
+
+        /// <summary>
+        /// Get handle point by 1-based number
+        /// </summary>
+        /// <param name="handleNumber"></param>
+        /// <returns></returns>
+        public override Point GetHandle(CursorPictureBox pictureBox, int handleNumber)
+        {
+            int x, y, xCenter, yCenter;
+            Rectangle rectangle = GetRectangle();
+
+            xCenter = rectangle.X + rectangle.Width / 2;
+            yCenter = rectangle.Y + rectangle.Height / 2;
+            x = rectangle.X;
+            y = rectangle.Y;
+
+            switch (handleNumber)
+            {
+                case 1:
+                    x = rectangle.X;
+                    y = rectangle.Y;
+                    break;
+                case 2:
+                    x = xCenter;
+                    y = rectangle.Y;
+                    break;
+                case 3:
+                    x = rectangle.Right;
+                    y = rectangle.Y;
+                    break;
+                case 4:
+                    x = rectangle.Right;
+                    y = yCenter;
+                    break;
+                case 5:
+                    x = rectangle.Right;
+                    y = rectangle.Bottom;
+                    break;
+                case 6:
+                    x = xCenter;
+                    y = rectangle.Bottom;
+                    break;
+                case 7:
+                    x = rectangle.X;
+                    y = rectangle.Bottom;
+                    break;
+                case 8:
+                    x = rectangle.X;
+                    y = yCenter;
+                    break;
+            }
+
+            return new Point(x, y);
+
         }
 
         /// <summary>
@@ -149,6 +211,17 @@ namespace Cii.Lar.DrawTools
             Point rightBottom = Point.Ceiling(new PointF(right, bottom));
 
             return new Rectangle(leftTop.X, leftTop.Y, rightBottom.X - leftTop.X, rightBottom.Y - leftTop.Y);
+        }
+
+        /// <summary>
+        /// Get number of handles
+        /// </summary>
+        public override int HandleCount
+        {
+            get
+            {
+                return 8;
+            }
         }
     }
 }

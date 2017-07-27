@@ -24,7 +24,7 @@ namespace Cii.Lar.DrawTools
         /// May be no same as ellipse for hit test when drawArea.
         /// Size is not equal to default draw area size for hit test
         /// </summary>
-        private Ellipse _ellipseForDraw = null;
+        private Ellipse ellipseForDraw = null;
 
         private Matrix orgMatrix;
 
@@ -39,8 +39,8 @@ namespace Cii.Lar.DrawTools
             get
             {
                 Matrix matrix = OrgMatrix.Clone();
-                matrix.Translate(_ellipseForDraw.Center.X, _ellipseForDraw.Center.Y);
-                matrix.Rotate(_ellipseForDraw.Angle);
+                matrix.Translate(ellipseForDraw.Center.X, ellipseForDraw.Center.Y);
+                matrix.Rotate(ellipseForDraw.Angle);
 
                 return matrix;
             }
@@ -76,7 +76,7 @@ namespace Cii.Lar.DrawTools
 
         private void ResetEllipseForDraw()
         {
-            _ellipseForDraw = null;
+            ellipseForDraw = null;
         }
 
         /// <summary>
@@ -86,9 +86,9 @@ namespace Cii.Lar.DrawTools
         /// <param name="pictureBox"></param>
         public override void Draw(Graphics g, CursorPictureBox pictureBox)
         {
-            if (_ellipseForDraw == null)
+            if (ellipseForDraw == null)
             {
-                _ellipseForDraw = new Ellipse(startPoint, endPoint, coeffcient, _drawAreaSize);
+                ellipseForDraw = new Ellipse(startPoint, endPoint, coeffcient, _drawAreaSize);
             }
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -102,7 +102,7 @@ namespace Cii.Lar.DrawTools
 
                     g.TranslateTransform(MovingOffset.X, MovingOffset.Y, MatrixOrder.Append);
 
-                    g.DrawEllipse(pen, _ellipseForDraw.Rectangle);
+                    g.DrawEllipse(pen, ellipseForDraw.Rectangle);
 
                     g.Transform = OrgMatrix;
                 }
@@ -124,12 +124,12 @@ namespace Cii.Lar.DrawTools
             if (handleNumber == 2 || handleNumber == 4)
             {
                 handleNumber = handleNumber == 2 ? 4 : 2;
-                double lenth = Ellipse.GetTwoPointLength(_ellipseForDraw.Center, point) * 2;
+                double lenth = Ellipse.GetTwoPointLength(ellipseForDraw.Center, point) * 2;
 
-                double coef = lenth / _ellipseForDraw.Width;
+                double coef = lenth / ellipseForDraw.Width;
                 if (coef < 0.1) coef = 0.1;
                 if (coef > 0.99) coef = 1;
-                _ellipseForDraw.Coeffcient = coef;
+                ellipseForDraw.Coeffcient = coef;
 
                 UpdateEllipseForHit();
 
@@ -138,14 +138,66 @@ namespace Cii.Lar.DrawTools
 
             if (handleNumber == 1)
             {
-                _ellipseForDraw.StartPoint = point;
+                ellipseForDraw.StartPoint = point;
             }
             else
             {
-                _ellipseForDraw.EndPoint = point;
+                ellipseForDraw.EndPoint = point;
             }
 
             UpdateEllipseForHit();
+        }
+
+        /// <summary>
+        /// Get handle point by 1-based number
+        /// </summary>
+        /// <param name="handleNumber"></param>
+        /// <returns></returns>
+        public override Point GetHandle(CursorPictureBox pictureBox, int handleNumber)
+        {
+            float x = 0, y = 0, xCenter, yCenter;
+
+            RectangleF rect = ellipseForDraw.Rectangle;
+            xCenter = rect.X + rect.Width / 2;
+            yCenter = rect.Y + rect.Height / 2;
+
+            switch (handleNumber)
+            {
+                case 1:
+                    x = rect.X;
+                    y = yCenter;
+                    break;
+                case 2:
+                    x = xCenter;
+                    y = rect.Y;
+                    break;
+                case 3:
+                    x = rect.Right;
+                    y = yCenter;
+                    break;
+                case 4:
+                    x = xCenter;
+                    y = rect.Bottom;
+                    break;
+            }
+
+            PointF[] pts = new PointF[1];
+            pts[0] = new PointF(x, y);
+
+            DrawMatrix.TransformPoints(pts);
+
+            return Point.Round(pts[0]);
+        }
+
+        /// <summary>
+        /// Get number of handles
+        /// </summary>
+        public override int HandleCount
+        {
+            get
+            {
+                return 4;
+            }
         }
 
         /// <summary>
@@ -153,12 +205,12 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         private void UpdateEllipseForHit()
         {
-            startPoint = _ellipseForDraw.StartPoint;
-            endPoint = _ellipseForDraw.EndPoint;
-            coeffcient = _ellipseForDraw.Coeffcient;
-            if (_ellipseForDraw.DrawAreaSize != _drawAreaSize && !_ellipseForDraw.DrawAreaSize.IsEmpty)
+            startPoint = ellipseForDraw.StartPoint;
+            endPoint = ellipseForDraw.EndPoint;
+            coeffcient = ellipseForDraw.Coeffcient;
+            if (ellipseForDraw.DrawAreaSize != _drawAreaSize && !ellipseForDraw.DrawAreaSize.IsEmpty)
             {
-                Ellipse.TransformLinear(ref startPoint, ref endPoint, ref coeffcient, _drawAreaSize.Width * 1.0 / _ellipseForDraw.DrawAreaSize.Width, _drawAreaSize.Height * 1.0 / _ellipseForDraw.DrawAreaSize.Height, 0, 0);
+                Ellipse.TransformLinear(ref startPoint, ref endPoint, ref coeffcient, _drawAreaSize.Width * 1.0 / ellipseForDraw.DrawAreaSize.Width, _drawAreaSize.Height * 1.0 / ellipseForDraw.DrawAreaSize.Height, 0, 0);
             }
         }
 

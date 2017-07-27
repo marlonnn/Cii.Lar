@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Cii.Lar.DrawTools
 {
@@ -118,6 +119,38 @@ namespace Cii.Lar.DrawTools
             set { movingOffset = value; }
         }
 
+        public bool IsMoving
+        {
+            get
+            {
+                if (!MovingOffset.IsEmpty)
+                {
+                    if (Control.ModifierKeys == Keys.Control)
+                    {
+                        if (MovingOffset.X == 10 || MovingOffset.X == -10 || MovingOffset.Y == 10 || MovingOffset.Y == -10)
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                            return true;
+                        }
+                    }
+                    else if (MovingOffset.X == 1 || MovingOffset.X == -1 || MovingOffset.Y == 1 || MovingOffset.Y == -1)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return !MovingOffset.IsEmpty;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
 
         /// <summary>
         /// Number of handles

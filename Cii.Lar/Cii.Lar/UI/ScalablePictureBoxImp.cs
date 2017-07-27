@@ -26,6 +26,7 @@ namespace Cii.Lar.UI
         Rectangle,
         Ellipse,
         Polygon,
+        PolyLine,
         NumberOfDrawTools
     };
     /// <summary>
@@ -170,6 +171,7 @@ namespace Cii.Lar.UI
             Tools[(int)DrawToolType.Rectangle] = new ToolRectangle();
             Tools[(int)DrawToolType.Ellipse] = new ToolEllipse();
             Tools[(int)DrawToolType.Polygon] = new ToolPolygon();
+            Tools[(int)DrawToolType.PolyLine] = new ToolPolyLine();
         }
 
 

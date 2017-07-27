@@ -36,6 +36,17 @@ namespace Cii.Lar.UI
             }
             set
             {
+                if (activeTool == DrawToolType.PolyLine && activeTool != value)
+                {
+                    if (GraphicsList.Count > 0 && GraphicsList[0] is DrawPolyLine)
+                    {
+                        DrawPolyLine polygon = (DrawPolyLine)GraphicsList[0];
+                        if (polygon != null && polygon.Creating)
+                        {
+                            tools[(int)DrawToolType.PolyLine].OnCancel(this, true);
+                        }
+                    }
+                }
                 activeTool = value;
                 if (tools != null && activeTool != DrawToolType.None)
                 {
@@ -74,6 +85,12 @@ namespace Cii.Lar.UI
             this.MouseDown += this.CursorPictureBox_MouseDown;
             this.MouseMove += this.CursorPictureBox_MouseMove;
             this.MouseUp += this.CursorPictureBox_MouseUp;
+            this.MouseDoubleClick += CursorPictureBox_MouseDoubleClick;
+        }
+
+        private void CursorPictureBox_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            tools[(int)activeTool].OnDoubleClick(this, e);
         }
 
         private void CursorPictureBox_MouseUp(object sender, MouseEventArgs e)
@@ -113,22 +130,5 @@ namespace Cii.Lar.UI
                 GraphicsList.Draw(e.Graphics, this);
             }
         }
-
-        //private void DrawNetSelection(Graphics graphics)
-        //{
-        //    if (RectNetSelection.IsEmpty) return;
-
-        //    System.Drawing.Drawing2D.SmoothingMode mode = graphics.SmoothingMode;
-        //    graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
-
-        //    Pen pen = new Pen(Color.DimGray, 1);
-        //    pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-
-        //    RectNetSelection = DrawRectangle.GetNormalizedRectangle(RectNetSelection);
-        //    graphics.DrawRectangle(pen, RectNetSelection);
-
-        //    pen.Dispose();
-        //    graphics.SmoothingMode = mode;
-        //}
     }
 }

@@ -53,6 +53,23 @@ namespace Cii.Lar.DrawTools
         }
 
         /// <summary>
+        /// Get handle point by 1-based number
+        /// </summary>
+        /// <param name="handleNumber"></param>
+        /// <returns></returns>
+        public override Point GetHandle(CursorPictureBox pictureBox, int handleNumber)
+        {
+            if (handleNumber == 1)
+            {
+                return Point.Ceiling(startDataPoint);
+            }
+            else
+            {
+                return Point.Ceiling(endDataPoint);
+            }
+        }
+
+        /// <summary>
         /// Mouse move to new point
         /// </summary>
         /// <param name="pictureBox"></param>
