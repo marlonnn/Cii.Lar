@@ -61,6 +61,7 @@
     <Compile Include="DrawTools\DrawPolyLine.cs" />
     <Compile Include="DrawTools\DrawRectangle.cs" />
     <Compile Include="DrawTools\GraphicsList.cs" />
+    <Compile Include="DrawTools\GraphicsProperties.cs" />
     <Compile Include="DrawTools\Tool.cs" />
     <Compile Include="DrawTools\ToolEllipse.cs" />
     <Compile Include="DrawTools\ToolLine.cs" />
