@@ -22,19 +22,19 @@ namespace Cii.Lar.DrawTools
 
         public override void OnMouseDown(CursorPictureBox pictureBox, MouseEventArgs e)
         {
-            //AddNewObject(pictureBox, new DrawRectangle(pictureBox, e.X, e.Y, e.X + 1, e.Y + 1));
+            AddNewObject(pictureBox, new DrawEllipse(pictureBox, e.X, e.Y, e.X, e.Y, 0.6));
         }
 
         public override void OnMouseMove(CursorPictureBox pictureBox, MouseEventArgs e)
         {
-            //pictureBox.Cursor = Cursor;
+            pictureBox.Cursor = Cursor;
 
-            //if (e.Button == MouseButtons.Left)
-            //{
-            //    Point point = new Point(e.X, e.Y);
-            //    pictureBox.GraphicsList[0].MoveHandleTo(pictureBox, point, 5);
-            //    pictureBox.Refresh();
-            //}
+            if (e.Button == MouseButtons.Left)
+            {
+                Point point = new Point(e.X, e.Y);
+                pictureBox.GraphicsList[0].MoveHandleTo(pictureBox, point, 5);
+                pictureBox.Refresh();
+            }
         }
     }
 }

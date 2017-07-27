@@ -175,11 +175,7 @@ namespace Cii.Lar
 
         private void toolStripButtonLine_Click(object sender, EventArgs e)
         {
-            ClickEventArgs clickEventArgs = new ClickEventArgs();
-            clickEventArgs.IsDoubleClick = false;
-            ToolStripItem item = sender as ToolStripItem;
-            MeasureTools measureTool = (MeasureTools)item.Tag;
-            SetMeasureTool(measureTool);
+            SetMeasureTool(sender, false);
         }
 
         private void toolStripButtonLaser_Click(object sender, EventArgs e)
@@ -190,16 +186,12 @@ namespace Cii.Lar
 
         private void toolStripButtonRectangle_Click(object sender, EventArgs e)
         {
-            ClickEventArgs clickEventArgs = new ClickEventArgs();
-            clickEventArgs.IsDoubleClick = false;
-            ToolStripItem item = sender as ToolStripItem;
-            MeasureTools measureTool = (MeasureTools)item.Tag;
-            SetMeasureTool(measureTool);
+            SetMeasureTool(sender, false);
         }
 
         private void toolStripButtonElliptical_Click(object sender, EventArgs e)
         {
-
+            SetMeasureTool(sender, false);
         }
 
         private void toolStripButtonPolygon_Click(object sender, EventArgs e)
@@ -213,8 +205,12 @@ namespace Cii.Lar
             settingForm.ShowDialog();
         }
 
-        private void SetMeasureTool(MeasureTools measureTool)
+        private void SetMeasureTool(object sender, bool isDoubleClick)
         {
+            ClickEventArgs clickEventArgs = new ClickEventArgs();
+            clickEventArgs.IsDoubleClick = false;
+            ToolStripItem item = sender as ToolStripItem;
+            MeasureTools measureTool = (MeasureTools)item.Tag;
             if (measureTool == MeasureTools.Line)
             {
                 CommandLine();

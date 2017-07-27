@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DrawTools\DrawEllipse.cs" />
     <Compile Include="DrawTools\DrawLine.cs" />
     <Compile Include="DrawTools\DrawObject.cs" />
     <Compile Include="DrawTools\DrawRectangle.cs" />
