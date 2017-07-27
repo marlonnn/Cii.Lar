@@ -9,6 +9,10 @@ using System.Drawing.Drawing2D;
 
 namespace Cii.Lar.DrawTools
 {
+    /// <summary>
+    /// Ellipse graphic object
+    /// Author:Zhong Wen 2017/07/26
+    /// </summary>
     public class DrawEllipse : DrawObject
     {
         private PointF startPoint;  // point at -a (in pixel)
@@ -75,6 +79,11 @@ namespace Cii.Lar.DrawTools
             _ellipseForDraw = null;
         }
 
+        /// <summary>
+        /// draw ellipse graphic
+        /// </summary>
+        /// <param name="g"></param>
+        /// <param name="pictureBox"></param>
         public override void Draw(Graphics g, CursorPictureBox pictureBox)
         {
             if (_ellipseForDraw == null)
@@ -104,6 +113,12 @@ namespace Cii.Lar.DrawTools
             }
         }
 
+        /// <summary>
+        /// Mouse move to new point
+        /// </summary>
+        /// <param name="pictureBox"></param>
+        /// <param name="point"></param>
+        /// <param name="handleNumber"></param>
         public override void MoveHandleTo(CursorPictureBox pictureBox, Point point, int handleNumber)
         {
             if (handleNumber == 2 || handleNumber == 4)
@@ -133,15 +148,18 @@ namespace Cii.Lar.DrawTools
             UpdateEllipseForHit();
         }
 
+        /// <summary>
+        /// update ellipse for hit
+        /// </summary>
         private void UpdateEllipseForHit()
         {
             startPoint = _ellipseForDraw.StartPoint;
             endPoint = _ellipseForDraw.EndPoint;
             coeffcient = _ellipseForDraw.Coeffcient;
-            //if (_ellipseForDraw.DrawAreaSize != _drawAreaSize && !_ellipseForDraw.DrawAreaSize.IsEmpty)
-            //{
-            //    Ellipse.TransformLinear(ref startPoint, ref endPoint, ref coeffcient, _drawAreaSize.Width * 1.0 / _ellipseForDraw.DrawAreaSize.Width, _drawAreaSize.Height * 1.0 / _ellipseForDraw.DrawAreaSize.Height, 0, 0);
-            //}
+            if (_ellipseForDraw.DrawAreaSize != _drawAreaSize && !_ellipseForDraw.DrawAreaSize.IsEmpty)
+            {
+                Ellipse.TransformLinear(ref startPoint, ref endPoint, ref coeffcient, _drawAreaSize.Width * 1.0 / _ellipseForDraw.DrawAreaSize.Width, _drawAreaSize.Height * 1.0 / _ellipseForDraw.DrawAreaSize.Height, 0, 0);
+            }
         }
 
         /// <summary>
@@ -313,8 +331,6 @@ namespace Cii.Lar.DrawTools
                     }
                 }
 
-                //NovoCyte.Algorithm.algebra_s_test.PrintLineF(string.Format("old: start=({0:F4}, {1:F4}), end=({2:F4}, {3:F4}), coef={4:F6}, k={5:F4}, h={6:F4}", oldStart.X, oldStart.Y, oldEnd.X, oldEnd.Y, oldCoef, k, h));
-                //NovoCyte.Algorithm.algebra_s_test.PrintLineF(string.Format("new: start=({0:F4}, {1:F4}), end=({2:F4}, {3:F4}), coef={4:F6}", start.X, start.Y, end.X, end.Y, coef));
             }
         }
 

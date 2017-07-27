@@ -11,6 +11,7 @@ namespace Cii.Lar.DrawTools
 {
     /// <summary>
     /// Base class for all tools which create new graphic object
+    /// Author:Zhong Wen 2017/07/25
     /// </summary>
     public abstract class ToolObject : Tool
     {
@@ -42,6 +43,11 @@ namespace Cii.Lar.DrawTools
 
         }
 
+        /// <summary>
+        /// left mouse is leave
+        /// </summary>
+        /// <param name="pictureBox"></param>
+        /// <param name="e"></param>
         public override void OnMouseLeave(CursorPictureBox pictureBox, EventArgs e)
         {
             OnMouseUp(pictureBox, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0));
@@ -61,6 +67,11 @@ namespace Cii.Lar.DrawTools
             //}
         }
 
+        /// <summary>
+        /// add new object to picturebox
+        /// </summary>
+        /// <param name="pictureBox"></param>
+        /// <param name="o"></param>
         protected void AddNewObject(CursorPictureBox pictureBox, DrawObject o)
         {
             pictureBox.GraphicsList.UnselectAll();

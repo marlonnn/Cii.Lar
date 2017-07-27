@@ -8,6 +8,10 @@ using System.Windows.Forms;
 
 namespace Cii.Lar.DrawTools
 {
+    /// <summary>
+    /// Normal mouse state 
+    /// Author:Zhong Wen 2017/07/27
+    /// </summary>
     public class ToolPointer : Tool
     {
         private enum SelectionMode

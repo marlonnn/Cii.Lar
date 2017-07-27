@@ -57,6 +57,7 @@
     <Compile Include="DrawTools\DrawEllipse.cs" />
     <Compile Include="DrawTools\DrawLine.cs" />
     <Compile Include="DrawTools\DrawObject.cs" />
+    <Compile Include="DrawTools\DrawPolygon.cs" />
     <Compile Include="DrawTools\DrawRectangle.cs" />
     <Compile Include="DrawTools\GraphicsList.cs" />
     <Compile Include="DrawTools\Tool.cs" />

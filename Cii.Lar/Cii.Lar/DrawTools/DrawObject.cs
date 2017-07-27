@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace Cii.Lar.DrawTools
 {
+    /// <summary>
+    /// Base class for all draw objects
+    /// Author:Zhong Wen 2017/07/25
+    /// </summary>
     public abstract class DrawObject
     {
         public enum ElementType
@@ -107,11 +111,11 @@ namespace Cii.Lar.DrawTools
                 color = value;
             }
         }
-        private Point _movingOffset;
+        private Point movingOffset;
         public Point MovingOffset
         {
-            get { return _movingOffset; }
-            set { _movingOffset = value; }
+            get { return movingOffset; }
+            set { movingOffset = value; }
         }
 
 

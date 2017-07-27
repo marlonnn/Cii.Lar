@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace Cii.Lar.DrawTools
 {
+    /// <summary>
+    /// Line graphic object
+    /// Author:Zhong Wen 2017/07/26
+    /// </summary>
     public class DrawLine : DrawObject
     {
         protected PointF startDataPoint;
@@ -16,7 +20,7 @@ namespace Cii.Lar.DrawTools
 
         public DrawLine()
         {
-            this.Color = Color.DarkGreen;
+            this.Color = Color.Blue;
         }
 
         public DrawLine(CursorPictureBox pictureBox, int x1, int y1, int x2, int y2) : this()
@@ -25,6 +29,11 @@ namespace Cii.Lar.DrawTools
             endDataPoint = new Point(x2, y2);
         }
 
+        /// <summary>
+        /// draw line graphic
+        /// </summary>
+        /// <param name="g"></param>
+        /// <param name="pictureBox"></param>
         public override void Draw(Graphics g, CursorPictureBox pictureBox)
         {
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -43,6 +52,12 @@ namespace Cii.Lar.DrawTools
             }
         }
 
+        /// <summary>
+        /// Mouse move to new point
+        /// </summary>
+        /// <param name="pictureBox"></param>
+        /// <param name="point"></param>
+        /// <param name="handleNumber"></param>
         public override void MoveHandleTo(CursorPictureBox pictureBox, Point point, int handleNumber)
         {
             if (handleNumber == 1)

@@ -10,6 +10,7 @@ namespace Cii.Lar.DrawTools
 {
     /// <summary>
     /// Base class for all drawing tools
+    /// Author:Zhong Wen 2017/07/25
     /// </summary>
     public class Tool
     {

@@ -10,6 +10,10 @@ using System.Windows.Forms;
 
 namespace Cii.Lar.DrawTools
 {
+    /// <summary>
+    /// Rectangle graphic object
+    /// Author:Zhong Wen 2017/07/26
+    /// </summary>
     public class DrawRectangle : DrawObject
     {
         private Rectangle rectangle;
@@ -23,6 +27,11 @@ namespace Cii.Lar.DrawTools
             rectangle = new Rectangle(x, y, width, height);
         }
 
+        /// <summary>
+        /// draw graphic object
+        /// </summary>
+        /// <param name="g"></param>
+        /// <param name="pictureBox"></param>
         public override void Draw(Graphics g, CursorPictureBox pictureBox)
         {
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -33,6 +42,12 @@ namespace Cii.Lar.DrawTools
             }
         }
 
+        /// <summary>
+        /// Mouse move to new point
+        /// </summary>
+        /// <param name="pictureBox"></param>
+        /// <param name="point"></param>
+        /// <param name="handleNumber"></param>
         public override void MoveHandleTo(CursorPictureBox pictureBox, Point point, int handleNumber)
         {
             int left = rectangle.Left;

@@ -11,6 +11,10 @@ using System.Windows.Forms;
 
 namespace Cii.Lar.DrawTools
 {
+    /// <summary>
+    /// Draw ellipse shape tool
+    /// Author:Zhong Wen 2017/07/27
+    /// </summary>
     public class ToolEllipse : ToolObject
     {
         private static Cursor s_cursor = new Cursor(new MemoryStream((byte[])new ResourceManager(typeof(CursorPictureBox)).GetObject("Ellipse")));

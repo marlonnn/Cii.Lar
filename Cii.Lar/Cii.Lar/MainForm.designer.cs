@@ -210,7 +210,7 @@ namespace Cii.Lar
             this.toolStripButtonLine.Name = "toolStripButtonLine";
             this.toolStripButtonLine.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonLine.Text = global::Cii.Lar.Properties.Resources.toolStripButtonLineStr;
-            this.toolStripButtonLine.Click += new System.EventHandler(this.toolStripButtonLine_Click);
+            this.toolStripButtonLine.Click += new System.EventHandler(this.toolStripButton_Click);
             // 
             // toolStripButtonRectangle
             // 
@@ -220,7 +220,7 @@ namespace Cii.Lar
             this.toolStripButtonRectangle.Name = "toolStripButtonRectangle";
             this.toolStripButtonRectangle.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonRectangle.Text = global::Cii.Lar.Properties.Resources.toolStripButtonRectangleStr;
-            this.toolStripButtonRectangle.Click += new System.EventHandler(this.toolStripButtonRectangle_Click);
+            this.toolStripButtonRectangle.Click += new System.EventHandler(this.toolStripButton_Click);
             // 
             // toolStripButtonElliptical
             // 
@@ -230,7 +230,7 @@ namespace Cii.Lar
             this.toolStripButtonElliptical.Name = "toolStripButtonElliptical";
             this.toolStripButtonElliptical.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonElliptical.Text = global::Cii.Lar.Properties.Resources.toolStripButtonEllipticalStr;
-            this.toolStripButtonElliptical.Click += new System.EventHandler(this.toolStripButtonElliptical_Click);
+            this.toolStripButtonElliptical.Click += new System.EventHandler(this.toolStripButton_Click);
             // 
             // toolStripButtonPolygon
             // 
@@ -240,7 +240,7 @@ namespace Cii.Lar
             this.toolStripButtonPolygon.Name = "toolStripButtonPolygon";
             this.toolStripButtonPolygon.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonPolygon.Text = global::Cii.Lar.Properties.Resources.toolStripButtonPolygonStr;
-            this.toolStripButtonPolygon.Click += new System.EventHandler(this.toolStripButtonPolygon_Click);
+            this.toolStripButtonPolygon.Click += new System.EventHandler(this.toolStripButton_Click);
             // 
             // toolStripSeparator5
             // 
@@ -283,10 +283,12 @@ namespace Cii.Lar
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(740, 567);
+            this.KeyPreview = true;
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.scalablePictureBox);
             this.Controls.Add(this.metroStatusBar1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyDown += MainForm_KeyDown;
             this.Name = "MainForm";
             this.ShowIcon = false;
             this.Text = "Lar-100";
