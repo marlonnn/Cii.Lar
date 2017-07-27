@@ -22,6 +22,7 @@ namespace Cii.Lar
         Rectangular,
         Elliptical,
         Polygon,
+        Circle
     }
     public partial class MainForm : DevComponents.DotNetBar.Office2007Form
     {
@@ -48,6 +49,7 @@ namespace Cii.Lar
             toolStripButtonRectangle.Tag = MeasureTools.Rectangular;
             toolStripButtonElliptical.Tag = MeasureTools.Elliptical;
             toolStripButtonPolygon.Tag = MeasureTools.Polygon;
+            toolStripButtonLaser.Tag = MeasureTools.Circle;
         }
 
         private void CaptureImage()
@@ -178,11 +180,6 @@ namespace Cii.Lar
             SetMeasureTool(sender, false);
         }
 
-        private void toolStripButtonLaser_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void toolStripButtonSetting_Click(object sender, EventArgs e)
         {
             settingForm = new SettingForm();
@@ -219,6 +216,10 @@ namespace Cii.Lar
             else if (measureTool == MeasureTools.Polygon)
             {
                 CommandPolyLine();
+            }
+            else if (measureTool == MeasureTools.Circle)
+            {
+                CommandCircle();
             }
             else
             {
@@ -261,6 +262,11 @@ namespace Cii.Lar
         private void CommandPointer()
         {
             this.scalablePictureBox.ActiveTool = DrawToolType.Pointer;
+        }
+
+        private void CommandCircle()
+        {
+            this.scalablePictureBox.ActiveTool = DrawToolType.Circle;
         }
     }
 }
