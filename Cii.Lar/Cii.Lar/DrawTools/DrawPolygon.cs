@@ -12,6 +12,7 @@ namespace Cii.Lar.DrawTools
     using PointFEnumerator = IEnumerator<PointF>;
     using UI;
     using System.Drawing.Drawing2D;
+    using System.Windows.Forms;
 
     /// <summary>
     /// Polygon graphic object
@@ -19,6 +20,9 @@ namespace Cii.Lar.DrawTools
     /// </summary>
     public class DrawPolygon : DrawLine
     {
+        protected static System.Resources.ResourceManager resourceManager = new System.Resources.ResourceManager(typeof(CursorPictureBox));
+
+        protected static Cursor handleCursor = new Cursor(new System.IO.MemoryStream((byte[])resourceManager.GetObject("PolyHandle")));
         protected PointFList pointArray;
         private PointFList pointArrayProportion;
 
@@ -57,7 +61,21 @@ namespace Cii.Lar.DrawTools
             AddPoint(pictureBox, new Point(x1, y1), false);
             AddPoint(pictureBox, new Point(x2, y2), false);
         }
-        
+
+        public override void Move(CursorPictureBox pictureBox, int deltaX, int deltaY)
+        {
+            int n = pointArray.Count;
+            Point point;
+
+            for (int i = 0; i < n; i++)
+            {
+                point = Point.Ceiling(pointArray[i]);
+                point = new Point(point.X + deltaX, point.Y + deltaY);
+
+                pointArray[i] = point;
+            }
+        }
+
         /// <summary>
         /// draw object
         /// </summary>
@@ -156,6 +174,118 @@ namespace Cii.Lar.DrawTools
             brush.Dispose();
         }
 
+        /// <summary>
+        /// Invalidate object.
+        /// When object is invalidated, path used for hit test
+        /// is released and should be created again.
+        /// </summary>
+        protected void Invalidate()
+        {
+            if (AreaPath != null)
+            {
+                AreaPath.Dispose();
+                AreaPath = null;
+            }
+
+            //if (AreaPen != null)
+            //{
+            //    AreaPen.Dispose();
+            //    AreaPen = null;
+            //}
+
+            if (AreaRegion != null)
+            {
+                AreaRegion.Dispose();
+                AreaRegion = null;
+            }
+        }
+
+        public override void UpdateHitTestRegions()
+        {
+            // call this since we use draw points to do gate hit test
+            CreateObjects();
+        }
+
+        /// <summary>
+        /// Create graphic object used for hit test
+        /// </summary>
+        protected void CreateObjects()
+        {
+            Invalidate();   // invalidate every time, since draw area may resize
+            if (AreaPath != null)
+                return;
+
+            // Create closed path which contains all polygon vertexes
+            AreaPath = new GraphicsPath();
+
+            PointF p1 = PointF.Empty;     // previous point
+            PointF p2 = PointF.Empty;     // current point
+
+            PointFEnumerator enumerator = pointArray.GetEnumerator();
+
+            if (enumerator.MoveNext())
+            {
+                p1 = enumerator.Current;
+            }
+
+            while (enumerator.MoveNext())
+            {
+                p2 = enumerator.Current;
+
+                AreaPath.AddLine(p1, p2);
+
+                p1 = p2;
+            }
+
+            AreaPath.CloseFigure();
+
+            // Create region from the path
+            AreaRegion = new Region(AreaPath);
+        }
+
+        /// <summary>
+        /// Hit test if dataPoint is in gate, only used for user operation like mouse operation
+        /// </summary>
+        /// <param name="nIndex">gate index</param>
+        /// <param name="dataPoint"></param>
+        /// <returns></returns>
+        public override bool HitTest(int nIndex, PointF dataPoint)
+        {
+            try
+            {
+                return nIndex == 0 && AreaRegion != null && AreaRegion.IsVisible(dataPoint);
+            }
+            catch (System.Exception)
+            {
+
+            }
+            return false;
+        }
+
+        public override HitTestResult HitTestForSelection(CursorPictureBox pictureBox, Point point0)
+        {
+            //transfer point according to const draw area size for hit test
+            Point point = new Point(point0.X * pictureBox.Width, point0.Y *pictureBox.Height);
+            GraphicsPath pathOut = AreaPath.Clone() as GraphicsPath;
+            Pen pen = new Pen(Color.Black, SelectionHitTestWidth * 2);
+            pathOut.Widen(pen);
+            Region rOut = new Region(pathOut);
+            bool result = false;
+            try
+            {
+                result = rOut.IsVisible(point);
+            }
+            catch (System.Exception ex)
+            {
+
+            }
+            pathOut.Dispose();
+            pen.Dispose();
+            rOut.Dispose();
+
+            return result ? new HitTestResult(ElementType.Gate, 0) : new HitTestResult(ElementType.Nothing, -1);
+        }
+
         public void MoveLastHandleTo(CursorPictureBox pictureBox, Point point)
         {
             if (PointCount == 0) return;
@@ -189,6 +319,39 @@ namespace Cii.Lar.DrawTools
             Point point = GetHandle(pictureBox, handleNumber);
 
             return new Rectangle(point.X - 3, point.Y - 3, 6, 6);
+        }
+
+        public override Cursor GetHandleCursor(int handleNumber)
+        {
+            if (handleNumber <= PointCount)
+            {
+                return handleCursor;
+            }
+            else
+            {
+                handleNumber -= PointCount;
+                switch (handleNumber)
+                {
+                    case 1:
+                        return Cursors.SizeNWSE;
+                    case 2:
+                        return Cursors.SizeNS;
+                    case 3:
+                        return Cursors.SizeNESW;
+                    case 4:
+                        return Cursors.SizeWE;
+                    case 5:
+                        return Cursors.SizeNWSE;
+                    case 6:
+                        return Cursors.SizeNS;
+                    case 7:
+                        return Cursors.SizeNESW;
+                    case 8:
+                        return Cursors.SizeWE;
+                    default:
+                        return Cursors.Default;
+                }
+            }
         }
 
         /// <summary>

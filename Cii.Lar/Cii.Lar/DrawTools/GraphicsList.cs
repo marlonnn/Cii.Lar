@@ -49,6 +49,11 @@ namespace Cii.Lar.DrawTools
             }
         }
 
+        public IEnumerator<DrawObject> GetEnumerator()
+        {
+            return graphicsList.GetEnumerator();
+        }
+
         public void Draw(Graphics g, CursorPictureBox pictureBox)
         {
             int n = graphicsList.Count;
@@ -68,6 +73,25 @@ namespace Cii.Lar.DrawTools
                 {
                     o.DrawTracker(g, pictureBox);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Returns INumerable object which may be used for enumeration
+        /// of selected objects.
+        /// 
+        /// Note: returning IEnumerable<DrawObject> breaks CLS-compliance
+        /// (assembly CLSCompliant = true is removed from AssemblyInfo.cs).
+        /// To make this program CLS-compliant, replace 
+        /// IEnumerable<DrawObject> with IEnumerable. This requires
+        /// casting to object at runtime.
+        /// </summary>
+        /// <value></value>
+        public IEnumerable<DrawObject> Selection
+        {
+            get
+            {
+                return graphicsList.Where(o => o.Selected).ToList();
             }
         }
 

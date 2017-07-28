@@ -72,6 +72,7 @@
     <Compile Include="DrawTools\ToolPolygon.cs" />
     <Compile Include="DrawTools\ToolPolyLine.cs" />
     <Compile Include="DrawTools\ToolRectangle.cs" />
+    <Compile Include="ExpClass\ExpManager.cs" />
     <Compile Include="ExpClass\Report.cs" />
     <Compile Include="ExpClass\ReportItemBase.cs" />
     <Compile Include="ExpClass\ReportPage.cs" />
@@ -265,6 +266,7 @@
     <Content Include="DrawTools\Ellipse.cur" />
     <Content Include="DrawTools\Line.cur" />
     <Content Include="DrawTools\Pencil.cur" />
+    <Content Include="DrawTools\PolyHandle.cur" />
     <Content Include="DrawTools\Rectangle.cur" />
     <Content Include="Resources\1.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

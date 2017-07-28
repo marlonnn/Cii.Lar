@@ -155,5 +155,6 @@ namespace Cii.Lar.SysClass
                     RefreshToolStripUICulture(resources, (item as ToolStripDropDownItem).DropDownItems);
             }
         }
+
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Drawing;
 using Cii.Lar.UI;
 using System.Drawing.Drawing2D;
@@ -15,9 +16,17 @@ namespace Cii.Lar.DrawTools
     /// </summary>
     public class DrawEllipse : DrawObject
     {
+        [NonSerialized]
+        protected static System.Resources.ResourceManager resourceManager = new System.Resources.ResourceManager(typeof(CursorPictureBox));
+        [NonSerialized]
+        protected static Cursor handleCursor = new Cursor(new System.IO.MemoryStream((byte[])resourceManager.GetObject("PolyHandle")));
+
         private PointF startPoint;  // point at -a (in pixel)
         private PointF endPoint;    // point at a (in pixel)
         private double coeffcient;  // height / width
+
+        private GraphicsPath areaPath = new GraphicsPath();
+        private Region areaRegion = new Region();
 
         /// <summary>
         /// ellipse only for draw, need to be reset when ellipse for hit test changed. 
@@ -25,6 +34,17 @@ namespace Cii.Lar.DrawTools
         /// Size is not equal to default draw area size for hit test
         /// </summary>
         private Ellipse ellipseForDraw = null;
+
+        /// <summary>
+        /// ellipse for hit test
+        /// </summary>
+        private Ellipse EllipseForHit
+        {
+            get
+            {
+                return new Ellipse(startPoint, endPoint, coeffcient, drawAreaSize);
+            }
+        }
 
         private Matrix orgMatrix;
 
@@ -46,7 +66,19 @@ namespace Cii.Lar.DrawTools
             }
         }
 
-        private Size _drawAreaSize = DefaultDrawAreaSize; // store draw area size for data point hit test
+        private Matrix HitTestMatrix
+        {
+            get
+            {
+                Ellipse ellipse = EllipseForHit;
+                Matrix matrix = new Matrix();
+                matrix.Translate(ellipse.Center.X, ellipse.Center.Y);
+                matrix.Rotate(ellipse.Angle);
+                return matrix;
+            }
+        }
+
+        private Size drawAreaSize = DefaultDrawAreaSize; // store draw area size for data point hit test
 
         public DrawEllipse()
         {
@@ -59,11 +91,11 @@ namespace Cii.Lar.DrawTools
             endPoint = new PointF(x2, y2);
             coeffcient = c;
 
-            _drawAreaSize = pictureBox.Size;
-            if (_drawAreaSize != DefaultDrawAreaSize)
+            drawAreaSize = pictureBox.Size;
+            if (drawAreaSize != DefaultDrawAreaSize)
             {
-                TransformLinear(DefaultDrawAreaSize.Width * 1.0 / _drawAreaSize.Width, DefaultDrawAreaSize.Height * 1.0 / _drawAreaSize.Height, 0, 0);
-                _drawAreaSize = DefaultDrawAreaSize;
+                TransformLinear(DefaultDrawAreaSize.Width * 1.0 / drawAreaSize.Width, DefaultDrawAreaSize.Height * 1.0 / drawAreaSize.Height, 0, 0);
+                drawAreaSize = DefaultDrawAreaSize;
             }
 
         }
@@ -88,7 +120,7 @@ namespace Cii.Lar.DrawTools
         {
             if (ellipseForDraw == null)
             {
-                ellipseForDraw = new Ellipse(startPoint, endPoint, coeffcient, _drawAreaSize);
+                ellipseForDraw = new Ellipse(startPoint, endPoint, coeffcient, drawAreaSize);
             }
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -111,6 +143,15 @@ namespace Cii.Lar.DrawTools
                     g.Transform = OrgMatrix;
                 }
             }
+        }
+
+        public override void Move(CursorPictureBox pictureBox, int deltaX, int deltaY)
+        {
+            PointF ps = ellipseForDraw.StartPoint;
+            PointF pe = ellipseForDraw.EndPoint;
+
+            ellipseForDraw.StartPoint = new PointF(ps.X + deltaX, ps.Y + deltaY);
+            ellipseForDraw.EndPoint = new PointF(pe.X + deltaX, pe.Y + deltaY);
         }
 
         /// <summary>
@@ -201,6 +242,30 @@ namespace Cii.Lar.DrawTools
         }
 
         /// <summary>
+        /// Create graphic object used for hit test
+        /// </summary>
+        protected void CreateObjects()
+        {
+            if (areaPath != null)
+            {
+                areaPath.Dispose();
+                areaPath = null;
+            }
+
+            if (areaRegion != null)
+            {
+                areaRegion.Dispose();
+                areaRegion = null;
+            }
+
+            areaPath = new GraphicsPath();
+            areaPath.AddEllipse(EllipseForHit.Rectangle);
+            areaRegion = new Region(areaPath);
+            areaRegion.Transform(HitTestMatrix);
+
+        }
+
+        /// <summary>
         /// update ellipse for hit
         /// </summary>
         private void UpdateEllipseForHit()
@@ -208,10 +273,55 @@ namespace Cii.Lar.DrawTools
             startPoint = ellipseForDraw.StartPoint;
             endPoint = ellipseForDraw.EndPoint;
             coeffcient = ellipseForDraw.Coeffcient;
-            if (ellipseForDraw.DrawAreaSize != _drawAreaSize && !ellipseForDraw.DrawAreaSize.IsEmpty)
+            if (ellipseForDraw.DrawAreaSize != drawAreaSize && !ellipseForDraw.DrawAreaSize.IsEmpty)
             {
-                Ellipse.TransformLinear(ref startPoint, ref endPoint, ref coeffcient, _drawAreaSize.Width * 1.0 / ellipseForDraw.DrawAreaSize.Width, _drawAreaSize.Height * 1.0 / ellipseForDraw.DrawAreaSize.Height, 0, 0);
+                Ellipse.TransformLinear(ref startPoint, ref endPoint, ref coeffcient, drawAreaSize.Width * 1.0 / ellipseForDraw.DrawAreaSize.Width, drawAreaSize.Height * 1.0 / ellipseForDraw.DrawAreaSize.Height, 0, 0);
             }
+        }
+
+        public override void UpdateHitTestRegions()
+        {
+            CreateObjects();
+        }
+
+        /// <summary>
+        /// Hit test if dataPoint is in gate, only used for user operation like mouse operation
+        /// </summary>
+        /// <param name="nIndex">gate index</param>
+        /// <param name="dataPoint"></param>
+        /// <returns></returns>
+        public override bool HitTest(int nIndex, PointF dataPoint)
+        {
+            return areaRegion.IsVisible(dataPoint);
+        }
+
+        public override HitTestResult HitTestForSelection(CursorPictureBox pictureBox, Point point0)
+        {
+            //transfer point according to const draw area size for hit test
+            Point point = new Point(point0.X * drawAreaSize.Width / pictureBox.Width, point0.Y * drawAreaSize.Height / pictureBox.Height);
+
+            GraphicsPath pathOut = areaPath.Clone() as GraphicsPath;
+            Pen pen = new Pen(Color.Black, SelectionHitTestWidth * 2);
+            try { pathOut.Widen(pen, HitTestMatrix); }
+            catch (Exception) { }
+            Region rOut = new Region(pathOut);
+
+            bool result = rOut.IsVisible(point);
+            pathOut.Dispose();
+            pen.Dispose();
+            rOut.Dispose();
+
+            return result ? new HitTestResult(ElementType.Gate, 0) : new HitTestResult(ElementType.Nothing, -1);
+        }
+
+        /// <summary>
+        /// Get cursor for the handle
+        /// </summary>
+        /// <param name="handleNumber"></param>
+        /// <returns></returns>
+        public override Cursor GetHandleCursor(int handleNumber)
+        {
+            return handleCursor;
         }
 
         /// <summary>

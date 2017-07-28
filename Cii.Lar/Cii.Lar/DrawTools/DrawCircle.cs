@@ -10,7 +10,7 @@ using System.Drawing.Drawing2D;
 namespace Cii.Lar.DrawTools
 {
     /// <summary>
-    /// Draw circle graphic
+    /// Draw hollow donut graphic
     /// Author:Zhong Wen 2017/07/27
     /// </summary>
     public class DrawCircle : DrawObject
@@ -46,14 +46,41 @@ namespace Cii.Lar.DrawTools
             {
                 circleForDraw = new Circle(CenterPoint, DrawAreaSize);
             }
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-
+            //path for the outer and inner circles
+            //using (GraphicsPath path = new GraphicsPath())
+            //using (SolidBrush brush = new SolidBrush(this.Color))
             using (Pen pen = new Pen(this.Color, PenWidth))
             {
-                g.DrawEllipse(pen, circleForDraw.Rectangle.X, circleForDraw.Rectangle.Y, 
+                g.DrawEllipse(pen, circleForDraw.Rectangle.X, circleForDraw.Rectangle.Y,
                     circleForDraw.Rectangle.Width, circleForDraw.Rectangle.Height);
+                //path.AddEllipse(circleForDraw.Rectangle.X, circleForDraw.Rectangle.Y,
+                //    circleForDraw.Rectangle.Width, circleForDraw.Rectangle.Height);
+                //path.AddEllipse(circleForDraw.Rectangle.X - circleForDraw.Rectangle.Width / 4, circleForDraw.Rectangle.Y - circleForDraw.Rectangle.Width / 4,
+                //        circleForDraw.Rectangle.Width / 2, circleForDraw.Rectangle.Height / 2);
+                //g.FillPath(brush, path);
             }
+            //GraphicsPath path1 = new GraphicsPath();
+            //GraphicsPath path2 = new GraphicsPath();
+            //SolidBrush brush = new SolidBrush(this.Color);
+            //path1.AddEllipse(circleForDraw.Rectangle.X, circleForDraw.Rectangle.Y,
+            //    circleForDraw.Rectangle.Width, circleForDraw.Rectangle.Height);
+            //path2.AddEllipse(circleForDraw.Rectangle.X - circleForDraw.Rectangle.Width / 4, circleForDraw.Rectangle.Y - circleForDraw.Rectangle.Width / 4,
+            //    circleForDraw.Rectangle.Width / 4, circleForDraw.Rectangle.Height / 4);
+            //// Create a region from the Outer circle.
+            //Region region = new Region(path1);
+
+            //// Exclude the Inner circle from the region
+            //region.Exclude(path2);
+
+            //// Draw the region to your Graphics object
+            //g.FillRegion(brush, region);
+
+            //brush.Dispose();
+            //path1.Dispose();
+            //path2.Dispose();
+            //region.Dispose();
         }
+
 
         /// <summary>
         /// Get handle point by 1-based number
@@ -92,6 +119,16 @@ namespace Cii.Lar.DrawTools
             pts[0] = new PointF(x, y);
 
             return Point.Round(pts[0]);
+        }
+
+        public override bool HitTest(int nIndex, PointF dataPoint)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override HitTestResult HitTestForSelection(CursorPictureBox pictureBox, Point point)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

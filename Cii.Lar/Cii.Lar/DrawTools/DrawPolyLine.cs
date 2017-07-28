@@ -10,6 +10,25 @@ namespace Cii.Lar.DrawTools
 {
     public class DrawPolyLine : DrawPolygon
     {
+        private bool needReverseX = false;
+        public bool NeedReverseX
+        {
+            get { return needReverseX; }
+            set { needReverseX = value; }
+        }
+        private bool needReverseY = false;
+        public bool NeedReverseY
+        {
+            get { return needReverseY; }
+            set { needReverseY = value; }
+        }
+        private bool setProportion = true;
+        public bool SetProportion
+        {
+            get { return setProportion; }
+            set { setProportion = value; }
+        }
+
         public DrawPolyLine()
         {
 

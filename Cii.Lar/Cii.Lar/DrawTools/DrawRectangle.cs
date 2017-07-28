@@ -143,6 +143,12 @@ namespace Cii.Lar.DrawTools
 
         }
 
+        public override void Move(CursorPictureBox pictureBox, int deltaX, int deltaY)
+        {
+            Rectangle rect = GetRectangle();
+            SetRectangle( new Rectangle(rect.X + deltaX, rect.Y + deltaY, rect.Width, rect.Height));
+        }
+
         /// <summary>
         /// Mouse move to new point
         /// </summary>
@@ -211,6 +217,55 @@ namespace Cii.Lar.DrawTools
             Point rightBottom = Point.Ceiling(new PointF(right, bottom));
 
             return new Rectangle(leftTop.X, leftTop.Y, rightBottom.X - leftTop.X, rightBottom.Y - leftTop.Y);
+        }
+
+        /// <summary>
+        /// Get cursor for the handle
+        /// </summary>
+        /// <param name="handleNumber"></param>
+        /// <returns></returns>
+        public override Cursor GetHandleCursor(int handleNumber)
+        {
+            switch (handleNumber)
+            {
+                case 1:
+                    return Cursors.SizeNWSE;
+                case 2:
+                    return Cursors.SizeNS;
+                case 3:
+                    return Cursors.SizeNESW;
+                case 4:
+                    return Cursors.SizeWE;
+                case 5:
+                    return Cursors.SizeNWSE;
+                case 6:
+                    return Cursors.SizeNS;
+                case 7:
+                    return Cursors.SizeNESW;
+                case 8:
+                    return Cursors.SizeWE;
+                default:
+                    return Cursors.Default;
+            }
+        }
+
+        public override bool HitTest(int nIndex, PointF dataPoint)
+        {
+            return dataPoint.X >= dataLeft && dataPoint.X <= dataRight
+               && dataPoint.Y >= dataBottom && dataPoint.Y <= dataTop;
+        }
+
+        public override HitTestResult HitTestForSelection(CursorPictureBox pictureBox, Point point)
+        {
+            Rectangle rectGate = GetRectangle();
+            Rectangle rectLarge = rectGate, rectSamll = rectGate;
+            rectLarge.Inflate(SelectionHitTestWidth, SelectionHitTestWidth);
+            rectSamll.Inflate(-SelectionHitTestWidth, -SelectionHitTestWidth);
+
+            if (!rectSamll.Contains(point) && rectLarge.Contains(point))
+                return new HitTestResult(ElementType.Gate, 0);
+
+            return new HitTestResult(ElementType.Nothing, -1);
         }
 
         /// <summary>

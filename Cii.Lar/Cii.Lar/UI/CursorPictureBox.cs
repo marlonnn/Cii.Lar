@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cii.Lar.DrawTools;
+using System.Drawing.Drawing2D;
 
 namespace Cii.Lar.UI
 {
@@ -70,6 +71,7 @@ namespace Cii.Lar.UI
                 drawObjects = value;
             }
         }
+
         public bool CreatingDrawObject
         {
             get
@@ -77,6 +79,12 @@ namespace Cii.Lar.UI
                 return ActiveTool != DrawToolType.None && ActiveTool != DrawToolType.Pointer &&
                       GraphicsList.Count > 0 && GraphicsList[0].Creating;
             }
+        }
+
+        public Rectangle RectNetSelection
+        {
+            get;
+            set;
         }
 
         public CursorPictureBox()
@@ -129,6 +137,26 @@ namespace Cii.Lar.UI
                 e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
                 GraphicsList.Draw(e.Graphics, this);
             }
+            DrawNetSelection(e.Graphics);
+        }
+
+        private void DrawNetSelection(Graphics graphics)
+        {
+            if (RectNetSelection.IsEmpty)
+            {
+                return;
+            }
+            SmoothingMode mode = graphics.SmoothingMode;
+            graphics.SmoothingMode = SmoothingMode.Default;
+
+            Pen pen = new Pen(Color.DimGray, 1);
+            pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+
+            RectNetSelection = DrawRectangle.GetNormalizedRectangle(RectNetSelection);
+            graphics.DrawRectangle(pen, RectNetSelection);
+
+            pen.Dispose();
+            graphics.SmoothingMode = mode;
         }
     }
 }

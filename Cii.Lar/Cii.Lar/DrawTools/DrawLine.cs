@@ -6,6 +6,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Cii.Lar.DrawTools
 {
@@ -17,6 +18,31 @@ namespace Cii.Lar.DrawTools
     {
         protected PointF startDataPoint;
         protected PointF endDataPoint;
+        private GraphicsPath areaPath = null;
+        protected GraphicsPath AreaPath
+        {
+            get
+            {
+                return areaPath;
+            }
+            set
+            {
+                areaPath = value;
+            }
+        }
+
+        protected Region areaRegion = null;
+        protected Region AreaRegion
+        {
+            get
+            {
+                return areaRegion;
+            }
+            set
+            {
+                areaRegion = value;
+            }
+        }
 
         public DrawLine()
         {
@@ -52,6 +78,22 @@ namespace Cii.Lar.DrawTools
             }
         }
 
+        public override Cursor GetHandleCursor(int handleNumber)
+        {
+            switch (handleNumber)
+            {
+                case 1:
+                case 2:
+                    {
+                        return Cursors.SizeAll;
+                    }
+                default:
+                    {
+                        return Cursors.Default;
+                    }
+            }
+        }
+
         /// <summary>
         /// Get handle point by 1-based number
         /// </summary>
@@ -67,6 +109,14 @@ namespace Cii.Lar.DrawTools
             {
                 return Point.Ceiling(endDataPoint);
             }
+        }
+
+        public override void Move(CursorPictureBox pictureBox, int deltaX, int deltaY)
+        {
+            Point s = Point.Ceiling(startDataPoint), e = Point.Ceiling(endDataPoint);
+
+            startDataPoint = new Point(s.X + deltaX, s.Y + deltaY);
+            endDataPoint = new Point(e.X + deltaX, e.Y + deltaY);
         }
 
         /// <summary>
@@ -85,6 +135,18 @@ namespace Cii.Lar.DrawTools
             {
                 endDataPoint = point;
             }
+        }
+
+        public override bool HitTest(int nIndex, PointF dataPoint)
+        {
+            return false;
+        }
+
+        public override HitTestResult HitTestForSelection(CursorPictureBox pictureBox, Point point)
+        {
+            Rectangle rect = new Rectangle(Point.Ceiling(startDataPoint), new Size((int)(endDataPoint.X - startDataPoint.X), 1));
+            rect.Inflate(0, this.SelectionHitTestWidth);
+            return rect.Contains(point) ? new HitTestResult(ElementType.Gate, 0) : new HitTestResult(ElementType.Nothing, -1);
         }
     }
 }

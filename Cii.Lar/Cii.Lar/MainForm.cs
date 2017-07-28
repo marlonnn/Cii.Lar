@@ -36,6 +36,7 @@ namespace Cii.Lar
         {
             InitializeComponent();
             InitializeToolStrip();
+            Program.ExpManager.ScalablePictureBox = this.scalablePictureBox;
             //this.WindowState = FormWindowState.Maximized;
             resources = new ComponentResourceManager(typeof(MainForm));
             sysConfig = SysConfig.GetSysConfig();
@@ -177,7 +178,7 @@ namespace Cii.Lar
 
         private void toolStripButton_Click(object sender, EventArgs e)
         {
-            SetMeasureTool(sender, false);
+            Program.ExpManager.SetMeasureTool(sender, false);
         }
 
         private void toolStripButtonSetting_Click(object sender, EventArgs e)
@@ -190,83 +191,9 @@ namespace Cii.Lar
         {
             if (e.KeyCode == Keys.Escape && !e.Handled && this.scalablePictureBox.ActiveTool != DrawToolType.Pointer)
             {
-                SetMeasureTool(MeasureTools.Pointer);
+                Program.ExpManager.SetMeasureTool(MeasureTools.Pointer);
                 e.Handled = true;
             }
-        }
-
-        /// <summary>
-        /// set cursor shape according to different measure tool
-        /// </summary>
-        /// <param name="measureTool"></param>
-        private void SetMeasureTool(MeasureTools measureTool)
-        {
-            if (measureTool == MeasureTools.Line)
-            {
-                CommandLine();
-            }
-            else if (measureTool == MeasureTools.Rectangular)
-            {
-                CommandRectangle();
-            }
-            else if (measureTool == MeasureTools.Elliptical)
-            {
-                CommandEllipse();
-            }
-            else if (measureTool == MeasureTools.Polygon)
-            {
-                CommandPolyLine();
-            }
-            else if (measureTool == MeasureTools.Circle)
-            {
-                CommandCircle();
-            }
-            else
-            {
-                CommandPointer();
-            }
-        }
-
-        /// <summary>
-        /// set cursor shape when click toolstrip button
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="isDoubleClick"></param>
-        private void SetMeasureTool(object sender, bool isDoubleClick)
-        {
-            ToolStripItem item = sender as ToolStripItem;
-            MeasureTools measureTool = (MeasureTools)item.Tag;
-            SetMeasureTool(measureTool);
-        }
-
-        private void CommandLine()
-        {
-            this.scalablePictureBox.ActiveTool = DrawToolType.Line;
-        }
-
-        private void CommandRectangle()
-        {
-            this.scalablePictureBox.ActiveTool = DrawToolType.Rectangle;
-        }
-
-        private void CommandEllipse()
-        {
-            this.scalablePictureBox.ActiveTool = DrawToolType.Ellipse;
-        }
-
-        private void CommandPolyLine()
-        {
-            this.scalablePictureBox.ActiveTool = DrawToolType.PolyLine;
-        }
-
-        private void CommandPointer()
-        {
-            this.scalablePictureBox.ActiveTool = DrawToolType.Pointer;
-        }
-
-        private void CommandCircle()
-        {
-            this.scalablePictureBox.ActiveTool = DrawToolType.Circle;
         }
     }
 }

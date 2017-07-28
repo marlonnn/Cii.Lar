@@ -59,6 +59,12 @@ namespace Cii.Lar.DrawTools
             }
             set
             {
+                // can not set creating object not selected
+                if (Creating && !value)
+                {
+                    return;
+                }
+
                 this.selected = value;
             }
         }
@@ -152,6 +158,8 @@ namespace Cii.Lar.DrawTools
             }
         }
 
+        protected int SelectionHitTestWidth = 4;
+
         /// <summary>
         /// Number of handles
         /// </summary>
@@ -166,6 +174,66 @@ namespace Cii.Lar.DrawTools
         {
             return true;
         }
+
+        /// <summary>
+        /// Get cursor for the handle
+        /// </summary>
+        /// <param name="handleNumber"></param>
+        /// <returns></returns>
+        public virtual Cursor GetHandleCursor(int handleNumber)
+        {
+            return Cursors.Default;
+        }
+
+        public virtual void UpdateHitTestRegions()
+        {
+            // update gate for data hit test
+        }
+
+        public abstract bool HitTest(int nIndex, PointF dataPoint);
+
+        public HitTestResult HitTest(CursorPictureBox pictureBox, Point point, bool forSelection, bool hitTestHandle = true)
+        {
+            if (Selected && hitTestHandle)
+            {
+                for (int i = 1; i <= HandleCount; i++)
+                {
+                    if (CheckHandleRegion(pictureBox, i, point))
+                    {
+                        return new HitTestResult(ElementType.Handle, i);
+                    }
+                }
+            }
+            UpdateHitTestRegions();
+            if (forSelection)
+            {
+                return HitTestForSelection(pictureBox, point);
+            }
+            else
+            {
+                for (int i = 0; i < pictureBox.GraphicsList.Count; i++)
+                {
+                    PointF dataPoint = point;
+                    if (HitTest(i, dataPoint))
+                    {
+                        return new HitTestResult(ElementType.Gate, i);
+                    }
+                }
+                return new HitTestResult(ElementType.Nothing, -1);
+            }
+        }
+
+        protected virtual bool CheckHandleRegion(CursorPictureBox pictureBox, int handleNumber, Point point)
+        {
+            return (GetHandleRectangle(pictureBox, handleNumber).Contains(point));
+        }
+
+        /// <summary>
+        /// hit test function for user selection by mouse left button
+        /// </summary>
+        /// <param name="drawArea"></param>
+        /// <param name="point"></param>
+        public abstract HitTestResult HitTestForSelection(CursorPictureBox pictureBox, Point point);
 
         /// <summary>
         /// Get handle point by 1-based number
@@ -187,6 +255,15 @@ namespace Cii.Lar.DrawTools
             Point point = GetHandle(pictureBox, handleNumber);
 
             return new Rectangle(point.X - 3, point.Y - 3, 6, 6);
+        }
+
+        /// <summary>
+        /// Move object
+        /// </summary>
+        /// <param name="deltaX"></param>
+        /// <param name="deltaY"></param>
+        public virtual void Move(CursorPictureBox pictureBox, int deltaX, int deltaY)
+        {
         }
 
         /// <summary>

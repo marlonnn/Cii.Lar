@@ -130,6 +130,9 @@
   <data name="Pencil" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\DrawTools\Pencil.cur;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="PolyHandle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\DrawTools\PolyHandle.cur;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Rectangle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\DrawTools\Rectangle.cur;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
