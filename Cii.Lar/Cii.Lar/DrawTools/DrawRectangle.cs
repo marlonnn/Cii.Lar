@@ -33,6 +33,14 @@ namespace Cii.Lar.DrawTools
             SetRectangle(rectangle);
         }
 
+        public override string Prefix
+        {
+            get
+            {
+                return "R";
+            }
+        }
+
         /// <summary>
         /// draw graphic object
         /// </summary>
@@ -54,6 +62,13 @@ namespace Cii.Lar.DrawTools
                 rectangle.Offset(MovingOffset);
                 g.DrawRectangle(pen, r);
             }
+        }
+
+        public override RectangleF GetTextF(string name, Graphics g, int index)
+        {
+            SizeF sizeF = g.MeasureString(name, this.Font);
+            return new RectangleF(rectangle.X - sizeF.Width, rectangle.Y - sizeF.Height,
+                sizeF.Width, sizeF.Height);
         }
 
         public static Rectangle GetNormalizedRectangle(Rectangle r)

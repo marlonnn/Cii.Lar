@@ -41,16 +41,16 @@ namespace Cii.Lar.DrawTools
         public override void OnMouseUp(CursorPictureBox pictureBox, MouseEventArgs e)
         {
             // if new object creation is canceled
-            if (!pictureBox.CreatingDrawObject)
-            {
-                return;
-            }
-            pictureBox.GraphicsList[0].Creating = false;
+            //if (!pictureBox.CreatingDrawObject)
+            //{
+            //    return;
+            //}
+            //pictureBox.GraphicsList[0].Creating = false;
 
-            Program.ExpManager.SetMeasureTool(MeasureTools.Pointer);
+            //Program.ExpManager.SetMeasureTool(MeasureTools.Pointer);
 
-            pictureBox.Capture = false;
-            pictureBox.Refresh();
+            //pictureBox.Capture = false;
+            //pictureBox.Refresh();
         }
 
         /// <summary>

@@ -31,7 +31,7 @@ namespace Cii.Lar.DrawTools
 
         public DrawCircle()
         {
-            this.Color = Color.OrangeRed;
+            this.Color = Color.Yellow;
             DrawAreaSize = new Size(30, 30);
         }
 

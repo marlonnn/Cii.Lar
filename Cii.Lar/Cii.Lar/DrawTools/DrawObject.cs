@@ -69,6 +69,28 @@ namespace Cii.Lar.DrawTools
             }
         }
 
+        public virtual string Prefix
+        {
+            get
+            {
+                return "";
+            }
+        }
+
+        //graphic object name
+        private string name;
+        public virtual string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
+            }
+        }
+
         private bool creating; // this value does not need to serialize, it always false when deserializing
         public bool Creating
         {
@@ -80,9 +102,15 @@ namespace Cii.Lar.DrawTools
 
         protected RectangleF[] rectF;   // gate label rectangle, keep for old data, and in memory use
 
+        //graphic object ID
         // Allows to write Undo - Redo functions and don't care about
         // objects order in the list.
         private int id;
+        public int ID
+        {
+            get { return id; }
+            set { id = value; }
+        }
 
         private bool _autoSnap;
         public bool AutoSnap
@@ -92,6 +120,14 @@ namespace Cii.Lar.DrawTools
         }
 
         protected static Size DefaultDrawAreaSize = new Size(256, 256); //const draw area size use for hit test
+
+        private Font font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular);
+
+        public Font Font
+        {
+            get { return font; }
+            set { font = value; }
+        }
 
         private int penWidth = 1;
 
@@ -281,6 +317,22 @@ namespace Cii.Lar.DrawTools
         /// <param name="g"></param>
         public virtual void Draw(Graphics g, CursorPictureBox pictureBox)
         {
+        }
+
+        public virtual void DrawTest(Graphics g, CursorPictureBox pictureBox)
+        {
+            SolidBrush brush = new SolidBrush(Color.White);
+            Pen pen = new Pen(Color.Black, PenWidth);
+            RectangleF r = GetTextF(this.Name, g, this.ID);
+            r.Offset(MovingOffset);
+            g.DrawString(this.Name, this.Font, brush, r);
+            brush.Dispose();
+            pen.Dispose();
+        }
+
+        public virtual RectangleF GetTextF(string name, Graphics g, int index)
+        {
+            return new RectangleF();
         }
 
         public virtual void DrawTracker(Graphics g, CursorPictureBox pictureBox)

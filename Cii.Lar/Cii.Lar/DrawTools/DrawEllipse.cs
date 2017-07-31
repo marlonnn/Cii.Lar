@@ -111,6 +111,14 @@ namespace Cii.Lar.DrawTools
             ellipseForDraw = null;
         }
 
+        public override string Prefix
+        {
+            get
+            {
+                return "E";
+            }
+        }
+
         /// <summary>
         /// draw ellipse graphic
         /// </summary>
@@ -143,6 +151,13 @@ namespace Cii.Lar.DrawTools
                     g.Transform = OrgMatrix;
                 }
             }
+        }
+
+        public override RectangleF GetTextF(string name, Graphics g, int index)
+        {
+            SizeF sizeF = g.MeasureString(name, this.Font);
+            return new RectangleF(startPoint.X - sizeF.Width, startPoint.Y - sizeF.Height,
+                sizeF.Width, sizeF.Height);
         }
 
         public override void Move(CursorPictureBox pictureBox, int deltaX, int deltaY)

@@ -1,4 +1,5 @@
-﻿using Cii.Lar.UI;
+﻿using Cii.Lar.DrawTools;
+using Cii.Lar.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,25 @@ namespace Cii.Lar.ExpClass
         public ExpManager()
         {
 
+        }
+
+        public int GetNextDrawObjectID()
+        {
+            List<int> objectIDs = new List<int>();
+            foreach (DrawObject o in ScalablePictureBox.GraphicsList)
+            {
+                if (o is DrawCircle)
+                {
+                    continue;
+                }
+                objectIDs.Add(o.ID);
+            }
+            objectIDs.Sort();
+            // find the id that larger than previous id plus one
+            for (int i = 1; i < objectIDs.Count; i++)
+                if (objectIDs[i] > objectIDs[i - 1] + 1) return objectIDs[i - 1] + 1;
+
+            return objectIDs.LastOrDefault() + 1;
         }
 
         /// <summary>

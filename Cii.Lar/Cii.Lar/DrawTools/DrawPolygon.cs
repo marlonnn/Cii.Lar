@@ -26,7 +26,7 @@ namespace Cii.Lar.DrawTools
         protected PointFList pointArray;
         private PointFList pointArrayProportion;
 
-        private Rectangle drawRectangle = Rectangle.Empty;
+        protected Rectangle drawRectangle = Rectangle.Empty;
         private Size drawAreaSize; // store draw area size for data point hit test
 
         public int PointCount

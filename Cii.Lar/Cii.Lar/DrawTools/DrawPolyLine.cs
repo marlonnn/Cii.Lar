@@ -39,6 +39,21 @@ namespace Cii.Lar.DrawTools
         {
         }
 
+        public override string Prefix
+        {
+            get
+            {
+                return "P";
+            }
+        }
+
+        public override RectangleF GetTextF(string name, Graphics g, int index)
+        {
+            SizeF sizeF = g.MeasureString(name, this.Font);
+            return new RectangleF(pointArray[0].X - sizeF.Width, pointArray[0].Y - sizeF.Height,
+                sizeF.Width, sizeF.Height);
+        }
+
         public bool CloseToFirstPoint(Point point)
         {
             if (PointCount <= 0) return false;

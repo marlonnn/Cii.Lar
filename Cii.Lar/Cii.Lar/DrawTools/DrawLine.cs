@@ -44,6 +44,14 @@ namespace Cii.Lar.DrawTools
             }
         }
 
+        public override string Prefix
+        {
+            get
+            {
+                return "L";
+            }
+        }
+
         public DrawLine()
         {
             this.Color = Color.Blue;
@@ -68,6 +76,13 @@ namespace Cii.Lar.DrawTools
             {
                 g.DrawLine(pen, startDataPoint.X, startDataPoint.Y, endDataPoint.X, endDataPoint.Y);
             }
+        }
+
+        public override RectangleF GetTextF(string name, Graphics g, int index)
+        {
+            SizeF sizeF = g.MeasureString(name, this.Font);
+            return new RectangleF(startDataPoint.X - sizeF.Width, startDataPoint.Y - sizeF.Height / 2, 
+                sizeF.Width, sizeF.Height);
         }
 
         public override int HandleCount

@@ -69,10 +69,11 @@ namespace Cii.Lar.DrawTools
                 }
                 o = graphicsList[i];
                 o.Draw(g, pictureBox);
-                if (o.Selected)
-                {
-                    o.DrawTracker(g, pictureBox);
-                }
+                o.DrawTest(g, pictureBox);
+                //if (o.Selected)
+                //{
+                //    o.DrawTracker(g, pictureBox);
+                //}
             }
         }
 
@@ -98,6 +99,9 @@ namespace Cii.Lar.DrawTools
         public void Add(DrawObject obj, bool refreshWhenAdded = false)
         {
             graphicsList.Insert(0, obj);
+
+            obj.ID = Program.ExpManager.GetNextDrawObjectID();
+            obj.Name = obj.Prefix + obj.ID.ToString();
 
             OnDrawObjsChanged(new ArrayChangedEventArgs<DrawObject>(obj, ArrayChangedType.ItemAdded, refreshWhenAdded));
         }
