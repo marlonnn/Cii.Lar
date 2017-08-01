@@ -89,6 +89,9 @@
     <Compile Include="UI\CursorPictureBox.Designer.cs">
       <DependentUpon>CursorPictureBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\ListViewEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\StatisticsCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
