@@ -151,11 +151,11 @@ namespace Cii.Lar.DrawTools
             {
                 endDataPoint = point;
             }
-            this.Statistics.Circumference = (float)GetDistance(startDataPoint, endDataPoint);
+            this.Statistics.Circumference = (float)GetCircumference(startDataPoint, endDataPoint);
             Console.WriteLine(this.Statistics.Circumference);
         }
 
-        private double GetDistance(PointF startPoint, PointF endPoint)
+        private double GetCircumference(PointF startPoint, PointF endPoint)
         {
             float x = System.Math.Abs(endPoint.X - startPoint.X);
             float y = System.Math.Abs(endPoint.Y - startPoint.Y);

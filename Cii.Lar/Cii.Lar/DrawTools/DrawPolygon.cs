@@ -298,6 +298,41 @@ namespace Cii.Lar.DrawTools
             {
                 pointArray[PointCount - 1] = point;
             }
+            Console.WriteLine("Circumference:" + GetCircumference());
+        }
+
+        private double GetCircumference()
+        {
+            Point p1 = Point.Empty; // previous point
+            Point p2 = Point.Empty; // current point
+            double sum = 0;
+            PointFEnumerator enumerator = pointArray.GetEnumerator();
+            if (enumerator.MoveNext())
+            {
+                p1 = Point.Ceiling(enumerator.Current);
+                p1.Offset(MovingOffset);
+            }
+            while (enumerator.MoveNext())
+            {
+                p2 = Point.Ceiling(enumerator.Current);
+                p2.Offset(MovingOffset);
+                float x = System.Math.Abs(p2.X - p1.X);
+                float y = System.Math.Abs(p2.Y - p1.Y);
+                sum += Math.Sqrt(x * x + y * y);
+                p1 = p2;
+            }
+            enumerator.Reset();
+            if (enumerator.MoveNext())
+            {
+                p2 = Point.Ceiling(enumerator.Current);
+                p2.Offset(MovingOffset);
+            }
+            return sum;
+        }
+
+        private double GetArea()
+        {
+            return 0;
         }
 
         public bool CloseToFirstPoint(CursorPictureBox pictureBox, Point point)

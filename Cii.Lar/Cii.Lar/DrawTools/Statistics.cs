@@ -12,9 +12,9 @@ namespace Cii.Lar.DrawTools
     /// </summary>
     public class Statistics
     {
-        private float circumference;
+        private double circumference;
 
-        public float Circumference
+        public double Circumference
         {
             get
             {
@@ -26,9 +26,9 @@ namespace Cii.Lar.DrawTools
             }
         }
 
-        private float area;
+        private double area;
 
-        public float Area
+        public double Area
         {
             get
             {

@@ -210,17 +210,19 @@ namespace Cii.Lar.DrawTools
             rectangle = new Rectangle(left, top, right - left, bottom - top);
             SetRectangle(rectangle);
             this.Statistics.Area = GetArea();
-            this.Statistics.Circumference = GetDistance();
+            this.Statistics.Circumference = GetCircumference();
             Console.WriteLine("area:" + this.Statistics.Area);
             Console.WriteLine("Circumference:" + this.Statistics.Circumference);
+            Console.WriteLine("Height:" + rectangle.Height);
+            Console.WriteLine("Width:" + rectangle.Width);
         }
 
-        private int GetDistance()
+        private double GetCircumference()
         {
             return 2*(rectangle.Width + rectangle.Height);
         }
 
-        private int GetArea()
+        private double GetArea()
         {
             return rectangle.Width * rectangle.Height;
         }

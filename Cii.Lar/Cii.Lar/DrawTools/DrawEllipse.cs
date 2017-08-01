@@ -202,6 +202,30 @@ namespace Cii.Lar.DrawTools
             }
 
             UpdateEllipseForHit();
+            Console.WriteLine("area:" + GetArea());
+            Console.WriteLine("Circumference:" + GetCircumference());
+            Console.WriteLine("Height:" + ellipseForDraw.Rectangle.Height);
+            Console.WriteLine("Width:" + ellipseForDraw.Rectangle.Width);
+        }
+
+        /// <summary>
+        /// L=2πb+4(a-b)
+        /// 半轴长（a）与短半轴长（b）
+        /// </summary>
+        /// <returns></returns>
+        private double GetCircumference()
+        {
+            return 2 * Math.PI * (ellipseForDraw.Rectangle.Height / 2) + 4 * (ellipseForDraw.Rectangle.Width / 2 - ellipseForDraw.Rectangle.Height / 2);
+        }
+
+        /// <summary>
+        /// S=πab
+        /// 半轴长（a）与短半轴长（b）
+        /// </summary>
+        /// <returns></returns>
+        private double GetArea()
+        {
+            return Math.PI * (ellipseForDraw.Rectangle.Width / 2) * (ellipseForDraw.Rectangle.Height / 2);
         }
 
         /// <summary>
