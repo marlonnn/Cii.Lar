@@ -89,6 +89,12 @@
     <Compile Include="UI\CursorPictureBox.Designer.cs">
       <DependentUpon>CursorPictureBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\StatisticsCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\StatisticsCtrl.designer.cs">
+      <DependentUpon>StatisticsCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\ProblemReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -184,6 +190,12 @@
     <Compile Include="UI\ScalablePictureBoxImp.Designer.cs">
       <DependentUpon>ScalablePictureBoxImp.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\TransparentButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\TransparentButton.Designer.cs">
+      <DependentUpon>TransparentButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="Util.cs" />
     <EmbeddedResource Include="MainForm.zh-CN.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -193,6 +205,9 @@
       <DependentUpon>CursorPictureBox.cs</DependentUpon>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CursorPictureBox1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\StatisticsCtrl.resx">
+      <DependentUpon>StatisticsCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ProblemReportForm.resx">
       <DependentUpon>ProblemReportForm.cs</DependentUpon>
@@ -245,6 +260,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ScalablePictureBoxImp.resx">
       <DependentUpon>ScalablePictureBoxImp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\TransparentButton.resx">
+      <DependentUpon>TransparentButton.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

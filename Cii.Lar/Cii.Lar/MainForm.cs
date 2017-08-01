@@ -11,6 +11,7 @@ using DevComponents.DotNetBar;
 using Cii.Lar.UI;
 using Cii.Lar.SysClass;
 using System.Drawing.Imaging;
+using System.Linq;
 
 namespace Cii.Lar
 {
@@ -32,8 +33,10 @@ namespace Cii.Lar
         private int CurrentScalePercent = 100;
         private SettingForm settingForm;
         private FilesForm filesForm;
+
         public MainForm()
         {
+            IsMdiContainer = true;
             InitializeComponent();
             InitializeToolStrip();
             Program.ExpManager.ScalablePictureBox = this.scalablePictureBox;
@@ -85,6 +88,7 @@ namespace Cii.Lar
             this.ActiveControl = this.scalablePictureBox.PictureBox;
 
             sysConfig.PropertyChanged += MainForm_PropertyChanged;
+
         }
 
         private void MainForm_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -179,6 +183,16 @@ namespace Cii.Lar
         private void toolStripButton_Click(object sender, EventArgs e)
         {
             Program.ExpManager.SetMeasureTool(sender, false);
+            ShowStatisticsCtrl();
+        }
+
+        private void ShowStatisticsCtrl()
+        {
+            if (!this.scalablePictureBox.StatisticsCtrl.Visible)
+            {
+                this.scalablePictureBox.StatisticsCtrl.Visible = true;
+                this.scalablePictureBox.StatisticsCtrl.Enabled = true;
+            }
         }
 
         private void toolStripButtonSetting_Click(object sender, EventArgs e)

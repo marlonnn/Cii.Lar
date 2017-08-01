@@ -26,6 +26,18 @@ namespace Cii.Lar.UI
     /// </summary>
     public partial class ScalablePictureBox : UserControl
     {
+        public StatisticsCtrl StatisticsCtrl
+        {
+            get
+            {
+                return this.statisticsCtrl;
+            }
+            set
+            {
+                this.statisticsCtrl = value;
+            }
+        }
+
         public DrawToolType ActiveTool
         {
             get
@@ -74,6 +86,21 @@ namespace Cii.Lar.UI
         /// the new area where the picture tracker control to be dragged
         /// </summary>
         private Rectangle draggingRectangle;
+
+        /// <summary>
+        /// indicating mouse dragging mode of Statistics control
+        /// </summary>
+        private bool isDraggingStatistics = false;
+
+        /// <summary>
+        /// last Statistics mouse position of mouse dragging
+        /// </summary>
+        private Point lastStatisticsMousePos;
+
+        /// <summary>
+        /// the new area where the Statistics control to be dragged
+        /// </summary>
+        private Rectangle draggingStatisticsRectangle;
 
         public ScalablePictureBox()
         {
@@ -239,6 +266,63 @@ namespace Cii.Lar.UI
                 // move the picture tracker control to the new position
                 this.pictureTracker.Location = draggingRectangle.Location;
             }
+        }
+
+
+        private void StatisticsCtrl_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (isDraggingStatistics)
+            {
+                isDraggingStatistics = false;
+
+                // erase dragging rectangle
+                DrawReversibleRect(draggingStatisticsRectangle);
+
+                // move the Statistics control to the new position
+                this.statisticsCtrl.Location = draggingStatisticsRectangle.Location;
+            }
+        }
+
+        private void StatisticsCtrl_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (isDraggingStatistics)
+            {
+                // caculating next candidate dragging rectangle
+                Point newPos = new Point(draggingStatisticsRectangle.Location.X + e.X - lastStatisticsMousePos.X,
+                                         draggingStatisticsRectangle.Location.Y + e.Y - lastStatisticsMousePos.Y);
+                Rectangle newPictureTrackerArea = draggingStatisticsRectangle;
+                newPictureTrackerArea.Location = newPos;
+
+                // saving current mouse position to be used for next dragging
+                this.lastStatisticsMousePos = new Point(e.X, e.Y);
+
+                // dragging Statistics ctrl only when the candidate dragging rectangle
+                // is within this ScalablePictureBox control
+                if (this.ClientRectangle.Contains(newPictureTrackerArea))
+                {
+                    // removing previous rubber-band frame
+                    DrawReversibleRect(draggingStatisticsRectangle);
+
+                    // updating dragging rectangle
+                    draggingStatisticsRectangle = newPictureTrackerArea;
+
+                    // drawing new rubber-band frame
+                    DrawReversibleRect(draggingStatisticsRectangle);
+                }
+            }
+        }
+
+        private void StatisticsCtrl_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            isDraggingStatistics = true;    // Make a note that we are dragging Statistics control
+
+            // Store the last mouse poit for this rubber-band rectangle.
+            lastStatisticsMousePos.X = e.X;
+            lastStatisticsMousePos.Y = e.Y;
+
+            // draw initial dragging rectangle
+            draggingStatisticsRectangle = this.statisticsCtrl.Bounds;
+            DrawReversibleRect(draggingStatisticsRectangle);
         }
 
         protected override void OnSizeChanged(EventArgs e)
