@@ -211,6 +211,19 @@ namespace Cii.Lar.DrawTools
             return true;
         }
 
+        private Statistics statistics = new Statistics();
+
+        public Statistics Statistics
+        {
+            get
+            {
+                return statistics;
+            }
+            set
+            {
+                statistics = value;
+            }
+        }
         /// <summary>
         /// Get cursor for the handle
         /// </summary>

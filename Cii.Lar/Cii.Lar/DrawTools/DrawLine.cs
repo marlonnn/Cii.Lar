@@ -55,6 +55,7 @@ namespace Cii.Lar.DrawTools
         public DrawLine()
         {
             this.Color = Color.Blue;
+            this.Statistics.Area = 0;
         }
 
         public DrawLine(CursorPictureBox pictureBox, int x1, int y1, int x2, int y2) : this()
@@ -150,6 +151,15 @@ namespace Cii.Lar.DrawTools
             {
                 endDataPoint = point;
             }
+            this.Statistics.Circumference = (float)GetDistance(startDataPoint, endDataPoint);
+            Console.WriteLine(this.Statistics.Circumference);
+        }
+
+        private double GetDistance(PointF startPoint, PointF endPoint)
+        {
+            float x = System.Math.Abs(endPoint.X - startPoint.X);
+            float y = System.Math.Abs(endPoint.Y - startPoint.Y);
+            return Math.Sqrt(x * x + y * y);
         }
 
         public override bool HitTest(int nIndex, PointF dataPoint)
