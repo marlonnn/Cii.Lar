@@ -51,6 +51,14 @@ namespace Cii.Lar.DrawTools
 
             //pictureBox.Capture = false;
             //pictureBox.Refresh();
+
+            if (pictureBox.CreatingDrawObject)
+            {
+                if (e.Button == MouseButtons.Left)
+                {
+                    pictureBox.GraphicsList[0].UpdateStatisticsInformation();
+                }
+            }
         }
 
         /// <summary>

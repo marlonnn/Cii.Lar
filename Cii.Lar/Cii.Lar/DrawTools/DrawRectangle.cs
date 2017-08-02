@@ -215,8 +215,6 @@ namespace Cii.Lar.DrawTools
             Console.WriteLine("area:" + this.Statistics.Area);
             Console.WriteLine("Circumference:" + this.Statistics.Circumference);
             Console.WriteLine("Height:" + rectangle.Height);
-            Console.WriteLine("Width:" + rectangle.Width);
-            this.UpdateStatisticInfoHandler?.Invoke(this, Statistics);
         }
 
         private double GetCircumference()

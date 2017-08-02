@@ -25,6 +25,18 @@ namespace Cii.Lar.UI
         /// </summary>
         public event StatisticsClosedHandler StatisticsClosed;
 
+        public ListViewEx StatisticsListView
+        {
+            get
+            {
+                return this.listViewEx;
+            }
+            set
+            {
+                this.listViewEx = value;
+            }
+        }
+
         public StatisticsCtrl()
         {
             InitializeComponent();

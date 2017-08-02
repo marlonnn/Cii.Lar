@@ -30,6 +30,11 @@ namespace Cii.Lar.DrawTools
             this.UpdateStatisticInfoHandler += Program.ExpManager.ScalablePictureBox.UpdateStatisticInfoHandler;
         }
 
+        public void UpdateStatisticsInformation()
+        {
+            this.UpdateStatisticInfoHandler?.Invoke(this, Statistics);
+        }
+
         public class HitTestResult
         {
             public ElementType ElementType

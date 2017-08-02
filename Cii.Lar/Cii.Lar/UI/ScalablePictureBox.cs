@@ -78,6 +78,16 @@ namespace Cii.Lar.UI
         /// <param name="statistics"></param>
         public void UpdateStatisticInfoHandler(DrawObject drawObject, Statistics statistics)
         {
+            AppendItems(drawObject, statistics);
+        }
+
+        private void AppendItems(DrawObject drawObject, Statistics statistics)
+        {
+            ListViewItem lvi = new ListViewItem();
+            lvi.Text = drawObject.Name;
+            lvi.SubItems.Add(statistics.Circumference.ToString());
+            lvi.SubItems.Add(statistics.Area.ToString());
+            this.statisticsCtrl.StatisticsListView.Items.Add(lvi);
         }
 
         /// <summary>

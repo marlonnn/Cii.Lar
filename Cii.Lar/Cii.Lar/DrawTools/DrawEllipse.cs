@@ -207,7 +207,6 @@ namespace Cii.Lar.DrawTools
             Console.WriteLine("Circumference:" + GetCircumference());
             Console.WriteLine("Height:" + ellipseForDraw.Rectangle.Height);
             Console.WriteLine("Width:" + ellipseForDraw.Rectangle.Width);
-            this.UpdateStatisticInfoHandler?.Invoke(this, Statistics);
         }
 
         /// <summary>

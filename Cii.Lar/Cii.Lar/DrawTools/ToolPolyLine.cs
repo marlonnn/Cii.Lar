@@ -113,6 +113,8 @@ namespace Cii.Lar.DrawTools
 
             // there is a mouse up event after double click event when in Continuous mode
             cancelNewFlag = true;
+
+            pictureBox.GraphicsList[0].UpdateStatisticsInformation();
         }
 
         private void EndCreating(CursorPictureBox pictureBox)
