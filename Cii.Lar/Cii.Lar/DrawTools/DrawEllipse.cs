@@ -83,6 +83,7 @@ namespace Cii.Lar.DrawTools
         public DrawEllipse()
         {
             this.Color = Color.BlueViolet;
+            this.RegisterUpdateStatisticsHandler();
         }
 
         public DrawEllipse(CursorPictureBox pictureBox, int x1, int y1, int x2, int y2, double c) : this()
@@ -206,6 +207,7 @@ namespace Cii.Lar.DrawTools
             Console.WriteLine("Circumference:" + GetCircumference());
             Console.WriteLine("Height:" + ellipseForDraw.Rectangle.Height);
             Console.WriteLine("Width:" + ellipseForDraw.Rectangle.Width);
+            this.UpdateStatisticInfoHandler?.Invoke(this, Statistics);
         }
 
         /// <summary>

@@ -25,6 +25,7 @@ namespace Cii.Lar.DrawTools
         public DrawRectangle()
         {
             this.Color = Color.Red;
+            this.RegisterUpdateStatisticsHandler();
         }
 
         public DrawRectangle(CursorPictureBox pictureBox, int x, int y, int width, int height) : this()
@@ -215,6 +216,7 @@ namespace Cii.Lar.DrawTools
             Console.WriteLine("Circumference:" + this.Statistics.Circumference);
             Console.WriteLine("Height:" + rectangle.Height);
             Console.WriteLine("Width:" + rectangle.Width);
+            this.UpdateStatisticInfoHandler?.Invoke(this, Statistics);
         }
 
         private double GetCircumference()

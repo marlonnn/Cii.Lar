@@ -73,6 +73,14 @@ namespace Cii.Lar.UI
         }
 
         /// <summary>
+        /// Update statistics information in listviewEx control
+        /// </summary>
+        /// <param name="statistics"></param>
+        public void UpdateStatisticInfoHandler(DrawObject drawObject, Statistics statistics)
+        {
+        }
+
+        /// <summary>
         /// indicating mouse dragging mode of picture tracker control
         /// </summary>
         private bool isDraggingPictureTracker = false;

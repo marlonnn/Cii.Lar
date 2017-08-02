@@ -15,12 +15,19 @@ namespace Cii.Lar.DrawTools
     /// </summary>
     public abstract class DrawObject
     {
+        public delegate void UpdateStatisticInfo(DrawObject drawObject, Statistics statistics);
+        public UpdateStatisticInfo UpdateStatisticInfoHandler;
         public enum ElementType
         {
             Nothing,
             Label,
             Handle,
             Gate
+        }
+
+        protected void RegisterUpdateStatisticsHandler()
+        {
+            this.UpdateStatisticInfoHandler += Program.ExpManager.ScalablePictureBox.UpdateStatisticInfoHandler;
         }
 
         public class HitTestResult

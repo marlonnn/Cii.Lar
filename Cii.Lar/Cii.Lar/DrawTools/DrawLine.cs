@@ -56,6 +56,7 @@ namespace Cii.Lar.DrawTools
         {
             this.Color = Color.Blue;
             this.Statistics.Area = 0;
+            this.RegisterUpdateStatisticsHandler();
         }
 
         public DrawLine(CursorPictureBox pictureBox, int x1, int y1, int x2, int y2) : this()
@@ -153,6 +154,7 @@ namespace Cii.Lar.DrawTools
             }
             this.Statistics.Circumference = (float)GetCircumference(startDataPoint, endDataPoint);
             Console.WriteLine(this.Statistics.Circumference);
+            this.UpdateStatisticInfoHandler?.Invoke(this, Statistics);
         }
 
         private double GetCircumference(PointF startPoint, PointF endPoint)

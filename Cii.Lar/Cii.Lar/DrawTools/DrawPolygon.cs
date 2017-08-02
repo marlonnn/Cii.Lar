@@ -299,6 +299,7 @@ namespace Cii.Lar.DrawTools
                 pointArray[PointCount - 1] = point;
             }
             Console.WriteLine("Circumference:" + GetCircumference());
+            this.UpdateStatisticInfoHandler?.Invoke(this, Statistics);
         }
 
         private double GetCircumference()
