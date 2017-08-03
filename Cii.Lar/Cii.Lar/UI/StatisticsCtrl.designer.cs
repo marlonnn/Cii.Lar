@@ -65,6 +65,7 @@ namespace Cii.Lar.UI
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
+            this.listViewEx.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listViewEx.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewEx.Location = new System.Drawing.Point(0, 0);
             this.listViewEx.Name = "listViewEx";

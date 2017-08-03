@@ -203,6 +203,8 @@ namespace Cii.Lar.DrawTools
             }
 
             UpdateEllipseForHit();
+            this.Statistics.Area = GetArea();
+            this.Statistics.Circumference = GetCircumference();
             Console.WriteLine("area:" + GetArea());
             Console.WriteLine("Circumference:" + GetCircumference());
             Console.WriteLine("Height:" + ellipseForDraw.Rectangle.Height);

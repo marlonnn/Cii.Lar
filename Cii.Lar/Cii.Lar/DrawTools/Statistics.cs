@@ -44,5 +44,11 @@ namespace Cii.Lar.DrawTools
         {
 
         }
+
+        public Statistics(double circumference, double area)
+        {
+            this.circumference = circumference;
+            this.area = area;
+        }
     }
 }

@@ -80,7 +80,7 @@ namespace Cii.Lar.UI
         {
             AppendItems(drawObject, statistics);
         }
-
+        int i = 0;
         private void AppendItems(DrawObject drawObject, Statistics statistics)
         {
             ListViewItem lvi = new ListViewItem();
@@ -88,6 +88,18 @@ namespace Cii.Lar.UI
             lvi.SubItems.Add(statistics.Circumference.ToString());
             lvi.SubItems.Add(statistics.Area.ToString());
             this.statisticsCtrl.StatisticsListView.Items.Add(lvi);
+            Button button = new Button();
+            button.Text = "delete";
+            button.TextAlign = ContentAlignment.TopCenter;
+            button.BackColor = SystemColors.Control;
+            button.Font = this.Font;
+            button.Tag = lvi;
+            //for (int i=0; i<this.statisticsCtrl.StatisticsListView.Items.Count; i++)
+            //{
+
+            //}
+            this.statisticsCtrl.StatisticsListView.AddEmbeddedControl(button, 3, i);
+            i++;
         }
 
         /// <summary>
