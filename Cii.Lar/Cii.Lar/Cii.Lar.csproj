@@ -93,6 +93,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\ListViewItemArray.cs" />
+    <Compile Include="UI\ListViewItemEx.cs" />
     <Compile Include="UI\StatisticsCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>

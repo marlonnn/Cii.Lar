@@ -106,6 +106,15 @@ namespace Cii.Lar.DrawTools
             OnDrawObjsChanged(new ArrayChangedEventArgs<DrawObject>(obj, ArrayChangedType.ItemAdded, refreshWhenAdded));
         }
 
+        /// <summary>
+        /// delete draw objcet
+        /// </summary>
+        /// <param name="drawObject"></param>
+        public void DeleteDrawObject(DrawObject drawObject)
+        {
+            graphicsList.Remove(drawObject);
+        }
+
         public void UnselectAll()
         {
             foreach (DrawObject o in graphicsList)

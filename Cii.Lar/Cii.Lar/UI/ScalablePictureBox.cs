@@ -72,6 +72,9 @@ namespace Cii.Lar.UI
             }
         }
 
+        //Set this to Tag of delete Button
+        private ListViewItemArray listViewItemArray;
+
         /// <summary>
         /// Update statistics information in listviewEx control
         /// </summary>
@@ -80,7 +83,12 @@ namespace Cii.Lar.UI
         {
             AppendItems(drawObject, statistics);
         }
-        int i = 0;
+
+        /// <summary>
+        /// Append new list view item to StatisticsListView items
+        /// </summary>
+        /// <param name="drawObject"></param>
+        /// <param name="statistics"></param>
         private void AppendItems(DrawObject drawObject, Statistics statistics)
         {
             ListViewItem lvi = new ListViewItem();
@@ -88,18 +96,60 @@ namespace Cii.Lar.UI
             lvi.SubItems.Add(statistics.Circumference.ToString());
             lvi.SubItems.Add(statistics.Area.ToString());
             this.statisticsCtrl.StatisticsListView.Items.Add(lvi);
-            Button button = new Button();
-            button.Text = "delete";
-            button.TextAlign = ContentAlignment.TopCenter;
-            button.BackColor = SystemColors.Control;
-            button.Font = this.Font;
-            button.Tag = lvi;
-            //for (int i=0; i<this.statisticsCtrl.StatisticsListView.Items.Count; i++)
-            //{
+            ListViewItemEx listViewItemEx = new ListViewItemEx(lvi, drawObject);
+            AddEmbeddedControlToListView(listViewItemEx);
 
-            //}
-            this.statisticsCtrl.StatisticsListView.AddEmbeddedControl(button, 3, i);
-            i++;
+        }
+
+        /// <summary>
+        /// Add embedded delete button control to list view
+        /// </summary>
+        /// <param name="listViewItemEx"></param>
+        private void AddEmbeddedControlToListView(ListViewItemEx listViewItemEx)
+        {
+            TransparentButton deleteButton = new TransparentButton();
+            deleteButton.BackColor = System.Drawing.Color.Transparent;
+            deleteButton.BackgroundImage = global::Cii.Lar.Properties.Resources.delete;
+            deleteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            deleteButton.Name = "removeButton";
+            deleteButton.Size = new System.Drawing.Size(16, 16);
+            deleteButton.Tag = listViewItemEx;
+            listViewItemArray.AddItem(listViewItemEx.ListViewItem);
+            this.statisticsCtrl.StatisticsListView.AddEmbeddedControl(deleteButton, 3, listViewItemArray.Count - 1);
+            deleteButton.Click += DeleteButton_Click;
+        }
+
+        /// <summary>
+        /// Delete button click event
+        /// delete listviewitem and draw object graphic
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            TransparentButton deleteButton = sender as TransparentButton;
+            if (deleteButton != null)
+            {
+                deleteButton.Click -= DeleteButton_Click;
+                ListViewItemEx listViewItemEx = (ListViewItemEx)deleteButton.Tag;
+                listViewItemArray.DeleteItem(listViewItemEx.ListViewItem);
+                this.statisticsCtrl.StatisticsListView.Items.Remove(listViewItemEx.ListViewItem);
+                this.statisticsCtrl.StatisticsListView.Invalidate();
+                DeleteDrawObject(listViewItemEx.DrawObject);
+            }
+        }
+
+        /// <summary>
+        /// delete draw objcect graphic
+        /// </summary>
+        /// <param name="drawObject"></param>
+        private void DeleteDrawObject(DrawObject drawObject)
+        {
+            if (drawObject != null)
+            {
+                this.GraphicsList.DeleteDrawObject(drawObject);
+                this.scalablePictureBoxImp.Refresh();
+            }
         }
 
         /// <summary>
@@ -141,6 +191,8 @@ namespace Cii.Lar.UI
             this.SetStyle(ControlStyles.UserPaint |
                           ControlStyles.AllPaintingInWmPaint |
                           ControlStyles.OptimizedDoubleBuffer, true);
+
+            listViewItemArray = new ListViewItemArray();
 
             // register event handler for events from ScalablePictureBox
             this.scalablePictureBoxImp.PictureBoxPaintedEvent += new ScalablePictureBoxImp.PictureBoxPaintedEventHandler(this.pictureTracker.OnPictureBoxPainted);
