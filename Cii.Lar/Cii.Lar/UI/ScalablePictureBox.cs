@@ -182,6 +182,12 @@ namespace Cii.Lar.UI
         /// </summary>
         private Rectangle draggingStatisticsRectangle;
 
+        /// <summary>
+        /// Get focus timer
+        /// </summary>
+        private Timer focusTimer;
+
+
         public ScalablePictureBox()
         {
             InitializeComponent();
@@ -193,6 +199,9 @@ namespace Cii.Lar.UI
                           ControlStyles.OptimizedDoubleBuffer, true);
 
             listViewItemArray = new ListViewItemArray();
+            InitializeTimer();
+            this.statisticsCtrl.Visible = false;
+            this.statisticsCtrl.Enabled = false;
 
             // register event handler for events from ScalablePictureBox
             this.scalablePictureBoxImp.PictureBoxPaintedEvent += new ScalablePictureBoxImp.PictureBoxPaintedEventHandler(this.pictureTracker.OnPictureBoxPainted);
@@ -201,6 +210,26 @@ namespace Cii.Lar.UI
             // register event handler for events from PictureTracker
             this.pictureTracker.ScrollPictureEvent += new PictureTracker.ScrollPictureEventHandler(this.scalablePictureBoxImp.OnScrollPictureEvent);
             this.pictureTracker.PictureTrackerClosed += new PictureTracker.PictureTrackerClosedHandler(this.PictureTracker_PictureTrackerClosed);
+        }
+
+        private void InitializeTimer()
+        {
+            focusTimer = new Timer();
+            focusTimer.Enabled = true;
+            focusTimer.Interval = 300;
+            focusTimer.Tick += FocusTimer_Tick;
+        }
+
+        /// <summary>
+        /// Timer tick set pictureBox & scalablePictureBoxImp enabled and focused
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FocusTimer_Tick(object sender, EventArgs e)
+        {
+            this.scalablePictureBoxImp.Enabled = true;
+            this.PictureBox.Enabled = true;
+            this.PictureBox.Focus();
         }
 
         /// <summary>
@@ -277,7 +306,6 @@ namespace Cii.Lar.UI
             // Draw the reversible frame.
             ControlPaint.DrawReversibleFrame(rect, Color.Navy, FrameStyle.Thick);
         }
-
 
         /// <summary>
         /// begin to drag picture tracker control

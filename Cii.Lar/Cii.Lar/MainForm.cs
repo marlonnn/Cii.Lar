@@ -40,7 +40,7 @@ namespace Cii.Lar
             InitializeComponent();
             InitializeToolStrip();
             Program.ExpManager.ScalablePictureBox = this.scalablePictureBox;
-            //this.WindowState = FormWindowState.Maximized;
+            this.WindowState = FormWindowState.Maximized;
             resources = new ComponentResourceManager(typeof(MainForm));
             sysConfig = SysConfig.GetSysConfig();
             this.Load += MainForm_Load;
