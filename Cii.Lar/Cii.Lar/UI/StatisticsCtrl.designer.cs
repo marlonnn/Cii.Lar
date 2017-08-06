@@ -29,7 +29,6 @@ namespace Cii.Lar.UI
         private void InitializeComponent()
         {
             this.panel = new System.Windows.Forms.Panel();
-            this.closeButton = new Cii.Lar.UI.TransparentButton();
             this.listViewEx = new Cii.Lar.UI.ListViewEx();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -37,6 +36,10 @@ namespace Cii.Lar.UI
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // closeButton
+            // 
+            this.closeButton.Location = new System.Drawing.Point(269, 3);
             // 
             // panel
             // 
@@ -46,18 +49,6 @@ namespace Cii.Lar.UI
             this.panel.Size = new System.Drawing.Size(282, 230);
             this.panel.TabIndex = 1;
             // 
-            // closeButton
-            // 
-            this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.closeButton.BackColor = System.Drawing.Color.Transparent;
-            this.closeButton.BackgroundImage = global::Cii.Lar.Properties.Resources.delete;
-            this.closeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.closeButton.Location = new System.Drawing.Point(269, 3);
-            this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(16, 16);
-            this.closeButton.TabIndex = 0;
-            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
-            // 
             // listViewEx
             // 
             this.listViewEx.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -65,8 +56,8 @@ namespace Cii.Lar.UI
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
-            this.listViewEx.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listViewEx.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewEx.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listViewEx.Location = new System.Drawing.Point(0, 0);
             this.listViewEx.Name = "listViewEx";
             this.listViewEx.Size = new System.Drawing.Size(282, 230);
@@ -97,11 +88,12 @@ namespace Cii.Lar.UI
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.Controls.Add(this.closeButton);
             this.Controls.Add(this.panel);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "StatisticsCtrl";
             this.Size = new System.Drawing.Size(288, 258);
+            this.Controls.SetChildIndex(this.panel, 0);
+            this.Controls.SetChildIndex(this.closeButton, 0);
             this.panel.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -110,7 +102,6 @@ namespace Cii.Lar.UI
         #endregion
 
         private System.Windows.Forms.Panel panel;
-        private TransparentButton closeButton;
         private ListViewEx listViewEx;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
