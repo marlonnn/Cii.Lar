@@ -31,13 +31,27 @@
             this.scalablePictureBoxImp = new Cii.Lar.UI.ScalablePictureBoxImp();
             this.pictureTracker = new Cii.Lar.UI.PictureTracker();
             this.statisticsCtrl = new StatisticsCtrl();
+            this.laserCtrl = new LaserCtrl();
             this.SuspendLayout();
+
+            //
+            // laserCtrl
+            //
+            this.laserCtrl = new LaserCtrl();
+            this.laserCtrl.Location = new System.Drawing.Point(50, 30);
+            this.laserCtrl.Name = "laserCtrl";
+            this.laserCtrl.MouseDown += LaserCtrl_MouseDown;
+            this.laserCtrl.MouseMove += LaserCtrl_MouseMove;
+            this.laserCtrl.MouseUp += LaserCtrl_MouseUp;
+            this.laserCtrl.Visible = false;
+            this.laserCtrl.Enabled = false;
 
             this.statisticsCtrl.Location = new System.Drawing.Point(5, 30);
             this.statisticsCtrl.Name = "statisticsCtrl";
             this.statisticsCtrl.MouseDown += StatisticsCtrl_MouseDown;
             this.statisticsCtrl.MouseMove += StatisticsCtrl_MouseMove;
             this.statisticsCtrl.MouseUp += StatisticsCtrl_MouseUp;
+
             // 
             // scalablePictureBoxImp
             // 
@@ -66,6 +80,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.laserCtrl);
             this.Controls.Add(this.statisticsCtrl);
             this.Controls.Add(this.pictureTracker);
             this.Controls.Add(this.scalablePictureBoxImp);
@@ -80,5 +95,6 @@
         private ScalablePictureBoxImp scalablePictureBoxImp;
         private PictureTracker pictureTracker;
         private StatisticsCtrl statisticsCtrl;
+        private LaserCtrl laserCtrl;
     }
 }

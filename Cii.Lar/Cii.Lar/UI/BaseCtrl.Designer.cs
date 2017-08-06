@@ -28,10 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             this.closeButton = new Cii.Lar.UI.TransparentButton();
             this.SuspendLayout();
-
             // 
             // closeButton
             // 
@@ -39,18 +37,21 @@
             this.closeButton.BackColor = System.Drawing.Color.Transparent;
             this.closeButton.BackgroundImage = global::Cii.Lar.Properties.Resources.delete;
             this.closeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.closeButton.Location = new System.Drawing.Point(0, 0);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(16, 16);
             this.closeButton.TabIndex = 0;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
-
+            // 
+            // BaseCtrl
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.Controls.Add(this.closeButton);
             this.Name = "BaseCtrl";
-            this.Size = new System.Drawing.Size(150, 150);
             this.ResumeLayout(false);
+
         }
 
         #endregion

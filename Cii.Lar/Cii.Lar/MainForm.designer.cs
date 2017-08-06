@@ -255,7 +255,7 @@ namespace Cii.Lar
             this.toolStripButtonLaser.Name = "toolStripButtonLaser";
             this.toolStripButtonLaser.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonLaser.Text = global::Cii.Lar.Properties.Resources.toolStripButtonLaserStr;
-            this.toolStripButtonLaser.Click += new System.EventHandler(this.toolStripButton_Click);
+            this.toolStripButtonLaser.Click += new System.EventHandler(this.toolStripButtonLaser_Click);
             // 
             // toolStripButtonSetting
             // 

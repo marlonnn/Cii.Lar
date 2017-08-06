@@ -43,6 +43,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -106,6 +107,12 @@
     </Compile>
     <Compile Include="UI\ListViewItemArray.cs" />
     <Compile Include="UI\ListViewItemEx.cs" />
+    <Compile Include="UI\SliderCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\SliderCtrl.Designer.cs">
+      <DependentUpon>SliderCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\StatisticsCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -228,6 +235,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\LaserCtrl.resx">
       <DependentUpon>LaserCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SliderCtrl.resx">
+      <DependentUpon>SliderCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\StatisticsCtrl.resx">
       <DependentUpon>StatisticsCtrl.cs</DependentUpon>
