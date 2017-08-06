@@ -185,30 +185,32 @@ namespace Cii.Lar.UI
         /// <summary>
         /// indicating mouse dragging mode of Laser control
         /// </summary>
-        private bool isDraggingLaser = false;
+        private bool isDraggingBaseCtrl = false;
 
         /// <summary>
         /// last Laser mouse position of mouse dragging
         /// </summary>
-        private Point lastLaserMousePos;
+        private Point lastBaseCtrlMousePos;
 
         /// <summary>
         /// the new area where the Laser control to be dragged
         /// </summary>
-        private Rectangle draggingLaserRectangle;
+        private Rectangle draggingBaseCtrlRectangle;
 
         /// <summary>
         /// Get focus timer
         /// </summary>
         private Timer focusTimer;
-
-        public LaserCtrl LaserCtrl
+        private BaseCtrl baseCtrl;
+        public BaseCtrl BaseCtrl
         {
             get
             {
-                return this.laserCtrl;
+                return this.baseCtrl;
             }
         }
+
+        private List<BaseCtrl> controls;
         public ScalablePictureBox()
         {
             InitializeComponent();
@@ -220,6 +222,8 @@ namespace Cii.Lar.UI
                           ControlStyles.OptimizedDoubleBuffer, true);
             listViewItemArray = new ListViewItemArray();
             InitializeTimer();
+            InitializeControls();
+            InitialzeBaseCtrl();
             this.Load += ScalablePictureBox_Load;
             this.statisticsCtrl.Visible = false;
             this.statisticsCtrl.Enabled = false;
@@ -233,15 +237,82 @@ namespace Cii.Lar.UI
             this.pictureTracker.PictureTrackerClosed += new PictureTracker.PictureTrackerClosedHandler(this.PictureTracker_PictureTrackerClosed);
         }
 
-        private void ScalablePictureBox_Load(object sender, EventArgs e)
+        /// <summary>
+        /// initialize all the base controls
+        /// </summary>
+        private void InitializeControls()
         {
-            this.laserCtrl.Location = new Point(this.Width - this.laserCtrl.Width - 5, 30);
+            controls = new List<BaseCtrl>();
+            controls.Add(new LaserCtrl());
+            controls.Add(new LaserAppearanceCtrl());
         }
 
-        public void ShowLaserCtrl(bool show)
+        /// <summary>
+        /// switch to different base control
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="name"></param>
+        private void ClickDelegateHandler(object sender, string name)
         {
-            this.laserCtrl.Visible = show;
-            this.laserCtrl.Enabled = show;
+            switch (name)
+            {
+                case "Laser Control":
+                    ShowBaseCtrl(true, controls[0]);
+                    break;
+                case "Appearance":
+                    ShowBaseCtrl(true, controls[1]);
+                    break;
+            }
+        }
+
+        private void InitialzeBaseCtrl()
+        {
+            this.baseCtrl = controls[0];
+            this.baseCtrl.Name = "baseCtrl";
+            this.baseCtrl.MouseDown += BaseCtrl_MouseDown;
+            this.baseCtrl.MouseMove += BaseCtrl_MouseMove;
+            this.baseCtrl.MouseUp += BaseCtrl_MouseUp;
+        }
+
+        private void ScalablePictureBox_Load(object sender, EventArgs e)
+        {
+            foreach (var ctrl in this.controls)
+            {
+                ctrl.Location = new Point(this.Width - ctrl.Width - 5, 30);
+                ctrl.ClickDelegateHandler += new BaseCtrl.ClickDelegate(this.ClickDelegateHandler);
+                this.Controls.Add(ctrl);
+                ctrl.Visible = false;
+                ctrl.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// show laser control
+        /// </summary>
+        /// <param name="show"></param>
+        public void ShowBaseCtrl(bool show)
+        {
+            this.baseCtrl = controls[0];
+            this.Controls.SetChildIndex(this.baseCtrl, 0);
+            this.baseCtrl.Visible = show;
+            this.baseCtrl.Enabled = show;
+        }
+
+        /// <summary>
+        /// switch to the base control
+        /// </summary>
+        /// <param name="show"></param>
+        /// <param name="baseCtrl"></param>
+        public void ShowBaseCtrl(bool show, BaseCtrl baseCtrl)
+        {
+            this.baseCtrl.Visible = false;
+            this.baseCtrl.Enabled = false;
+
+            this.baseCtrl = baseCtrl;
+            this.Controls.SetChildIndex(this.baseCtrl, 0);
+
+            this.baseCtrl.Visible = show;
+            this.baseCtrl.Enabled = show;
         }
 
         private void InitializeTimer()
@@ -467,60 +538,60 @@ namespace Cii.Lar.UI
             DrawReversibleRect(draggingStatisticsRectangle);
         }
 
-        private void LaserCtrl_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void BaseCtrl_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if (isDraggingLaser)
+            if (isDraggingBaseCtrl)
             {
-                isDraggingLaser = false;
+                isDraggingBaseCtrl = false;
 
                 // erase dragging rectangle
-                DrawReversibleRect(draggingLaserRectangle);
+                DrawReversibleRect(draggingBaseCtrlRectangle);
 
                 // move the Laser control to the new position
-                this.laserCtrl.Location = draggingLaserRectangle.Location;
+                this.baseCtrl.Location = draggingBaseCtrlRectangle.Location;
             }
         }
 
-        private void LaserCtrl_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void BaseCtrl_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if (isDraggingLaser)
+            if (isDraggingBaseCtrl)
             {
                 // caculating next candidate dragging rectangle
-                Point newPos = new Point(draggingLaserRectangle.Location.X + e.X - lastLaserMousePos.X,
-                                         draggingLaserRectangle.Location.Y + e.Y - lastLaserMousePos.Y);
-                Rectangle newLaserArea = draggingLaserRectangle;
+                Point newPos = new Point(draggingBaseCtrlRectangle.Location.X + e.X - lastBaseCtrlMousePos.X,
+                                         draggingBaseCtrlRectangle.Location.Y + e.Y - lastBaseCtrlMousePos.Y);
+                Rectangle newLaserArea = draggingBaseCtrlRectangle;
                 newLaserArea.Location = newPos;
 
                 // saving current mouse position to be used for next dragging
-                this.lastLaserMousePos = new Point(e.X, e.Y);
+                this.lastBaseCtrlMousePos = new Point(e.X, e.Y);
 
                 // dragging Laser ctrl only when the candidate dragging rectangle
                 // is within this ScalablePictureBox control
-                if (this.ClientRectangle.Contains(draggingLaserRectangle))
+                if (this.ClientRectangle.Contains(draggingBaseCtrlRectangle))
                 {
                     // removing previous rubber-band frame
-                    DrawReversibleRect(draggingLaserRectangle);
+                    DrawReversibleRect(draggingBaseCtrlRectangle);
 
                     // updating dragging rectangle
-                    draggingLaserRectangle = newLaserArea;
+                    draggingBaseCtrlRectangle = newLaserArea;
 
                     // drawing new rubber-band frame
-                    DrawReversibleRect(draggingLaserRectangle);
+                    DrawReversibleRect(draggingBaseCtrlRectangle);
                 }
             }
         }
 
-        private void LaserCtrl_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void BaseCtrl_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            isDraggingLaser = true;    // Make a note that we are dragging Laser control
+            isDraggingBaseCtrl = true;    // Make a note that we are dragging Laser control
 
             // Store the last mouse poit for this rubber-band rectangle.
-            lastLaserMousePos.X = e.X;
-            lastLaserMousePos.Y = e.Y;
+            lastBaseCtrlMousePos.X = e.X;
+            lastBaseCtrlMousePos.Y = e.Y;
 
             // draw initial dragging rectangle
-            draggingLaserRectangle = this.laserCtrl.Bounds;
-            DrawReversibleRect(draggingLaserRectangle);
+            draggingBaseCtrlRectangle = this.baseCtrl.Bounds;
+            DrawReversibleRect(draggingBaseCtrlRectangle);
         }
 
         protected override void OnSizeChanged(EventArgs e)

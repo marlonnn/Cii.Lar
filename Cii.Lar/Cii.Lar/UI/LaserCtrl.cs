@@ -53,7 +53,7 @@ namespace Cii.Lar.UI
 
         private void btnAppearance_Click(object sender, EventArgs e)
         {
-
+            ClickDelegateHandler?.Invoke(sender, "Appearance");
         }
     }
 }

@@ -102,6 +102,12 @@
     <Compile Include="UI\LaserCtrl.Designer.cs">
       <DependentUpon>LaserCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\LaserAppearanceCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\LaserAppearanceCtrl.Designer.cs">
+      <DependentUpon>LaserAppearanceCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\ListViewEx.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -235,6 +241,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\LaserCtrl.resx">
       <DependentUpon>LaserCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\LaserAppearanceCtrl.resx">
+      <DependentUpon>LaserAppearanceCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\SliderCtrl.resx">
       <DependentUpon>SliderCtrl.cs</DependentUpon>

@@ -198,7 +198,7 @@ namespace Cii.Lar
         private void toolStripButtonLaser_Click(object sender, EventArgs e)
         {
             Program.ExpManager.SetMeasureTool(sender, false);
-            this.scalablePictureBox.ShowLaserCtrl(true);
+            this.scalablePictureBox.ShowBaseCtrl(true);
         }
 
         private void toolStripButtonSetting_Click(object sender, EventArgs e)
