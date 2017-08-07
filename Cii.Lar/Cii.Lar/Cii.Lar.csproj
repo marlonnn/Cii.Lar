@@ -113,6 +113,12 @@
     </Compile>
     <Compile Include="UI\ListViewItemArray.cs" />
     <Compile Include="UI\ListViewItemEx.cs" />
+    <Compile Include="UI\RulerAppearanceCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\RulerAppearanceCtrl.Designer.cs">
+      <DependentUpon>RulerAppearanceCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\SliderCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -244,6 +250,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\LaserAppearanceCtrl.resx">
       <DependentUpon>LaserAppearanceCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\RulerAppearanceCtrl.resx">
+      <DependentUpon>RulerAppearanceCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\SliderCtrl.resx">
       <DependentUpon>SliderCtrl.cs</DependentUpon>
