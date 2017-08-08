@@ -26,17 +26,6 @@ namespace Cii.Lar.UI
     /// </summary>
     public partial class ScalablePictureBox : UserControl
     {
-        public StatisticsCtrl StatisticsCtrl
-        {
-            get
-            {
-                return this.statisticsCtrl;
-            }
-            set
-            {
-                this.statisticsCtrl = value;
-            }
-        }
 
         public DrawToolType ActiveTool
         {
@@ -84,6 +73,14 @@ namespace Cii.Lar.UI
             AppendItems(drawObject, statistics);
         }
 
+        public StatisticsCtrl StatisticsControl
+        {
+            get
+            {
+                return this.controls[2] as StatisticsCtrl;
+            }
+        }
+
         /// <summary>
         /// Append new list view item to StatisticsListView items
         /// </summary>
@@ -95,7 +92,7 @@ namespace Cii.Lar.UI
             lvi.Text = drawObject.Name;
             lvi.SubItems.Add(statistics.Circumference.ToString());
             lvi.SubItems.Add(statistics.Area.ToString());
-            this.statisticsCtrl.StatisticsListView.Items.Add(lvi);
+            StatisticsControl.StatisticsListView.Items.Add(lvi);
             ListViewItemEx listViewItemEx = new ListViewItemEx(lvi, drawObject);
             AddEmbeddedControlToListView(listViewItemEx);
 
@@ -115,7 +112,7 @@ namespace Cii.Lar.UI
             deleteButton.Size = new System.Drawing.Size(16, 16);
             deleteButton.Tag = listViewItemEx;
             listViewItemArray.AddItem(listViewItemEx.ListViewItem);
-            this.statisticsCtrl.StatisticsListView.AddEmbeddedControl(deleteButton, 3, listViewItemArray.Count - 1);
+            StatisticsControl.StatisticsListView.AddEmbeddedControl(deleteButton, 3, listViewItemArray.Count - 1);
             deleteButton.Click += DeleteButton_Click;
         }
 
@@ -133,8 +130,8 @@ namespace Cii.Lar.UI
                 deleteButton.Click -= DeleteButton_Click;
                 ListViewItemEx listViewItemEx = (ListViewItemEx)deleteButton.Tag;
                 listViewItemArray.DeleteItem(listViewItemEx.ListViewItem);
-                this.statisticsCtrl.StatisticsListView.Items.Remove(listViewItemEx.ListViewItem);
-                this.statisticsCtrl.StatisticsListView.Invalidate();
+                StatisticsControl.StatisticsListView.Items.Remove(listViewItemEx.ListViewItem);
+                StatisticsControl.StatisticsListView.Invalidate();
                 DeleteDrawObject(listViewItemEx.DrawObject);
             }
         }
@@ -183,21 +180,6 @@ namespace Cii.Lar.UI
         private Rectangle draggingStatisticsRectangle;
 
         /// <summary>
-        /// indicating mouse dragging mode of Laser control
-        /// </summary>
-        private bool isDraggingBaseCtrl = false;
-
-        /// <summary>
-        /// last Laser mouse position of mouse dragging
-        /// </summary>
-        private Point lastBaseCtrlMousePos;
-
-        /// <summary>
-        /// the new area where the Laser control to be dragged
-        /// </summary>
-        private Rectangle draggingBaseCtrlRectangle;
-
-        /// <summary>
         /// Get focus timer
         /// </summary>
         private Timer focusTimer;
@@ -223,10 +205,7 @@ namespace Cii.Lar.UI
             listViewItemArray = new ListViewItemArray();
             InitializeTimer();
             InitializeControls();
-            InitialzeBaseCtrl();
             this.Load += ScalablePictureBox_Load;
-            this.statisticsCtrl.Visible = false;
-            this.statisticsCtrl.Enabled = false;
 
             // register event handler for events from ScalablePictureBox
             this.scalablePictureBoxImp.PictureBoxPaintedEvent += new ScalablePictureBoxImp.PictureBoxPaintedEventHandler(this.pictureTracker.OnPictureBoxPainted);
@@ -245,6 +224,7 @@ namespace Cii.Lar.UI
             controls = new List<BaseCtrl>();
             controls.Add(new LaserCtrl());
             controls.Add(new LaserAppearanceCtrl());
+            controls.Add(new StatisticsCtrl());
         }
 
         /// <summary>
@@ -265,21 +245,15 @@ namespace Cii.Lar.UI
             }
         }
 
-        private void InitialzeBaseCtrl()
-        {
-            this.baseCtrl = controls[0];
-            this.baseCtrl.Name = "baseCtrl";
-            this.baseCtrl.MouseDown += BaseCtrl_MouseDown;
-            this.baseCtrl.MouseMove += BaseCtrl_MouseMove;
-            this.baseCtrl.MouseUp += BaseCtrl_MouseUp;
-        }
-
         private void ScalablePictureBox_Load(object sender, EventArgs e)
         {
             foreach (var ctrl in this.controls)
             {
-                ctrl.Location = new Point(this.Width - ctrl.Width - 5, 30);
+                ctrl.Location = new Point(5, 30);
                 ctrl.ClickDelegateHandler += new BaseCtrl.ClickDelegate(this.ClickDelegateHandler);
+                ctrl.MouseDown += StatisticsCtrl_MouseDown;
+                ctrl.MouseMove += StatisticsCtrl_MouseMove;
+                ctrl.MouseUp += StatisticsCtrl_MouseUp;
                 this.Controls.Add(ctrl);
                 ctrl.Visible = false;
                 ctrl.Enabled = false;
@@ -290,12 +264,23 @@ namespace Cii.Lar.UI
         /// show laser control
         /// </summary>
         /// <param name="show"></param>
-        public void ShowBaseCtrl(bool show)
+        public void ShowBaseCtrl(bool show, int index)
         {
-            this.baseCtrl = controls[0];
-            this.Controls.SetChildIndex(this.baseCtrl, 0);
-            this.baseCtrl.Visible = show;
-            this.baseCtrl.Enabled = show;
+            for (int i=0; i<this.controls.Count; i++)
+            {
+                if (this.controls[i].ShowIndex == index)
+                {
+                    this.baseCtrl = controls[index];
+                    this.Controls.SetChildIndex(this.baseCtrl, 0);
+                    this.baseCtrl.Visible = show;
+                    this.baseCtrl.Enabled = show;
+                }
+                else
+                {
+                    this.controls[i].Visible = !show;
+                    this.controls[i].Enabled = !show;
+                }
+            }
         }
 
         /// <summary>
@@ -492,7 +477,7 @@ namespace Cii.Lar.UI
                 DrawReversibleRect(draggingStatisticsRectangle);
 
                 // move the Statistics control to the new position
-                this.statisticsCtrl.Location = draggingStatisticsRectangle.Location;
+                this.baseCtrl.Location = draggingStatisticsRectangle.Location;
             }
         }
 
@@ -534,64 +519,8 @@ namespace Cii.Lar.UI
             lastStatisticsMousePos.Y = e.Y;
 
             // draw initial dragging rectangle
-            draggingStatisticsRectangle = this.statisticsCtrl.Bounds;
+            draggingStatisticsRectangle = this.baseCtrl.Bounds;
             DrawReversibleRect(draggingStatisticsRectangle);
-        }
-
-        private void BaseCtrl_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            if (isDraggingBaseCtrl)
-            {
-                isDraggingBaseCtrl = false;
-
-                // erase dragging rectangle
-                DrawReversibleRect(draggingBaseCtrlRectangle);
-
-                // move the Laser control to the new position
-                this.baseCtrl.Location = draggingBaseCtrlRectangle.Location;
-            }
-        }
-
-        private void BaseCtrl_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            if (isDraggingBaseCtrl)
-            {
-                // caculating next candidate dragging rectangle
-                Point newPos = new Point(draggingBaseCtrlRectangle.Location.X + e.X - lastBaseCtrlMousePos.X,
-                                         draggingBaseCtrlRectangle.Location.Y + e.Y - lastBaseCtrlMousePos.Y);
-                Rectangle newLaserArea = draggingBaseCtrlRectangle;
-                newLaserArea.Location = newPos;
-
-                // saving current mouse position to be used for next dragging
-                this.lastBaseCtrlMousePos = new Point(e.X, e.Y);
-
-                // dragging Laser ctrl only when the candidate dragging rectangle
-                // is within this ScalablePictureBox control
-                if (this.ClientRectangle.Contains(draggingBaseCtrlRectangle))
-                {
-                    // removing previous rubber-band frame
-                    DrawReversibleRect(draggingBaseCtrlRectangle);
-
-                    // updating dragging rectangle
-                    draggingBaseCtrlRectangle = newLaserArea;
-
-                    // drawing new rubber-band frame
-                    DrawReversibleRect(draggingBaseCtrlRectangle);
-                }
-            }
-        }
-
-        private void BaseCtrl_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            isDraggingBaseCtrl = true;    // Make a note that we are dragging Laser control
-
-            // Store the last mouse poit for this rubber-band rectangle.
-            lastBaseCtrlMousePos.X = e.X;
-            lastBaseCtrlMousePos.Y = e.Y;
-
-            // draw initial dragging rectangle
-            draggingBaseCtrlRectangle = this.baseCtrl.Bounds;
-            DrawReversibleRect(draggingBaseCtrlRectangle);
         }
 
         protected override void OnSizeChanged(EventArgs e)

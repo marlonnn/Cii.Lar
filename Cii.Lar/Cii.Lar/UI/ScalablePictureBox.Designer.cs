@@ -30,15 +30,7 @@
         {
             this.scalablePictureBoxImp = new Cii.Lar.UI.ScalablePictureBoxImp();
             this.pictureTracker = new Cii.Lar.UI.PictureTracker();
-            this.statisticsCtrl = new StatisticsCtrl();
             this.SuspendLayout();
-
-            this.statisticsCtrl.Location = new System.Drawing.Point(5, 30);
-            this.statisticsCtrl.Name = "statisticsCtrl";
-            this.statisticsCtrl.MouseDown += StatisticsCtrl_MouseDown;
-            this.statisticsCtrl.MouseMove += StatisticsCtrl_MouseMove;
-            this.statisticsCtrl.MouseUp += StatisticsCtrl_MouseUp;
-
             // 
             // scalablePictureBoxImp
             // 
@@ -67,7 +59,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.statisticsCtrl);
             this.Controls.Add(this.pictureTracker);
             this.Controls.Add(this.scalablePictureBoxImp);
             this.Name = "ScalablePictureBox";
@@ -80,6 +71,5 @@
 
         private ScalablePictureBoxImp scalablePictureBoxImp;
         private PictureTracker pictureTracker;
-        private StatisticsCtrl statisticsCtrl;
     }
 }

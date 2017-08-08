@@ -48,6 +48,19 @@ namespace Cii.Lar.UI
             }
         }
 
+        private int showIndex;
+        public int ShowIndex
+        {
+            get
+            {
+                return showIndex;
+            }
+            set
+            {
+                this.showIndex = value;
+            }
+        }
+
         public BaseCtrl()
         {
             InitializeComponent();

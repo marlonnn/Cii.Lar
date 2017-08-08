@@ -183,22 +183,13 @@ namespace Cii.Lar
         private void toolStripButton_Click(object sender, EventArgs e)
         {
             Program.ExpManager.SetMeasureTool(sender, false);
-            ShowStatisticsCtrl();
-        }
-
-        private void ShowStatisticsCtrl()
-        {
-            if (!this.scalablePictureBox.StatisticsCtrl.Visible)
-            {
-                this.scalablePictureBox.StatisticsCtrl.Visible = true;
-                this.scalablePictureBox.StatisticsCtrl.Enabled = true;
-            }
+            this.scalablePictureBox.ShowBaseCtrl(true, 2);
         }
 
         private void toolStripButtonLaser_Click(object sender, EventArgs e)
         {
             Program.ExpManager.SetMeasureTool(sender, false);
-            this.scalablePictureBox.ShowBaseCtrl(true);
+            this.scalablePictureBox.ShowBaseCtrl(true, 0);
         }
 
         private void toolStripButtonSetting_Click(object sender, EventArgs e)

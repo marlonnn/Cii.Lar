@@ -35,6 +35,7 @@ namespace Cii.Lar.UI
 
         public StatisticsCtrl()
         {
+            this.ShowIndex = 2;
             InitializeComponent();
         }
 

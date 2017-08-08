@@ -18,6 +18,7 @@ namespace Cii.Lar.UI
     {
         public LaserCtrl()
         {
+            this.ShowIndex = 0;
             InitializeComponent();
         }
 
