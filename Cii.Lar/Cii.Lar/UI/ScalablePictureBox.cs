@@ -225,6 +225,7 @@ namespace Cii.Lar.UI
             controls.Add(new LaserCtrl());
             controls.Add(new LaserAppearanceCtrl());
             controls.Add(new StatisticsCtrl());
+            controls.Add(new RulerAppearanceCtrl());
         }
 
         /// <summary>
@@ -239,8 +240,14 @@ namespace Cii.Lar.UI
                 case "Laser Control":
                     ShowBaseCtrl(true, controls[0]);
                     break;
-                case "Appearance":
+                case "Laser Appearance":
                     ShowBaseCtrl(true, controls[1]);
+                    break;
+                case "Statistics control":
+                    ShowBaseCtrl(true, controls[2]);
+                    break;
+                case "Ruler Appearance":
+                    ShowBaseCtrl(true, controls[3]);
                     break;
             }
         }

@@ -14,7 +14,13 @@ namespace Cii.Lar.UI
     {
         public RulerAppearanceCtrl()
         {
+            this.ShowIndex = 3;
             InitializeComponent();
+        }
+
+        private void btnLaserCtrl_Click(object sender, EventArgs e)
+        {
+            ClickDelegateHandler?.Invoke(sender, "Statistics control");
         }
     }
 }

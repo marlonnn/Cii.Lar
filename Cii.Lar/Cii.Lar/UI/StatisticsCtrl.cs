@@ -51,5 +51,9 @@ namespace Cii.Lar.UI
             StatisticsClosed?.Invoke();
         }
 
+        private void btnAppearance_Click(object sender, EventArgs e)
+        {
+            ClickDelegateHandler?.Invoke(sender, "Ruler Appearance");
+        }
     }
 }

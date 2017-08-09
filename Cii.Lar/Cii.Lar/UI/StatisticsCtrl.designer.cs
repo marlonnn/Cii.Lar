@@ -34,6 +34,7 @@ namespace Cii.Lar.UI
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnAppearance = new DevComponents.DotNetBar.ButtonX();
             this.panel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,17 +84,31 @@ namespace Cii.Lar.UI
             this.columnHeader4.Text = "";
             this.columnHeader4.Width = 40;
             // 
+            // btnAppearance
+            // 
+            this.btnAppearance.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnAppearance.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnAppearance.Location = new System.Drawing.Point(3, 256);
+            this.btnAppearance.Name = "btnAppearance";
+            this.btnAppearance.Size = new System.Drawing.Size(75, 23);
+            this.btnAppearance.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnAppearance.TabIndex = 2;
+            this.btnAppearance.Text = "Appearance";
+            this.btnAppearance.Click += new System.EventHandler(this.btnAppearance_Click);
+            // 
             // StatisticsCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Controls.Add(this.btnAppearance);
             this.Controls.Add(this.panel);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "StatisticsCtrl";
-            this.Size = new System.Drawing.Size(288, 258);
+            this.Size = new System.Drawing.Size(288, 284);
             this.Controls.SetChildIndex(this.panel, 0);
             this.Controls.SetChildIndex(this.closeButton, 0);
+            this.Controls.SetChildIndex(this.btnAppearance, 0);
             this.panel.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -107,6 +122,7 @@ namespace Cii.Lar.UI
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
+        private DevComponents.DotNetBar.ButtonX btnAppearance;
     }
 }
 

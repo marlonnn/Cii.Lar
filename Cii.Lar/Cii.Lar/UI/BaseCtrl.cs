@@ -24,14 +24,6 @@ namespace Cii.Lar.UI
             System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 
         /// <summary>
-        /// button click delegate
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="name"></param>
-        public delegate void ClickDelegate(object sender, string name);
-        public ClickDelegate ClickDelegateHandler;
-
-        /// <summary>
         /// title of this contrl
         /// </summary>
         protected string title = "Title";
@@ -61,6 +53,14 @@ namespace Cii.Lar.UI
             }
         }
 
+
+        /// <summary>
+        /// button click delegate
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="name"></param>
+        public delegate void ClickDelegate(object sender, string name);
+        public ClickDelegate ClickDelegateHandler;
         public BaseCtrl()
         {
             InitializeComponent();
