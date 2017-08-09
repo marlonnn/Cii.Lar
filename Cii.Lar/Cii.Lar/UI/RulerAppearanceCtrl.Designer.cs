@@ -60,7 +60,7 @@
             this.btnLaserCtrl.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnLaserCtrl.Location = new System.Drawing.Point(5, 166);
             this.btnLaserCtrl.Name = "btnLaserCtrl";
-            this.btnLaserCtrl.Size = new System.Drawing.Size(75, 21);
+            this.btnLaserCtrl.Size = new System.Drawing.Size(88, 21);
             this.btnLaserCtrl.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnLaserCtrl.TabIndex = 25;
             this.btnLaserCtrl.Text = "Laser Control";
@@ -140,7 +140,7 @@
             this.lblTargerSize.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblTargerSize.Location = new System.Drawing.Point(5, 86);
             this.lblTargerSize.Name = "lblTargerSize";
-            this.lblTargerSize.Size = new System.Drawing.Size(75, 21);
+            this.lblTargerSize.Size = new System.Drawing.Size(116, 21);
             this.lblTargerSize.TabIndex = 19;
             this.lblTargerSize.Text = "Target Size";
             // 
@@ -166,7 +166,7 @@
             this.lblThickness.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblThickness.Location = new System.Drawing.Point(5, 59);
             this.lblThickness.Name = "lblThickness";
-            this.lblThickness.Size = new System.Drawing.Size(75, 21);
+            this.lblThickness.Size = new System.Drawing.Size(116, 21);
             this.lblThickness.TabIndex = 17;
             this.lblThickness.Text = "Line Thickness";
             // 
@@ -192,7 +192,7 @@
             this.lblTransparency.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblTransparency.Location = new System.Drawing.Point(5, 32);
             this.lblTransparency.Name = "lblTransparency";
-            this.lblTransparency.Size = new System.Drawing.Size(75, 21);
+            this.lblTransparency.Size = new System.Drawing.Size(116, 21);
             this.lblTransparency.TabIndex = 15;
             this.lblTransparency.Text = "Transparency";
             // 
