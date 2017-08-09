@@ -13,8 +13,8 @@ namespace Cii.Lar.DrawTools
     /// </summary>
     public class GraphicsProperties
     {
-        private Color? color;
-        public Color? Color
+        private Color color;
+        public Color Color
         {
             get
             {
@@ -25,8 +25,8 @@ namespace Cii.Lar.DrawTools
                 color = value;
             }
         }
-        private int? penWidth;
-        public int? PenWidth
+        private int penWidth;
+        public int PenWidth
         {
             get
             {
@@ -40,7 +40,7 @@ namespace Cii.Lar.DrawTools
 
         public GraphicsProperties()
         {
-            color = System.Drawing.Color.Black;
+            color = System.Drawing.Color.WhiteSmoke;
             penWidth = 1;
         }
     }

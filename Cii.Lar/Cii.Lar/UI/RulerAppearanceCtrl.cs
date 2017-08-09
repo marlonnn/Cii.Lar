@@ -22,5 +22,18 @@ namespace Cii.Lar.UI
         {
             ClickDelegateHandler?.Invoke(sender, "Statistics control");
         }
+
+        private void cmboxRuler_DropDown(object sender, EventArgs e)
+        {
+            UpdateTimerStatesHandler?.Invoke(false);
+        }
+
+        private void cmboxRuler_DropDownClosed(object sender, EventArgs e)
+        {
+            UpdateTimerStatesHandler?.Invoke(true);
+        }
+
+        public delegate void UpdateTimerState(bool enable);
+        public UpdateTimerState UpdateTimerStatesHandler;
     }
 }

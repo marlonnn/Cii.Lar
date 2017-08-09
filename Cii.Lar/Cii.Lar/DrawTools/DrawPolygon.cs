@@ -42,8 +42,6 @@ namespace Cii.Lar.DrawTools
             pointArray = new PointFList();
             pointArrayProportion = new PointFList();
             drawAreaSize = DefaultDrawAreaSize;
-
-            this.Color = Color.AliceBlue;
         }
 
         public DrawPolygon(CursorPictureBox pictureBox, List<PointF> dataPoints) : this()
@@ -88,7 +86,7 @@ namespace Cii.Lar.DrawTools
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            using (Pen pen = new Pen(this.Color, PenWidth))
+            using (Pen pen = new Pen(GraphicsProperties.Color, GraphicsProperties.PenWidth))
             {
                 PointFEnumerator enumerator = pointArray.GetEnumerator();
                 if (enumerator.MoveNext())

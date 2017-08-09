@@ -225,7 +225,14 @@ namespace Cii.Lar.UI
             controls.Add(new LaserCtrl());
             controls.Add(new LaserAppearanceCtrl());
             controls.Add(new StatisticsCtrl());
-            controls.Add(new RulerAppearanceCtrl());
+            RulerAppearanceCtrl rulerAppearance = new RulerAppearanceCtrl();
+            rulerAppearance.UpdateTimerStatesHandler += UpdateTimerStatesHandler;
+            controls.Add(rulerAppearance);
+        }
+
+        private void UpdateTimerStatesHandler(bool enable)
+        {
+            this.focusTimer.Enabled = enable;
         }
 
         /// <summary>

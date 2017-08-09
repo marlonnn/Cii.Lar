@@ -40,6 +40,12 @@
             this.lblThickness = new DevComponents.DotNetBar.LabelX();
             this.sliderTransparency = new DevComponents.DotNetBar.Controls.Slider();
             this.lblTransparency = new DevComponents.DotNetBar.LabelX();
+            this.lblRuler = new DevComponents.DotNetBar.LabelX();
+            this.cmboxRuler = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.comboItem1 = new DevComponents.Editors.ComboItem();
+            this.comboItem2 = new DevComponents.Editors.ComboItem();
+            this.comboItem3 = new DevComponents.Editors.ComboItem();
+            this.comboItem4 = new DevComponents.Editors.ComboItem();
             this.SuspendLayout();
             // 
             // closeButton
@@ -58,7 +64,7 @@
             // 
             this.btnLaserCtrl.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnLaserCtrl.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnLaserCtrl.Location = new System.Drawing.Point(5, 166);
+            this.btnLaserCtrl.Location = new System.Drawing.Point(5, 193);
             this.btnLaserCtrl.Name = "btnLaserCtrl";
             this.btnLaserCtrl.Size = new System.Drawing.Size(88, 21);
             this.btnLaserCtrl.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -73,7 +79,7 @@
             // 
             this.sliderColour.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.sliderColour.LabelVisible = false;
-            this.sliderColour.Location = new System.Drawing.Point(127, 139);
+            this.sliderColour.Location = new System.Drawing.Point(127, 166);
             this.sliderColour.Name = "sliderColour";
             this.sliderColour.Size = new System.Drawing.Size(150, 21);
             this.sliderColour.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -86,7 +92,7 @@
             // 
             // 
             this.lblZColour.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblZColour.Location = new System.Drawing.Point(5, 139);
+            this.lblZColour.Location = new System.Drawing.Point(5, 166);
             this.lblZColour.Name = "lblZColour";
             this.lblZColour.Size = new System.Drawing.Size(113, 21);
             this.lblZColour.TabIndex = 23;
@@ -99,7 +105,7 @@
             // 
             this.sliderTickLength.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.sliderTickLength.LabelVisible = false;
-            this.sliderTickLength.Location = new System.Drawing.Point(127, 113);
+            this.sliderTickLength.Location = new System.Drawing.Point(127, 140);
             this.sliderTickLength.Name = "sliderTickLength";
             this.sliderTickLength.Size = new System.Drawing.Size(150, 21);
             this.sliderTickLength.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -112,7 +118,7 @@
             // 
             // 
             this.lblTickLength.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblTickLength.Location = new System.Drawing.Point(5, 113);
+            this.lblTickLength.Location = new System.Drawing.Point(5, 140);
             this.lblTickLength.Name = "lblTickLength";
             this.lblTickLength.Size = new System.Drawing.Size(113, 21);
             this.lblTickLength.TabIndex = 21;
@@ -125,7 +131,7 @@
             // 
             this.sliderTargetSize.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.sliderTargetSize.LabelVisible = false;
-            this.sliderTargetSize.Location = new System.Drawing.Point(127, 86);
+            this.sliderTargetSize.Location = new System.Drawing.Point(127, 113);
             this.sliderTargetSize.Name = "sliderTargetSize";
             this.sliderTargetSize.Size = new System.Drawing.Size(150, 21);
             this.sliderTargetSize.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -138,7 +144,7 @@
             // 
             // 
             this.lblTargerSize.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblTargerSize.Location = new System.Drawing.Point(5, 86);
+            this.lblTargerSize.Location = new System.Drawing.Point(5, 113);
             this.lblTargerSize.Name = "lblTargerSize";
             this.lblTargerSize.Size = new System.Drawing.Size(116, 21);
             this.lblTargerSize.TabIndex = 19;
@@ -151,7 +157,7 @@
             // 
             this.sliderThickness.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.sliderThickness.LabelVisible = false;
-            this.sliderThickness.Location = new System.Drawing.Point(127, 59);
+            this.sliderThickness.Location = new System.Drawing.Point(127, 86);
             this.sliderThickness.Name = "sliderThickness";
             this.sliderThickness.Size = new System.Drawing.Size(150, 21);
             this.sliderThickness.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -164,7 +170,7 @@
             // 
             // 
             this.lblThickness.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblThickness.Location = new System.Drawing.Point(5, 59);
+            this.lblThickness.Location = new System.Drawing.Point(5, 86);
             this.lblThickness.Name = "lblThickness";
             this.lblThickness.Size = new System.Drawing.Size(116, 21);
             this.lblThickness.TabIndex = 17;
@@ -177,7 +183,7 @@
             // 
             this.sliderTransparency.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.sliderTransparency.LabelVisible = false;
-            this.sliderTransparency.Location = new System.Drawing.Point(127, 32);
+            this.sliderTransparency.Location = new System.Drawing.Point(127, 59);
             this.sliderTransparency.Name = "sliderTransparency";
             this.sliderTransparency.Size = new System.Drawing.Size(150, 21);
             this.sliderTransparency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -190,16 +196,65 @@
             // 
             // 
             this.lblTransparency.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblTransparency.Location = new System.Drawing.Point(5, 32);
+            this.lblTransparency.Location = new System.Drawing.Point(5, 59);
             this.lblTransparency.Name = "lblTransparency";
             this.lblTransparency.Size = new System.Drawing.Size(116, 21);
             this.lblTransparency.TabIndex = 15;
             this.lblTransparency.Text = "Transparency";
             // 
+            // lblRuler
+            // 
+            // 
+            // 
+            // 
+            this.lblRuler.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblRuler.Location = new System.Drawing.Point(5, 32);
+            this.lblRuler.Name = "lblRuler";
+            this.lblRuler.Size = new System.Drawing.Size(116, 21);
+            this.lblRuler.TabIndex = 26;
+            this.lblRuler.Text = "Ruler";
+            // 
+            // cmboxRuler
+            // 
+            this.cmboxRuler.DisplayMember = "Text";
+            this.cmboxRuler.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmboxRuler.FormattingEnabled = true;
+            this.cmboxRuler.ItemHeight = 15;
+            this.cmboxRuler.Items.AddRange(new object[] {
+            this.comboItem1,
+            this.comboItem2,
+            this.comboItem3,
+            this.comboItem4});
+            this.cmboxRuler.Location = new System.Drawing.Point(127, 32);
+            this.cmboxRuler.Name = "cmboxRuler";
+            this.cmboxRuler.Size = new System.Drawing.Size(150, 21);
+            this.cmboxRuler.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cmboxRuler.TabIndex = 27;
+            this.cmboxRuler.DropDown += new System.EventHandler(this.cmboxRuler_DropDown);
+            this.cmboxRuler.DropDownClosed += new System.EventHandler(this.cmboxRuler_DropDownClosed);
+            // 
+            // comboItem1
+            // 
+            this.comboItem1.Text = "Line";
+            // 
+            // comboItem2
+            // 
+            this.comboItem2.Text = "Rectangle";
+            // 
+            // comboItem3
+            // 
+            this.comboItem3.Text = "Ellipse";
+            // 
+            // comboItem4
+            // 
+            this.comboItem4.Text = "Polygon";
+            // 
             // RulerAppearanceCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cmboxRuler);
+            this.Controls.Add(this.lblRuler);
             this.Controls.Add(this.btnLaserCtrl);
             this.Controls.Add(this.sliderColour);
             this.Controls.Add(this.lblZColour);
@@ -212,8 +267,9 @@
             this.Controls.Add(this.sliderTransparency);
             this.Controls.Add(this.lblTransparency);
             this.Controls.Add(this.line1);
+            this.DoubleBuffered = true;
             this.Name = "RulerAppearanceCtrl";
-            this.Size = new System.Drawing.Size(315, 193);
+            this.Size = new System.Drawing.Size(315, 226);
             this.Title = "Ruler Appearance";
             this.Controls.SetChildIndex(this.closeButton, 0);
             this.Controls.SetChildIndex(this.line1, 0);
@@ -228,6 +284,8 @@
             this.Controls.SetChildIndex(this.lblZColour, 0);
             this.Controls.SetChildIndex(this.sliderColour, 0);
             this.Controls.SetChildIndex(this.btnLaserCtrl, 0);
+            this.Controls.SetChildIndex(this.lblRuler, 0);
+            this.Controls.SetChildIndex(this.cmboxRuler, 0);
             this.ResumeLayout(false);
 
         }
@@ -246,5 +304,11 @@
         private DevComponents.DotNetBar.LabelX lblThickness;
         private DevComponents.DotNetBar.Controls.Slider sliderTransparency;
         private DevComponents.DotNetBar.LabelX lblTransparency;
+        private DevComponents.DotNetBar.LabelX lblRuler;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cmboxRuler;
+        private DevComponents.Editors.ComboItem comboItem1;
+        private DevComponents.Editors.ComboItem comboItem2;
+        private DevComponents.Editors.ComboItem comboItem3;
+        private DevComponents.Editors.ComboItem comboItem4;
     }
 }

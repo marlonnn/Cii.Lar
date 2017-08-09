@@ -15,6 +15,18 @@ namespace Cii.Lar.DrawTools
     /// </summary>
     public abstract class DrawObject
     {
+        private GraphicsProperties graphicsProperties;
+        public GraphicsProperties GraphicsProperties
+        {
+            get
+            {
+                return graphicsProperties;
+            }
+            set
+            {
+                graphicsProperties = value;
+            }
+        }
         public delegate void UpdateStatisticInfo(DrawObject drawObject, Statistics statistics);
         public UpdateStatisticInfo UpdateStatisticInfoHandler;
         public enum ElementType

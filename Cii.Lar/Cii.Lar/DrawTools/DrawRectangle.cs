@@ -24,12 +24,12 @@ namespace Cii.Lar.DrawTools
         private Rectangle rectangle;
         public DrawRectangle()
         {
-            this.Color = Color.Red;
             this.RegisterUpdateStatisticsHandler();
         }
 
         public DrawRectangle(CursorPictureBox pictureBox, int x, int y, int width, int height) : this()
         {
+            this.GraphicsProperties = new GraphicsProperties();
             rectangle = new Rectangle(x, y, width, height);
             SetRectangle(rectangle);
         }
@@ -52,7 +52,7 @@ namespace Cii.Lar.DrawTools
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
             Rectangle r = GetNormalizedRectangle(GetRectangle());
-            using (Pen pen = new Pen(this.Color, PenWidth))
+            using (Pen pen = new Pen(GraphicsProperties.Color, GraphicsProperties.PenWidth))
             {
                 if (IsMoving)
                 {

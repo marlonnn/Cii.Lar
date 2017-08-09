@@ -54,7 +54,7 @@ namespace Cii.Lar.DrawTools
 
         public DrawLine()
         {
-            this.Color = Color.Blue;
+            this.GraphicsProperties = new GraphicsProperties();
             this.Statistics.Area = 0;
             this.RegisterUpdateStatisticsHandler();
         }
@@ -74,7 +74,7 @@ namespace Cii.Lar.DrawTools
         {
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            using (Pen pen = new Pen(this.Color, PenWidth))
+            using (Pen pen = new Pen(GraphicsProperties.Color, GraphicsProperties.PenWidth))
             {
                 g.DrawLine(pen, startDataPoint.X, startDataPoint.Y, endDataPoint.X, endDataPoint.Y);
             }

@@ -82,7 +82,7 @@ namespace Cii.Lar.DrawTools
 
         public DrawEllipse()
         {
-            this.Color = Color.BlueViolet;
+            this.GraphicsProperties = new GraphicsProperties();
             this.RegisterUpdateStatisticsHandler();
         }
 
@@ -134,7 +134,7 @@ namespace Cii.Lar.DrawTools
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            using (Pen pen = new Pen(this.Color, PenWidth))
+            using (Pen pen = new Pen(GraphicsProperties.Color, GraphicsProperties.PenWidth))
             {
                 try
                 {
