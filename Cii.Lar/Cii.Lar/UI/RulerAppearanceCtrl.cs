@@ -56,5 +56,33 @@ namespace Cii.Lar.UI
                 graphicsProperties.Alpha = (0xFF / 100) * value;
             }
         }
+
+        private void sliderThickness_ValueChanged(object sender, EventArgs e)
+        {
+            var value = this.sliderThickness.Value;
+            if (graphicsProperties != null)
+            {
+                graphicsProperties.PenWidth = value;
+            }
+        }
+
+        private void sliderTargetSize_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sliderTickLength_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sliderColour_ValueChanged(object sender, EventArgs e)
+        {
+            var value = this.sliderColour.Value / 10;
+            if (graphicsProperties != null)
+            {
+                graphicsProperties.ChangeColor(value);
+            }
+        }
     }
 }

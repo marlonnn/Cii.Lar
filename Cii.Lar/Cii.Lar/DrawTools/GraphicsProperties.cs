@@ -29,6 +29,19 @@ namespace Cii.Lar.DrawTools
             }
         }
 
+        private Color[] colorSets;
+        public Color[] ColorSets
+        {
+            get
+            {
+                return colorSets;
+            }
+            set
+            {
+                colorSets = value;
+            }
+        }
+
         private Color color;
         public Color Color
         {
@@ -38,7 +51,11 @@ namespace Cii.Lar.DrawTools
             }
             set
             {
-                color = value;
+                if (value != color)
+                {
+                    color = value;
+                    GraphicsPropertiesChangedHandler?.Invoke(DrawObject, this);
+                }
             }
         }
         private int penWidth;
@@ -53,6 +70,7 @@ namespace Cii.Lar.DrawTools
                 if (value != penWidth)
                 {
                     penWidth = value;
+                    GraphicsPropertiesChangedHandler?.Invoke(DrawObject, this);
                 }
             }
         }
@@ -97,6 +115,22 @@ namespace Cii.Lar.DrawTools
             color = Color.White;
             penWidth = 1;
             graphicsName = name;
+            InitializeColorSets();
+        }
+
+        private void InitializeColorSets()
+        {
+            ColorSets = new Color[10] {
+                Color.White, Color.Red, Color.Orange, Color.Yellow, Color.Green,
+                Color.Blue, Color.Violet,Color.YellowGreen, Color.DarkGreen, Color.BlueViolet};
+        }
+
+        public void ChangeColor(int value)
+        {
+            if (value > 0 && value < 11)
+            {
+                this.Color = ColorSets[value - 1];
+            }
         }
     }
 }

@@ -80,11 +80,14 @@
             this.sliderColour.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.sliderColour.LabelVisible = false;
             this.sliderColour.Location = new System.Drawing.Point(127, 166);
+            this.sliderColour.Minimum = 1;
             this.sliderColour.Name = "sliderColour";
             this.sliderColour.Size = new System.Drawing.Size(150, 21);
+            this.sliderColour.Step = 10;
             this.sliderColour.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.sliderColour.TabIndex = 24;
             this.sliderColour.Value = 0;
+            this.sliderColour.ValueChanged += new System.EventHandler(this.sliderColour_ValueChanged);
             // 
             // lblZColour
             // 
@@ -111,6 +114,7 @@
             this.sliderTickLength.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.sliderTickLength.TabIndex = 22;
             this.sliderTickLength.Value = 0;
+            this.sliderTickLength.ValueChanged += new System.EventHandler(this.sliderTickLength_ValueChanged);
             // 
             // lblTickLength
             // 
@@ -137,6 +141,7 @@
             this.sliderTargetSize.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.sliderTargetSize.TabIndex = 20;
             this.sliderTargetSize.Value = 0;
+            this.sliderTargetSize.ValueChanged += new System.EventHandler(this.sliderTargetSize_ValueChanged);
             // 
             // lblTargerSize
             // 
@@ -163,6 +168,7 @@
             this.sliderThickness.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.sliderThickness.TabIndex = 18;
             this.sliderThickness.Value = 0;
+            this.sliderThickness.ValueChanged += new System.EventHandler(this.sliderThickness_ValueChanged);
             // 
             // lblThickness
             // 
