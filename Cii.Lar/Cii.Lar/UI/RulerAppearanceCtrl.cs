@@ -7,11 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Cii.Lar.DrawTools;
 
 namespace Cii.Lar.UI
 {
     public partial class RulerAppearanceCtrl : BaseCtrl
     {
+        private GraphicsPropertiesManager graphicsPropertiesManager = GraphicsPropertiesManager.GraphicsManagerSingleInstance();
+
+        private GraphicsProperties graphicsProperties;
         public RulerAppearanceCtrl()
         {
             this.ShowIndex = 3;
@@ -38,7 +42,19 @@ namespace Cii.Lar.UI
 
         private void cmboxRuler_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var name = this.cmboxRuler.SelectedItem.ToString();
+            graphicsProperties = graphicsPropertiesManager.GetPropertiesByName(name);
 
+
+        }
+
+        private void sliderTransparency_ValueChanged(object sender, EventArgs e)
+        {
+            var value = this.sliderTransparency.Value;
+            if (graphicsProperties != null)
+            {
+                graphicsProperties.Alpha = (0xFF / 100) * value;
+            }
         }
     }
 }

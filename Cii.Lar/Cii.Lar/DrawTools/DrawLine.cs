@@ -55,6 +55,7 @@ namespace Cii.Lar.DrawTools
         public DrawLine()
         {
             InitializeGraphicsProperties();
+            this.ObjectType = ObjectType.Line;
             this.Statistics.Area = 0;
             this.RegisterUpdateStatisticsHandler();
         }
@@ -63,12 +64,16 @@ namespace Cii.Lar.DrawTools
         {
             startDataPoint = new Point(x1, y1);
             endDataPoint = new Point(x2, y2);
+            this.GraphicsProperties.GraphicsPropertiesChangedHandler += pictureBox.GraphicsPropertiesChangedHandler;
         }
 
         private void InitializeGraphicsProperties()
         {
             this.GraphicsProperties = GraphicsPropertiesManager.GetPropertiesByName("Line");
+            this.GraphicsProperties.DrawObject = this;
             this.GraphicsProperties.Color = Color.DarkBlue;
+            this.GraphicsProperties.Alpha = (this.GraphicsProperties.Alpha == 0xFF || this.GraphicsProperties.Alpha == 0) ? 0xFF 
+                : this.GraphicsProperties.Alpha;
         }
 
         /// <summary>
@@ -80,7 +85,7 @@ namespace Cii.Lar.DrawTools
         {
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            using (Pen pen = new Pen(GraphicsProperties.Color, GraphicsProperties.PenWidth))
+            using (Pen pen = new Pen(Color.FromArgb(GraphicsProperties.Alpha, GraphicsProperties.Color), GraphicsProperties.PenWidth))
             {
                 g.DrawLine(pen, startDataPoint.X, startDataPoint.Y, endDataPoint.X, endDataPoint.Y);
             }

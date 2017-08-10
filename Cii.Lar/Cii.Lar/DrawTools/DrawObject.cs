@@ -9,12 +9,23 @@ using System.Windows.Forms;
 
 namespace Cii.Lar.DrawTools
 {
+    public enum ObjectType
+    {
+        Line,
+        Rectangle,
+        Ellipse,
+        Polygon,
+        Circle,
+        Text
+    }
     /// <summary>
     /// Base class for all draw objects
     /// Author:Zhong Wen 2017/07/25
     /// </summary>
     public abstract class DrawObject
     {
+        public ObjectType ObjectType;
+
         /// <summary>
         /// GraphicsPropertiesManager: include all the draw object graphics properties
         /// </summary>

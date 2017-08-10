@@ -31,7 +31,7 @@ namespace Cii.Lar.DrawTools
 
         public DrawPolyLine()
         {
-
+            this.ObjectType = ObjectType.Polygon;
         }
 
         public DrawPolyLine(CursorPictureBox pictureBox, int x1, int y1, int x2, int y2) 
@@ -39,12 +39,17 @@ namespace Cii.Lar.DrawTools
         {
             InitializeGraphicsProperties();
             this.RegisterUpdateStatisticsHandler();
+            this.GraphicsProperties.GraphicsPropertiesChangedHandler += pictureBox.GraphicsPropertiesChangedHandler;
+
         }
 
         private void InitializeGraphicsProperties()
         {
             this.GraphicsProperties = GraphicsPropertiesManager.GetPropertiesByName("Polygon");
+			this.GraphicsProperties.DrawObject = this;
             this.GraphicsProperties.Color = Color.LawnGreen;
+            this.GraphicsProperties.Alpha = (this.GraphicsProperties.Alpha == 0xFF || this.GraphicsProperties.Alpha == 0) ? 0xFF 
+                : this.GraphicsProperties.Alpha;			
         }
 
         public override string Prefix

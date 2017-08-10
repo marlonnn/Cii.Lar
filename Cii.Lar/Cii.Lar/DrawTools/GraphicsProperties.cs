@@ -13,6 +13,9 @@ namespace Cii.Lar.DrawTools
     /// </summary>
     public class GraphicsProperties
     {
+        public delegate void GraphicsPropertiesChangedDelegate(DrawObject drawObject, GraphicsProperties graphicsProperties);
+        public GraphicsPropertiesChangedDelegate GraphicsPropertiesChangedHandler;
+
         private string graphicsName;
         public string GraphicsName
         {
@@ -71,10 +74,24 @@ namespace Cii.Lar.DrawTools
                 {
                     this.alpha = value;
                     color = Color.FromArgb(value, this.color);
+                    GraphicsPropertiesChangedHandler?.Invoke(DrawObject, this);
                 }
             }
         }
 
+        private DrawObject drawObject;
+
+        public DrawObject DrawObject
+        {
+            get
+            {
+                return drawObject;
+            }
+            set
+            {
+                this.drawObject = value;
+            }
+        }
         public GraphicsProperties(string name)
         {
             color = Color.White;

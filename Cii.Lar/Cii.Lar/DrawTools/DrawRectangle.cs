@@ -30,14 +30,19 @@ namespace Cii.Lar.DrawTools
         public DrawRectangle(CursorPictureBox pictureBox, int x, int y, int width, int height) : this()
         {
             InitializeGraphicsProperties();
+            this.ObjectType = ObjectType.Rectangle;
             rectangle = new Rectangle(x, y, width, height);
             SetRectangle(rectangle);
+            this.GraphicsProperties.GraphicsPropertiesChangedHandler += pictureBox.GraphicsPropertiesChangedHandler;
         }
 
         private void InitializeGraphicsProperties()
         {
             this.GraphicsProperties = GraphicsPropertiesManager.GetPropertiesByName("Rectangle");
             this.GraphicsProperties.Color = Color.BlueViolet;
+			this.GraphicsProperties.DrawObject = this;
+			this.GraphicsProperties.Alpha = (this.GraphicsProperties.Alpha == 0xFF || this.GraphicsProperties.Alpha == 0) ? 0xFF 
+                : this.GraphicsProperties.Alpha;
         }
 
         public override string Prefix
@@ -58,7 +63,7 @@ namespace Cii.Lar.DrawTools
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
             Rectangle r = GetNormalizedRectangle(GetRectangle());
-            using (Pen pen = new Pen(GraphicsProperties.Color, GraphicsProperties.PenWidth))
+            using (Pen pen = new Pen(Color.FromArgb(GraphicsProperties.Alpha, GraphicsProperties.Color), GraphicsProperties.PenWidth))
             {
                 if (IsMoving)
                 {

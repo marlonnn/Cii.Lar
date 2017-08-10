@@ -90,10 +90,15 @@ namespace Cii.Lar.DrawTools
         {
             this.GraphicsProperties = GraphicsPropertiesManager.GetPropertiesByName("Ellipse");
             this.GraphicsProperties.Color = Color.Orange;
+			this.GraphicsProperties.DrawObject = this;
+            this.GraphicsProperties.Alpha = (this.GraphicsProperties.Alpha == 0xFF || this.GraphicsProperties.Alpha == 0) ? 0xFF 
+                : this.GraphicsProperties.Alpha;			
         }
 
         public DrawEllipse(CursorPictureBox pictureBox, int x1, int y1, int x2, int y2, double c) : this()
         {
+            this.ObjectType = ObjectType.Ellipse;
+
             startPoint = new PointF(x1, y1);
             endPoint = new PointF(x2, y2);
             coeffcient = c;
@@ -104,6 +109,7 @@ namespace Cii.Lar.DrawTools
                 TransformLinear(DefaultDrawAreaSize.Width * 1.0 / drawAreaSize.Width, DefaultDrawAreaSize.Height * 1.0 / drawAreaSize.Height, 0, 0);
                 drawAreaSize = DefaultDrawAreaSize;
             }
+            this.GraphicsProperties.GraphicsPropertiesChangedHandler += pictureBox.GraphicsPropertiesChangedHandler;
 
         }
 
@@ -140,7 +146,7 @@ namespace Cii.Lar.DrawTools
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            using (Pen pen = new Pen(GraphicsProperties.Color, GraphicsProperties.PenWidth))
+            using (Pen pen = new Pen(Color.FromArgb(GraphicsProperties.Alpha, GraphicsProperties.Color), GraphicsProperties.PenWidth))
             {
                 try
                 {

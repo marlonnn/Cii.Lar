@@ -57,6 +57,11 @@ namespace Cii.Lar.UI
             }
         }
 
+        internal void GraphicsPropertiesChangedHandler(DrawObject drawObject, GraphicsProperties graphicsProperties)
+        {
+            this.Invalidate();
+        }
+
         private GraphicsList drawObjects;
 
         public GraphicsList GraphicsList
@@ -96,7 +101,6 @@ namespace Cii.Lar.UI
             this.MouseDoubleClick += CursorPictureBox_MouseDoubleClick;
         }
 
-        bool click = false;
         private void CursorPictureBox_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             tools[(int)activeTool].OnDoubleClick(this, e);
