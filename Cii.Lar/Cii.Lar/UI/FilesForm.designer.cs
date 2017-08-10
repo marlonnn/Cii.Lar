@@ -101,6 +101,7 @@ namespace Cii.Lar
             this.imageListView.Size = new System.Drawing.Size(600, 457);
             this.imageListView.TabIndex = 0;
             this.imageListView.Text = "";
+            this.imageListView.ItemClick += new Manina.Windows.Forms.ItemClickEventHandler(this.imageListView_ItemClick);
             this.imageListView.SelectionChanged += new System.EventHandler(this.imageListView_SelectionChanged);
             // 
             // toolStrip

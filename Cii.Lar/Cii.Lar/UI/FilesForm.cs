@@ -21,14 +21,17 @@ namespace Cii.Lar
         private ReportForm reportFrom;
         public FilesForm()
         {
+            this.WindowState = FormWindowState.Maximized;
             InitializeComponent();
             string folderName = SysConfig.GetSysConfig().StorePath;
             string[] extesnsions = new string[] { ".png", ".wmv" };
             var files = GetFiles(folderName, extesnsions, SearchOption.TopDirectoryOnly);
+            //this.imageListView.View = Manina.Windows.Forms.View.Gallery;
             foreach (var file in files)
             {
                 imageListView.Items.Add(file.ToString());
             }
+            imageForm = new ImageForm();
         }
 
         /// <summary>
@@ -113,6 +116,19 @@ namespace Cii.Lar
         private void UpdateStatus(string text)
         {
             toolStripStatusLabel.Text = text;
+        }
+
+        private ImageForm imageForm;
+
+        private void imageListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ImageListViewItem item = this.imageListView.Items.FocusedItem;
+            if (item != null)
+            {
+                string fileName = item.FileName;
+                imageForm.FileName = fileName;
+                imageForm.ShowDialog();
+            }
         }
     }
 }

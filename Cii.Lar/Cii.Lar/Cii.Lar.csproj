@@ -97,6 +97,12 @@
     <Compile Include="UI\CursorPictureBox.Designer.cs">
       <DependentUpon>CursorPictureBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\ImageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ImageForm.designer.cs">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\LaserCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -245,6 +251,9 @@
       <DependentUpon>CursorPictureBox.cs</DependentUpon>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CursorPictureBox1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ImageForm.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\LaserCtrl.resx">
       <DependentUpon>LaserCtrl.cs</DependentUpon>
