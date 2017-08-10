@@ -35,5 +35,10 @@ namespace Cii.Lar.UI
 
         public delegate void UpdateTimerState(bool enable);
         public UpdateTimerState UpdateTimerStatesHandler;
+
+        private void cmboxRuler_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

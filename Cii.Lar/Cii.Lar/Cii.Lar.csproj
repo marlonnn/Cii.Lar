@@ -64,6 +64,7 @@
     <Compile Include="DrawTools\DrawRectangle.cs" />
     <Compile Include="DrawTools\GraphicsList.cs" />
     <Compile Include="DrawTools\GraphicsProperties.cs" />
+    <Compile Include="DrawTools\GraphicsPropertiesManager.cs" />
     <Compile Include="DrawTools\Statistics.cs" />
     <Compile Include="DrawTools\Tool.cs" />
     <Compile Include="DrawTools\ToolCircle.cs" />

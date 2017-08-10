@@ -13,6 +13,19 @@ namespace Cii.Lar.DrawTools
     /// </summary>
     public class GraphicsProperties
     {
+        private string graphicsName;
+        public string GraphicsName
+        {
+            get
+            {
+                return graphicsName;
+            }
+            set
+            {
+                graphicsName = value;
+            }
+        }
+
         private Color color;
         public Color Color
         {
@@ -34,14 +47,39 @@ namespace Cii.Lar.DrawTools
             }
             set
             {
-                penWidth = value;
+                if (value != penWidth)
+                {
+                    penWidth = value;
+                }
             }
         }
 
-        public GraphicsProperties()
+        /// <summary>
+        /// set color transparency
+        /// </summary>
+        private int alpha;
+
+        public int Alpha
         {
-            color = System.Drawing.Color.WhiteSmoke;
+            get
+            {
+                return this.alpha;
+            }
+            set
+            {
+                if (value != this.alpha)
+                {
+                    this.alpha = value;
+                    color = Color.FromArgb(value, this.color);
+                }
+            }
+        }
+
+        public GraphicsProperties(string name)
+        {
+            color = Color.White;
             penWidth = 1;
+            graphicsName = name;
         }
     }
 }

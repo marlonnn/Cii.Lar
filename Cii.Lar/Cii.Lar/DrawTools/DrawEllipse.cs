@@ -82,8 +82,14 @@ namespace Cii.Lar.DrawTools
 
         public DrawEllipse()
         {
-            this.GraphicsProperties = new GraphicsProperties();
+            InitializeGraphicsProperties();
             this.RegisterUpdateStatisticsHandler();
+        }
+
+        private void InitializeGraphicsProperties()
+        {
+            this.GraphicsProperties = GraphicsPropertiesManager.GetPropertiesByName("Ellipse");
+            this.GraphicsProperties.Color = Color.Orange;
         }
 
         public DrawEllipse(CursorPictureBox pictureBox, int x1, int y1, int x2, int y2, double c) : this()

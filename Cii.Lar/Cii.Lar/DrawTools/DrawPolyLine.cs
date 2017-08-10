@@ -37,8 +37,14 @@ namespace Cii.Lar.DrawTools
         public DrawPolyLine(CursorPictureBox pictureBox, int x1, int y1, int x2, int y2) 
             : base(pictureBox, x1, y1, x2, y2)
         {
-            this.GraphicsProperties = new GraphicsProperties();
+            InitializeGraphicsProperties();
             this.RegisterUpdateStatisticsHandler();
+        }
+
+        private void InitializeGraphicsProperties()
+        {
+            this.GraphicsProperties = GraphicsPropertiesManager.GetPropertiesByName("Polygon");
+            this.GraphicsProperties.Color = Color.LawnGreen;
         }
 
         public override string Prefix

@@ -54,7 +54,7 @@ namespace Cii.Lar.DrawTools
 
         public DrawLine()
         {
-            this.GraphicsProperties = new GraphicsProperties();
+            InitializeGraphicsProperties();
             this.Statistics.Area = 0;
             this.RegisterUpdateStatisticsHandler();
         }
@@ -63,6 +63,12 @@ namespace Cii.Lar.DrawTools
         {
             startDataPoint = new Point(x1, y1);
             endDataPoint = new Point(x2, y2);
+        }
+
+        private void InitializeGraphicsProperties()
+        {
+            this.GraphicsProperties = GraphicsPropertiesManager.GetPropertiesByName("Line");
+            this.GraphicsProperties.Color = Color.DarkBlue;
         }
 
         /// <summary>

@@ -29,9 +29,15 @@ namespace Cii.Lar.DrawTools
 
         public DrawRectangle(CursorPictureBox pictureBox, int x, int y, int width, int height) : this()
         {
-            this.GraphicsProperties = new GraphicsProperties();
+            InitializeGraphicsProperties();
             rectangle = new Rectangle(x, y, width, height);
             SetRectangle(rectangle);
+        }
+
+        private void InitializeGraphicsProperties()
+        {
+            this.GraphicsProperties = GraphicsPropertiesManager.GetPropertiesByName("Rectangle");
+            this.GraphicsProperties.Color = Color.BlueViolet;
         }
 
         public override string Prefix

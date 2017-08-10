@@ -31,13 +31,19 @@ namespace Cii.Lar.DrawTools
 
         public DrawCircle()
         {
-            this.Color = Color.Yellow;
+            InitializeGraphicsProperties();
             DrawAreaSize = new Size(30, 30);
         }
 
         public DrawCircle(PointF centerPoint) : this()
         {
             CenterPoint = centerPoint;
+        }
+
+        private void InitializeGraphicsProperties()
+        {
+            this.GraphicsProperties = GraphicsPropertiesManager.GetPropertiesByName("Circle");
+            this.GraphicsProperties.Color = Color.Yellow;
         }
 
         public override void Draw(Graphics g, CursorPictureBox pictureBox)
@@ -49,7 +55,7 @@ namespace Cii.Lar.DrawTools
             //path for the outer and inner circles
             //using (GraphicsPath path = new GraphicsPath())
             //using (SolidBrush brush = new SolidBrush(this.Color))
-            using (Pen pen = new Pen(this.Color, PenWidth))
+            using (Pen pen = new Pen(this.GraphicsProperties.Color, this.GraphicsProperties.PenWidth))
             {
                 g.DrawEllipse(pen, circleForDraw.Rectangle.X, circleForDraw.Rectangle.Y,
                     circleForDraw.Rectangle.Width, circleForDraw.Rectangle.Height);

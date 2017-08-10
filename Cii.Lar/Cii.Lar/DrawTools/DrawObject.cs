@@ -15,6 +15,25 @@ namespace Cii.Lar.DrawTools
     /// </summary>
     public abstract class DrawObject
     {
+        /// <summary>
+        /// GraphicsPropertiesManager: include all the draw object graphics properties
+        /// </summary>
+        private GraphicsPropertiesManager graphicsPropertiesManager = GraphicsPropertiesManager.GraphicsManagerSingleInstance();
+        public GraphicsPropertiesManager GraphicsPropertiesManager
+        {
+            get
+            {
+                return graphicsPropertiesManager;
+            }
+            set
+            {
+                graphicsPropertiesManager = value;
+            }
+        }
+
+        /// <summary>
+        /// GraphicsProperties of this draw object 
+        /// </summary>
         private GraphicsProperties graphicsProperties;
         public GraphicsProperties GraphicsProperties
         {
@@ -27,6 +46,12 @@ namespace Cii.Lar.DrawTools
                 graphicsProperties = value;
             }
         }
+
+        /// <summary>
+        /// Update statistic information delegate ang handler
+        /// </summary>
+        /// <param name="drawObject"></param>
+        /// <param name="statistics"></param>
         public delegate void UpdateStatisticInfo(DrawObject drawObject, Statistics statistics);
         public UpdateStatisticInfo UpdateStatisticInfoHandler;
         public enum ElementType
@@ -153,31 +178,6 @@ namespace Cii.Lar.DrawTools
             set { font = value; }
         }
 
-        private int penWidth = 1;
-
-        public int PenWidth
-        {
-            get
-            {
-                return penWidth;
-            }
-            set
-            {
-                penWidth = value;
-            }
-        }
-        private Color color;
-        public Color Color
-        {
-            get
-            {
-                return color;
-            }
-            set
-            {
-                color = value;
-            }
-        }
         private Point movingOffset;
         public Point MovingOffset
         {
@@ -358,13 +358,11 @@ namespace Cii.Lar.DrawTools
 
         public virtual void DrawTest(Graphics g, CursorPictureBox pictureBox)
         {
-            SolidBrush brush = new SolidBrush(Color.White);
-            Pen pen = new Pen(Color.Black, PenWidth);
+            SolidBrush brush = new SolidBrush(GraphicsPropertiesManager.GetPropertiesByName("Text").Color);
             RectangleF r = GetTextF(this.Name, g, this.ID);
             r.Offset(MovingOffset);
             g.DrawString(this.Name, this.Font, brush, r);
             brush.Dispose();
-            pen.Dispose();
         }
 
         public virtual RectangleF GetTextF(string name, Graphics g, int index)
@@ -377,7 +375,8 @@ namespace Cii.Lar.DrawTools
             if (Selected)
             {
                 SolidBrush brush = new SolidBrush(Color.White);
-                Pen pen = new Pen(Color.Black, penWidth);
+                Pen pen = new Pen(GraphicsPropertiesManager.GetPropertiesByName("Text").Color, 
+                    GraphicsPropertiesManager.GetPropertiesByName("Text").PenWidth);
 
                 for (int i = 1; i <= HandleCount; i++)
                 {
