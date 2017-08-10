@@ -183,11 +183,11 @@
     <Compile Include="UI\SystemInfoForm.designer.cs">
       <DependentUpon>SystemInfoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\SettingForm.cs">
-      <SubType>Form</SubType>
+    <Compile Include="UI\SettingCtrl.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\SettingForm.designer.cs">
-      <DependentUpon>SettingForm.cs</DependentUpon>
+    <Compile Include="UI\SettingCtrl.designer.cs">
+      <DependentUpon>SettingCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\FunctionCtrl.cs">
       <SubType>UserControl</SubType>
@@ -282,8 +282,8 @@
     <EmbeddedResource Include="UI\SystemInfoForm.resx">
       <DependentUpon>SystemInfoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\SettingForm.resx">
-      <DependentUpon>SettingForm.cs</DependentUpon>
+    <EmbeddedResource Include="UI\SettingCtrl.resx">
+      <DependentUpon>SettingCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\FunctionCtrl.resx">
       <DependentUpon>FunctionCtrl.cs</DependentUpon>

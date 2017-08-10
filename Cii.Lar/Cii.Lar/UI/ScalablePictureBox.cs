@@ -248,6 +248,10 @@ namespace Cii.Lar.UI
             RulerAppearanceCtrl rulerAppearance = new RulerAppearanceCtrl();
             rulerAppearance.UpdateTimerStatesHandler += UpdateTimerStatesHandler;
             controls.Add(rulerAppearance);
+
+            SettingCtrl settingCtrl = new SettingCtrl();
+            settingCtrl.UpdateTimerStatesHandler += UpdateTimerStatesHandler;
+            controls.Add(settingCtrl);
         }
 
         private void UpdateTimerStatesHandler(bool enable)

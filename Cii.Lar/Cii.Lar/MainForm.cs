@@ -31,7 +31,7 @@ namespace Cii.Lar
         private SysConfig sysConfig;
 
         private int CurrentScalePercent = 100;
-        private SettingForm settingForm;
+        private SettingCtrl settingForm;
         private FilesForm filesForm;
 
         public MainForm()
@@ -128,8 +128,6 @@ namespace Cii.Lar
                     this.scalablePictureBox.CurrentScalePercent = CurrentScalePercent;
                     break;
                 case "toolStripButtonSetting":
-                    settingForm = new SettingForm();
-                    settingForm.ShowDialog();
                     break;
             }
         }
@@ -194,8 +192,7 @@ namespace Cii.Lar
 
         private void toolStripButtonSetting_Click(object sender, EventArgs e)
         {
-            settingForm = new SettingForm();
-            settingForm.ShowDialog();
+            this.scalablePictureBox.ShowBaseCtrl(true, 4);
         }
 
         private void MainForm_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)

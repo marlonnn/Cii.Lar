@@ -10,16 +10,21 @@ using System.Windows.Forms;
 
 namespace Cii.Lar.UI
 {
-    public partial class SettingForm : DevComponents.DotNetBar.Office2007Form
+    public partial class SettingCtrl : BaseCtrl
     {
         private ComponentResourceManager resources;
 
         private SystemInfoForm systemInfoForm;
         private SysConfig sysConfig;
-        public SettingForm()
+
+        public delegate void UpdateTimerState(bool enable);
+        public UpdateTimerState UpdateTimerStatesHandler;
+
+        public SettingCtrl()
         {
+            this.ShowIndex = 4;
             InitializeComponent();
-            resources = new ComponentResourceManager(typeof(SettingForm));
+            resources = new ComponentResourceManager(typeof(SettingCtrl));
             sysConfig = SysConfig.GetSysConfig();
             this.textBoxItemStoragePath.Text = sysConfig.StorePath;
             UpdateComboLanguage();
@@ -84,6 +89,12 @@ namespace Cii.Lar.UI
             string language = this.comboBoxItemLanguage.SelectedItem.ToString();
             var v = ((ComboItem)comboBoxItemLanguage.SelectedItem).Value.ToString();
             SysConfig.GetSysConfig().UICulture = v;
+        }
+
+        private void comboBoxItemLanguage_ExpandChange(object sender, EventArgs e)
+        {
+            var v = this.comboBoxItemLanguage.Expanded;
+            UpdateTimerStatesHandler?.Invoke(!this.comboBoxItemLanguage.Expanded);
         }
     }
 }
