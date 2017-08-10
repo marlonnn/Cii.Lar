@@ -95,7 +95,7 @@ namespace Cii.Lar.UI
             StatisticsControl.StatisticsListView.Items.Add(lvi);
             ListViewItemEx listViewItemEx = new ListViewItemEx(lvi, drawObject);
             AddEmbeddedControlToListView(listViewItemEx);
-
+            EnableAppearanceButton();
         }
 
         /// <summary>
@@ -146,6 +146,26 @@ namespace Cii.Lar.UI
             {
                 this.GraphicsList.DeleteDrawObject(drawObject);
                 this.scalablePictureBoxImp.Refresh();
+                EnableAppearanceButton();
+            }
+        }
+
+        /// <summary>
+        /// enable or disable ruler appearance button
+        /// </summary>
+        private void EnableAppearanceButton()
+        {
+            var baseCtrl = this.controls[2] as StatisticsCtrl;
+            if (baseCtrl != null)
+            {
+                if (this.GraphicsList != null && this.GraphicsList.Count > 0)
+                {
+                    baseCtrl.BtnAppearance.Enabled = true;
+                }
+                else
+                {
+                    baseCtrl.BtnAppearance.Enabled = false;
+                }
             }
         }
 
@@ -167,17 +187,17 @@ namespace Cii.Lar.UI
         /// <summary>
         /// indicating mouse dragging mode of Statistics control
         /// </summary>
-        private bool isDraggingStatistics = false;
+        private bool isDraggingBaseCtrl = false;
 
         /// <summary>
         /// last Statistics mouse position of mouse dragging
         /// </summary>
-        private Point lastStatisticsMousePos;
+        private Point lastBaseCtrlMousePos;
 
         /// <summary>
         /// the new area where the Statistics control to be dragged
         /// </summary>
-        private Rectangle draggingStatisticsRectangle;
+        private Rectangle draggingBaseCtrlRectangle;
 
         /// <summary>
         /// Get focus timer
@@ -265,9 +285,9 @@ namespace Cii.Lar.UI
             {
                 ctrl.Location = new Point(5, 30);
                 ctrl.ClickDelegateHandler += new BaseCtrl.ClickDelegate(this.ClickDelegateHandler);
-                ctrl.MouseDown += StatisticsCtrl_MouseDown;
-                ctrl.MouseMove += StatisticsCtrl_MouseMove;
-                ctrl.MouseUp += StatisticsCtrl_MouseUp;
+                ctrl.MouseDown += BaseCtrl_MouseDown;
+                ctrl.MouseMove += BaseCtrl_MouseMove;
+                ctrl.MouseUp += BaseCtrl_MouseUp;
                 this.Controls.Add(ctrl);
                 ctrl.Visible = false;
                 ctrl.Enabled = false;
@@ -288,6 +308,7 @@ namespace Cii.Lar.UI
                     this.Controls.SetChildIndex(this.baseCtrl, 0);
                     this.baseCtrl.Visible = show;
                     this.baseCtrl.Enabled = show;
+                    EnableAppearanceButton();
                 }
                 else
                 {
@@ -481,60 +502,60 @@ namespace Cii.Lar.UI
         }
 
 
-        private void StatisticsCtrl_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void BaseCtrl_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if (isDraggingStatistics)
+            if (isDraggingBaseCtrl)
             {
-                isDraggingStatistics = false;
+                isDraggingBaseCtrl = false;
 
                 // erase dragging rectangle
-                DrawReversibleRect(draggingStatisticsRectangle);
+                DrawReversibleRect(draggingBaseCtrlRectangle);
 
                 // move the Statistics control to the new position
-                this.baseCtrl.Location = draggingStatisticsRectangle.Location;
+                this.baseCtrl.Location = draggingBaseCtrlRectangle.Location;
             }
         }
 
-        private void StatisticsCtrl_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void BaseCtrl_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if (isDraggingStatistics)
+            if (isDraggingBaseCtrl)
             {
                 // caculating next candidate dragging rectangle
-                Point newPos = new Point(draggingStatisticsRectangle.Location.X + e.X - lastStatisticsMousePos.X,
-                                         draggingStatisticsRectangle.Location.Y + e.Y - lastStatisticsMousePos.Y);
-                Rectangle newPictureTrackerArea = draggingStatisticsRectangle;
+                Point newPos = new Point(draggingBaseCtrlRectangle.Location.X + e.X - lastBaseCtrlMousePos.X,
+                                         draggingBaseCtrlRectangle.Location.Y + e.Y - lastBaseCtrlMousePos.Y);
+                Rectangle newPictureTrackerArea = draggingBaseCtrlRectangle;
                 newPictureTrackerArea.Location = newPos;
 
                 // saving current mouse position to be used for next dragging
-                this.lastStatisticsMousePos = new Point(e.X, e.Y);
+                this.lastBaseCtrlMousePos = new Point(e.X, e.Y);
 
                 // dragging Statistics ctrl only when the candidate dragging rectangle
                 // is within this ScalablePictureBox control
                 if (this.ClientRectangle.Contains(newPictureTrackerArea))
                 {
                     // removing previous rubber-band frame
-                    DrawReversibleRect(draggingStatisticsRectangle);
+                    DrawReversibleRect(draggingBaseCtrlRectangle);
 
                     // updating dragging rectangle
-                    draggingStatisticsRectangle = newPictureTrackerArea;
+                    draggingBaseCtrlRectangle = newPictureTrackerArea;
 
                     // drawing new rubber-band frame
-                    DrawReversibleRect(draggingStatisticsRectangle);
+                    DrawReversibleRect(draggingBaseCtrlRectangle);
                 }
             }
         }
 
-        private void StatisticsCtrl_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void BaseCtrl_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            isDraggingStatistics = true;    // Make a note that we are dragging Statistics control
+            isDraggingBaseCtrl = true;    // Make a note that we are dragging Statistics control
 
             // Store the last mouse poit for this rubber-band rectangle.
-            lastStatisticsMousePos.X = e.X;
-            lastStatisticsMousePos.Y = e.Y;
+            lastBaseCtrlMousePos.X = e.X;
+            lastBaseCtrlMousePos.Y = e.Y;
 
             // draw initial dragging rectangle
-            draggingStatisticsRectangle = this.baseCtrl.Bounds;
-            DrawReversibleRect(draggingStatisticsRectangle);
+            draggingBaseCtrlRectangle = this.baseCtrl.Bounds;
+            DrawReversibleRect(draggingBaseCtrlRectangle);
         }
 
         protected override void OnSizeChanged(EventArgs e)

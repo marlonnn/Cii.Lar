@@ -33,6 +33,18 @@ namespace Cii.Lar.UI
             }
         }
 
+        public ButtonX BtnAppearance
+        {
+            get
+            {
+                return this.btnAppearance;
+            }
+            private set
+            {
+                this.btnAppearance = value;
+            }
+        }
+
         public StatisticsCtrl()
         {
             this.ShowIndex = 2;
