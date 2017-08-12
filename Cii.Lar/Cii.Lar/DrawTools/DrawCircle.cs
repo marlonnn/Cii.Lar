@@ -35,9 +35,10 @@ namespace Cii.Lar.DrawTools
             DrawAreaSize = new Size(30, 30);
         }
 
-        public DrawCircle(PointF centerPoint) : this()
+        public DrawCircle(CursorPictureBox pictureBox, PointF centerPoint) : this()
         {
             CenterPoint = centerPoint;
+            this.GraphicsProperties.GraphicsPropertiesChangedHandler += pictureBox.GraphicsPropertiesChangedHandler;
         }
 
         private void InitializeGraphicsProperties()

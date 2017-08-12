@@ -27,7 +27,7 @@ namespace Cii.Lar.DrawTools
 
         public override void OnMouseDown(CursorPictureBox pictureBox, MouseEventArgs e)
         {
-            AddNewObject(pictureBox, new DrawCircle( new PointF(e.X, e.Y)));
+            AddNewObject(pictureBox, new DrawCircle(pictureBox, new PointF(e.X, e.Y)));
         }
 
         public override void OnMouseMove(CursorPictureBox pictureBox, MouseEventArgs e)

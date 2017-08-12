@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Cii.Lar.DrawTools;
 
 namespace Cii.Lar.UI
 {
@@ -16,15 +17,57 @@ namespace Cii.Lar.UI
     /// </summary>
     public partial class LaserAppearanceCtrl : BaseCtrl
     {
+        private GraphicsPropertiesManager graphicsPropertiesManager = GraphicsPropertiesManager.GraphicsManagerSingleInstance();
+
+        private GraphicsProperties graphicsProperties;
+
         public LaserAppearanceCtrl()
         {
             this.ShowIndex = 1;
+            graphicsProperties = graphicsPropertiesManager.GetPropertiesByName("Circle");
             InitializeComponent();
         }
 
         private void btnLaserCtrl_Click(object sender, EventArgs e)
         {
             ClickDelegateHandler?.Invoke(sender, "Laser Control");
+        }
+
+        private void sliderTransparency_ValueChanged(object sender, EventArgs e)
+        {
+            var value = this.sliderTransparency.Value;
+            if (graphicsProperties != null)
+            {
+                graphicsProperties.Alpha = (0xFF / 100) * value;
+            }
+        }
+
+        private void sliderThickness_ValueChanged(object sender, EventArgs e)
+        {
+            var value = this.sliderThickness.Value;
+            if (graphicsProperties != null)
+            {
+                graphicsProperties.PenWidth = value;
+            }
+        }
+
+        private void slideTargetSize_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void slideZoneSize_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sliderZoneColour_ValueChanged(object sender, EventArgs e)
+        {
+            var value = this.sliderZoneColour.Value / 10;
+            if (graphicsProperties != null)
+            {
+                graphicsProperties.ChangeColor(value);
+            }
         }
     }
 }
