@@ -41,6 +41,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>D:\Program Files (x86)\DotNetBar for Windows Forms\DevComponents.DotNetBar2.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Reference\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
@@ -76,13 +80,16 @@
     <Compile Include="DrawTools\ToolPolyLine.cs" />
     <Compile Include="DrawTools\ToolRectangle.cs" />
     <Compile Include="ExpClass\ExpManager.cs" />
+    <Compile Include="ExpClass\PublicTypes.cs" />
     <Compile Include="ExpClass\Report.cs" />
     <Compile Include="ExpClass\ReportItemBase.cs" />
     <Compile Include="ExpClass\ReportPage.cs" />
     <Compile Include="ExpClass\ReportPictureItem.cs" />
+    <Compile Include="LogHelper.cs" />
     <Compile Include="MessageBoxManager.cs" />
     <Compile Include="MiniDump.cs" />
     <Compile Include="NativeMethods.cs" />
+    <Compile Include="SimpleLogger.cs" />
     <Compile Include="SysClass\SysConfig.cs" />
     <Compile Include="UI\ArrayChangedEventArgs.cs" />
     <Compile Include="UI\BaseCtrl.cs">
@@ -342,12 +349,16 @@
     <Content Include="Archive\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\log4net.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="DrawTools\Cross.cur" />
     <Content Include="DrawTools\Ellipse.cur" />
     <Content Include="DrawTools\Line.cur" />
     <Content Include="DrawTools\Pencil.cur" />
     <Content Include="DrawTools\PolyHandle.cur" />
     <Content Include="DrawTools\Rectangle.cur" />
+    <Content Include="Reference\log4net.dll" />
     <Content Include="Resources\1.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

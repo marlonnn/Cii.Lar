@@ -26,6 +26,38 @@ namespace Cii.Lar.UI
     /// </summary>
     public partial class ScalablePictureBox : UserControl
     {
+        private bool myIsChangingAutoScroll = false;
+
+        /// <summary>
+        /// Auto scroll
+        /// </summary>
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override bool AutoScroll
+        {
+            get { return base.AutoScroll; }
+            set { base.AutoScroll = value; }
+        }
+
+        [Description("Show scrollbar"), DefaultValue(false)]
+        public bool ShowScrollbars
+        {
+            get { return AutoScroll; }
+            set
+            {
+                if (AutoScroll == value)
+                {
+                    return;
+                }
+                if (value)
+                {
+                    UpdateScrollbars();
+                }
+                myIsChangingAutoScroll = true;
+                AutoScroll = value;
+                myIsChangingAutoScroll = false;
+            }
+        }
 
         public DrawToolType ActiveTool
         {
@@ -79,6 +111,11 @@ namespace Cii.Lar.UI
             {
                 return this.controls[2] as StatisticsCtrl;
             }
+        }
+
+        private void UpdateScrollbars()
+        {
+
         }
 
         /// <summary>
@@ -564,6 +601,10 @@ namespace Cii.Lar.UI
 
         protected override void OnSizeChanged(EventArgs e)
         {
+            if (myIsChangingAutoScroll)
+            {
+                return;
+            }
             base.OnSizeChanged(e);
 
             int x = this.ClientSize.Width - this.pictureTracker.Width - 20;
