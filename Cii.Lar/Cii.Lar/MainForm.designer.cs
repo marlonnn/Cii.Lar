@@ -292,6 +292,7 @@ namespace Cii.Lar
             this.Name = "MainForm";
             this.ShowIcon = false;
             this.Text = "Lar-100";
+            this.AutoScroll = false;
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);

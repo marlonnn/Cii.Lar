@@ -160,7 +160,6 @@ namespace Cii.Lar.UI
 
             // Enable auto scroll of this control
             this.AutoScroll = true;
-            _zoom = 1;
         }
 
         private void Initialize()
@@ -233,7 +232,7 @@ namespace Cii.Lar.UI
         /// </summary>
         /// <param name="xMovementRate">horizontal scroll movement rate which may be nagtive value</param>
         /// <param name="yMovementRate">vertical scroll movement rate which may be nagtive value</param>
-        public void OnScrollPictureEvent(float xMovementRate, float yMovementRate)
+        public void OnScrollPictureEvent(int xOffset, int yOffset)
         {
             // NOTICE : usage of Math.Abs(this.AutoScrollPosition.X) and Math.Abs(this.AutoScrollPosition.Y)
             // The get method of the Panel.AutoScrollPosition.X property and
@@ -241,9 +240,8 @@ namespace Cii.Lar.UI
             // However, positive values are required.
             // You can use the Math.Abs function to obtain a positive value from the Panel.AutoScrollPosition.X property and
             // the Panel.AutoScrollPosition.Y property
-            int X = (int)(Math.Abs(this.AutoScrollPosition.X) + this.pictureBox.ClientRectangle.Width * xMovementRate);
-            int Y = (int)(Math.Abs(this.AutoScrollPosition.Y) + this.pictureBox.ClientRectangle.Height * yMovementRate);
-            this.AutoScrollPosition = new Point(X, Y);
+
+            this.pictureBox.Location = new Point(this.pictureBox.Location.X - xOffset, this.pictureBox.Location.Y - yOffset);
         }
 
         /// <summary>
@@ -301,10 +299,12 @@ namespace Cii.Lar.UI
                 //{
                 //    left = this.AutoScrollPosition.X;
                 //}
-                //this.pictureBox.Left = left;
-                //this.pictureBox.Top = top;
+                this.pictureBox.Left = left;
+                this.pictureBox.Top = top;
 
-                this.AutoScroll = true;
+                this.AutoScroll = false;
+                //this.HorizontalScroll.Enabled = false;
+                //this.HorizontalScroll.Visible = false;
             }
 
             this.pictureBox.Invalidate();
@@ -382,9 +382,6 @@ namespace Cii.Lar.UI
                                              (float)this.ClientSize.Height / (float)this.Picture.Height);
             return (int)(minScalePercent * 100.0f);
         }
-
-        private float _zoom;
-        public float ZoomFactor { get { return _zoom; } }
 
         private void PictureBox_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
         {

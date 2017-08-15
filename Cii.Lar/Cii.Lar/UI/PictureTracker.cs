@@ -86,7 +86,7 @@ namespace Cii.Lar.UI
         /// </summary>
         /// <param name="xMovementRate">horizontal scroll movement rate which may be nagtive value</param>
         /// <param name="yMovementRate">vertical scroll movement rate which may be nagtive value</param>
-        public delegate void ScrollPictureEventHandler(float xMovementRate, float yMovementRate);
+        public delegate void ScrollPictureEventHandler(int xMovementRate, int yMovementRate);
 
         /// <summary>
         /// Scroll picture event to ask ScalablePictureBox to scroll picture
@@ -274,13 +274,7 @@ namespace Cii.Lar.UI
                 int offsetX = e.X - lastMousePosOfDragging.X;
                 int offsetY = e.Y - lastMousePosOfDragging.Y;
                 lastMousePosOfDragging = new Point(e.X, e.Y);
-
-                // 1.Calculate horizontal and vertical mouse movement rates relative to the pictureDestRect
-                //   the mouse movement rates may be nagtive value if mouse moved to left or up
-                // 2.Raise ScrollPictureEvent to scroll actual picture in the ScalablePictureBox
-                float xMovementRate = (float)offsetX / (float)pictureDestRect.Width;
-                float yMovementRate = (float)offsetY / (float)pictureDestRect.Height;
-                ScrollPictureEvent(xMovementRate, yMovementRate);
+                ScrollPictureEvent(offsetX, offsetY);
             }
             // use hand dragging cursor if mouse mode is dragging mouse or
             // mouse is within highlighting rectangle

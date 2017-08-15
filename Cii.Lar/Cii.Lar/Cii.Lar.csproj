@@ -79,7 +79,9 @@
     <Compile Include="DrawTools\ToolPolygon.cs" />
     <Compile Include="DrawTools\ToolPolyLine.cs" />
     <Compile Include="DrawTools\ToolRectangle.cs" />
+    <Compile Include="ExpClass\ConversionInfo.cs" />
     <Compile Include="ExpClass\ExpManager.cs" />
+    <Compile Include="ExpClass\MeasureSystem.cs" />
     <Compile Include="ExpClass\PublicTypes.cs" />
     <Compile Include="ExpClass\Report.cs" />
     <Compile Include="ExpClass\ReportItemBase.cs" />
