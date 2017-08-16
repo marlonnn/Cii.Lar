@@ -50,6 +50,26 @@ namespace Cii.Lar.UI
         {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
+            this.Load += ImageForm_Load;
+        }
+
+        private void ImageForm_Load(object sender, EventArgs e)
+        {
+            var scale = Math.Min((float)this.CurrentImage.Width / this.ClientSize.Width, (float)this.CurrentImage.Height /this.ClientSize.Height);
+
+            this.pictureBox.Width = (int)(this.CurrentImage.Width * scale);
+            this.pictureBox.Height = (int)(this.CurrentImage.Height * scale);
+            this.pictureBox.Top = (this.ClientSize.Height - this.pictureBox.Height) / 2;
+            this.pictureBox.Left = (this.ClientSize.Width - this.pictureBox.Width) / 2;
+            this.AutoScroll = false;
+            //if (this.CurrentImage.Width <= this.ClientSize.Width && this.CurrentImage.Height <= this.ClientSize.Height)
+            //{
+            //    this.pictureBox.Width = this.CurrentImage.Width;
+            //    this.pictureBox.Height = this.CurrentImage.Height;
+            //    this.pictureBox.Top = (this.ClientSize.Height - this.pictureBox.Height) / 2;
+            //    this.pictureBox.Left = (this.ClientSize.Width - this.pictureBox.Width) / 2;
+            //    this.AutoScroll = false;
+            //}
         }
     }
 }

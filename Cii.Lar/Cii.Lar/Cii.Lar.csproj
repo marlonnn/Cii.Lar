@@ -381,9 +381,6 @@
     <Content Include="Resources\elliptical.png" />
     <Content Include="Resources\files.png" />
     <Content Include="Resources\assign.png" />
-    <Content Include="Resources\Image 1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\laser.png" />
     <Content Include="Resources\lens.png" />
     <Content Include="Resources\logo.ico" />
