@@ -92,6 +92,24 @@ namespace Cii.Lar.UI
         /// </summary>
         private int currentScalePercent = MAX_SCALE_PERCENT;
 
+        public int ScalePercent
+        {
+            get
+            {
+                return this.currentScalePercent;
+            }
+            set
+            {
+                if (value != this.currentScalePercent)
+                {
+                    if (value >= 100 && value <= 1500)
+                    {
+                        this.currentScalePercent = value;
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Picture size mode
         /// </summary>
@@ -259,6 +277,31 @@ namespace Cii.Lar.UI
             }
         }
 
+        public void ScaleImage()
+        {
+            this.pictureBox.Width = this.Picture.Width * this.CurrentScalePercent / 100;
+            this.pictureBox.Height = this.Picture.Height * this.CurrentScalePercent / 100;
+
+            // Centering picture box control
+            int top = (this.ClientSize.Height - this.pictureBox.Height) / 2;
+            int left = (this.ClientSize.Width - this.pictureBox.Width) / 2;
+
+            this.pictureBox.Left = left;
+            this.pictureBox.Top = top;
+
+            this.AutoScroll = false;
+
+            this.pictureBox.Invalidate();
+
+            // Raise zoom rate changed event
+            if (ZoomRateChangedEvent != null)
+            {
+                bool isFullPictureShown = this.pictureBox.Width <= this.ClientSize.Width &&
+                                          this.pictureBox.Height <= this.ClientSize.Height;
+                ZoomRateChangedEvent(this.CurrentScalePercent, isFullPictureShown);
+            }
+        }
+
         private void ScalePictureBoxToFit()
         {
             if (this.Picture == null)
@@ -274,37 +317,13 @@ namespace Cii.Lar.UI
             else if (this.pictureBoxSizeMode == PictureBoxSizeMode.Zoom || 
                 (this.Picture.Width <= this.ClientSize.Width && this.Picture.Height <= this.ClientSize.Height))
             {
-                this.pictureBox.Width = Math.Min(this.ClientSize.Width, this.Picture.Width);
-                this.pictureBox.Height = Math.Min(this.ClientSize.Height, this.Picture.Height);
+                this.pictureBox.Width = this.Picture.Width;
+                this.pictureBox.Height = this.Picture.Height;
                 this.pictureBox.Top = (this.ClientSize.Height - this.pictureBox.Height) / 2;
                 this.pictureBox.Left = (this.ClientSize.Width - this.pictureBox.Width) / 2;
                 this.AutoScroll = false;
-                this.CurrentScalePercent = GetMinScalePercent();
+                this.CurrentScalePercent = 100;
                 this.pictureBoxSizeMode = PictureBoxSizeMode.Zoom;
-            }
-            else
-            {
-                this.pictureBox.Width = Math.Max(this.Picture.Width * this.CurrentScalePercent / 100, this.ClientSize.Width);
-                this.pictureBox.Height = Math.Max(this.Picture.Height * this.CurrentScalePercent / 100, this.ClientSize.Height);
-
-                // Centering picture box control
-                int top = (this.ClientSize.Height - this.pictureBox.Height) / 2;
-                int left = (this.ClientSize.Width - this.pictureBox.Width) / 2;
-
-                //if (top < 0)
-                //{
-                //    top = this.AutoScrollPosition.Y;
-                //}
-                //if (left < 0)
-                //{
-                //    left = this.AutoScrollPosition.X;
-                //}
-                this.pictureBox.Left = left;
-                this.pictureBox.Top = top;
-
-                this.AutoScroll = false;
-                //this.HorizontalScroll.Enabled = false;
-                //this.HorizontalScroll.Visible = false;
             }
 
             this.pictureBox.Invalidate();
@@ -385,24 +404,18 @@ namespace Cii.Lar.UI
 
         private void PictureBox_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if (ModifierKeys == Keys.Control)
+            int delta = e.Delta;
+            if (delta > 0)
             {
-                int delta = e.Delta;
-                if (delta > 0)
-                {
-                    //Zoom in
-                    this.currentScalePercent += delta / 12;
-                }
-                else if (delta < 0)
-                {
-                    //Zoom out
-                    this.currentScalePercent -= (delta) / (-12);
-                }
-
-                //this.pictureBox.Left = (int)(e.X - scale * (e.X - pictureBox.Left));
-                //this.pictureBox.Top = (int)(e.Y - scale * (e.Y - pictureBox.Top));
-                this.ImageSizeMode = PictureBoxSizeMode.Normal;
+                //Zoom in
+                this.ScalePercent += delta / 12;
             }
+            else if (delta < 0)
+            {
+                //Zoom out
+                this.ScalePercent -= (delta) / (-12);
+            }
+            ScaleImage();
         }
 
         /// <summary>
