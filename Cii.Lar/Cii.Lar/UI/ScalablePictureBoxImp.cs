@@ -388,18 +388,15 @@ namespace Cii.Lar.UI
             if (ModifierKeys == Keys.Control)
             {
                 int delta = e.Delta;
-                float scale = 1;
                 if (delta > 0)
                 {
                     //Zoom in
                     this.currentScalePercent += delta / 12;
-                    scale = 0.1f * currentScalePercent + 1;
                 }
                 else if (delta < 0)
                 {
                     //Zoom out
                     this.currentScalePercent -= (delta) / (-12);
-                    scale = -0.1f * currentScalePercent + 1;
                 }
 
                 //this.pictureBox.Left = (int)(e.X - scale * (e.X - pictureBox.Left));

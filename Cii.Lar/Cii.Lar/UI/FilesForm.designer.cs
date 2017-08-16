@@ -1,3 +1,6 @@
+using System;
+using Manina.Windows.Forms;
+
 namespace Cii.Lar
 {
     partial class FilesForm
@@ -101,6 +104,7 @@ namespace Cii.Lar
             this.imageListView.Size = new System.Drawing.Size(600, 457);
             this.imageListView.TabIndex = 0;
             this.imageListView.Text = "";
+            this.imageListView.ItemDoubleClick += new Manina.Windows.Forms.ItemDoubleClickEventHandler(this.imageListView_ItemDoubleClick);
             this.imageListView.ItemClick += new Manina.Windows.Forms.ItemClickEventHandler(this.imageListView_ItemClick);
             this.imageListView.SelectionChanged += new System.EventHandler(this.imageListView_SelectionChanged);
             // 

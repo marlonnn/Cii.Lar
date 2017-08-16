@@ -69,6 +69,7 @@
     <Compile Include="DrawTools\GraphicsList.cs" />
     <Compile Include="DrawTools\GraphicsProperties.cs" />
     <Compile Include="DrawTools\GraphicsPropertiesManager.cs" />
+    <Compile Include="DrawTools\Ruler.cs" />
     <Compile Include="DrawTools\Statistics.cs" />
     <Compile Include="DrawTools\Tool.cs" />
     <Compile Include="DrawTools\ToolCircle.cs" />
@@ -99,6 +100,12 @@
     </Compile>
     <Compile Include="UI\BaseCtrl.Designer.cs">
       <DependentUpon>BaseCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ControlCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\ControlCtrl.Designer.cs">
+      <DependentUpon>ControlCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\CursorPictureBox.cs">
       <SubType>Component</SubType>
@@ -255,6 +262,9 @@
     <EmbeddedResource Include="Properties\Resources.zh-CN.resx" />
     <EmbeddedResource Include="UI\BaseCtrl.resx">
       <DependentUpon>BaseCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ControlCtrl.resx">
+      <DependentUpon>ControlCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\CursorPictureBox.resx">
       <DependentUpon>CursorPictureBox.cs</DependentUpon>

@@ -120,7 +120,7 @@ namespace Cii.Lar
 
         private ImageForm imageForm;
 
-        private void imageListView_ItemClick(object sender, ItemClickEventArgs e)
+        private void imageListView_ItemDoubleClick(object sender, ItemClickEventArgs e)
         {
             ImageListViewItem item = this.imageListView.Items.FocusedItem;
             if (item != null)
@@ -129,6 +129,17 @@ namespace Cii.Lar
                 imageForm.FileName = fileName;
                 imageForm.ShowDialog();
             }
+        }
+
+        private void imageListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            //ImageListViewItem item = this.imageListView.Items.FocusedItem;
+            //if (item != null)
+            //{
+            //    string fileName = item.FileName;
+            //    imageForm.FileName = fileName;
+            //    imageForm.ShowDialog();
+            //}
         }
     }
 }

@@ -31,7 +31,6 @@ namespace Cii.Lar
         private SysConfig sysConfig;
 
         private int CurrentScalePercent = 100;
-        private SettingCtrl settingForm;
         private FilesForm filesForm;
 
         public MainForm()
@@ -40,6 +39,7 @@ namespace Cii.Lar
             InitializeComponent();
             InitializeToolStrip();
             Program.ExpManager.ScalablePictureBox = this.scalablePictureBox;
+            //this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
             resources = new ComponentResourceManager(typeof(MainForm));
             sysConfig = SysConfig.GetSysConfig();
