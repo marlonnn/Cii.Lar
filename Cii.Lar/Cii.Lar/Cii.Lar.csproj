@@ -384,6 +384,7 @@
     <Content Include="Resources\laser.png" />
     <Content Include="Resources\lens.png" />
     <Content Include="Resources\logo.ico" />
+    <Content Include="Resources\open.png" />
     <Content Include="Resources\polygon.png" />
     <Content Include="Resources\print preview.png" />
     <Content Include="Resources\print.png" />

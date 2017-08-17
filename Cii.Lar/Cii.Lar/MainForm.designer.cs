@@ -56,6 +56,7 @@ namespace Cii.Lar
             this.toolStripButtonLaser = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSetting = new System.Windows.Forms.ToolStripButton();
             this.scalablePictureBox = new Cii.Lar.UI.ScalablePictureBox();
+            this.toolStripButtonOpen = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -110,7 +111,8 @@ namespace Cii.Lar
             this.toolStripButtonPolygon,
             this.toolStripSeparator5,
             this.toolStripButtonLaser,
-            this.toolStripButtonSetting});
+            this.toolStripButtonSetting,
+            this.toolStripButtonOpen});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(740, 25);
@@ -269,6 +271,7 @@ namespace Cii.Lar
             // 
             // scalablePictureBox
             // 
+            this.scalablePictureBox.ActiveTool = Cii.Lar.UI.DrawToolType.None;
             this.scalablePictureBox.BackColor = System.Drawing.Color.White;
             this.scalablePictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.scalablePictureBox.ForeColor = System.Drawing.Color.Black;
@@ -277,22 +280,30 @@ namespace Cii.Lar
             this.scalablePictureBox.Size = new System.Drawing.Size(740, 545);
             this.scalablePictureBox.TabIndex = 3;
             // 
+            // toolStripButtonOpen
+            // 
+            this.toolStripButtonOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonOpen.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonOpen.Image")));
+            this.toolStripButtonOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonOpen.Name = "toolStripButtonOpen";
+            this.toolStripButtonOpen.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonOpen.Text = "toolStripButton1";
+            this.toolStripButtonOpen.Click += new System.EventHandler(this.toolStripButtonOpen_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(740, 567);
-            this.KeyPreview = true;
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.scalablePictureBox);
             this.Controls.Add(this.metroStatusBar1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.KeyDown += MainForm_KeyDown;
+            this.KeyPreview = true;
             this.Name = "MainForm";
             this.ShowIcon = false;
             this.Text = "Lar-100";
-            this.AutoScroll = false;
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -324,6 +335,7 @@ namespace Cii.Lar
         private System.Windows.Forms.ToolStripButton toolStripButtonPolygon;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripButton toolStripButtonOpen;
     }
 }
 

@@ -203,5 +203,27 @@ namespace Cii.Lar
                 e.Handled = true;
             }
         }
+
+        private void toolStripButtonOpen_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string strFilter = "All file (*.*)|*.*|JPEG File Interchange Format (*.jpg;*.jpeg)|*.jpg;*.jpeg|Portable Network Graphics (*.png)|*.png|Tiff Format(*.tiff)|*.tiff|Graphics Interchange Format (*.gif)|*.gif";
+                System.Windows.Forms.OpenFileDialog OpenImageDialog = new System.Windows.Forms.OpenFileDialog();
+                OpenImageDialog.Filter = strFilter;
+                OpenImageDialog.ShowDialog();
+                if (OpenImageDialog.FileName.Length > 0)
+                {
+                    this.scalablePictureBox.PictureBox.Image = System.Drawing.Image.FromFile(OpenImageDialog.FileName);
+                    //LinkedPictureBox.Image = System.Drawing.Image.FromFile(OpenImageDialog.FileName);
+                    //LinkedPictureBox.ZoomToDefaultRect();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.GetLogger<MainForm>().Error(ex.Message);
+                LogHelper.GetLogger<MainForm>().Error(ex.StackTrace);
+            }
+        }
     }
 }
