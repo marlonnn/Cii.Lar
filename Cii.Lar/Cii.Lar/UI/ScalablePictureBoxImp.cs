@@ -176,8 +176,17 @@ namespace Cii.Lar.UI
             // set size mode of picture box to zoom mode
             this.pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
 
+            this.Load += ScalablePictureBoxImp_Load;
             // Enable auto scroll of this control
-            this.AutoScroll = true;
+            this.AutoScroll = false;
+        }
+
+        private void ScalablePictureBoxImp_Load(object sender, EventArgs e)
+        {
+            this.PictureBox.Width = (int)(this.ClientSize.Width * 0.8f);
+            this.PictureBox.Height = this.ClientSize.Height;
+            this.pictureBox.Left = (int)(this.ClientSize.Width * 0.1f);
+            this.pictureBox.Top = 0;
         }
 
         private void Initialize()
@@ -279,26 +288,29 @@ namespace Cii.Lar.UI
 
         public void ScaleImage()
         {
-            this.pictureBox.Width = this.Picture.Width * this.CurrentScalePercent / 100;
-            this.pictureBox.Height = this.Picture.Height * this.CurrentScalePercent / 100;
-
-            // Centering picture box control
-            int top = (this.ClientSize.Height - this.pictureBox.Height) / 2;
-            int left = (this.ClientSize.Width - this.pictureBox.Width) / 2;
-
-            this.pictureBox.Left = left;
-            this.pictureBox.Top = top;
-
-            this.AutoScroll = false;
-
-            this.pictureBox.Invalidate();
-
-            // Raise zoom rate changed event
-            if (ZoomRateChangedEvent != null)
+            if (this.Picture != null)
             {
-                bool isFullPictureShown = this.pictureBox.Width <= this.ClientSize.Width &&
-                                          this.pictureBox.Height <= this.ClientSize.Height;
-                ZoomRateChangedEvent(this.CurrentScalePercent, isFullPictureShown);
+                this.pictureBox.Width = this.Picture.Width * this.CurrentScalePercent / 100;
+                this.pictureBox.Height = this.Picture.Height * this.CurrentScalePercent / 100;
+
+                // Centering picture box control
+                int top = (this.ClientSize.Height - this.pictureBox.Height) / 2;
+                int left = (this.ClientSize.Width - this.pictureBox.Width) / 2;
+
+                this.pictureBox.Left = left;
+                this.pictureBox.Top = top;
+
+                this.AutoScroll = false;
+
+                this.pictureBox.Invalidate();
+
+                // Raise zoom rate changed event
+                if (ZoomRateChangedEvent != null)
+                {
+                    bool isFullPictureShown = this.pictureBox.Width <= this.ClientSize.Width &&
+                                              this.pictureBox.Height <= this.ClientSize.Height;
+                    ZoomRateChangedEvent(this.CurrentScalePercent, isFullPictureShown);
+                }
             }
         }
 

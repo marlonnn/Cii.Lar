@@ -15,6 +15,7 @@ namespace Cii.Lar.UI
     /// </summary>
     public partial class ImageForm : Office2007Form
     {
+        private AssignForm assignForm;
         private Bitmap currentImage;
         public Bitmap CurrentImage
         {
@@ -41,7 +42,6 @@ namespace Cii.Lar.UI
                 {
                     this.fileName = value;
                     currentImage = new Bitmap(value);
-                    this.pictureBox.Image = currentImage;
                 }
             }
         }
@@ -55,21 +55,34 @@ namespace Cii.Lar.UI
 
         private void ImageForm_Load(object sender, EventArgs e)
         {
-            var scale = Math.Min((float)this.CurrentImage.Width / this.ClientSize.Width, (float)this.CurrentImage.Height /this.ClientSize.Height);
+            this.pictureBox.Width = (int)(this.ClientSize.Width * 0.8f);
+            this.pictureBox.Height = this.ClientSize.Height;
+            this.pictureBox.Left = (int)(this.ClientSize.Width * 0.1f);
+            this.pictureBox.Top = 0;
 
-            this.pictureBox.Width = (int)(this.CurrentImage.Width * scale);
-            this.pictureBox.Height = (int)(this.CurrentImage.Height * scale);
-            this.pictureBox.Top = (this.ClientSize.Height - this.pictureBox.Height) / 2;
-            this.pictureBox.Left = (this.ClientSize.Width - this.pictureBox.Width) / 2;
-            this.AutoScroll = false;
-            //if (this.CurrentImage.Width <= this.ClientSize.Width && this.CurrentImage.Height <= this.ClientSize.Height)
-            //{
-            //    this.pictureBox.Width = this.CurrentImage.Width;
-            //    this.pictureBox.Height = this.CurrentImage.Height;
-            //    this.pictureBox.Top = (this.ClientSize.Height - this.pictureBox.Height) / 2;
-            //    this.pictureBox.Left = (this.ClientSize.Width - this.pictureBox.Width) / 2;
-            //    this.AutoScroll = false;
-            //}
+            this.pictureBox.Image = currentImage;
         }
+
+        private void toolStripButtonDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButtonCopy_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButtonAssign_Click(object sender, EventArgs e)
+        {
+            assignForm = new AssignForm();
+            assignForm.ShowDialog();
+        }
+
+        private void toolStripButtonPrint_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

@@ -83,8 +83,8 @@ namespace Cii.Lar
         private void MainForm_Load(object sender, EventArgs e)
         {
             //for test
-            string defaultImage = string.Format("{0}\\Resources\\1.bmp", System.Environment.CurrentDirectory);
-            this.scalablePictureBox.Picture = new Bitmap(defaultImage);
+            //string defaultImage = string.Format("{0}\\Resources\\1.bmp", System.Environment.CurrentDirectory);
+            //this.scalablePictureBox.Picture = new Bitmap(defaultImage);
             this.ActiveControl = this.scalablePictureBox.PictureBox;
 
             sysConfig.PropertyChanged += MainForm_PropertyChanged;
@@ -201,6 +201,26 @@ namespace Cii.Lar
             {
                 Program.ExpManager.SetMeasureTool(MeasureTools.Pointer);
                 e.Handled = true;
+            }
+        }
+
+        private void toolStripButtonOpen_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string strFilter = "All file (*.*)|*.*|JPEG File Interchange Format (*.jpg;*.jpeg)|*.jpg;*.jpeg|Portable Network Graphics (*.png)|*.png|Tiff Format(*.tiff)|*.tiff|Graphics Interchange Format (*.gif)|*.gif";
+                System.Windows.Forms.OpenFileDialog OpenImageDialog = new System.Windows.Forms.OpenFileDialog();
+                OpenImageDialog.Filter = strFilter;
+                OpenImageDialog.ShowDialog();
+                if (OpenImageDialog.FileName.Length > 0)
+                {
+                    this.scalablePictureBox.Picture = new Bitmap(OpenImageDialog.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.GetLogger<MainForm>().Error(ex.Message);
+                LogHelper.GetLogger<MainForm>().Error(ex.StackTrace);
             }
         }
     }
