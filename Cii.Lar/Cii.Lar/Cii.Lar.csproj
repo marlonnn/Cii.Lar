@@ -45,6 +45,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Reference\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Reference\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
@@ -93,6 +97,8 @@
     <Compile Include="MiniDump.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="SimpleLogger.cs" />
+    <Compile Include="SysClass\JsonFile.cs" />
+    <Compile Include="SysClass\Patient.cs" />
     <Compile Include="SysClass\SysConfig.cs" />
     <Compile Include="UI\ArrayChangedEventArgs.cs" />
     <Compile Include="UI\BaseCtrl.cs">
@@ -112,6 +118,12 @@
     </Compile>
     <Compile Include="UI\CursorPictureBox.Designer.cs">
       <DependentUpon>CursorPictureBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AssignForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AssignForm.designer.cs">
+      <DependentUpon>AssignForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\ImageForm.cs">
       <SubType>Form</SubType>
@@ -271,6 +283,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CursorPictureBox1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\AssignForm.resx">
+      <DependentUpon>AssignForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\ImageForm.resx">
       <DependentUpon>ImageForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -371,6 +386,7 @@
     <Content Include="DrawTools\PolyHandle.cur" />
     <Content Include="DrawTools\Rectangle.cur" />
     <Content Include="Reference\log4net.dll" />
+    <Content Include="Reference\Newtonsoft.Json.dll" />
     <Content Include="Resources\1.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

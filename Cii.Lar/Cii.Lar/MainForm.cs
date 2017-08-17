@@ -83,8 +83,8 @@ namespace Cii.Lar
         private void MainForm_Load(object sender, EventArgs e)
         {
             //for test
-            string defaultImage = string.Format("{0}\\Resources\\1.bmp", System.Environment.CurrentDirectory);
-            this.scalablePictureBox.Picture = new Bitmap(defaultImage);
+            //string defaultImage = string.Format("{0}\\Resources\\1.bmp", System.Environment.CurrentDirectory);
+            //this.scalablePictureBox.Picture = new Bitmap(defaultImage);
             this.ActiveControl = this.scalablePictureBox.PictureBox;
 
             sysConfig.PropertyChanged += MainForm_PropertyChanged;

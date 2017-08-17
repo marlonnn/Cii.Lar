@@ -15,6 +15,7 @@ namespace Cii.Lar.UI
     /// </summary>
     public partial class ImageForm : Office2007Form
     {
+        private AssignForm assignForm;
         private Bitmap currentImage;
         public Bitmap CurrentImage
         {
@@ -41,7 +42,6 @@ namespace Cii.Lar.UI
                 {
                     this.fileName = value;
                     currentImage = new Bitmap(value);
-                    this.pictureBox.Image = currentImage;
                 }
             }
         }
@@ -50,6 +50,38 @@ namespace Cii.Lar.UI
         {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
+            this.Load += ImageForm_Load;
+        }
+
+        private void ImageForm_Load(object sender, EventArgs e)
+        {
+            this.pictureBox.Width = (int)(this.ClientSize.Width * 0.8f);
+            this.pictureBox.Height = this.ClientSize.Height;
+            this.pictureBox.Left = (int)(this.ClientSize.Width * 0.1f);
+            this.pictureBox.Top = 0;
+
+            this.pictureBox.Image = currentImage;
+        }
+
+        private void toolStripButtonDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButtonCopy_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButtonAssign_Click(object sender, EventArgs e)
+        {
+            assignForm = new AssignForm();
+            assignForm.ShowDialog();
+        }
+
+        private void toolStripButtonPrint_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

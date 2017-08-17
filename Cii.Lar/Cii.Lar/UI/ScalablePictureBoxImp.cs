@@ -176,8 +176,17 @@ namespace Cii.Lar.UI
             // set size mode of picture box to zoom mode
             this.pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
 
+            this.Load += ScalablePictureBoxImp_Load;
             // Enable auto scroll of this control
-            this.AutoScroll = true;
+            this.AutoScroll = false;
+        }
+
+        private void ScalablePictureBoxImp_Load(object sender, EventArgs e)
+        {
+            this.PictureBox.Width = (int)(this.ClientSize.Width * 0.8f);
+            this.PictureBox.Height = this.ClientSize.Height;
+            this.pictureBox.Left = (int)(this.ClientSize.Width * 0.1f);
+            this.pictureBox.Top = 0;
         }
 
         private void Initialize()
