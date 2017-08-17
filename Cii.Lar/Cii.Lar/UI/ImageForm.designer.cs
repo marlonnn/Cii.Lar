@@ -89,6 +89,7 @@ namespace Cii.Lar.UI
             this.toolStripLabel1.Name = "toolStripLabel1";
             this.toolStripLabel1.Size = new System.Drawing.Size(40, 22);
             this.toolStripLabel1.Text = "Delete";
+            this.toolStripLabel1.Click += new System.EventHandler(this.toolStripButtonDelete_Click);
             // 
             // toolStripSeparator1
             // 
@@ -110,6 +111,7 @@ namespace Cii.Lar.UI
             this.toolStripLabel2.Name = "toolStripLabel2";
             this.toolStripLabel2.Size = new System.Drawing.Size(35, 22);
             this.toolStripLabel2.Text = "Copy";
+            this.toolStripLabel2.Click += new System.EventHandler(this.toolStripButtonCopy_Click);
             // 
             // toolStripSeparator2
             // 
@@ -131,6 +133,7 @@ namespace Cii.Lar.UI
             this.toolStripLabel3.Name = "toolStripLabel3";
             this.toolStripLabel3.Size = new System.Drawing.Size(42, 22);
             this.toolStripLabel3.Text = "Assign";
+            this.toolStripLabel3.Click += new System.EventHandler(this.toolStripButtonAssign_Click);
             // 
             // toolStripSeparator3
             // 
@@ -152,6 +155,7 @@ namespace Cii.Lar.UI
             this.toolStripLabel4.Name = "toolStripLabel4";
             this.toolStripLabel4.Size = new System.Drawing.Size(32, 22);
             this.toolStripLabel4.Text = "Print";
+            this.toolStripLabel4.Click += new System.EventHandler(this.toolStripButtonPrint_Click);
             // 
             // ImageForm
             // 

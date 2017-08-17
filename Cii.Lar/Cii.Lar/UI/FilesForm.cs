@@ -33,6 +33,18 @@ namespace Cii.Lar
                 imageListView.Items.Add(file.ToString());
             }
             imageForm = new ImageForm();
+            imageForm.DeleteImageItemHandler += DeleteImageItemHandler;
+        }
+
+        private void DeleteImageItemHandler(ImageListViewItem imageListViewItem)
+        {
+            imageListView.SuspendLayout();
+
+            // Remove selected items
+            imageListView.Items.Remove(imageListViewItem);
+
+            // Resume layout logic.
+            imageListView.ResumeLayout(true);
         }
 
         /// <summary>
@@ -127,6 +139,8 @@ namespace Cii.Lar
             if (item != null)
             {
                 string fileName = item.FileName;
+                imageForm.Text = item.Text;
+                imageForm.ImageListViewItem = item;
                 imageForm.FileName = fileName;
                 imageForm.ShowDialog();
             }

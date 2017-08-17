@@ -1,4 +1,5 @@
 using DevComponents.DotNetBar;
+using Manina.Windows.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,23 @@ namespace Cii.Lar.UI
     /// </summary>
     public partial class ImageForm : Office2007Form
     {
+        private ImageListViewItem imageListViewItem;
+        
+        public ImageListViewItem ImageListViewItem
+        {
+            get
+            {
+                return imageListViewItem;
+            }
+            set
+            {
+                imageListViewItem = value;
+            }
+        }
+
+        public delegate void DeleteImageItem(ImageListViewItem imageListViewItem);
+        public DeleteImageItem DeleteImageItemHandler;
+
         private AssignForm assignForm;
         private Bitmap currentImage;
         public Bitmap CurrentImage
@@ -55,6 +73,7 @@ namespace Cii.Lar.UI
 
         private void ImageForm_Load(object sender, EventArgs e)
         {
+            //this.TitleText = this.Title;
             this.pictureBox.Width = (int)(this.ClientSize.Width * 0.8f);
             this.pictureBox.Height = this.ClientSize.Height;
             this.pictureBox.Left = (int)(this.ClientSize.Width * 0.1f);
@@ -65,7 +84,15 @@ namespace Cii.Lar.UI
 
         private void toolStripButtonDelete_Click(object sender, EventArgs e)
         {
-
+            string info = string.Format("{0}\n {1}", ImageListViewItem.Text, ImageListViewItem.DateModified);
+            var result = MessageBox.Show(info, "Are you confirm to delete the file ? " , MessageBoxButtons.OKCancel);
+            if (result == DialogResult.OK)
+            {
+                //delete file
+                DeleteImageItemHandler?.Invoke(ImageListViewItem);
+                this.Close();
+            }
+            
         }
 
         private void toolStripButtonCopy_Click(object sender, EventArgs e)

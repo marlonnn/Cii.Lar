@@ -90,7 +90,7 @@ namespace Cii.Lar
             // toolStripStatusLabel
             // 
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(39, 17);
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(44, 17);
             this.toolStripStatusLabel.Text = "Ready";
             // 
             // imageListView
@@ -104,6 +104,7 @@ namespace Cii.Lar
             this.imageListView.Size = new System.Drawing.Size(600, 457);
             this.imageListView.TabIndex = 0;
             this.imageListView.Text = "";
+            this.imageListView.ThumbnailSize = new System.Drawing.Size(120, 200);
             this.imageListView.View = Manina.Windows.Forms.View.Pane;
             this.imageListView.ItemClick += new Manina.Windows.Forms.ItemClickEventHandler(this.imageListView_ItemClick);
             this.imageListView.ItemDoubleClick += new Manina.Windows.Forms.ItemDoubleClickEventHandler(this.imageListView_ItemDoubleClick);
@@ -122,7 +123,7 @@ namespace Cii.Lar
             this.toolStripComboBox1});
             this.toolStrip.Location = new System.Drawing.Point(3, 0);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(377, 25);
+            this.toolStrip.Size = new System.Drawing.Size(389, 25);
             this.toolStrip.TabIndex = 0;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -177,7 +178,7 @@ namespace Cii.Lar
             // toolStripLabelSelectByID
             // 
             this.toolStripLabelSelectByID.Name = "toolStripLabelSelectByID";
-            this.toolStripLabelSelectByID.Size = new System.Drawing.Size(111, 22);
+            this.toolStripLabelSelectByID.Size = new System.Drawing.Size(123, 22);
             this.toolStripLabelSelectByID.Text = "Select Patient by ID:";
             // 
             // toolStripComboBox1
@@ -196,6 +197,7 @@ namespace Cii.Lar
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 504);
             this.Controls.Add(this.toolStripContainer1);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "FilesForm";
             this.ShowIcon = false;
