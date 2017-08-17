@@ -35,7 +35,7 @@ namespace Cii.Lar.UI
             this.textBoxPatientName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnConfirm = new DevComponents.DotNetBar.ButtonX();
             this.btnCancel = new DevComponents.DotNetBar.ButtonX();
-            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Patient name is required.");
+            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Patient name should not empty.");
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
@@ -126,7 +126,7 @@ namespace Cii.Lar.UI
             this.requiredFieldValidator2.ErrorMessage = "Patient name should not empty.";
             this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
-            // requiredFieldValidator1
+            // regularExpressionValidator1
             // 
             this.regularExpressionValidator1.ErrorMessage = "Patient ID is number required.";
             this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;

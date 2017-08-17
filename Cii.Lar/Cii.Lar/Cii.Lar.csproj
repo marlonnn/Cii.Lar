@@ -97,6 +97,7 @@
     <Compile Include="MiniDump.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="SimpleLogger.cs" />
+    <Compile Include="SysClass\AllPatients.cs" />
     <Compile Include="SysClass\JsonFile.cs" />
     <Compile Include="SysClass\Patient.cs" />
     <Compile Include="SysClass\SysConfig.cs" />

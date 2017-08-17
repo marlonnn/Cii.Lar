@@ -214,9 +214,7 @@ namespace Cii.Lar
                 OpenImageDialog.ShowDialog();
                 if (OpenImageDialog.FileName.Length > 0)
                 {
-                    this.scalablePictureBox.PictureBox.Image = System.Drawing.Image.FromFile(OpenImageDialog.FileName);
-                    //LinkedPictureBox.Image = System.Drawing.Image.FromFile(OpenImageDialog.FileName);
-                    //LinkedPictureBox.ZoomToDefaultRect();
+                    this.scalablePictureBox.Picture = new Bitmap(OpenImageDialog.FileName);
                 }
             }
             catch (Exception ex)

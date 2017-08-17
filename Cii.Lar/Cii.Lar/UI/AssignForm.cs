@@ -16,9 +16,11 @@ namespace Cii.Lar.UI
     /// </summary>
     public partial class AssignForm : Office2007Form
     {
+        private AllPatients allPatients;
         public AssignForm()
         {
             InitializeComponent();
+            allPatients = AllPatients.GetAllPatients();
         }
 
         private bool CheckTextBoxValided(string text)
@@ -35,6 +37,7 @@ namespace Cii.Lar.UI
             try
             {
                 Patient patient = new Patient(Int32.Parse(this.textBoxPatientID.Text), this.textBoxPatientName.Text);
+                allPatients.Add(patient);
             }
             catch (Exception ex)
             {

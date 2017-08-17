@@ -18,6 +18,7 @@ namespace Cii.Lar
 {
     public partial class FilesForm : Office2007Form
     {
+        private AssignForm assignForm;
         private ReportForm reportFrom;
         public FilesForm()
         {
@@ -140,6 +141,12 @@ namespace Cii.Lar
             //    imageForm.FileName = fileName;
             //    imageForm.ShowDialog();
             //}
+        }
+
+        private void toolStripButtonAssign_Click(object sender, EventArgs e)
+        {
+            assignForm = new AssignForm();
+            assignForm.Show();
         }
     }
 }
