@@ -135,15 +135,33 @@ namespace Cii.Lar
 
         private void imageListView_ItemDoubleClick(object sender, ItemClickEventArgs e)
         {
-            ImageListViewItem item = this.imageListView.Items.FocusedItem;
-            if (item != null)
+            try
             {
-                string fileName = item.FileName;
-                imageForm.Text = item.Text;
-                imageForm.ImageListViewItem = item;
-                imageForm.FileName = fileName;
-                imageForm.ShowDialog();
+                ImageListViewItem item = this.imageListView.Items.FocusedItem;
+                if (item != null)
+                {
+                    string fileName = item.FileName;
+                    imageForm.Text = item.Text;
+                    imageForm.ImageListViewItem = item;
+                    imageForm.FileName = fileName;
+                    DialogResult dr = imageForm.ShowDialog();
+                    if (dr == DialogResult.OK && imageForm.IsAssign)
+                    {
+                        DeleteImageItemHandler(item);
+                        File.Delete(item.FileName);
+                    }
+                }
             }
+            catch (Exception ex)
+            {
+                LogHelper.GetLogger<FilesForm>().Error(ex.Message);
+                LogHelper.GetLogger<FilesForm>().Error(ex.StackTrace);
+            }
+        }
+
+        private void RemoveAndDelete(ImageListViewItem item)
+        {
+
         }
 
         private void imageListView_ItemClick(object sender, ItemClickEventArgs e)
@@ -162,5 +180,6 @@ namespace Cii.Lar
             assignForm = new AssignForm();
             assignForm.Show();
         }
+
     }
 }

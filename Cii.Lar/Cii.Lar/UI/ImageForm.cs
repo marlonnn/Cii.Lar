@@ -35,6 +35,20 @@ namespace Cii.Lar.UI
 
         private AssignForm assignForm;
         private Bitmap currentImage;
+
+        private bool isAssign;
+
+        public bool IsAssign
+        {
+            get
+            {
+                return isAssign;
+            }
+            set
+            {
+                isAssign = value;
+            }
+        }
         public Bitmap CurrentImage
         {
             get
@@ -67,6 +81,7 @@ namespace Cii.Lar.UI
         public ImageForm()
         {
             InitializeComponent();
+            this.isAssign = false;
             this.WindowState = FormWindowState.Maximized;
             this.Load += ImageForm_Load;
         }
@@ -102,13 +117,27 @@ namespace Cii.Lar.UI
 
         private void toolStripButtonAssign_Click(object sender, EventArgs e)
         {
-            assignForm = new AssignForm();
-            assignForm.ShowDialog();
+            assignForm = new AssignForm(imageListViewItem);
+            if (assignForm.ShowDialog() == DialogResult.OK)
+            {
+                this.isAssign = true;
+            }
+            else
+            {
+                this.isAssign = false;
+            }
         }
 
         private void toolStripButtonPrint_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            CurrentImage.Dispose();
+            this.DialogResult = DialogResult.OK;
         }
 
     }

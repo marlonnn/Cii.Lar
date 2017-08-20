@@ -16,6 +16,7 @@ namespace Cii.Lar.SysClass
     public class SysConfig
     {
         public static SysConfig systemConfig;
+
         private string storagePath;
 
         public string StorePath
@@ -27,6 +28,19 @@ namespace Cii.Lar.SysClass
             set
             {
                 this.storagePath = value;
+            }
+        }
+
+        private string archivePath;
+        public string ArchivePath
+        {
+            get
+            {
+                return this.archivePath;
+            }
+            set
+            {
+                this.archivePath = value;
             }
         }
 
@@ -81,6 +95,7 @@ namespace Cii.Lar.SysClass
         public SysConfig()
         {
             this.storagePath = string.Format("{0}\\Archive",System.Environment.CurrentDirectory);
+            this.archivePath = string.Format("{0}\\Archive", System.Environment.CurrentDirectory);
         }
 
         public CultureInfo GetSysDefaultCulture()
