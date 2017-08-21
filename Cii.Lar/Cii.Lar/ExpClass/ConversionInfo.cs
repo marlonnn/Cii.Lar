@@ -146,9 +146,6 @@ namespace Cii.Lar.ExpClass
             return !(C1 == C2);
         }
 
-        /// <summary>
-        /// Trasforma una coordinata X da coordinate fisiche a coordinate logiche
-        /// </summary>
         public float ToLogicalCoordX(float PhysicalCoordX)
         {
             try
@@ -163,9 +160,6 @@ namespace Cii.Lar.ExpClass
             }
         }
 
-        /// <summary>
-        /// Trasforma una coordinata Y da coordinate fisiche a coordinate logiche
-        /// </summary>
         public float ToLogicalCoordY(float PhysicalCoordY)
         {
             try
@@ -180,11 +174,6 @@ namespace Cii.Lar.ExpClass
             }
         }
 
-        /// <summary>
-        /// Trasforma una dimensione da coordinate fisiche a coordinate logiche
-        /// NOTA: Una dimensione e' intesa come "coordinata1- coordinata2", quindi
-        /// e' invariante rispetto alla posizione dell'origine
-        /// </summary>
         public float ToLogicalDimension(float dimension)
         {
             try
@@ -199,9 +188,6 @@ namespace Cii.Lar.ExpClass
             }
         }
 
-        /// <summary>
-        /// Trasforma un punto da coordinate fisiche a coordinate logiche
-        /// </summary>
         public System.Drawing.Point ToLogicalPoint(System.Drawing.Point PhysicalPoint)
         {
             try
@@ -216,10 +202,6 @@ namespace Cii.Lar.ExpClass
             }
         }
 
-
-        /// <summary>
-        /// Trasforma un punto da coordinate fisiche a coordinate logiche
-        /// </summary>
         public Point ToLogicalPoint(int X, int Y)
         {
             try
@@ -234,9 +216,6 @@ namespace Cii.Lar.ExpClass
             }
         }
 
-        /// <summary>
-        /// Trasforma una coordinata X da coordinate logiche a coordinate fisiche
-        /// </summary>
         public float ToPhysicalCoordX(float LogicalCoordX)
         {
             try
@@ -251,9 +230,6 @@ namespace Cii.Lar.ExpClass
             }
         }
 
-        /// <summary>
-        /// Trasforma una coordinata Y da coordinate logiche a coordinate fisiche
-        /// </summary>
         public float ToPhysicalCoordY(float LogicalCoordY)
         {
             try
@@ -268,11 +244,6 @@ namespace Cii.Lar.ExpClass
             }
         }
 
-        /// <summary>
-        /// Trasforma una dimensione da coordinate logiche a coordinate fisiche
-        /// NOTA: Una dimensione e' intesa come "coordinata1- coordinata2", quindi
-        /// e' invariante rispetto alla posizione dell'origine
-        /// </summary>
         public float ToPhysicalDimension(float dimension)
         {
             try
@@ -287,9 +258,6 @@ namespace Cii.Lar.ExpClass
             }
         }
 
-        /// <summary>
-        /// Trasforma un punto da coordinate logiche a coordinate fisiche
-        /// </summary>
         public System.Drawing.Point ToPhysicalPoint(System.Drawing.Point LogicalPoint)
         {
             try

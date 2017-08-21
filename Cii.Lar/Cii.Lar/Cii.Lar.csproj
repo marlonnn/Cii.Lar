@@ -149,6 +149,18 @@
     </Compile>
     <Compile Include="UI\ListViewItemArray.cs" />
     <Compile Include="UI\ListViewItemEx.cs" />
+    <Compile Include="UI\Picture\RxPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Picture\RxPictureBox.Designer.cs">
+      <DependentUpon>RxPictureBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Picture\ZoomblePictureBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Picture\ZoomblePictureBox.Designer.cs">
+      <DependentUpon>ZoomblePictureBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\RulerAppearanceCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>

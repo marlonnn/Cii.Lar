@@ -506,7 +506,7 @@ namespace Cii.Lar.ExpClass
 
             #endregion
 
-            #region "Funzioni statiche"
+            #region "static function"
             public static RECT Union(ref RECT a, ref RECT b)
             {
                 Rectangle ra = Rectangle.Union((Rectangle)a, (Rectangle)b);
