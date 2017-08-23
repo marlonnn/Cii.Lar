@@ -1,6 +1,6 @@
 ﻿namespace Cii.Lar.UI.Picture
 {
-    partial class RxPictureBox
+    partial class ZoomblePictureBoxControl
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -16,8 +16,6 @@
             if (disposing && (components != null))
             {
                 components.Dispose();
-                this.BitmapImage.Dispose();
-                this.BitmapImage = null;
             }
             base.Dispose(disposing);
         }
@@ -31,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         }
 
         #endregion

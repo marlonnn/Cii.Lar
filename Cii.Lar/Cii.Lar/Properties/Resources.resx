@@ -121,9 +121,6 @@
   <data name="scale" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\scale.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="toolStripButtonZoomInStr" xml:space="preserve">
-    <value>Zoom In</value>
-  </data>
   <data name="toolStripButtonLineStr" xml:space="preserve">
     <value>Line</value>
   </data>
@@ -142,8 +139,8 @@
   <data name="toolStripButtonCaptureStr" xml:space="preserve">
     <value>Capture Screen</value>
   </data>
-  <data name="print preview" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\print preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="toolStripButtonEllipticalStr" xml:space="preserve">
+    <value>Elliptical</value>
   </data>
   <data name="zoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\zoom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -153,9 +150,6 @@
   </data>
   <data name="copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\copy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Zoom out" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Zoom out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="StrReport" xml:space="preserve">
     <value>Report</value>
@@ -196,8 +190,8 @@
   <data name="toolStripButtonVideoStr" xml:space="preserve">
     <value>Capture Video</value>
   </data>
-  <data name="toolStripButtonEllipticalStr" xml:space="preserve">
-    <value>Elliptical</value>
+  <data name="toolStripButtonZoomInStr" xml:space="preserve">
+    <value>Zoom In</value>
   </data>
   <data name="labelItemStoragePathStr" xml:space="preserve">
     <value>Storage Path</value>
@@ -217,6 +211,9 @@
   <data name="StrOK" xml:space="preserve">
     <value>OK</value>
   </data>
+  <data name="camera" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\camera.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -235,6 +232,9 @@
   <data name="toolStripButtonLaserStr" xml:space="preserve">
     <value>Laser</value>
   </data>
+  <data name="Zoom out" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Zoom out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="video" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\video.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -244,7 +244,13 @@
   <data name="buttonSaveStr" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="camera" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\camera.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="print preview" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\print preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Zoom-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Zoom-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

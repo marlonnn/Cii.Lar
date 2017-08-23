@@ -8,14 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cii.Lar.ExpClass;
-using static Cii.Lar.ExpClass.PublicTypes;
+using static Cii.Lar.UI.Picture.PublicTypes;
 
 namespace Cii.Lar.UI.Picture
 {
-    public partial class ZoomblePictureBox : UserControl
+    public partial class ZoomblePictureBoxControl : UserControl
     {
-        private RxPictureBox pictureBox;
-
         public const MeasureSystem.enUniMis DefaultUnitOfMeasure = MeasureSystem.enUniMis.mm;
 
         private MeasureSystem.enUniMis myUnitOfMeasure = DefaultUnitOfMeasure;
@@ -170,24 +168,7 @@ namespace Cii.Lar.UI.Picture
             }
         }
 
-        public Image Image
-        {
-            get
-            {
-                return this.pictureBox.Image;
-            }
-            set
-            {
-                //this.pictureBox.Image = value;
-                if (value != null)
-                {
-                    //this.pictureBox = new RxPictureBox((Bitmap)myPictureBoxImage, ImageCustomOrigin.X, ImageCustomOrigin.Y,
-                    //    enBitmapOriginPosition.TopLeft, myPictureBoxImagePixelSize_micron, myPictureBoxImagePixelSize_micron);
-                }
-            }
-        }
-
-        public ZoomblePictureBox()
+        public ZoomblePictureBoxControl()
         {
 
             this.Load += ZoomblePictureBox_Load;
@@ -204,35 +185,17 @@ namespace Cii.Lar.UI.Picture
         private void Initialize()
         {
             ImageCustomOrigin = new Point();
-            pictureBox = new RxPictureBox();
             ZoomToDefaultRect();
         }
 
         private void ZoomToDefaultRect()
         {
-            if (this.pictureBox.Image != null)
-            {
-                ZoomToFit();
-            }
-            else
-            {
-                ShowLogicalWindow(DefaultRect, false);
-            }
+
         }
 
         private void ZoomToFit()
         {
-            if (this.pictureBox.Image != null)
-            {
-                RECT ImgR = new RECT(ImageCustomOrigin.X, ImageCustomOrigin.Y, 
-                    ImageCustomOrigin.X + this.pictureBox.Image.Width, ImageCustomOrigin.Y + this.pictureBox.Image.Height);
-                RECT PhysicalR = default(RECT);
-                PhysicalR.left = ImgR.left * BackgroundImagePixelSize_Mic;
-                PhysicalR.top = ImgR.top * BackgroundImagePixelSize_Mic;
-                PhysicalR.Width = ImgR.Width * BackgroundImagePixelSize_Mic;
-                PhysicalR.Height = ImgR.Height * BackgroundImagePixelSize_Mic;
-                ShowLogicalWindow(PhysicalR, true);
-            }
+
         }
 
         public void ShowLogicalWindow(RECT LogicalWindow, bool CenterWindow = true, bool AddEmptyBorder = true, bool ExcludeRulersArea = true)

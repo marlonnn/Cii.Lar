@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cii.Lar.ExpClass
+namespace Cii.Lar.UI.Picture
 {
     public class MeasureSystem
     {

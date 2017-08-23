@@ -4,10 +4,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Cii.Lar.ExpClass.PublicTypes;
+using static Cii.Lar.UI.Picture.PublicTypes;
 
-namespace Cii.Lar.ExpClass
+namespace Cii.Lar.UI.Picture
 {
+    /// <summary>
+    /// Conversion information class
+    /// Author: Zhong Wen 2017/08/22
+    /// </summary>
     public class ConversionInfo
     {
         public int PhysicalWidth = 640;
@@ -136,7 +140,8 @@ namespace Cii.Lar.ExpClass
             }
             catch (Exception ex)
             {
-
+                LogHelper.GetLogger<ConversionInfo>().Error(ex.Message);
+                LogHelper.GetLogger<ConversionInfo>().Error(ex.StackTrace);
                 return false;
             }
 

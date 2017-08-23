@@ -84,10 +84,11 @@
     <Compile Include="DrawTools\ToolPolygon.cs" />
     <Compile Include="DrawTools\ToolPolyLine.cs" />
     <Compile Include="DrawTools\ToolRectangle.cs" />
-    <Compile Include="ExpClass\ConversionInfo.cs" />
+    <Compile Include="UI\Picture\CommonCursors.cs" />
+    <Compile Include="UI\Picture\ConversionInfo.cs" />
     <Compile Include="ExpClass\ExpManager.cs" />
-    <Compile Include="ExpClass\MeasureSystem.cs" />
-    <Compile Include="ExpClass\PublicTypes.cs" />
+    <Compile Include="UI\Picture\MeasureSystem.cs" />
+    <Compile Include="UI\Picture\PublicTypes.cs" />
     <Compile Include="ExpClass\Report.cs" />
     <Compile Include="ExpClass\ReportItemBase.cs" />
     <Compile Include="ExpClass\ReportPage.cs" />
@@ -149,17 +150,12 @@
     </Compile>
     <Compile Include="UI\ListViewItemArray.cs" />
     <Compile Include="UI\ListViewItemEx.cs" />
-    <Compile Include="UI\Picture\RxPictureBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="UI\Picture\RxPictureBox.Designer.cs">
-      <DependentUpon>RxPictureBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Picture\ZoomblePictureBox.cs">
+    <Compile Include="UI\Picture\BackImageGraphics.cs" />
+    <Compile Include="UI\Picture\ZoomblePictureBoxControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Picture\ZoomblePictureBox.Designer.cs">
-      <DependentUpon>ZoomblePictureBox.cs</DependentUpon>
+    <Compile Include="UI\Picture\ZoomblePictureBoxControl.Designer.cs">
+      <DependentUpon>ZoomblePictureBoxControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\RulerAppearanceCtrl.cs">
       <SubType>UserControl</SubType>
@@ -407,6 +403,7 @@
     <Content Include="Resources\capture.png" />
     <Content Include="Resources\copy.png" />
     <Content Include="Resources\delete.png" />
+    <Content Include="Resources\edit.png" />
     <Content Include="Resources\elliptical.png" />
     <Content Include="Resources\files.png" />
     <Content Include="Resources\assign.png" />
@@ -420,6 +417,7 @@
     <Content Include="Resources\rectangular.png" />
     <Content Include="Resources\Zoom in.png" />
     <Content Include="Resources\Zoom out.png" />
+    <Content Include="Resources\Zoom-32.png" />
     <Content Include="Resources\zoom.png" />
     <None Include="Resources\scale.png" />
     <Content Include="Resources\measure.png" />
