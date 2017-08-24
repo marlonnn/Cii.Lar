@@ -35,8 +35,11 @@
             this.btVideo = new System.Windows.Forms.ToolStripButton();
             this.btFiles = new System.Windows.Forms.ToolStripButton();
             this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btZoom = new System.Windows.Forms.ToolStripButton();
             this.btMeasure = new System.Windows.Forms.ToolStripDropDownButton();
+            this.btLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.btRectangle = new System.Windows.Forms.ToolStripMenuItem();
+            this.btEllipse = new System.Windows.Forms.ToolStripMenuItem();
+            this.btPloygon = new System.Windows.Forms.ToolStripMenuItem();
             this.btView = new System.Windows.Forms.ToolStripDropDownButton();
             this.btViewRulers = new System.Windows.Forms.ToolStripMenuItem();
             this.btViewScrollBars = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,13 +51,10 @@
             this.btUmInch = new System.Windows.Forms.ToolStripMenuItem();
             this.btUmMeters = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btZoom = new System.Windows.Forms.ToolStripButton();
             this.btZoomFit = new System.Windows.Forms.ToolStripButton();
             this.ToolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btLoad = new System.Windows.Forms.ToolStripButton();
-            this.btLine = new System.Windows.Forms.ToolStripMenuItem();
-            this.btRectangle = new System.Windows.Forms.ToolStripMenuItem();
-            this.btEllipse = new System.Windows.Forms.ToolStripMenuItem();
-            this.btPloygon = new System.Windows.Forms.ToolStripMenuItem();
             this.btSetting = new System.Windows.Forms.ToolStripButton();
             this.ToolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -92,6 +92,7 @@
             this.btScreenShort.Name = "btScreenShort";
             this.btScreenShort.Size = new System.Drawing.Size(36, 36);
             this.btScreenShort.Text = "Capture Screen";
+            this.btScreenShort.Click += new System.EventHandler(this.btSreenShort_Click);
             // 
             // btVideo
             // 
@@ -101,6 +102,7 @@
             this.btVideo.Name = "btVideo";
             this.btVideo.Size = new System.Drawing.Size(36, 36);
             this.btVideo.Text = "Capture Video";
+            this.btVideo.Click += new System.EventHandler(this.btVideo_Click);
             // 
             // btFiles
             // 
@@ -111,24 +113,12 @@
             this.btFiles.Size = new System.Drawing.Size(36, 36);
             this.btFiles.Text = "Assign Files";
             this.btFiles.ToolTipText = "Assign Files";
+            this.btFiles.Click += new System.EventHandler(this.btFiles_Click);
             // 
             // ToolStripSeparator1
             // 
             this.ToolStripSeparator1.Name = "ToolStripSeparator1";
             this.ToolStripSeparator1.Size = new System.Drawing.Size(6, 39);
-            // 
-            // btZoom
-            // 
-            this.btZoom.Checked = true;
-            this.btZoom.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.btZoom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btZoom.Image = global::Cii.Lar.Properties.Resources.zoom;
-            this.btZoom.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btZoom.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btZoom.Name = "btZoom";
-            this.btZoom.Size = new System.Drawing.Size(36, 36);
-            this.btZoom.Text = "Zoom mode";
-            this.btZoom.ToolTipText = "Zoom mode";
             // 
             // btMeasure
             // 
@@ -145,6 +135,37 @@
             this.btMeasure.Size = new System.Drawing.Size(45, 36);
             this.btMeasure.Text = "Gauging mode";
             this.btMeasure.ToolTipText = "Gauging mode";
+            // 
+            // btLine
+            // 
+            this.btLine.Name = "btLine";
+            this.btLine.Size = new System.Drawing.Size(126, 22);
+            this.btLine.Text = "Line";
+            this.btLine.ToolTipText = "Line";
+            this.btLine.Click += new System.EventHandler(this.btLine_Click);
+            // 
+            // btRectangle
+            // 
+            this.btRectangle.Name = "btRectangle";
+            this.btRectangle.Size = new System.Drawing.Size(126, 22);
+            this.btRectangle.Text = "Rectangle";
+            this.btRectangle.ToolTipText = "Rectangle";
+            this.btRectangle.Click += new System.EventHandler(this.btRectangle_Click);
+            // 
+            // btEllipse
+            // 
+            this.btEllipse.Name = "btEllipse";
+            this.btEllipse.Size = new System.Drawing.Size(126, 22);
+            this.btEllipse.Text = "Ellipse";
+            this.btEllipse.Click += new System.EventHandler(this.btEllipse_Click);
+            // 
+            // btPloygon
+            // 
+            this.btPloygon.Name = "btPloygon";
+            this.btPloygon.Size = new System.Drawing.Size(126, 22);
+            this.btPloygon.Text = "Ploygon";
+            this.btPloygon.ToolTipText = "Ploygon";
+            this.btPloygon.Click += new System.EventHandler(this.btPloygon_Click);
             // 
             // btView
             // 
@@ -167,7 +188,7 @@
             this.btViewRulers.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btViewRulers.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btViewRulers.Name = "btViewRulers";
-            this.btViewRulers.Size = new System.Drawing.Size(152, 22);
+            this.btViewRulers.Size = new System.Drawing.Size(128, 22);
             this.btViewRulers.Text = "Rulers";
             this.btViewRulers.Click += new System.EventHandler(this.btViewRulers_Click);
             // 
@@ -177,7 +198,7 @@
             this.btViewScrollBars.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btViewScrollBars.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btViewScrollBars.Name = "btViewScrollBars";
-            this.btViewScrollBars.Size = new System.Drawing.Size(152, 22);
+            this.btViewScrollBars.Size = new System.Drawing.Size(128, 22);
             this.btViewScrollBars.Text = "Scroll bars";
             this.btViewScrollBars.Click += new System.EventHandler(this.btViewScrollBars_Click);
             // 
@@ -187,7 +208,7 @@
             this.btViewGrid.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btViewGrid.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btViewGrid.Name = "btViewGrid";
-            this.btViewGrid.Size = new System.Drawing.Size(152, 22);
+            this.btViewGrid.Size = new System.Drawing.Size(128, 22);
             this.btViewGrid.Text = "Grid";
             this.btViewGrid.Click += new System.EventHandler(this.btViewGrid_Click);
             // 
@@ -255,6 +276,19 @@
             this.ToolStripSeparator2.Name = "ToolStripSeparator2";
             this.ToolStripSeparator2.Size = new System.Drawing.Size(6, 39);
             // 
+            // btZoom
+            // 
+            this.btZoom.Checked = true;
+            this.btZoom.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.btZoom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btZoom.Image = global::Cii.Lar.Properties.Resources.zoom;
+            this.btZoom.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btZoom.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btZoom.Name = "btZoom";
+            this.btZoom.Size = new System.Drawing.Size(36, 36);
+            this.btZoom.Text = "Zoom mode";
+            this.btZoom.ToolTipText = "Zoom mode";
+            // 
             // btZoomFit
             // 
             this.btZoomFit.Checked = true;
@@ -283,37 +317,6 @@
             this.btLoad.Size = new System.Drawing.Size(36, 36);
             this.btLoad.Text = "ToolStripButton2";
             this.btLoad.ToolTipText = "Load Image";
-            // 
-            // btLine
-            // 
-            this.btLine.Name = "btLine";
-            this.btLine.Size = new System.Drawing.Size(152, 22);
-            this.btLine.Text = "Line";
-            this.btLine.ToolTipText = "Line";
-            this.btLine.Click += new System.EventHandler(this.btLine_Click);
-            // 
-            // btRectangle
-            // 
-            this.btRectangle.Name = "btRectangle";
-            this.btRectangle.Size = new System.Drawing.Size(152, 22);
-            this.btRectangle.Text = "Rectangle";
-            this.btRectangle.ToolTipText = "Rectangle";
-            this.btRectangle.Click += new System.EventHandler(this.btRectangle_Click);
-            // 
-            // btEllipse
-            // 
-            this.btEllipse.Name = "btEllipse";
-            this.btEllipse.Size = new System.Drawing.Size(152, 22);
-            this.btEllipse.Text = "Ellipse";
-            this.btEllipse.Click += new System.EventHandler(this.btEllipse_Click);
-            // 
-            // btPloygon
-            // 
-            this.btPloygon.Name = "btPloygon";
-            this.btPloygon.Size = new System.Drawing.Size(152, 22);
-            this.btPloygon.Text = "Ploygon";
-            this.btPloygon.ToolTipText = "Ploygon";
-            this.btPloygon.Click += new System.EventHandler(this.btPloygon_Click);
             // 
             // btSetting
             // 

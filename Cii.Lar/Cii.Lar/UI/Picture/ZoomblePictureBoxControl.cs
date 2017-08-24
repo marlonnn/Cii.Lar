@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Cii.Lar.ExpClass;
 using static Cii.Lar.UI.Picture.PublicTypes;
 using System.Drawing.Imaging;
+using Cii.Lar.DrawTools;
 
 namespace Cii.Lar.UI.Picture
 {
@@ -19,6 +20,79 @@ namespace Cii.Lar.UI.Picture
     /// </summary>
     public partial class ZoomblePictureBoxControl : UserControl
     {
+        private Tool[] tools; // array of tools
+
+        public Tool[] Tools
+        {
+            get
+            {
+                return tools;
+            }
+            set
+            {
+                this.tools = value;
+            }
+        }
+
+        private DrawToolType activeTool;      // active drawing tool
+
+        public DrawToolType ActiveTool
+        {
+            get
+            {
+                return activeTool;
+            }
+            set
+            {
+                if (activeTool == DrawToolType.PolyLine && activeTool != value)
+                {
+                    if (GraphicsList.Count > 0 && GraphicsList[0] is DrawPolyLine)
+                    {
+                        DrawPolyLine polygon = (DrawPolyLine)GraphicsList[0];
+                        if (polygon != null && polygon.Creating)
+                        {
+                            //tools[(int)DrawToolType.PolyLine].OnCancel(this, true);
+                        }
+                    }
+                }
+                activeTool = value;
+                if (tools != null && activeTool != DrawToolType.None)
+                {
+                    Cursor = tools[(int)activeTool] is ToolPointer ? Cursors.Default : (tools[(int)activeTool] as ToolObject).Cursor;
+                }
+                Enabled = activeTool != DrawToolType.None;
+            }
+        }
+
+        internal void GraphicsPropertiesChangedHandler(DrawObject drawObject, GraphicsProperties graphicsProperties)
+        {
+            this.Invalidate();
+        }
+
+        private GraphicsList drawObjects;
+
+        public GraphicsList GraphicsList
+        {
+            get
+            {
+                return drawObjects;
+            }
+
+            set
+            {
+                drawObjects = value;
+            }
+        }
+
+        public bool CreatingDrawObject
+        {
+            get
+            {
+                return ActiveTool != DrawToolType.None && ActiveTool != DrawToolType.Pointer &&
+                      GraphicsList.Count > 0 && GraphicsList[0].Creating;
+            }
+        }
+
         public bool HScrollable
         {
             get
@@ -1062,6 +1136,7 @@ namespace Cii.Lar.UI.Picture
                 }
             }
         }
+
         public Image GetScreenShot()
         {
             try

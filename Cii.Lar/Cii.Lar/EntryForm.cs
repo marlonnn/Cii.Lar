@@ -18,6 +18,7 @@ namespace Cii.Lar
         public EntryForm()
         {
             InitializeComponent();
+            //this.WindowState = FormWindowState.Maximized;
             this.Load += EntryForm_Load;
         }
 

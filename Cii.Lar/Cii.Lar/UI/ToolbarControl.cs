@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cii.Lar.UI.Picture;
 using static Cii.Lar.UI.Picture.PublicTypes;
+using Cii.Lar.SysClass;
+using DevComponents.DotNetBar;
 
 namespace Cii.Lar.UI
 {
@@ -19,6 +21,8 @@ namespace Cii.Lar.UI
     public partial class ToolbarControl : UserControl
     {
         private ZoomblePictureBoxControl myZRGPictureBox;
+        private FilesForm filesForm;
+
         public ZoomblePictureBoxControl LinkedPictureBox
         {
             get { return myZRGPictureBox; }
@@ -89,22 +93,6 @@ namespace Cii.Lar.UI
             this.btMeasure.Click += btMeasure_Click;
             this.btZoomFit.Click += btZoomFit_Click;
         }
-
-        private void btZoomFit_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (LinkedPictureBox != null)
-                {
-                    LinkedPictureBox.ZoomToFit();
-                }
-            }
-            catch (Exception ex)
-            {
-                LogHelper.GetLogger<ToolbarControl>().Error(ex.Message);
-                LogHelper.GetLogger<ToolbarControl>().Error(ex.StackTrace);
-            }
-        }
         private void btMeasure_Click(object sender, EventArgs e)
         {
             try
@@ -113,41 +101,6 @@ namespace Cii.Lar.UI
                 {
                     LinkedPictureBox.ClickAction = enClickAction.MeasureDistance;
                     RefreshDisplayButtonState();
-                }
-            }
-            catch (Exception ex)
-            {
-                LogHelper.GetLogger<ToolbarControl>().Error(ex.Message);
-                LogHelper.GetLogger<ToolbarControl>().Error(ex.StackTrace);
-            }
-        }
-        private void btZoom_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (LinkedPictureBox != null)
-                {
-                    LinkedPictureBox.ClickAction = enClickAction.Zoom;
-                    RefreshDisplayButtonState();
-                }
-            }
-            catch (Exception ex)
-            {
-                LogHelper.GetLogger<ToolbarControl>().Error(ex.Message);
-                LogHelper.GetLogger<ToolbarControl>().Error(ex.StackTrace);
-            }
-        }
-        private void btLoad_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenFileDialog OpenImageDialog = new System.Windows.Forms.OpenFileDialog();
-                OpenImageDialog.Filter = "All file (*.*)|*.*|JPEG File Interchange Format (*.jpg;*.jpeg)|*.jpg;*.jpeg|Portable Network Graphics (*.png)|*.png|Tiff Format(*.tiff)|*.tiff|Graphics Interchange Format (*.gif)|*.gif";
-                OpenImageDialog.ShowDialog();
-                if (OpenImageDialog.FileName.Length > 0)
-                {
-                    LinkedPictureBox.Image = Image.FromFile(OpenImageDialog.FileName);
-                    LinkedPictureBox.ZoomToDefaultRect();
                 }
             }
             catch (Exception ex)
@@ -194,6 +147,70 @@ namespace Cii.Lar.UI
             }
         }
 
+        private void btSreenShort_Click(object sender, EventArgs e)
+        {
+            CaptureImage();
+        }
+
+        private void CaptureImage()
+        {
+            try
+            {
+                if (this.LinkedPictureBox.Image != null)
+                {
+                    string fileName = string.Format("{0}\\{1}.png", SysConfig.GetSysConfig().StorePath, DateTime.Now.ToString("yyyyMMddHHmmsss"));
+                    this.LinkedPictureBox.Image.Save(fileName);
+                    ShowToastNotification();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.GetLogger<ToolbarControl>().Error(ex.Message);
+                LogHelper.GetLogger<ToolbarControl>().Error(ex.StackTrace);
+            }
+        }
+
+        private void ShowToastNotification()
+        {
+            ToastNotification.Show(this, "Screenshot success",
+                global::Cii.Lar.Properties.Resources.capture, 1000, eToastGlowColor.Blue,
+                eToastPosition.MiddleCenter);
+        }
+
+        private void btVideo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btFiles_Click(object sender, EventArgs e)
+        {
+            filesForm = new FilesForm();
+            filesForm.ShowDialog();
+        }
+
+        #region Draw & measure tools 
+        private void btLine_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btRectangle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btEllipse_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btPloygon_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region Show rulers、ScrollBars or Grid
         private void btViewRulers_Click(object sender, EventArgs e)
         {
             try
@@ -249,28 +266,61 @@ namespace Cii.Lar.UI
             {
                 LogHelper.GetLogger<ToolbarControl>().Error(ex.Message);
                 LogHelper.GetLogger<ToolbarControl>().Error(ex.StackTrace);
-                //Interaction.MsgBox(ex.Message);
+            }
+        }
+        #endregion
+
+        private void btZoom_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (LinkedPictureBox != null)
+                {
+                    LinkedPictureBox.ClickAction = enClickAction.Zoom;
+                    RefreshDisplayButtonState();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.GetLogger<ToolbarControl>().Error(ex.Message);
+                LogHelper.GetLogger<ToolbarControl>().Error(ex.StackTrace);
             }
         }
 
-        private void btLine_Click(object sender, EventArgs e)
+        private void btZoomFit_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (LinkedPictureBox != null)
+                {
+                    LinkedPictureBox.ZoomToFit();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.GetLogger<ToolbarControl>().Error(ex.Message);
+                LogHelper.GetLogger<ToolbarControl>().Error(ex.StackTrace);
+            }
         }
 
-        private void btRectangle_Click(object sender, EventArgs e)
+        private void btLoad_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void btEllipse_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btPloygon_Click(object sender, EventArgs e)
-        {
-
+            try
+            {
+                OpenFileDialog OpenImageDialog = new System.Windows.Forms.OpenFileDialog();
+                OpenImageDialog.Filter = "All file (*.*)|*.*|JPEG File Interchange Format (*.jpg;*.jpeg)|*.jpg;*.jpeg|Portable Network Graphics (*.png)|*.png|Tiff Format(*.tiff)|*.tiff|Graphics Interchange Format (*.gif)|*.gif";
+                OpenImageDialog.ShowDialog();
+                if (OpenImageDialog.FileName.Length > 0)
+                {
+                    LinkedPictureBox.Image = Image.FromFile(OpenImageDialog.FileName);
+                    LinkedPictureBox.ZoomToDefaultRect();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.GetLogger<ToolbarControl>().Error(ex.Message);
+                LogHelper.GetLogger<ToolbarControl>().Error(ex.StackTrace);
+            }
         }
     }
 }
