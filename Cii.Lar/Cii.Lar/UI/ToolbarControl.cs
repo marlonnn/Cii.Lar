@@ -20,6 +20,9 @@ namespace Cii.Lar.UI
     /// </summary>
     public partial class ToolbarControl : UserControl
     {
+        public delegate void ShowBaseCtrl(string controlName);
+        public ShowBaseCtrl ShowBaseCtrlHandler;
+
         private ZoomblePictureBoxControl myZRGPictureBox;
         private FilesForm filesForm;
 
@@ -189,24 +192,32 @@ namespace Cii.Lar.UI
         }
 
         #region Draw & measure tools 
-        private void btLine_Click(object sender, EventArgs e)
+        private void drawTool_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void btRectangle_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btEllipse_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btPloygon_Click(object sender, EventArgs e)
-        {
-
+            ToolStripMenuItem item = sender as ToolStripMenuItem;
+            if (item != null)
+            {
+                btLine.Checked = false;
+                btRectangle.Checked = false;
+                btEllipse.Checked = false;
+                btPloygon.Checked = false;
+                switch (item.Text)
+                {
+                    case "Line":
+                        btLine.Checked = true;
+                        break;
+                    case "Rectangle":
+                        btRectangle.Checked = true;
+                        break;
+                    case "Ellipse":
+                        btEllipse.Checked = true;
+                        break;
+                    case "Ploygon":
+                        btPloygon.Checked = true;
+                        break;
+                }
+                ShowBaseCtrlHandler?.Invoke("DrawTool");
+            }
         }
         #endregion
 

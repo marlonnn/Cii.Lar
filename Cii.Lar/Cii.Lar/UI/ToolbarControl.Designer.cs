@@ -138,34 +138,38 @@
             // 
             // btLine
             // 
+            this.btLine.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btLine.Name = "btLine";
-            this.btLine.Size = new System.Drawing.Size(126, 22);
+            this.btLine.Size = new System.Drawing.Size(113, 22);
             this.btLine.Text = "Line";
             this.btLine.ToolTipText = "Line";
-            this.btLine.Click += new System.EventHandler(this.btLine_Click);
+            this.btLine.Click += new System.EventHandler(this.drawTool_Click);
             // 
             // btRectangle
             // 
+            this.btRectangle.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btRectangle.Name = "btRectangle";
-            this.btRectangle.Size = new System.Drawing.Size(126, 22);
+            this.btRectangle.Size = new System.Drawing.Size(113, 22);
             this.btRectangle.Text = "Rectangle";
             this.btRectangle.ToolTipText = "Rectangle";
-            this.btRectangle.Click += new System.EventHandler(this.btRectangle_Click);
+            this.btRectangle.Click += new System.EventHandler(this.drawTool_Click);
             // 
             // btEllipse
             // 
+            this.btEllipse.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btEllipse.Name = "btEllipse";
-            this.btEllipse.Size = new System.Drawing.Size(126, 22);
+            this.btEllipse.Size = new System.Drawing.Size(113, 22);
             this.btEllipse.Text = "Ellipse";
-            this.btEllipse.Click += new System.EventHandler(this.btEllipse_Click);
+            this.btEllipse.Click += new System.EventHandler(this.drawTool_Click);
             // 
             // btPloygon
             // 
+            this.btPloygon.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btPloygon.Name = "btPloygon";
-            this.btPloygon.Size = new System.Drawing.Size(126, 22);
+            this.btPloygon.Size = new System.Drawing.Size(113, 22);
             this.btPloygon.Text = "Ploygon";
             this.btPloygon.ToolTipText = "Ploygon";
-            this.btPloygon.Click += new System.EventHandler(this.btPloygon_Click);
+            this.btPloygon.Click += new System.EventHandler(this.drawTool_Click);
             // 
             // btView
             // 
