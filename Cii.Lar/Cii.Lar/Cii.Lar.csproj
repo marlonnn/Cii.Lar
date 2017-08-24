@@ -94,8 +94,9 @@
       <DependentUpon>CoordinatesBox.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Picture\CrossCursor.cs" />
+    <Compile Include="UI\Picture\DistanceRuler.cs" />
+    <Compile Include="UI\Picture\DrawNumberBitmap.cs" />
     <Compile Include="UI\Picture\MeasureSystem.cs" />
-    <Compile Include="UI\Picture\PublicTypes.cs" />
     <Compile Include="ExpClass\Report.cs" />
     <Compile Include="ExpClass\ReportItemBase.cs" />
     <Compile Include="ExpClass\ReportPage.cs" />
@@ -158,6 +159,14 @@
     <Compile Include="UI\ListViewItemArray.cs" />
     <Compile Include="UI\ListViewItemEx.cs" />
     <Compile Include="UI\Picture\BackImageGraphics.cs" />
+    <Compile Include="UI\Picture\PublicTypes.cs" />
+    <Compile Include="UI\Picture\Rulers.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Picture\Rulers.Designer.cs">
+      <DependentUpon>Rulers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Picture\SelectionBoxElement.cs" />
     <Compile Include="UI\Picture\ZoomblePictureBoxControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -422,6 +431,8 @@
     <Content Include="Resources\print preview.png" />
     <Content Include="Resources\print.png" />
     <Content Include="Resources\rectangular.png" />
+    <Content Include="Resources\Rulers.RulerOrigin.png" />
+    <Content Include="Resources\Rulers.RulerOriginSnap.png" />
     <Content Include="Resources\Zoom in.png" />
     <Content Include="Resources\Zoom out.png" />
     <Content Include="Resources\Zoom-32.png" />

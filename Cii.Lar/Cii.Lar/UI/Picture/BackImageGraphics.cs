@@ -19,7 +19,7 @@ namespace Cii.Lar.UI.Picture
     /// </summary>
     public class BackImageGraphics
     {
-        private Point Origin;
+        internal Point Origin;
         private Bitmap BitmapImage;
         private enBitmapOriginPosition BitmapOrigin;
 
