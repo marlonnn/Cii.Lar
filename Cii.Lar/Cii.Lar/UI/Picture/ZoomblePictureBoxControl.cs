@@ -14,6 +14,22 @@ namespace Cii.Lar.UI.Picture
 {
     public partial class ZoomblePictureBoxControl : UserControl
     {
+        public bool HScrollable
+        {
+            get
+            {
+                return this.HScroll;
+            }
+        }
+
+        public bool VScrollable
+        {
+            get
+            {
+                return this.VScroll;
+            }
+        }
+
         public const MeasureSystem.enUniMis DefaultUnitOfMeasure = MeasureSystem.enUniMis.mm;
 
         private MeasureSystem.enUniMis myUnitOfMeasure = DefaultUnitOfMeasure;

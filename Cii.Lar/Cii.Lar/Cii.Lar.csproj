@@ -87,6 +87,13 @@
     <Compile Include="UI\Picture\CommonCursors.cs" />
     <Compile Include="UI\Picture\ConversionInfo.cs" />
     <Compile Include="ExpClass\ExpManager.cs" />
+    <Compile Include="UI\Picture\CoordinatesBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Picture\CoordinatesBox.Designer.cs">
+      <DependentUpon>CoordinatesBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Picture\CrossCursor.cs" />
     <Compile Include="UI\Picture\MeasureSystem.cs" />
     <Compile Include="UI\Picture\PublicTypes.cs" />
     <Compile Include="ExpClass\Report.cs" />
