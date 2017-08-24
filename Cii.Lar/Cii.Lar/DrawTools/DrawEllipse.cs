@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using Cii.Lar.UI;
 using System.Drawing.Drawing2D;
+using Cii.Lar.UI.Picture;
 
 namespace Cii.Lar.DrawTools
 {
@@ -17,7 +18,7 @@ namespace Cii.Lar.DrawTools
     public class DrawEllipse : DrawObject
     {
         [NonSerialized]
-        protected static System.Resources.ResourceManager resourceManager = new System.Resources.ResourceManager(typeof(CursorPictureBox));
+        protected static System.Resources.ResourceManager resourceManager = new System.Resources.ResourceManager(typeof(ZoomblePictureBoxControl));
         [NonSerialized]
         protected static Cursor handleCursor = new Cursor(new System.IO.MemoryStream((byte[])resourceManager.GetObject("PolyHandle")));
 
@@ -95,7 +96,7 @@ namespace Cii.Lar.DrawTools
                 : this.GraphicsProperties.Alpha;			
         }
 
-        public DrawEllipse(CursorPictureBox pictureBox, int x1, int y1, int x2, int y2, double c) : this()
+        public DrawEllipse(ZoomblePictureBoxControl pictureBox, int x1, int y1, int x2, int y2, double c) : this()
         {
             this.ObjectType = ObjectType.Ellipse;
 
@@ -137,7 +138,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="g"></param>
         /// <param name="pictureBox"></param>
-        public override void Draw(Graphics g, CursorPictureBox pictureBox)
+        public override void Draw(Graphics g, ZoomblePictureBoxControl pictureBox)
         {
             if (ellipseForDraw == null)
             {
@@ -173,7 +174,7 @@ namespace Cii.Lar.DrawTools
                 sizeF.Width, sizeF.Height);
         }
 
-        public override void Move(CursorPictureBox pictureBox, int deltaX, int deltaY)
+        public override void Move(ZoomblePictureBoxControl pictureBox, int deltaX, int deltaY)
         {
             PointF ps = ellipseForDraw.StartPoint;
             PointF pe = ellipseForDraw.EndPoint;
@@ -188,7 +189,7 @@ namespace Cii.Lar.DrawTools
         /// <param name="pictureBox"></param>
         /// <param name="point"></param>
         /// <param name="handleNumber"></param>
-        public override void MoveHandleTo(CursorPictureBox pictureBox, Point point, int handleNumber)
+        public override void MoveHandleTo(ZoomblePictureBoxControl pictureBox, Point point, int handleNumber)
         {
             if (handleNumber == 2 || handleNumber == 4)
             {
@@ -248,7 +249,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="handleNumber"></param>
         /// <returns></returns>
-        public override Point GetHandle(CursorPictureBox pictureBox, int handleNumber)
+        public override Point GetHandle(ZoomblePictureBoxControl pictureBox, int handleNumber)
         {
             float x = 0, y = 0, xCenter, yCenter;
 
@@ -349,7 +350,7 @@ namespace Cii.Lar.DrawTools
             return areaRegion.IsVisible(dataPoint);
         }
 
-        public override HitTestResult HitTestForSelection(CursorPictureBox pictureBox, Point point0)
+        public override HitTestResult HitTestForSelection(ZoomblePictureBoxControl pictureBox, Point point0)
         {
             //transfer point according to const draw area size for hit test
             Point point = new Point(point0.X * drawAreaSize.Width / pictureBox.Width, point0.Y * drawAreaSize.Height / pictureBox.Height);

@@ -1,4 +1,5 @@
 ﻿using Cii.Lar.UI;
+using Cii.Lar.UI.Picture;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -18,19 +19,19 @@ namespace Cii.Lar.DrawTools
     public class ToolCircle : ToolObject
     {
         private static Cursor s_cursor = new Cursor(
-            new MemoryStream((byte[])new ResourceManager(typeof(CursorPictureBox)).GetObject("Cross")));
+            new MemoryStream((byte[])new ResourceManager(typeof(ZoomblePictureBoxControl)).GetObject("Cross")));
 
         public ToolCircle()
         {
             Cursor = s_cursor;
         }
 
-        public override void OnMouseDown(CursorPictureBox pictureBox, MouseEventArgs e)
+        public override void OnMouseDown(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
         {
             AddNewObject(pictureBox, new DrawCircle(pictureBox, new PointF(e.X, e.Y)));
         }
 
-        public override void OnMouseMove(CursorPictureBox pictureBox, MouseEventArgs e)
+        public override void OnMouseMove(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
         {
             //pictureBox.Cursor = Cursor;
 

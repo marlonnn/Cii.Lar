@@ -44,6 +44,9 @@
             this.btViewRulers = new System.Windows.Forms.ToolStripMenuItem();
             this.btViewScrollBars = new System.Windows.Forms.ToolStripMenuItem();
             this.btViewGrid = new System.Windows.Forms.ToolStripMenuItem();
+            this.btFullLines = new System.Windows.Forms.ToolStripMenuItem();
+            this.btPoints = new System.Windows.Forms.ToolStripMenuItem();
+            this.btCrosses = new System.Windows.Forms.ToolStripMenuItem();
             this.btUm = new System.Windows.Forms.ToolStripDropDownButton();
             this.btUmMicron = new System.Windows.Forms.ToolStripMenuItem();
             this.btUmDmm = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,9 +59,6 @@
             this.ToolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btLoad = new System.Windows.Forms.ToolStripButton();
             this.btSetting = new System.Windows.Forms.ToolStripButton();
-            this.btFullLines = new System.Windows.Forms.ToolStripMenuItem();
-            this.btPoints = new System.Windows.Forms.ToolStripMenuItem();
-            this.btCrosses = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -143,7 +143,7 @@
             // 
             this.btLine.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btLine.Name = "btLine";
-            this.btLine.Size = new System.Drawing.Size(133, 22);
+            this.btLine.Size = new System.Drawing.Size(152, 22);
             this.btLine.Text = "Line";
             this.btLine.ToolTipText = "Line";
             this.btLine.Click += new System.EventHandler(this.drawTool_Click);
@@ -152,7 +152,7 @@
             // 
             this.btRectangle.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btRectangle.Name = "btRectangle";
-            this.btRectangle.Size = new System.Drawing.Size(133, 22);
+            this.btRectangle.Size = new System.Drawing.Size(152, 22);
             this.btRectangle.Text = "Rectangle";
             this.btRectangle.ToolTipText = "Rectangle";
             this.btRectangle.Click += new System.EventHandler(this.drawTool_Click);
@@ -161,7 +161,7 @@
             // 
             this.btEllipse.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btEllipse.Name = "btEllipse";
-            this.btEllipse.Size = new System.Drawing.Size(133, 22);
+            this.btEllipse.Size = new System.Drawing.Size(152, 22);
             this.btEllipse.Text = "Ellipse";
             this.btEllipse.Click += new System.EventHandler(this.drawTool_Click);
             // 
@@ -169,7 +169,7 @@
             // 
             this.btPloygon.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btPloygon.Name = "btPloygon";
-            this.btPloygon.Size = new System.Drawing.Size(133, 22);
+            this.btPloygon.Size = new System.Drawing.Size(152, 22);
             this.btPloygon.Text = "Ploygon";
             this.btPloygon.ToolTipText = "Ploygon";
             this.btPloygon.Click += new System.EventHandler(this.drawTool_Click);
@@ -195,7 +195,7 @@
             this.btViewRulers.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btViewRulers.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btViewRulers.Name = "btViewRulers";
-            this.btViewRulers.Size = new System.Drawing.Size(152, 22);
+            this.btViewRulers.Size = new System.Drawing.Size(138, 22);
             this.btViewRulers.Text = "Rulers";
             this.btViewRulers.Click += new System.EventHandler(this.btViewRulers_Click);
             // 
@@ -205,7 +205,7 @@
             this.btViewScrollBars.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btViewScrollBars.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btViewScrollBars.Name = "btViewScrollBars";
-            this.btViewScrollBars.Size = new System.Drawing.Size(152, 22);
+            this.btViewScrollBars.Size = new System.Drawing.Size(138, 22);
             this.btViewScrollBars.Text = "Scroll bars";
             this.btViewScrollBars.Click += new System.EventHandler(this.btViewScrollBars_Click);
             // 
@@ -219,9 +219,33 @@
             this.btCrosses});
             this.btViewGrid.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btViewGrid.Name = "btViewGrid";
-            this.btViewGrid.Size = new System.Drawing.Size(152, 22);
+            this.btViewGrid.Size = new System.Drawing.Size(138, 22);
             this.btViewGrid.Text = "Grid Type";
             this.btViewGrid.Click += new System.EventHandler(this.btViewGrid_Click);
+            // 
+            // btFullLines
+            // 
+            this.btFullLines.Name = "btFullLines";
+            this.btFullLines.Size = new System.Drawing.Size(128, 22);
+            this.btFullLines.Text = "Full Lines";
+            this.btFullLines.ToolTipText = "Full Lines";
+            this.btFullLines.Click += new System.EventHandler(this.ChooseGrid_Click);
+            // 
+            // btPoints
+            // 
+            this.btPoints.Name = "btPoints";
+            this.btPoints.Size = new System.Drawing.Size(128, 22);
+            this.btPoints.Text = "Points";
+            this.btPoints.ToolTipText = "Points";
+            this.btPoints.Click += new System.EventHandler(this.ChooseGrid_Click);
+            // 
+            // btCrosses
+            // 
+            this.btCrosses.Name = "btCrosses";
+            this.btCrosses.Size = new System.Drawing.Size(128, 22);
+            this.btCrosses.Text = "Crosses";
+            this.btCrosses.ToolTipText = "Crosses";
+            this.btCrosses.Click += new System.EventHandler(this.ChooseGrid_Click);
             // 
             // btUm
             // 
@@ -244,7 +268,7 @@
             // 
             this.btUmMicron.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btUmMicron.Name = "btUmMicron";
-            this.btUmMicron.Size = new System.Drawing.Size(152, 22);
+            this.btUmMicron.Size = new System.Drawing.Size(117, 22);
             this.btUmMicron.Text = "micron";
             this.btUmMicron.Click += new System.EventHandler(this.btUmMicron_Click);
             // 
@@ -252,7 +276,7 @@
             // 
             this.btUmDmm.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btUmDmm.Name = "btUmDmm";
-            this.btUmDmm.Size = new System.Drawing.Size(152, 22);
+            this.btUmDmm.Size = new System.Drawing.Size(117, 22);
             this.btUmDmm.Text = "mm/10";
             this.btUmDmm.Click += new System.EventHandler(this.btUmMicron_Click);
             // 
@@ -262,7 +286,7 @@
             this.btUmMillimeters.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btUmMillimeters.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btUmMillimeters.Name = "btUmMillimeters";
-            this.btUmMillimeters.Size = new System.Drawing.Size(152, 22);
+            this.btUmMillimeters.Size = new System.Drawing.Size(117, 22);
             this.btUmMillimeters.Text = "mm";
             this.btUmMillimeters.Click += new System.EventHandler(this.btUmMicron_Click);
             // 
@@ -270,7 +294,7 @@
             // 
             this.btUmInch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btUmInch.Name = "btUmInch";
-            this.btUmInch.Size = new System.Drawing.Size(152, 22);
+            this.btUmInch.Size = new System.Drawing.Size(117, 22);
             this.btUmInch.Text = "inches";
             this.btUmInch.Click += new System.EventHandler(this.btUmMicron_Click);
             // 
@@ -278,7 +302,7 @@
             // 
             this.btUmMeters.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btUmMeters.Name = "btUmMeters";
-            this.btUmMeters.Size = new System.Drawing.Size(152, 22);
+            this.btUmMeters.Size = new System.Drawing.Size(117, 22);
             this.btUmMeters.Text = "meters";
             this.btUmMeters.Click += new System.EventHandler(this.btUmMicron_Click);
             // 
@@ -341,30 +365,6 @@
             this.btSetting.Size = new System.Drawing.Size(36, 36);
             this.btSetting.Text = "Setting";
             this.btSetting.Click += new System.EventHandler(this.btSetting_Click);
-            // 
-            // btFullLines
-            // 
-            this.btFullLines.Name = "btFullLines";
-            this.btFullLines.Size = new System.Drawing.Size(152, 22);
-            this.btFullLines.Text = "Full Lines";
-            this.btFullLines.ToolTipText = "Full Lines";
-            this.btFullLines.Click += new System.EventHandler(this.ChooseGrid_Click);
-            // 
-            // btPoints
-            // 
-            this.btPoints.Name = "btPoints";
-            this.btPoints.Size = new System.Drawing.Size(152, 22);
-            this.btPoints.Text = "Points";
-            this.btPoints.ToolTipText = "Points";
-            this.btPoints.Click += new System.EventHandler(this.ChooseGrid_Click);
-            // 
-            // btCrosses
-            // 
-            this.btCrosses.Name = "btCrosses";
-            this.btCrosses.Size = new System.Drawing.Size(152, 22);
-            this.btCrosses.Text = "Crosses";
-            this.btCrosses.ToolTipText = "Crosses";
-            this.btCrosses.Click += new System.EventHandler(this.ChooseGrid_Click);
             // 
             // ToolbarControl
             // 

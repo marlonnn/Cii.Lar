@@ -1,4 +1,5 @@
 ﻿using Cii.Lar.UI;
+using Cii.Lar.UI.Picture;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -17,19 +18,19 @@ namespace Cii.Lar.DrawTools
     /// </summary>
     public class ToolRectangle : ToolObject
     {
-        private static Cursor s_cursor = new Cursor(new MemoryStream((byte[])new ResourceManager(typeof(CursorPictureBox)).GetObject("Rectangle")));
+        private static Cursor s_cursor = new Cursor(new MemoryStream((byte[])new ResourceManager(typeof(ZoomblePictureBoxControl)).GetObject("Rectangle")));
 
         public ToolRectangle()
         {
             Cursor = s_cursor;
         }
 
-        public override void OnMouseDown(CursorPictureBox pictureBox, MouseEventArgs e)
+        public override void OnMouseDown(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
         {
             AddNewObject(pictureBox, new DrawRectangle(pictureBox, e.X, e.Y, 1, 1));
         }
 
-        public override void OnMouseMove(CursorPictureBox pictureBox, MouseEventArgs e)
+        public override void OnMouseMove(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
         {
             pictureBox.Cursor = Cursor;
 

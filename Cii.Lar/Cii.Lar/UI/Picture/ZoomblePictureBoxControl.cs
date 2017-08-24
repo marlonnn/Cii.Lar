@@ -34,6 +34,19 @@ namespace Cii.Lar.UI.Picture
             }
         }
 
+        private void InitializeTools()
+        {
+            Tools = new Tool[(int)DrawToolType.NumberOfDrawTools];
+            Tools[(int)DrawToolType.None] = new Tool();
+            Tools[(int)DrawToolType.Pointer] = new ToolPointer();
+            Tools[(int)DrawToolType.Line] = new ToolLine();
+            Tools[(int)DrawToolType.Rectangle] = new ToolRectangle();
+            Tools[(int)DrawToolType.Ellipse] = new ToolEllipse();
+            Tools[(int)DrawToolType.Polygon] = new ToolPolygon();
+            Tools[(int)DrawToolType.PolyLine] = new ToolPolyLine();
+            Tools[(int)DrawToolType.Circle] = new ToolCircle();
+        }
+
         private DrawToolType activeTool;      // active drawing tool
 
         public DrawToolType ActiveTool
@@ -51,7 +64,7 @@ namespace Cii.Lar.UI.Picture
                         DrawPolyLine polygon = (DrawPolyLine)GraphicsList[0];
                         if (polygon != null && polygon.Creating)
                         {
-                            //tools[(int)DrawToolType.PolyLine].OnCancel(this, true);
+                            tools[(int)DrawToolType.PolyLine].OnCancel(this, true);
                         }
                     }
                 }
@@ -221,22 +234,22 @@ namespace Cii.Lar.UI.Picture
         private bool myIsChangingAutoScroll = false;
 
         private DistanceRuler withEventsField_myDistanceRuler;
-        private DistanceRuler myDistanceRuler
-        {
-            get { return withEventsField_myDistanceRuler; }
-            set
-            {
-                if (withEventsField_myDistanceRuler != null)
-                {
-                    withEventsField_myDistanceRuler.CaptureFinished -= myDistanceRuler_CaptureFinished;
-                }
-                withEventsField_myDistanceRuler = value;
-                if (withEventsField_myDistanceRuler != null)
-                {
-                    withEventsField_myDistanceRuler.CaptureFinished += myDistanceRuler_CaptureFinished;
-                }
-            }
-        }
+        //private DistanceRuler myDistanceRuler
+        //{
+        //    get { return withEventsField_myDistanceRuler; }
+        //    set
+        //    {
+        //        if (withEventsField_myDistanceRuler != null)
+        //        {
+        //            withEventsField_myDistanceRuler.CaptureFinished -= myDistanceRuler_CaptureFinished;
+        //        }
+        //        withEventsField_myDistanceRuler = value;
+        //        if (withEventsField_myDistanceRuler != null)
+        //        {
+        //            withEventsField_myDistanceRuler.CaptureFinished += myDistanceRuler_CaptureFinished;
+        //        }
+        //    }
+        //}
 
         private void myDistanceRuler_CaptureFinished(object sender, CaptureEventArgs e)
         {
@@ -610,17 +623,17 @@ namespace Cii.Lar.UI.Picture
                     OnClickActionChanged(oldClickAction, myClickAction);
                 }
 
-                switch (myClickAction)
-                {
-                    case enClickAction.Zoom:
-                        SelectionBox.KeepAspectRatio = true;
-                        Cursor = CommonCursors.ZoomCursor;
-                        break;
-                    case enClickAction.MeasureDistance:
-                        SelectionBox.KeepAspectRatio = true;
-                        Cursor = CommonCursors.EditCursor;
-                        break;
-                }
+                //switch (myClickAction)
+                //{
+                //    case enClickAction.Zoom:
+                //        SelectionBox.KeepAspectRatio = true;
+                //        Cursor = CommonCursors.ZoomCursor;
+                //        break;
+                //    case enClickAction.MeasureDistance:
+                //        SelectionBox.KeepAspectRatio = true;
+                //        Cursor = CommonCursors.EditCursor;
+                //        break;
+                //}
             }
         }
         #endregion
@@ -685,6 +698,8 @@ namespace Cii.Lar.UI.Picture
 
         public ZoomblePictureBoxControl(bool visible) : base()
         {
+            InitializeTools();
+            GraphicsList = new GraphicsList();
             myCoordinatesBox = new CoordinatesBox(this);
             myRulers = new Rulers(this);
             withEventsField_myDistanceRuler = new DistanceRuler(this);
@@ -795,7 +810,8 @@ namespace Cii.Lar.UI.Picture
                     case enClickAction.None:
                         break; // TODO: might not be correct. Was : Exit Select
                     case enClickAction.MeasureDistance:
-                        myDistanceRuler.MouseDown(this, e);
+                        //myDistanceRuler.MouseDown(this, e);
+                        tools[(int)activeTool].OnMouseDown(this, e);
                         break;
                     case enClickAction.Zoom:
                         SelectionBox.KeepAspectRatio = true;
@@ -870,8 +886,10 @@ namespace Cii.Lar.UI.Picture
                     case enClickAction.MeasureDistance:
                         if (e.Button == System.Windows.Forms.MouseButtons.Left)
                         {
-                            myDistanceRuler.MouseMove(this, e);
+                            //myDistanceRuler.MouseMove(this, e);
                             needsRepaint = true;
+
+                            tools[(int)activeTool].OnMouseMove(this, e);
                         }
                         break;
                     case enClickAction.Zoom:
@@ -919,7 +937,8 @@ namespace Cii.Lar.UI.Picture
                     case enClickAction.None:
                         break; // TODO: might not be correct. Was : Exit Select
                     case enClickAction.MeasureDistance:
-                        myDistanceRuler.MouseUp(this, e);
+                        //myDistanceRuler.MouseUp(this, e);
+                        tools[(int)activeTool].OnMouseUp(this, e);
                         break;
                     case enClickAction.Zoom:
                         if (!IsDragging)
@@ -1434,11 +1453,11 @@ namespace Cii.Lar.UI.Picture
                         if (IsCtrlKeyPressed)
                         {
                             double ScaleFactor = MeasureSystem.MicronToCustomUnit(Convert.ToDouble(BackgroundImagePixelSize_Mic), myUnitOfMeasure, false);
-                            myDistanceRuler.Painting(gr, ScaleFactor);
+                            //myDistanceRuler.Painting(gr, ScaleFactor);
                         }
                         else
                         {
-                            myDistanceRuler.Painting(gr);
+                            //myDistanceRuler.Painting(gr);
                         }
 
                         break;
@@ -1478,6 +1497,12 @@ namespace Cii.Lar.UI.Picture
                     {
                         myCoordinatesBox.DrawCoordinate(gr, logicalMousePos);
                     }
+                }
+
+                if (GraphicsList != null)
+                {
+                    e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                    GraphicsList.Draw(e.Graphics, this);
                 }
 
             }

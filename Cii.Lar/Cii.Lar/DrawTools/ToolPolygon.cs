@@ -1,4 +1,5 @@
 ﻿using Cii.Lar.UI;
+using Cii.Lar.UI.Picture;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -23,13 +24,13 @@ namespace Cii.Lar.DrawTools
         private const int minDistance = 15 * 15;
 
         private static Cursor s_cursor = new Cursor(
-            new MemoryStream((byte[])new ResourceManager(typeof(CursorPictureBox)).GetObject("Pencil")));
+            new MemoryStream((byte[])new ResourceManager(typeof(ZoomblePictureBoxControl)).GetObject("Pencil")));
         public ToolPolygon()
         {
             Cursor = s_cursor;
         }
 
-        public override void OnMouseDown(CursorPictureBox pictureBox, MouseEventArgs e)
+        public override void OnMouseDown(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
         {
             newPolygon = new DrawPolygon(pictureBox, e.X, e.Y, e.X + 1, e.Y + 1);
             AddNewObject(pictureBox, newPolygon);
@@ -38,7 +39,7 @@ namespace Cii.Lar.DrawTools
             lastY = e.Y;
         }
 
-        public override void OnMouseMove(CursorPictureBox pictureBox, MouseEventArgs e)
+        public override void OnMouseMove(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
         {
             pictureBox.Cursor = Cursor;
 
@@ -69,7 +70,7 @@ namespace Cii.Lar.DrawTools
             pictureBox.Refresh();
         }
 
-        public override void OnMouseUp(CursorPictureBox pictureBox, MouseEventArgs e)
+        public override void OnMouseUp(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
         {
             newPolygon.Creating = false;
             newPolygon = null;

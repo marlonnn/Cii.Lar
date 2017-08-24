@@ -1,4 +1,5 @@
 ﻿using Cii.Lar.UI;
+using Cii.Lar.UI.Picture;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -27,7 +28,7 @@ namespace Cii.Lar.DrawTools
             this.RegisterUpdateStatisticsHandler();
         }
 
-        public DrawRectangle(CursorPictureBox pictureBox, int x, int y, int width, int height) : this()
+        public DrawRectangle(ZoomblePictureBoxControl pictureBox, int x, int y, int width, int height) : this()
         {
             InitializeGraphicsProperties();
             this.ObjectType = ObjectType.Rectangle;
@@ -58,7 +59,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="g"></param>
         /// <param name="pictureBox"></param>
-        public override void Draw(Graphics g, CursorPictureBox pictureBox)
+        public override void Draw(Graphics g, ZoomblePictureBoxControl pictureBox)
         {
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
@@ -120,7 +121,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="handleNumber"></param>
         /// <returns></returns>
-        public override Point GetHandle(CursorPictureBox pictureBox, int handleNumber)
+        public override Point GetHandle(ZoomblePictureBoxControl pictureBox, int handleNumber)
         {
             int x, y, xCenter, yCenter;
             Rectangle rectangle = GetRectangle();
@@ -170,7 +171,7 @@ namespace Cii.Lar.DrawTools
 
         }
 
-        public override void Move(CursorPictureBox pictureBox, int deltaX, int deltaY)
+        public override void Move(ZoomblePictureBoxControl pictureBox, int deltaX, int deltaY)
         {
             Rectangle rect = GetRectangle();
             SetRectangle( new Rectangle(rect.X + deltaX, rect.Y + deltaY, rect.Width, rect.Height));
@@ -182,7 +183,7 @@ namespace Cii.Lar.DrawTools
         /// <param name="pictureBox"></param>
         /// <param name="point"></param>
         /// <param name="handleNumber"></param>
-        public override void MoveHandleTo(CursorPictureBox pictureBox, Point point, int handleNumber)
+        public override void MoveHandleTo(ZoomblePictureBoxControl pictureBox, Point point, int handleNumber)
         {
             int left = rectangle.Left;
             int top = rectangle.Top;
@@ -297,7 +298,7 @@ namespace Cii.Lar.DrawTools
                && dataPoint.Y >= dataBottom && dataPoint.Y <= dataTop;
         }
 
-        public override HitTestResult HitTestForSelection(CursorPictureBox pictureBox, Point point)
+        public override HitTestResult HitTestForSelection(ZoomblePictureBoxControl pictureBox, Point point)
         {
             Rectangle rectGate = GetRectangle();
             Rectangle rectLarge = rectGate, rectSamll = rectGate;

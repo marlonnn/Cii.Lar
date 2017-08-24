@@ -43,6 +43,9 @@ namespace Cii.Lar
             }
         }
 
+        //Set this to Tag of delete Button
+        private ListViewItemArray listViewItemArray;
+
         public GraphicsList GraphicsList
         {
             get
@@ -56,13 +59,102 @@ namespace Cii.Lar
             }
         }
 
+        /// <summary>
+        /// Update statistics information in listviewEx control
+        /// </summary>
+        /// <param name="statistics"></param>
+        public void UpdateStatisticInfoHandler(DrawObject drawObject, Statistics statistics)
+        {
+            AppendItems(drawObject, statistics);
+        }
+
+        public StatisticsCtrl StatisticsControl
+        {
+            get
+            {
+                return this.controls[2] as StatisticsCtrl;
+            }
+        }
+
+        /// <summary>
+        /// Append new list view item to StatisticsListView items
+        /// </summary>
+        /// <param name="drawObject"></param>
+        /// <param name="statistics"></param>
+        private void AppendItems(DrawObject drawObject, Statistics statistics)
+        {
+            ListViewItem lvi = new ListViewItem();
+            lvi.Text = drawObject.Name;
+            lvi.SubItems.Add(statistics.Circumference.ToString());
+            lvi.SubItems.Add(statistics.Area.ToString());
+            StatisticsControl.StatisticsListView.Items.Add(lvi);
+            ListViewItemEx listViewItemEx = new ListViewItemEx(lvi, drawObject);
+            AddEmbeddedControlToListView(listViewItemEx);
+            EnableAppearanceButton();
+        }
+
+        /// <summary>
+        /// Add embedded delete button control to list view
+        /// </summary>
+        /// <param name="listViewItemEx"></param>
+        private void AddEmbeddedControlToListView(ListViewItemEx listViewItemEx)
+        {
+            TransparentButton deleteButton = new TransparentButton();
+            deleteButton.BackColor = System.Drawing.Color.Transparent;
+            deleteButton.BackgroundImage = global::Cii.Lar.Properties.Resources.delete;
+            deleteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            deleteButton.Name = "removeButton";
+            deleteButton.Size = new System.Drawing.Size(16, 16);
+            deleteButton.Tag = listViewItemEx;
+            listViewItemArray.AddItem(listViewItemEx.ListViewItem);
+            StatisticsControl.StatisticsListView.AddEmbeddedControl(deleteButton, 3, listViewItemArray.Count - 1);
+            deleteButton.Click += DeleteButton_Click;
+        }
+
+        /// <summary>
+        /// Delete button click event
+        /// delete listviewitem and draw object graphic
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            TransparentButton deleteButton = sender as TransparentButton;
+            if (deleteButton != null)
+            {
+                deleteButton.Click -= DeleteButton_Click;
+                ListViewItemEx listViewItemEx = (ListViewItemEx)deleteButton.Tag;
+                listViewItemArray.DeleteItem(listViewItemEx.ListViewItem);
+                StatisticsControl.StatisticsListView.Items.Remove(listViewItemEx.ListViewItem);
+                StatisticsControl.StatisticsListView.Invalidate();
+                DeleteDrawObject(listViewItemEx.DrawObject);
+            }
+        }
+
+        /// <summary>
+        /// delete draw objcect graphic
+        /// </summary>
+        /// <param name="drawObject"></param>
+        private void DeleteDrawObject(DrawObject drawObject)
+        {
+            if (drawObject != null)
+            {
+                this.GraphicsList.DeleteDrawObject(drawObject);
+                this.zoomblePictureBoxControl.Refresh();
+                EnableAppearanceButton();
+            }
+        }
+
         public EntryForm()
         {
             InitializeComponent();
             InitializeControls();
+            listViewItemArray = new ListViewItemArray();
             this.WindowState = FormWindowState.Maximized;
             this.Load += EntryForm_Load;
             this.toolbarControl.ShowBaseCtrlHandler += ShowBaseCtrlHandler;
+            Program.ExpManager.PictureBox = this.zoomblePictureBoxControl;
+            Program.ExpManager.Form = this;
         }
 
         private void ShowBaseCtrlHandler(string controlName)

@@ -91,7 +91,16 @@ namespace Cii.Lar.UI
         public ToolbarControl()
         {
             InitializeComponent();
+            InitializeToolStrip();
             //this.btMeasure.Click += btMeasure_Click;
+        }
+
+        private void InitializeToolStrip()
+        {
+            btLine.Tag = MeasureTools.Line;
+            btRectangle.Tag = MeasureTools.Rectangular;
+            btEllipse.Tag = MeasureTools.Elliptical;
+            btPloygon.Tag = MeasureTools.Polygon;
         }
         private void btMeasure_Click(object sender, EventArgs e)
         {
@@ -191,30 +200,45 @@ namespace Cii.Lar.UI
         #region Draw & measure tools 
         private void drawTool_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem item = sender as ToolStripMenuItem;
-            if (item != null)
+            try
             {
-                btLine.Checked = false;
-                btRectangle.Checked = false;
-                btEllipse.Checked = false;
-                btPloygon.Checked = false;
-                switch (item.Text)
+                ToolStripMenuItem item = sender as ToolStripMenuItem;
+                if (item != null)
                 {
-                    case "Line":
-                        btLine.Checked = true;
-                        break;
-                    case "Rectangle":
-                        btRectangle.Checked = true;
-                        break;
-                    case "Ellipse":
-                        btEllipse.Checked = true;
-                        break;
-                    case "Ploygon":
-                        btPloygon.Checked = true;
-                        break;
+                    if (LinkedPictureBox != null)
+                    {
+                        LinkedPictureBox.ClickAction = enClickAction.MeasureDistance;
+                        RefreshDisplayButtonState();
+                    }
+                    btLine.Checked = false;
+                    btRectangle.Checked = false;
+                    btEllipse.Checked = false;
+                    btPloygon.Checked = false;
+                    switch (item.Text)
+                    {
+                        case "Line":
+                            btLine.Checked = true;
+                            break;
+                        case "Rectangle":
+                            btRectangle.Checked = true;
+                            break;
+                        case "Ellipse":
+                            btEllipse.Checked = true;
+                            break;
+                        case "Ploygon":
+                            btPloygon.Checked = true;
+                            break;
+                    }
+                    Program.ExpManager.SetMeasureTool(sender, false);
+                    ShowBaseCtrlHandler?.Invoke("DrawTool");
                 }
-                ShowBaseCtrlHandler?.Invoke("DrawTool");
             }
+            catch (Exception ex)
+            {
+                LogHelper.GetLogger<ToolbarControl>().Error(ex.Message);
+                LogHelper.GetLogger<ToolbarControl>().Error(ex.StackTrace);
+            }
+
         }
         #endregion
 
@@ -365,5 +389,6 @@ namespace Cii.Lar.UI
                 LinkedPictureBox.Redraw();
             }
         }
+
     }
 }

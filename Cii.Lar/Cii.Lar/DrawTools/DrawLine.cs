@@ -1,4 +1,5 @@
 ﻿using Cii.Lar.UI;
+using Cii.Lar.UI.Picture;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -60,7 +61,7 @@ namespace Cii.Lar.DrawTools
             this.RegisterUpdateStatisticsHandler();
         }
 
-        public DrawLine(CursorPictureBox pictureBox, int x1, int y1, int x2, int y2) : this()
+        public DrawLine(ZoomblePictureBoxControl pictureBox, int x1, int y1, int x2, int y2) : this()
         {
             startDataPoint = new Point(x1, y1);
             endDataPoint = new Point(x2, y2);
@@ -81,7 +82,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="g"></param>
         /// <param name="pictureBox"></param>
-        public override void Draw(Graphics g, CursorPictureBox pictureBox)
+        public override void Draw(Graphics g, ZoomblePictureBoxControl pictureBox)
         {
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
@@ -127,7 +128,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="handleNumber"></param>
         /// <returns></returns>
-        public override Point GetHandle(CursorPictureBox pictureBox, int handleNumber)
+        public override Point GetHandle(ZoomblePictureBoxControl pictureBox, int handleNumber)
         {
             if (handleNumber == 1)
             {
@@ -139,7 +140,7 @@ namespace Cii.Lar.DrawTools
             }
         }
 
-        public override void Move(CursorPictureBox pictureBox, int deltaX, int deltaY)
+        public override void Move(ZoomblePictureBoxControl pictureBox, int deltaX, int deltaY)
         {
             Point s = Point.Ceiling(startDataPoint), e = Point.Ceiling(endDataPoint);
 
@@ -153,7 +154,7 @@ namespace Cii.Lar.DrawTools
         /// <param name="pictureBox"></param>
         /// <param name="point"></param>
         /// <param name="handleNumber"></param>
-        public override void MoveHandleTo(CursorPictureBox pictureBox, Point point, int handleNumber)
+        public override void MoveHandleTo(ZoomblePictureBoxControl pictureBox, Point point, int handleNumber)
         {
             if (handleNumber == 1)
             {
@@ -179,7 +180,7 @@ namespace Cii.Lar.DrawTools
             return false;
         }
 
-        public override HitTestResult HitTestForSelection(CursorPictureBox pictureBox, Point point)
+        public override HitTestResult HitTestForSelection(ZoomblePictureBoxControl pictureBox, Point point)
         {
             Rectangle rect = new Rectangle(Point.Ceiling(startDataPoint), new Size((int)(endDataPoint.X - startDataPoint.X), 1));
             rect.Inflate(0, this.SelectionHitTestWidth);

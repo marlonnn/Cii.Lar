@@ -335,6 +335,7 @@
     <EmbeddedResource Include="UI\LaserAppearanceCtrl.resx">
       <DependentUpon>LaserAppearanceCtrl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Picture\ZoomblePictureBoxControl.resx" />
     <EmbeddedResource Include="UI\RulerAppearanceCtrl.resx">
       <DependentUpon>RulerAppearanceCtrl.cs</DependentUpon>
     </EmbeddedResource>
@@ -421,6 +422,8 @@
     </Content>
     <Content Include="DrawTools\Cross.cur" />
     <Content Include="DrawTools\Ellipse.cur" />
+    <None Include="DrawTools\Ellipse1.cur" />
+    <None Include="DrawTools\Ellipse2.cur" />
     <Content Include="DrawTools\Line.cur" />
     <Content Include="DrawTools\Pencil.cur" />
     <Content Include="DrawTools\PolyHandle.cur" />

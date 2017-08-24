@@ -8,6 +8,7 @@ namespace Cii.Lar.DrawTools
 {
     using System.Drawing;
     using UI;
+    using UI.Picture;
     using DrawList = List<DrawObject>;
 
     public class GraphicsList
@@ -54,7 +55,7 @@ namespace Cii.Lar.DrawTools
             return graphicsList.GetEnumerator();
         }
 
-        public void Draw(Graphics g, CursorPictureBox pictureBox)
+        public void Draw(Graphics g, ZoomblePictureBoxControl pictureBox)
         {
             int n = graphicsList.Count;
             DrawObject o;
