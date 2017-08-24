@@ -239,7 +239,7 @@ namespace Cii.Lar.UI.Picture
         }
 
 
-        private ConversionInfo myGraphicInfo;
+        private ConversionInfo myGraphicInfo = new ConversionInfo();
         public ConversionInfo GraphicInfo
         {
             get
@@ -613,7 +613,7 @@ namespace Cii.Lar.UI.Picture
         {
             myCoordinatesBox = new CoordinatesBox(this);
             myRulers = new Rulers(this);
-            //withEventsField_myDistanceRuler = new DistanceRuler(this);
+            withEventsField_myDistanceRuler = new DistanceRuler(this);
             mySelectionBox = new SelectionBoxElement(this);
             Load += PictureBoxEx_Load;
             GiveFeedback += ListDragSource_GiveFeedback;
@@ -1750,7 +1750,7 @@ namespace Cii.Lar.UI.Picture
 
         #endregion
 
-        private void ZoomToDefaultRect()
+        public void ZoomToDefaultRect()
         {
             try
             {
@@ -1770,7 +1770,7 @@ namespace Cii.Lar.UI.Picture
             }
         }
 
-        private void ZoomToFit()
+        public void ZoomToFit()
         {
             try
             {

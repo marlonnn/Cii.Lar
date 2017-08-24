@@ -217,6 +217,16 @@ namespace Cii.Lar.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap open {
+            get {
+                object obj = ResourceManager.GetObject("open", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap polygon {
             get {
                 object obj = ResourceManager.GetObject("polygon", resourceCulture);
@@ -280,6 +290,16 @@ namespace Cii.Lar.Properties {
         internal static System.Drawing.Bitmap scale {
             get {
                 object obj = ResourceManager.GetObject("scale", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap screenshort {
+            get {
+                object obj = ResourceManager.GetObject("screenshort", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -459,9 +479,29 @@ namespace Cii.Lar.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap um {
+            get {
+                object obj = ResourceManager.GetObject("um", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap video {
             get {
                 object obj = ResourceManager.GetObject("video", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap view {
+            get {
+                object obj = ResourceManager.GetObject("view", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -502,6 +542,16 @@ namespace Cii.Lar.Properties {
         internal static System.Drawing.Bitmap Zoom_out {
             get {
                 object obj = ResourceManager.GetObject("Zoom out", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap zoomFit {
+            get {
+                object obj = ResourceManager.GetObject("zoomFit", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
