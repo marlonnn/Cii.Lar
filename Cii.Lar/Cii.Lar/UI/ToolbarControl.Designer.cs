@@ -140,7 +140,7 @@
             // 
             this.btLine.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btLine.Name = "btLine";
-            this.btLine.Size = new System.Drawing.Size(113, 22);
+            this.btLine.Size = new System.Drawing.Size(126, 22);
             this.btLine.Text = "Line";
             this.btLine.ToolTipText = "Line";
             this.btLine.Click += new System.EventHandler(this.drawTool_Click);
@@ -149,7 +149,7 @@
             // 
             this.btRectangle.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btRectangle.Name = "btRectangle";
-            this.btRectangle.Size = new System.Drawing.Size(113, 22);
+            this.btRectangle.Size = new System.Drawing.Size(126, 22);
             this.btRectangle.Text = "Rectangle";
             this.btRectangle.ToolTipText = "Rectangle";
             this.btRectangle.Click += new System.EventHandler(this.drawTool_Click);
@@ -158,7 +158,7 @@
             // 
             this.btEllipse.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btEllipse.Name = "btEllipse";
-            this.btEllipse.Size = new System.Drawing.Size(113, 22);
+            this.btEllipse.Size = new System.Drawing.Size(126, 22);
             this.btEllipse.Text = "Ellipse";
             this.btEllipse.Click += new System.EventHandler(this.drawTool_Click);
             // 
@@ -166,7 +166,7 @@
             // 
             this.btPloygon.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btPloygon.Name = "btPloygon";
-            this.btPloygon.Size = new System.Drawing.Size(113, 22);
+            this.btPloygon.Size = new System.Drawing.Size(126, 22);
             this.btPloygon.Text = "Ploygon";
             this.btPloygon.ToolTipText = "Ploygon";
             this.btPloygon.Click += new System.EventHandler(this.drawTool_Click);
@@ -292,6 +292,7 @@
             this.btZoom.Size = new System.Drawing.Size(36, 36);
             this.btZoom.Text = "Zoom mode";
             this.btZoom.ToolTipText = "Zoom mode";
+            this.btZoom.Click += new System.EventHandler(this.btZoom_Click);
             // 
             // btZoomFit
             // 
@@ -305,6 +306,7 @@
             this.btZoomFit.Size = new System.Drawing.Size(36, 36);
             this.btZoomFit.Text = "Zoom Fit";
             this.btZoomFit.ToolTipText = "Zoom Fit";
+            this.btZoomFit.Click += new System.EventHandler(this.btZoomFit_Click);
             // 
             // ToolStripSeparator3
             // 
@@ -321,6 +323,7 @@
             this.btLoad.Size = new System.Drawing.Size(36, 36);
             this.btLoad.Text = "ToolStripButton2";
             this.btLoad.ToolTipText = "Load Image";
+            this.btLoad.Click += new System.EventHandler(this.btLoad_Click);
             // 
             // btSetting
             // 
@@ -330,6 +333,7 @@
             this.btSetting.Name = "btSetting";
             this.btSetting.Size = new System.Drawing.Size(36, 36);
             this.btSetting.Text = "Setting";
+            this.btSetting.Click += new System.EventHandler(this.btSetting_Click);
             // 
             // ToolbarControl
             // 

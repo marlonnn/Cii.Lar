@@ -91,10 +91,7 @@ namespace Cii.Lar.UI
         public ToolbarControl()
         {
             InitializeComponent();
-            this.btLoad.Click += btLoad_Click;
-            this.btZoom.Click += btZoom_Click;
-            this.btMeasure.Click += btMeasure_Click;
-            this.btZoomFit.Click += btZoomFit_Click;
+            //this.btMeasure.Click += btMeasure_Click;
         }
         private void btMeasure_Click(object sender, EventArgs e)
         {
@@ -333,5 +330,11 @@ namespace Cii.Lar.UI
                 LogHelper.GetLogger<ToolbarControl>().Error(ex.StackTrace);
             }
         }
+
+        private void btSetting_Click(object sender, EventArgs e)
+        {
+            ShowBaseCtrlHandler?.Invoke("Setting");
+        }
+
     }
 }

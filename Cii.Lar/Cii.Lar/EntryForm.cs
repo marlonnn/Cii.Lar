@@ -72,6 +72,9 @@ namespace Cii.Lar
                 case "DrawTool":
                     ShowBaseCtrl(true, 2);
                     break;
+                case "Setting":
+                    ShowBaseCtrl(true, 4);
+                    break;
             }
         }
 
@@ -103,7 +106,7 @@ namespace Cii.Lar
             this.toolbarControl.LinkedPictureBox = this.zoomblePictureBoxControl;
             foreach (var ctrl in this.controls)
             {
-                ctrl.Location = new Point(5, 30);
+                ctrl.Location = new Point(22, 62);
                 ctrl.ClickDelegateHandler += new BaseCtrl.ClickDelegate(this.ClickDelegateHandler);
                 ctrl.MouseDown += BaseCtrl_MouseDown;
                 ctrl.MouseMove += BaseCtrl_MouseMove;
