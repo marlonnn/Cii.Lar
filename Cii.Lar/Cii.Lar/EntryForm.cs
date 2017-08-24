@@ -60,7 +60,7 @@ namespace Cii.Lar
         {
             InitializeComponent();
             InitializeControls();
-            //this.WindowState = FormWindowState.Maximized;
+            this.WindowState = FormWindowState.Maximized;
             this.Load += EntryForm_Load;
             this.toolbarControl.ShowBaseCtrlHandler += ShowBaseCtrlHandler;
         }

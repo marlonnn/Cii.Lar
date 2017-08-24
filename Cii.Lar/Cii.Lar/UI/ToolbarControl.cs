@@ -336,5 +336,34 @@ namespace Cii.Lar.UI
             ShowBaseCtrlHandler?.Invoke("Setting");
         }
 
+        /// <summary>
+        /// Choose grid show type
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ChooseGrid_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = sender as ToolStripMenuItem;
+            if (item != null)
+            {
+                GridKind kind = GridKind.Crosses;
+                switch (item.Text)
+                {
+                    case "Full Lines":
+                        kind = GridKind.FullLines;
+                        break;
+                    case "Points":
+                        kind = GridKind.Points;
+                        break;
+                    case "Crosses":
+                        kind = GridKind.Crosses;
+                        break;
+                }
+                btViewGrid.Checked = true;
+                LinkedPictureBox.ShowGrid = true;
+                LinkedPictureBox.GridView = kind;
+                LinkedPictureBox.Redraw();
+            }
+        }
     }
 }
