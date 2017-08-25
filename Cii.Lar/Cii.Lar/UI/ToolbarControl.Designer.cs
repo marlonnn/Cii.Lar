@@ -42,7 +42,6 @@
             this.btPloygon = new System.Windows.Forms.ToolStripMenuItem();
             this.btView = new System.Windows.Forms.ToolStripDropDownButton();
             this.btViewRulers = new System.Windows.Forms.ToolStripMenuItem();
-            this.btViewScrollBars = new System.Windows.Forms.ToolStripMenuItem();
             this.btViewGrid = new System.Windows.Forms.ToolStripMenuItem();
             this.btFullLines = new System.Windows.Forms.ToolStripMenuItem();
             this.btPoints = new System.Windows.Forms.ToolStripMenuItem();
@@ -179,7 +178,6 @@
             this.btView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btViewRulers,
-            this.btViewScrollBars,
             this.btViewGrid});
             this.btView.Image = global::Cii.Lar.Properties.Resources.view;
             this.btView.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -198,16 +196,6 @@
             this.btViewRulers.Size = new System.Drawing.Size(138, 22);
             this.btViewRulers.Text = "Rulers";
             this.btViewRulers.Click += new System.EventHandler(this.btViewRulers_Click);
-            // 
-            // btViewScrollBars
-            // 
-            this.btViewScrollBars.Checked = true;
-            this.btViewScrollBars.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.btViewScrollBars.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btViewScrollBars.Name = "btViewScrollBars";
-            this.btViewScrollBars.Size = new System.Drawing.Size(138, 22);
-            this.btViewScrollBars.Text = "Scroll bars";
-            this.btViewScrollBars.Click += new System.EventHandler(this.btViewScrollBars_Click);
             // 
             // btViewGrid
             // 
@@ -385,7 +373,6 @@
         private System.Windows.Forms.ToolStripSeparator ToolStripSeparator1;
         private System.Windows.Forms.ToolStripDropDownButton btView;
         private System.Windows.Forms.ToolStripMenuItem btViewRulers;
-        private System.Windows.Forms.ToolStripMenuItem btViewScrollBars;
         private System.Windows.Forms.ToolStripMenuItem btViewGrid;
         private System.Windows.Forms.ToolStripButton btLoad;
         private System.Windows.Forms.ToolStripSeparator ToolStripSeparator2;

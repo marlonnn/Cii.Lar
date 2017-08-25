@@ -43,7 +43,6 @@ namespace Cii.Lar.UI
                 if (LinkedPictureBox != null)
                 {
                     btViewRulers.Checked = LinkedPictureBox.ShowRulers;
-                    btViewScrollBars.Checked = LinkedPictureBox.ShowScrollbars;
                     btViewGrid.Checked = LinkedPictureBox.ShowGrid;
                     btUmDmm.Checked = false;
                     btUmInch.Checked = false;
@@ -258,25 +257,6 @@ namespace Cii.Lar.UI
                 LogHelper.GetLogger<ToolbarControl>().Error(ex.Message);
                 LogHelper.GetLogger<ToolbarControl>().Error(ex.StackTrace);
                 //Interaction.MsgBox(ex.Message);
-            }
-        }
-
-        private void btViewScrollBars_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (LinkedPictureBox != null)
-                {
-                    btViewScrollBars.Checked = !(btViewScrollBars.Checked);
-                    LinkedPictureBox.ShowScrollbars = btViewScrollBars.Checked;
-                    LinkedPictureBox.Redraw();
-                    RefreshDisplayButtonState();
-                }
-            }
-            catch (Exception ex)
-            {
-                LogHelper.GetLogger<ToolbarControl>().Error(ex.Message);
-                LogHelper.GetLogger<ToolbarControl>().Error(ex.StackTrace);
             }
         }
 

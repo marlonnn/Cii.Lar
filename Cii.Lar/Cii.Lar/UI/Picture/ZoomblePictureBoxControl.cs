@@ -399,10 +399,6 @@ namespace Cii.Lar.UI.Picture
             set
             {
                 myMaxLogicalWindowSize = value;
-                if (ShowScrollbars)
-                {
-                    UpdateScrollbars();
-                }
             }
         }
 
@@ -544,60 +540,6 @@ namespace Cii.Lar.UI.Picture
                 }
             }
         }
-
-        #region "Scrollbar"
-
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public override bool AutoScroll
-        {
-            get { return base.AutoScroll; }
-            set { base.AutoScroll = value; }
-        }
-
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public new System.Drawing.Size AutoScrollMinSize
-        {
-            get { return base.AutoScrollMinSize; }
-            private set { base.AutoScrollMinSize = value; }
-        }
-
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public new System.Drawing.Size AutoScrollMargin
-        {
-            get { return base.AutoScrollMargin; }
-            private set { base.AutoScrollMargin = value; }
-        }
-
-        /// <summary>
-        /// allows you to display the scrollbar
-        /// </summary>
-        [Description("allows you to display the scrollbar"), DefaultValue(false)]
-        public bool ShowScrollbars
-        {
-            get { return AutoScroll; }
-            set
-            {
-
-                if (AutoScroll == value)
-                {
-                    return;
-                }
-
-                if (value)
-                {
-                    UpdateScrollbars();
-                }
-
-                myIsChangingAutoScroll = true;
-                AutoScroll = value;
-                myIsChangingAutoScroll = false;
-            }
-        }
-
-        #endregion
 
         #region "current state"
         /// <summary>
@@ -1001,37 +943,6 @@ namespace Cii.Lar.UI.Picture
             }
         }
 
-        private void UpdateScrollbars()
-        {
-            // NOTA: La thumb di una scrollbar e' la parte che posso cliccare e trascinare qua e la
-
-            // Aggiorno la dimensione che fa apparire le scrollbar, in pratica la modifico in modo
-            // che la thumb delle scrollbar diventi piu' stretta o piu' larga in funzione dell'area logica visualizzata
-            int newValueX = 0;
-            int newValueY = 0;
-            newValueX = (int)(Math.BigMul(this.Size.Width, MaxLogicalWindowSize.Width) / LogicalWidth);
-            newValueY = (int)(Math.BigMul(this.Size.Height, MaxLogicalWindowSize.Height) / LogicalHeight);
-            // Check se ho dei valori validi
-            newValueX = Math.Max(newValueX, 0);
-            newValueX = Math.Max(newValueY, 0);
-            this.AutoScrollMinSize = new Size(newValueX, newValueY);
-
-            // Aggiorno la posizione delle thumb all'interno delle scrollbar
-            // NOTA: Devono essere sempre maggiori o uguali a zero
-            newValueX = (int)(Math.BigMul(this.Size.Width, LogicalCenter.X + MaxLogicalWindowSize.Width / 2) / LogicalWidth);
-            newValueY = (int)(Math.BigMul(this.Size.Height, LogicalCenter.Y + MaxLogicalWindowSize.Height / 2) / LogicalHeight);
-            // Check se ho dei valori validi
-            newValueX = Math.Max(newValueX, 0);
-            newValueX = Math.Max(newValueY, 0);
-            this.AutoScrollPosition = new Point(newValueX, newValueY);
-
-            // Aggiorno gli spostamenti relativi alle scrollbar
-            this.HorizontalScroll.SmallChange = (int)(Convert.ToSingle(LogicalWidth) * PanFactorWithShift / 100f);
-            this.HorizontalScroll.LargeChange = (int)(Convert.ToSingle(LogicalWidth) * PanFactorNoShift / 100f);
-            this.VerticalScroll.SmallChange = (int)(Convert.ToSingle(LogicalHeight) * PanFactorWithShift / 100f);
-            this.VerticalScroll.LargeChange = (int)(Convert.ToSingle(LogicalHeight) * PanFactorNoShift / 100f);
-        }
-
         protected override void OnScroll(ScrollEventArgs se)
         {
             if (se.ScrollOrientation == ScrollOrientation.HorizontalScroll)
@@ -1126,11 +1037,6 @@ namespace Cii.Lar.UI.Picture
 
 
                 Refresh();
-
-                if (ShowScrollbars)
-                {
-                    UpdateScrollbars();
-                }
 
                 if (OnRedrawCompleted != null)
                 {
