@@ -69,10 +69,10 @@ namespace Cii.Lar.UI.Picture
                     }
                 }
                 activeTool = value;
-                if (tools != null && activeTool != DrawToolType.None)
-                {
-                    Cursor = tools[(int)activeTool] is ToolPointer ? Cursors.Default : (tools[(int)activeTool] as ToolObject).Cursor;
-                }
+                //if (tools != null && activeTool != DrawToolType.None)
+                //{
+                //    Cursor = tools[(int)activeTool] is ToolPointer ? Cursors.Default : (tools[(int)activeTool] as ToolObject).Cursor;
+                //}
                 Enabled = activeTool != DrawToolType.None;
             }
         }
@@ -623,17 +623,17 @@ namespace Cii.Lar.UI.Picture
                     OnClickActionChanged(oldClickAction, myClickAction);
                 }
 
-                //switch (myClickAction)
-                //{
-                //    case enClickAction.Zoom:
-                //        SelectionBox.KeepAspectRatio = true;
-                //        Cursor = CommonCursors.ZoomCursor;
-                //        break;
-                //    case enClickAction.MeasureDistance:
-                //        SelectionBox.KeepAspectRatio = true;
-                //        Cursor = CommonCursors.EditCursor;
-                //        break;
-                //}
+                switch (myClickAction)
+                {
+                    case enClickAction.Zoom:
+                        SelectionBox.KeepAspectRatio = true;
+                        Cursor = CommonCursors.ZoomCursor;
+                        break;
+                    case enClickAction.MeasureDistance:
+                        SelectionBox.KeepAspectRatio = true;
+                        Cursor = CommonCursors.EditCursor;
+                        break;
+                }
             }
         }
         #endregion
@@ -811,7 +811,8 @@ namespace Cii.Lar.UI.Picture
                         break; // TODO: might not be correct. Was : Exit Select
                     case enClickAction.MeasureDistance:
                         //myDistanceRuler.MouseDown(this, e);
-                        tools[(int)activeTool].OnMouseDown(this, e);
+                        if (e.Button == MouseButtons.Left)
+                            tools[(int)activeTool].OnMouseDown(this, e);
                         break;
                     case enClickAction.Zoom:
                         SelectionBox.KeepAspectRatio = true;
@@ -826,7 +827,6 @@ namespace Cii.Lar.UI.Picture
             }
             catch (Exception ex)
             {
-                //Interaction.MsgBox(ex.Message);
                 LogHelper.GetLogger<ZoomblePictureBoxControl>().Error(ex.Message);
                 LogHelper.GetLogger<ZoomblePictureBoxControl>().Error(ex.StackTrace);
             }
@@ -884,7 +884,7 @@ namespace Cii.Lar.UI.Picture
                     case enClickAction.None:
                         break; // TODO: might not be correct. Was : Exit Select
                     case enClickAction.MeasureDistance:
-                        if (e.Button == System.Windows.Forms.MouseButtons.Left)
+                        if (e.Button == System.Windows.Forms.MouseButtons.Left || e.Button == MouseButtons.None)
                         {
                             //myDistanceRuler.MouseMove(this, e);
                             needsRepaint = true;
@@ -938,7 +938,8 @@ namespace Cii.Lar.UI.Picture
                         break; // TODO: might not be correct. Was : Exit Select
                     case enClickAction.MeasureDistance:
                         //myDistanceRuler.MouseUp(this, e);
-                        tools[(int)activeTool].OnMouseUp(this, e);
+                        if ((e.Button == MouseButtons.Left))
+                            tools[(int)activeTool].OnMouseUp(this, e);
                         break;
                     case enClickAction.Zoom:
                         if (!IsDragging)
@@ -979,6 +980,7 @@ namespace Cii.Lar.UI.Picture
             try
             {
                 base.OnMouseDoubleClick(e);
+                tools[(int)activeTool].OnDoubleClick(this, e);
             }
             catch (Exception ex)
             {
@@ -1422,15 +1424,15 @@ namespace Cii.Lar.UI.Picture
                     return;
                 }
 
-                Graphics gr = e.Graphics;
+                Graphics g = e.Graphics;
 
                 if (myIsBetweenResizeBeginEnd)
                 {
-                    DrawResizePreview(gr);
+                    DrawResizePreview(g);
                     return;
                 }
 
-                gr.DrawImage(myRefreshBackBuffer, e.ClipRectangle, e.ClipRectangle, GraphicsUnit.Pixel);
+                g.DrawImage(myRefreshBackBuffer, e.ClipRectangle, e.ClipRectangle, GraphicsUnit.Pixel);
 
                 if (DesignMode)
                 {
@@ -1440,7 +1442,7 @@ namespace Cii.Lar.UI.Picture
                 Point physicalMousePos = this.PointToClient(MousePosition);
                 Point logicalMousePos = GraphicInfo.ToLogicalPoint(physicalMousePos);
 
-                ScaleGraphicObject(ref gr);
+                ScaleGraphicObject(ref g);
 
                 bool drawSelectionBox = false;
 
@@ -1449,39 +1451,37 @@ namespace Cii.Lar.UI.Picture
                     case enClickAction.None:
                         break; // TODO: might not be correct. Was : Exit Select
                     case enClickAction.MeasureDistance:
-                        gr.ResetTransform();
-                        if (IsCtrlKeyPressed)
+                        g.ResetTransform();
+                        if (GraphicsList != null)
                         {
-                            double ScaleFactor = MeasureSystem.MicronToCustomUnit(Convert.ToDouble(BackgroundImagePixelSize_Mic), myUnitOfMeasure, false);
-                            //myDistanceRuler.Painting(gr, ScaleFactor);
-                        }
-                        else
-                        {
-                            //myDistanceRuler.Painting(gr);
+                            GraphicsList.Draw(g, this);
                         }
 
+                        //if (IsCtrlKeyPressed)
+                        //{
+                        //    double ScaleFactor = MeasureSystem.MicronToCustomUnit(Convert.ToDouble(BackgroundImagePixelSize_Mic), myUnitOfMeasure, false);
+                        //    myDistanceRuler.Painting(gr, ScaleFactor);
+                        //}
+                        //else
+                        //{
+                        //    myDistanceRuler.Painting(gr);
+                        //}
                         break;
                     case enClickAction.Zoom:
-   
                         drawSelectionBox = IsDragging;
                         break; // TODO: might not be correct. Was : Exit Select
                 }
 
-                gr.ResetTransform();
+                g.ResetTransform();
 
                 if (drawSelectionBox && (!SelectionBox.IsInvalid))
                 {
-                    SelectionBox.Draw(gr);
-                }
-
-
-                if (FullPictureBoxCross)
-                {
+                    SelectionBox.Draw(g);
                 }
 
                 if (this.FullPictureBoxCross && ContainsMousePosition)
                 {
-                    FullCrossCursor.DrawCross(gr, logicalMousePos);
+                    FullCrossCursor.DrawCross(g, logicalMousePos);
                 }
 
                 if (myShowMouseCoordinates)
@@ -1491,18 +1491,12 @@ namespace Cii.Lar.UI.Picture
                         System.Drawing.Point BitmapCoord = default(System.Drawing.Point);
                         BitmapCoord.X = logicalMousePos.X / BackgroundImagePixelSize_Mic;
                         BitmapCoord.Y = logicalMousePos.Y / BackgroundImagePixelSize_Mic;
-                        myCoordinatesBox.DrawCoordinate(gr, BitmapCoord, true);
+                        myCoordinatesBox.DrawCoordinate(g, BitmapCoord, true);
                     }
                     else
                     {
-                        myCoordinatesBox.DrawCoordinate(gr, logicalMousePos);
+                        myCoordinatesBox.DrawCoordinate(g, logicalMousePos);
                     }
-                }
-
-                if (GraphicsList != null)
-                {
-                    e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                    GraphicsList.Draw(e.Graphics, this);
                 }
 
             }

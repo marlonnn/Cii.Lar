@@ -15,17 +15,12 @@ namespace Cii.Lar.DrawTools
     public class ToolPolyLine : ToolObject
     {
         private DrawPolyLine newPolyLine;
-
-        private static Cursor s_cursor = new Cursor(
-            new MemoryStream((byte[])new ResourceManager(typeof(ZoomblePictureBoxControl)).GetObject("Pencil")));
-
         /// <summary>
         /// used for double click to end drawing polygon gate when in Continuous mode
         /// </summary>
         private bool cancelNewFlag = false;
         public ToolPolyLine()
         {
-            Cursor = s_cursor;
         }
 
         public override void OnMouseDown(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
@@ -64,13 +59,10 @@ namespace Cii.Lar.DrawTools
                 // Drawing is in process, so simply add a new point
                 newPolyLine.AddPoint(pictureBox, e.Location, true);
             }
-            pictureBox.Capture = false;
-            pictureBox.Refresh();
         }
 
         public override void OnMouseMove(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
         {
-            pictureBox.Cursor = Cursor;
             // if new object creation is canceled
             if (!pictureBox.CreatingDrawObject) return;
 
@@ -80,7 +72,6 @@ namespace Cii.Lar.DrawTools
             Point point = new Point(e.X, e.Y);
             // move last point
             newPolyLine.MoveLastHandleTo(pictureBox, point);
-            pictureBox.Refresh();
         }
 
         public override void OnMouseLeave(ZoomblePictureBoxControl pictureBox, System.EventArgs e)

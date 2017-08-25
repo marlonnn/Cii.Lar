@@ -18,12 +18,8 @@ namespace Cii.Lar.DrawTools
     /// </summary>
     public class ToolLine : ToolObject
     {
-        private static Cursor s_cursor = new Cursor(new MemoryStream((byte[])new ResourceManager(typeof(
-            ZoomblePictureBoxControl)).GetObject("Line")));
-
         public ToolLine()
         {
-            Cursor = s_cursor;
         }
 
         public override void OnMouseDown(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
@@ -33,15 +29,12 @@ namespace Cii.Lar.DrawTools
 
         public override void OnMouseMove(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
         {
-            pictureBox.Cursor = Cursor;
-
             if (pictureBox.CreatingDrawObject)
             {
                 if (e.Button == MouseButtons.Left)
                 {
                     Point point = new Point(e.X, e.Y);
                     pictureBox.GraphicsList[0].MoveHandleTo(pictureBox, point, 2);
-                    pictureBox.Refresh();
                 }
             }
         }

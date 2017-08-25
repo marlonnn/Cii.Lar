@@ -138,13 +138,10 @@ namespace Cii.Lar.UI.Picture
             {
                 return (C1.PhysicalWidth == C2.PhysicalWidth) && (C1.PhysicalHeight == C2.PhysicalHeight) && (C1.ScaleFactor == C2.ScaleFactor) && (C1.LogicalOrigin == C2.LogicalOrigin);
             }
-            catch (Exception ex)
+            catch
             {
-                LogHelper.GetLogger<ConversionInfo>().Error(ex.Message);
-                LogHelper.GetLogger<ConversionInfo>().Error(ex.StackTrace);
                 return false;
             }
-
         }
         public static bool operator !=(ConversionInfo C1, ConversionInfo C2)
         {

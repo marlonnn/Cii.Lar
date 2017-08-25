@@ -67,7 +67,6 @@ namespace Cii.Lar.UI.Picture
                 }
                 catch (Exception ex)
                 {
-                    //Interaction.MsgBox(ex.Message);
                     LogHelper.GetLogger<CommonCursors>().Error(ex.Message);
                     LogHelper.GetLogger<CommonCursors>().Error(ex.StackTrace);
                     return Cursors.No;

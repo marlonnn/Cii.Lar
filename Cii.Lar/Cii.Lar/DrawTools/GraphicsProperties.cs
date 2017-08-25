@@ -112,7 +112,7 @@ namespace Cii.Lar.DrawTools
         }
         public GraphicsProperties(string name)
         {
-            color = Color.White;
+            color = Color.Black;
             penWidth = 1;
             graphicsName = name;
             InitializeColorSets();

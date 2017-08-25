@@ -100,37 +100,6 @@ namespace Cii.Lar.UI.Picture
             }
         }
 
-        /// <summary>
-        /// Gets or sets an array values that specify a compound pen. A compound pen draws a compound line made up of parallel lines and spaces.
-        /// </summary>
-        /// <value>An array of single values.</value>
-        /// <remarks>A compound line is made up of alternating parallel lines and spaces of varying widths.
-        /// The values in the array specify the starting points of each component of the compound line 
-        /// relative to the pen's width. The first value in the array specifies where the first component 
-        /// (a line) begins as a fraction of the distance across the width of the pen. The second value in the 
-        /// array specifies the beginning of the next component (a space) as a fraction of the distance across 
-        /// the width of the pen. The final value in the array specifies where the last component ends.
-        /// Suppose you want a pen to draw two parallel lines where the width of the first line is 20 percent of 
-        /// the pen's width, the width of the space that separates the two lines is 50 percent of the pen' s width, 
-        /// and the width of the second line is 30 percent of the pen's width. Start by creating a Pen object and 
-        /// an array of real numbers. 
-        /// Set the compound array by passing the array with the values 0.0, 0.2, 0.7, and 1.0 to this property.
-        /// </remarks>
-        public float[] LineCompoundArray
-        {
-            get { return compArray; }
-            set
-            {
-                foreach (float i in value)
-                {
-                    if (i < 0 || i > 1)
-                    {
-                        throw new ArgumentOutOfRangeException("LineCompoundArray", i, "All elements in the compound array must be >=0 or <=1.");
-                    }
-                }
-                compArray = value;
-            }
-        }
         private double CvRadToDeg(double RadAngle)
         {
             return RadAngle * (180 / (System.Math.Atan(1) * 4));

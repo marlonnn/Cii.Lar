@@ -203,17 +203,15 @@ namespace Cii.Lar.UI
             try
             {
                 ToolStripMenuItem item = sender as ToolStripMenuItem;
-                if (item != null)
+                if (item != null && LinkedPictureBox != null)
                 {
-                    if (LinkedPictureBox != null)
-                    {
-                        LinkedPictureBox.ClickAction = enClickAction.MeasureDistance;
-                        RefreshDisplayButtonState();
-                    }
                     btLine.Checked = false;
                     btRectangle.Checked = false;
                     btEllipse.Checked = false;
                     btPloygon.Checked = false;
+
+                    LinkedPictureBox.ClickAction = enClickAction.MeasureDistance;
+                    //RefreshDisplayButtonState();
                     switch (item.Text)
                     {
                         case "Line":

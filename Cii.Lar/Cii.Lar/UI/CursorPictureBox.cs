@@ -49,10 +49,6 @@ namespace Cii.Lar.UI
                     }
                 }
                 activeTool = value;
-                if (tools != null && activeTool != DrawToolType.None)
-                {
-                    Cursor = tools[(int)activeTool] is ToolPointer ? Cursors.Default : (tools[(int)activeTool] as ToolObject).Cursor;
-                }
                 Enabled = activeTool != DrawToolType.None;
             }
         }

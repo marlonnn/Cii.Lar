@@ -16,22 +16,6 @@ namespace Cii.Lar.DrawTools
     /// </summary>
     public abstract class ToolObject : Tool
     {
-        private Cursor cursor;
-
-        /// <summary>
-        /// Tool cursor.
-        /// </summary>
-        public Cursor Cursor
-        {
-            get
-            {
-                return cursor;
-            }
-            set
-            {
-                cursor = value;
-            }
-        }
 
         /// <summary>
         /// Left mouse is released.

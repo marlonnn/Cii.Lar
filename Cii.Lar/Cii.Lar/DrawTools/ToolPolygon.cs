@@ -22,12 +22,8 @@ namespace Cii.Lar.DrawTools
         private int lastY;
         private DrawPolygon newPolygon;
         private const int minDistance = 15 * 15;
-
-        private static Cursor s_cursor = new Cursor(
-            new MemoryStream((byte[])new ResourceManager(typeof(ZoomblePictureBoxControl)).GetObject("Pencil")));
         public ToolPolygon()
         {
-            Cursor = s_cursor;
         }
 
         public override void OnMouseDown(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
@@ -41,7 +37,6 @@ namespace Cii.Lar.DrawTools
 
         public override void OnMouseMove(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
         {
-            pictureBox.Cursor = Cursor;
 
             if (e.Button != MouseButtons.Left)
             {
@@ -67,7 +62,6 @@ namespace Cii.Lar.DrawTools
                 lastX = e.X;
                 lastY = e.Y;
             }
-            pictureBox.Refresh();
         }
 
         public override void OnMouseUp(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
