@@ -190,6 +190,21 @@ namespace Cii.Lar.UI.Picture
             }
         }
 
+        public Rectangle ToLogicalRectangle(int x, int y, int width, int height)
+        {
+            try
+            {
+                return new Rectangle((int)(x / ScaleFactor + LogicalOrigin.X), (int)(y / ScaleFactor + LogicalOrigin.Y), 
+                    (int)(width / ScaleFactor), (int)(height / ScaleFactor));
+            }
+            catch (Exception ex)
+            {
+                LogHelper.GetLogger<ConversionInfo>().Error(ex.Message);
+                LogHelper.GetLogger<ConversionInfo>().Error(ex.StackTrace);
+                return Rectangle.Empty;
+            }
+        }
+
         public System.Drawing.Point ToLogicalPoint(System.Drawing.Point PhysicalPoint)
         {
             try

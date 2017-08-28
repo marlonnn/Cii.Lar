@@ -144,7 +144,9 @@ namespace Cii.Lar.DrawTools
             {
                 ellipseForDraw = new Ellipse(startPoint, endPoint, coeffcient, drawAreaSize);
             }
-
+            //Rectangle logicalRect = pictureBox.GraphicInfo.ToLogicalRectangle((int)ellipseForDraw.Rectangle.X, (int)ellipseForDraw.Rectangle.Y, (int)ellipseForDraw.Rectangle.Width, (int)ellipseForDraw.Rectangle.Height);
+            //Rectangle newRect = new Rectangle((int)(logicalRect.X - pictureBox.OffsetX), (int)(logicalRect.Y - pictureBox.OffsetY),
+            //    (int)logicalRect.Width, (int)logicalRect.Height);
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
             using (Pen pen = new Pen(Color.FromArgb(GraphicsProperties.Alpha, GraphicsProperties.Color), GraphicsProperties.PenWidth))
@@ -403,6 +405,7 @@ namespace Cii.Lar.DrawTools
             {
                 get;
                 set;
+
             }
 
             public Ellipse(PointF start, PointF end, double coef, Size drawAreaSize)

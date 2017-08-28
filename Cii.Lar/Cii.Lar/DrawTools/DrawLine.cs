@@ -86,9 +86,11 @@ namespace Cii.Lar.DrawTools
         {
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
+            var v1 = pictureBox.GraphicInfo.ToLogicalCoordX(startDataPoint.X) - pictureBox.OffsetX;
             using (Pen pen = new Pen(Color.FromArgb(GraphicsProperties.Alpha, GraphicsProperties.Color), GraphicsProperties.PenWidth))
             {
-                g.DrawLine(pen, startDataPoint.X, startDataPoint.Y, endDataPoint.X, endDataPoint.Y);
+                g.DrawLine(pen, v1, pictureBox.GraphicInfo.ToLogicalCoordY(startDataPoint.Y) - pictureBox.OffsetY, 
+                    pictureBox.GraphicInfo.ToLogicalCoordX(endDataPoint.X) - pictureBox.OffsetX, pictureBox.GraphicInfo.ToLogicalCoordY(endDataPoint.Y) - pictureBox.OffsetY);
             }
         }
 

@@ -943,58 +943,6 @@ namespace Cii.Lar.UI.Picture
             }
         }
 
-        protected override void OnScroll(ScrollEventArgs se)
-        {
-            if (se.ScrollOrientation == ScrollOrientation.HorizontalScroll)
-            {
-                switch (se.Type)
-                {
-                    case ScrollEventType.SmallIncrement:
-                        PanRight(PanFactorWithShift);
-                        break;
-                    case ScrollEventType.SmallDecrement:
-                        PanLeft(PanFactorWithShift);
-                        break;
-                    case ScrollEventType.LargeIncrement:
-                        PanRight(PanFactorNoShift);
-                        break;
-                    case ScrollEventType.LargeDecrement:
-                        PanLeft(PanFactorNoShift);
-                        break;
-                    default:
-                        int newValueX = (int)(Math.BigMul(this.HorizontalScroll.Value, LogicalWidth) / this.Size.Width);
-                        newValueX -= MaxLogicalWindowSize.Width / 2;
-                        LogicalOrigin = new Point(newValueX, LogicalOrigin.Y);
-                        Redraw();
-                        break;
-                }
-            }
-            else
-            {
-                switch (se.Type)
-                {
-                    case ScrollEventType.SmallIncrement:
-                        PanDown(PanFactorWithShift);
-                        break;
-                    case ScrollEventType.SmallDecrement:
-                        PanUp(PanFactorWithShift);
-                        break;
-                    case ScrollEventType.LargeIncrement:
-                        PanDown(PanFactorNoShift);
-                        break;
-                    case ScrollEventType.LargeDecrement:
-                        PanUp(PanFactorNoShift);
-                        break;
-                    default:
-                        int newValueY = (int)(Math.BigMul(this.VerticalScroll.Value, LogicalHeight) / this.Size.Height);
-                        newValueY -= MaxLogicalWindowSize.Height / 2;
-                        LogicalOrigin = new Point(LogicalOrigin.X, newValueY);
-                        Redraw();
-                        break;
-                }
-            }
-        }
-
         public void Redraw()
         {
             Redraw(false);
@@ -1008,11 +956,6 @@ namespace Cii.Lar.UI.Picture
                 if ((this.IsDisposed))
                 {
                     return;
-                }
-
-                if (!Visible || IsLayoutSuspended)
-                {
-                    //Exit Sub
                 }
 
                 UpdateDimensions();
@@ -1035,6 +978,10 @@ namespace Cii.Lar.UI.Picture
 
                 DrawGrids(GR);
 
+                if (GraphicsList != null)
+                {
+                    GraphicsList.Draw(GR, this);
+                }
 
                 Refresh();
 
@@ -1357,7 +1304,7 @@ namespace Cii.Lar.UI.Picture
                     case enClickAction.None:
                         break; // TODO: might not be correct. Was : Exit Select
                     case enClickAction.MeasureDistance:
-                        g.ResetTransform();
+                        //g.ResetTransform();
                         if (GraphicsList != null)
                         {
                             GraphicsList.Draw(g, this);
@@ -1654,6 +1601,10 @@ namespace Cii.Lar.UI.Picture
 
                 LogicalArea = tmpArea;
 
+                //this.OffsetX = (int)this.GraphicInfo.ToLogicalCoordX(ZoomCenter.X - LogicalCenter.X);
+                //this.OffsetY = (int)this.GraphicInfo.ToLogicalCoordY(ZoomCenter.Y - LogicalCenter.Y);
+                Console.WriteLine(string.Format("zoom forward--->X offset: {0}, Y offset: {1}", this.GraphicInfo.ToLogicalCoordX(ZoomCenter.X - LogicalCenter.X), 
+                    this.GraphicInfo.ToLogicalCoordY(ZoomCenter.Y - LogicalCenter.Y)));
                 Redraw();
             }
             catch (Exception ex)
@@ -1707,11 +1658,15 @@ namespace Cii.Lar.UI.Picture
                 RECT tmpArea = LogicalArea.ExpandFromFixedPoint(ZoomMultiplier, LogicalCenter);
                 tmpArea.Offset(ZoomCenter.X - LogicalCenter.X, ZoomCenter.Y - LogicalCenter.Y);
 
+                //this.OffsetX = (int)this.GraphicInfo.ToLogicalCoordX(ZoomCenter.X - LogicalCenter.X);
+                //this.OffsetY = (int)this.GraphicInfo.ToLogicalCoordY(ZoomCenter.Y - LogicalCenter.Y);
                 myLastVisibleAreaRequested = myLastVisibleAreaRequested.ExpandFromFixedPoint(ZoomMultiplier, LogicalCenter);
                 myLastVisibleAreaRequested.Offset(ZoomCenter.X - LogicalCenter.X, ZoomCenter.Y - LogicalCenter.Y);
 
                 LogicalArea = tmpArea;
 
+                Console.WriteLine(string.Format("zoom back--->X offset: {0}, Y offset: {1}", this.GraphicInfo.ToLogicalCoordX(ZoomCenter.X - LogicalCenter.X),
+                    this.GraphicInfo.ToLogicalCoordY(ZoomCenter.Y - LogicalCenter.Y)));
                 Redraw();
             }
             catch (Exception ex)
@@ -1770,12 +1725,22 @@ namespace Cii.Lar.UI.Picture
             }
         }
 
+        /// <summary>
+        /// reset X/Y offset to original
+        /// </summary>
+        private void ResetOffset()
+        {
+            this.offsetX = 0;
+            this.offsetY = 0;
+        }
+
         public void ZoomToFit()
         {
             try
             {
                 if (Image != null)
                 {
+                    ResetOffset();
                     RECT ImgR = new RECT(ImageCustomOrigin.X, ImageCustomOrigin.Y, ImageCustomOrigin.X + Image.Width, ImageCustomOrigin.Y + Image.Height);
                     RECT PhysicalR = default(RECT);
                     PhysicalR.left = ImgR.left * BackgroundImagePixelSize_Mic;
@@ -1811,6 +1776,31 @@ namespace Cii.Lar.UI.Picture
         }
 
         #region management of pan
+        private int offsetX = 0;
+        public int OffsetX
+        {
+            get
+            {
+                return offsetX;
+            }
+            set
+            {
+                offsetX += value;
+            }
+        }
+        private int offsetY = 0;
+        public int OffsetY
+        {
+            get
+            {
+                return offsetY;
+            }
+            set
+            {
+                offsetY += value;
+            }
+        }
+
         public virtual void PanHome()
         {
         }
@@ -1832,9 +1822,10 @@ namespace Cii.Lar.UI.Picture
                 {
                     return;
                 }
-                int offsetY = Convert.ToInt32(Convert.ToSingle(LogicalHeight) * (Percent / 100f));
-                LogicalOrigin = new Point(LogicalOrigin.X, LogicalOrigin.Y + offsetY);
-                myLastVisibleAreaRequested.Offset(0, offsetY);
+                int tempOffsetY = Convert.ToInt32(Convert.ToSingle(LogicalHeight) * (Percent / 100f));
+                OffsetY = tempOffsetY;
+                LogicalOrigin = new Point(LogicalOrigin.X, LogicalOrigin.Y + tempOffsetY);
+                myLastVisibleAreaRequested.Offset(0, tempOffsetY);
                 Redraw();
             }
             catch (Exception ex)
@@ -1850,9 +1841,10 @@ namespace Cii.Lar.UI.Picture
             {
                 return;
             }
-            int offsetY = Convert.ToInt32(Convert.ToSingle(LogicalHeight) * (Percent / 100f));
-            LogicalOrigin = new Point(LogicalOrigin.X, LogicalOrigin.Y - offsetY);
-            myLastVisibleAreaRequested.Offset(0, -offsetY);
+            int tempOffsetY = Convert.ToInt32(Convert.ToSingle(LogicalHeight) * (Percent / 100f));
+            OffsetY = -tempOffsetY;
+            LogicalOrigin = new Point(LogicalOrigin.X, LogicalOrigin.Y - tempOffsetY);
+            myLastVisibleAreaRequested.Offset(0, -tempOffsetY);
             Redraw();
         }
 
@@ -1862,9 +1854,10 @@ namespace Cii.Lar.UI.Picture
             {
                 return;
             }
-            int offsetX = Convert.ToInt32(Convert.ToSingle(LogicalWidth) * (Percent / 100f));
-            LogicalOrigin = new Point(LogicalOrigin.X - offsetX, LogicalOrigin.Y);
-            myLastVisibleAreaRequested.Offset(-offsetX, 0);
+            int tempOffsetX = Convert.ToInt32(Convert.ToSingle(LogicalWidth) * (Percent / 100f));
+            OffsetX = -tempOffsetX;
+            LogicalOrigin = new Point(LogicalOrigin.X - tempOffsetX, LogicalOrigin.Y);
+            myLastVisibleAreaRequested.Offset(-tempOffsetX, 0);
             Redraw();
         }
 
@@ -1874,9 +1867,10 @@ namespace Cii.Lar.UI.Picture
             {
                 return;
             }
-            int offsetX = Convert.ToInt32(Convert.ToSingle(LogicalWidth) * (Percent / 100f));
-            LogicalOrigin = new Point(LogicalOrigin.X + offsetX, LogicalOrigin.Y);
-            myLastVisibleAreaRequested.Offset(offsetX, 0);
+            int tempOffsetX = Convert.ToInt32(Convert.ToSingle(LogicalWidth) * (Percent / 100f));
+            OffsetX = tempOffsetX;
+            LogicalOrigin = new Point(LogicalOrigin.X + tempOffsetX, LogicalOrigin.Y);
+            myLastVisibleAreaRequested.Offset(tempOffsetX, 0);
             Redraw();
         }
         #endregion

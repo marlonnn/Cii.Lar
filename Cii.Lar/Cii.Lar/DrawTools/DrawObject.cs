@@ -370,11 +370,19 @@ namespace Cii.Lar.DrawTools
 
         public virtual void DrawTest(Graphics g, ZoomblePictureBoxControl pictureBox)
         {
-            SolidBrush brush = new SolidBrush(GraphicsPropertiesManager.GetPropertiesByName("Text").Color);
-            RectangleF r = GetTextF(this.Name, g, this.ID);
-            r.Offset(MovingOffset);
-            g.DrawString(this.Name, this.Font, brush, r);
-            brush.Dispose();
+            try
+            {
+                SolidBrush brush = new SolidBrush(GraphicsPropertiesManager.GetPropertiesByName("Text").Color);
+                RectangleF r = GetTextF(this.Name, g, this.ID);
+                r.Offset(MovingOffset);
+                g.DrawString(this.Name, this.Font, brush, r);
+                brush.Dispose();
+            }
+            catch (Exception ex)
+            {
+                LogHelper.GetLogger<DrawObject>().Error(ex.Message);
+                LogHelper.GetLogger<DrawObject>().Error(ex.StackTrace);
+            }
         }
 
         public virtual RectangleF GetTextF(string name, Graphics g, int index)

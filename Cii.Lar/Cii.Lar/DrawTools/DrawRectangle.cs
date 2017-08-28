@@ -63,7 +63,9 @@ namespace Cii.Lar.DrawTools
         {
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            Rectangle r = GetNormalizedRectangle(GetRectangle());
+            Rectangle r = GetNormalizedRectangle(GetRectangle(), pictureBox);
+            //r.Offset(new Point(pictureBox.OffsetX, pictureBox.OffsetY));
+            Rectangle newRect = new Rectangle(r.X - pictureBox.OffsetX, r.Y - pictureBox.OffsetY, r.Width, r.Height);
             using (Pen pen = new Pen(Color.FromArgb(GraphicsProperties.Alpha, GraphicsProperties.Color), GraphicsProperties.PenWidth))
             {
                 if (IsMoving)
@@ -73,7 +75,7 @@ namespace Cii.Lar.DrawTools
                 }
 
                 rectangle.Offset(MovingOffset);
-                g.DrawRectangle(pen, r);
+                g.DrawRectangle(pen, newRect);
             }
         }
 
@@ -84,9 +86,10 @@ namespace Cii.Lar.DrawTools
                 sizeF.Width, sizeF.Height);
         }
 
-        public static Rectangle GetNormalizedRectangle(Rectangle r)
+        public static Rectangle GetNormalizedRectangle(Rectangle r, ZoomblePictureBoxControl pictureBox)
         {
-            return GetNormalizedRectangle(r.X, r.Y, r.X + r.Width, r.Y + r.Height);
+            // var v1 = pictureBox.GraphicInfo.ToLogicalRectangle(r.X, r.Y, r.X + r.Width, r.Y + r.Height);
+            return GetNormalizedRectangle(r.X, r.Y, r.X + r.Width, r.Y + r.Height, pictureBox);
         }
 
         /// <summary>
@@ -97,7 +100,7 @@ namespace Cii.Lar.DrawTools
         /// <param name="x2"></param>
         /// <param name="y2"></param>
         /// <returns></returns>
-        public static Rectangle GetNormalizedRectangle(int x1, int y1, int x2, int y2)
+        public static Rectangle GetNormalizedRectangle(int x1, int y1, int x2, int y2, ZoomblePictureBoxControl pictureBox)
         {
             if (x2 < x1)
             {
@@ -113,7 +116,7 @@ namespace Cii.Lar.DrawTools
                 y1 = tmp;
             }
 
-            return new Rectangle(x1, y1, x2 - x1, y2 - y1);
+            return pictureBox.GraphicInfo.ToLogicalRectangle(x1, y1, x2 - x1, y2 - y1);
         }
 
         /// <summary>

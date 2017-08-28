@@ -140,24 +140,5 @@ namespace Cii.Lar.UI
             //}
             //DrawNetSelection(e.Graphics);
         }
-
-        private void DrawNetSelection(Graphics graphics)
-        {
-            if (RectNetSelection.IsEmpty)
-            {
-                return;
-            }
-            SmoothingMode mode = graphics.SmoothingMode;
-            graphics.SmoothingMode = SmoothingMode.Default;
-
-            Pen pen = new Pen(Color.DimGray, 1);
-            pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-
-            RectNetSelection = DrawRectangle.GetNormalizedRectangle(RectNetSelection);
-            graphics.DrawRectangle(pen, RectNetSelection);
-
-            pen.Dispose();
-            graphics.SmoothingMode = mode;
-        }
     }
 }
