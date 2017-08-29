@@ -372,11 +372,12 @@ namespace Cii.Lar.DrawTools
         {
             try
             {
-                SolidBrush brush = new SolidBrush(GraphicsPropertiesManager.GetPropertiesByName("Text").Color);
-                RectangleF r = GetTextF(this.Name, g, this.ID);
-                r.Offset(MovingOffset);
-                g.DrawString(this.Name, this.Font, brush, r);
-                brush.Dispose();
+                using (SolidBrush brush = new SolidBrush(GraphicsPropertiesManager.GetPropertiesByName("Text").Color))
+                {
+                    RectangleF r = GetTextF(this.Name, g, this.ID);
+                    r.Offset(MovingOffset);
+                    g.DrawString(this.Name, pictureBox.GraphicInfo.ToLogicalFont(this.Font), brush, r);
+                }
             }
             catch (Exception ex)
             {

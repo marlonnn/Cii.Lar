@@ -1288,7 +1288,6 @@ namespace Cii.Lar.UI.Picture
                     case enClickAction.None:
                         break; // TODO: might not be correct. Was : Exit Select
                     case enClickAction.MeasureDistance:
-                        //g.ResetTransform();
                         if (GraphicsList != null)
                         {
                             GraphicsList.Draw(g, this);

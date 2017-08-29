@@ -59,6 +59,8 @@ namespace Cii.Lar
             }
         }
 
+        private DrawObject drawObject;
+
         /// <summary>
         /// Update statistics information in listviewEx control
         /// </summary>
@@ -83,14 +85,18 @@ namespace Cii.Lar
         /// <param name="statistics"></param>
         private void AppendItems(DrawObject drawObject, Statistics statistics)
         {
-            ListViewItem lvi = new ListViewItem();
-            lvi.Text = drawObject.Name;
-            lvi.SubItems.Add(statistics.Circumference.ToString());
-            lvi.SubItems.Add(statistics.Area.ToString());
-            StatisticsControl.StatisticsListView.Items.Add(lvi);
-            ListViewItemEx listViewItemEx = new ListViewItemEx(lvi, drawObject);
-            AddEmbeddedControlToListView(listViewItemEx);
-            EnableAppearanceButton();
+            if (this.drawObject == null || drawObject.Name != this.drawObject.Name)
+            {
+                this.drawObject = drawObject;
+                ListViewItem lvi = new ListViewItem();
+                lvi.Text = drawObject.Name;
+                lvi.SubItems.Add(statistics.Circumference.ToString());
+                lvi.SubItems.Add(statistics.Area.ToString());
+                StatisticsControl.StatisticsListView.Items.Add(lvi);
+                ListViewItemEx listViewItemEx = new ListViewItemEx(lvi, drawObject);
+                AddEmbeddedControlToListView(listViewItemEx);
+                EnableAppearanceButton();
+            }
         }
 
         /// <summary>

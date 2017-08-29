@@ -43,7 +43,7 @@ namespace Cii.Lar.DrawTools
         {
             get
             {
-                return new Ellipse(startPoint, endPoint, coeffcient, drawAreaSize);
+                return new Ellipse( this.pictureBox, startPoint, endPoint, coeffcient, drawAreaSize);
             }
         }
 
@@ -80,6 +80,7 @@ namespace Cii.Lar.DrawTools
         }
 
         private Size drawAreaSize = DefaultDrawAreaSize; // store draw area size for data point hit test
+        private ZoomblePictureBoxControl pictureBox;
 
         public DrawEllipse()
         {
@@ -98,6 +99,7 @@ namespace Cii.Lar.DrawTools
 
         public DrawEllipse(ZoomblePictureBoxControl pictureBox, int x1, int y1, int x2, int y2, double c) : this()
         {
+            this.pictureBox = pictureBox;
             this.ObjectType = ObjectType.Ellipse;
 
             startPoint = new PointF(x1, y1);
@@ -142,11 +144,8 @@ namespace Cii.Lar.DrawTools
         {
             if (ellipseForDraw == null)
             {
-                ellipseForDraw = new Ellipse(startPoint, endPoint, coeffcient, drawAreaSize);
+                ellipseForDraw = new Ellipse(pictureBox, startPoint, endPoint, coeffcient, drawAreaSize);
             }
-            //Rectangle logicalRect = pictureBox.GraphicInfo.ToLogicalRectangle((int)ellipseForDraw.Rectangle.X, (int)ellipseForDraw.Rectangle.Y, (int)ellipseForDraw.Rectangle.Width, (int)ellipseForDraw.Rectangle.Height);
-            //Rectangle newRect = new Rectangle((int)(logicalRect.X - pictureBox.OffsetX), (int)(logicalRect.Y - pictureBox.OffsetY),
-            //    (int)logicalRect.Width, (int)logicalRect.Height);
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
             using (Pen pen = new Pen(Color.FromArgb(GraphicsProperties.Alpha, GraphicsProperties.Color), GraphicsProperties.PenWidth))
@@ -157,7 +156,6 @@ namespace Cii.Lar.DrawTools
                     g.Transform = DrawMatrix;
 
                     g.TranslateTransform(MovingOffset.X, MovingOffset.Y, MatrixOrder.Append);
-
                     g.DrawEllipse(pen, ellipseForDraw.Rectangle);
 
                     g.Transform = OrgMatrix;
@@ -173,7 +171,7 @@ namespace Cii.Lar.DrawTools
         {
             SizeF sizeF = g.MeasureString(name, this.Font);
             return new RectangleF(startPoint.X - sizeF.Width, startPoint.Y - sizeF.Height,
-                sizeF.Width, sizeF.Height);
+                sizeF.Width / pictureBox.ScaleFactor, sizeF.Height / pictureBox.ScaleFactor);
         }
 
         public override void Move(ZoomblePictureBoxControl pictureBox, int deltaX, int deltaY)
@@ -220,10 +218,10 @@ namespace Cii.Lar.DrawTools
             UpdateEllipseForHit();
             this.Statistics.Area = GetArea();
             this.Statistics.Circumference = GetCircumference();
-            Console.WriteLine("area:" + GetArea());
-            Console.WriteLine("Circumference:" + GetCircumference());
-            Console.WriteLine("Height:" + ellipseForDraw.Rectangle.Height);
-            Console.WriteLine("Width:" + ellipseForDraw.Rectangle.Width);
+            //Console.WriteLine("area:" + GetArea());
+            //Console.WriteLine("Circumference:" + GetCircumference());
+            //Console.WriteLine("Height:" + ellipseForDraw.Rectangle.Height);
+            //Console.WriteLine("Width:" + ellipseForDraw.Rectangle.Width);
         }
 
         /// <summary>
@@ -386,15 +384,29 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         public class Ellipse
         {
+            private PointF startPoint;
             public PointF StartPoint
             {
-                get;
-                set;
+                get
+                {
+                    return startPoint;
+                }
+                set
+                {
+                    startPoint = pictureBox.GraphicInfo.ToLogicalPointF(value);
+                }
             }
+            public PointF endPoint;
             public PointF EndPoint
             {
-                get;
-                set;
+                get
+                {
+                    return endPoint;
+                }
+                set
+                {
+                    endPoint = pictureBox.GraphicInfo.ToLogicalPointF(value);
+                }
             }
             public double Coeffcient
             {
@@ -408,8 +420,10 @@ namespace Cii.Lar.DrawTools
 
             }
 
-            public Ellipse(PointF start, PointF end, double coef, Size drawAreaSize)
+            private ZoomblePictureBoxControl pictureBox;
+            public Ellipse(ZoomblePictureBoxControl pictureBox , PointF start, PointF end, double coef, Size drawAreaSize)
             {
+                this.pictureBox = pictureBox;
                 StartPoint = start;
                 EndPoint = end;
                 Coeffcient = coef;

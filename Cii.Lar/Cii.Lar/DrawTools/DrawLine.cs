@@ -102,7 +102,7 @@ namespace Cii.Lar.DrawTools
         public override RectangleF GetTextF(string name, Graphics g, int index)
         {
             SizeF sizeF = g.MeasureString(name, this.Font);
-            return this.pictureBox.GraphicInfo.ToLogicalRectangleF(startDataPoint.X - sizeF.Width, startDataPoint.Y - sizeF.Height / 2, 
+            return pictureBox.GraphicInfo.ToLogicalRectangleF(startDataPoint.X - sizeF.Width, startDataPoint.Y - sizeF.Height / 2,
                 sizeF.Width, sizeF.Height);
         }
 
@@ -172,7 +172,7 @@ namespace Cii.Lar.DrawTools
                 endDataPoint = point;
             }
             this.Statistics.Circumference = (float)GetCircumference(startDataPoint, endDataPoint);
-            Console.WriteLine(this.Statistics.Circumference);
+            //Console.WriteLine(this.Statistics.Circumference);
         }
 
         private double GetCircumference(PointF startPoint, PointF endPoint)

@@ -205,6 +205,36 @@ namespace Cii.Lar.UI.Picture
             }
         }
 
+        public Rectangle ToLogicalRectangle(Rectangle rectangle)
+        {
+            try
+            {
+                return new Rectangle((int)(rectangle.X / ScaleFactor + LogicalOrigin.X), (int)(rectangle.Y / ScaleFactor + LogicalOrigin.Y),
+                    (int)(rectangle.Width / ScaleFactor), (int)(rectangle.Height / ScaleFactor));
+            }
+            catch (Exception ex)
+            {
+                LogHelper.GetLogger<ConversionInfo>().Error(ex.Message);
+                LogHelper.GetLogger<ConversionInfo>().Error(ex.StackTrace);
+                return Rectangle.Empty;
+            }
+        }
+
+        public RectangleF ToLogicalRectangleF(RectangleF rectangle)
+        {
+            try
+            {
+                return new RectangleF(rectangle.X / ScaleFactor + LogicalOrigin.X, rectangle.Y / ScaleFactor + LogicalOrigin.Y,
+                    rectangle.Width / ScaleFactor, rectangle.Height / ScaleFactor);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.GetLogger<ConversionInfo>().Error(ex.Message);
+                LogHelper.GetLogger<ConversionInfo>().Error(ex.StackTrace);
+                return RectangleF.Empty;
+            }
+        }
+
         public RectangleF ToLogicalRectangleF(float x, float y, float width, float height)
         {
             try
@@ -218,6 +248,11 @@ namespace Cii.Lar.UI.Picture
                 LogHelper.GetLogger<ConversionInfo>().Error(ex.StackTrace);
                 return RectangleF.Empty;
             }
+        }
+
+        public Font ToLogicalFont(Font font)
+        {
+            return new Font("Microsoft Sans Serif", 8.25F / ScaleFactor, FontStyle.Regular);
         }
 
         public System.Drawing.Point ToLogicalPoint(System.Drawing.Point PhysicalPoint)
@@ -245,6 +280,34 @@ namespace Cii.Lar.UI.Picture
                 LogHelper.GetLogger<ConversionInfo>().Error(ex.Message);
                 LogHelper.GetLogger<ConversionInfo>().Error(ex.StackTrace);
                 return Point.Empty;
+            }
+        }
+
+        public PointF ToLogicalPointF(float X, float Y)
+        {
+            try
+            {
+                return new PointF(X / ScaleFactor + LogicalOrigin.X, Y / ScaleFactor + LogicalOrigin.Y);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.GetLogger<ConversionInfo>().Error(ex.Message);
+                LogHelper.GetLogger<ConversionInfo>().Error(ex.StackTrace);
+                return PointF.Empty;
+            }
+        }
+
+        public PointF ToLogicalPointF(PointF point)
+        {
+            try
+            {
+                return new PointF(point.X / ScaleFactor + LogicalOrigin.X, point.Y / ScaleFactor + LogicalOrigin.Y);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.GetLogger<ConversionInfo>().Error(ex.Message);
+                LogHelper.GetLogger<ConversionInfo>().Error(ex.StackTrace);
+                return PointF.Empty;
             }
         }
 

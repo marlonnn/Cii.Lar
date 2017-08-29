@@ -29,6 +29,7 @@ namespace Cii.Lar.DrawTools
             get { return setProportion; }
             set { setProportion = value; }
         }
+        private ZoomblePictureBoxControl pictureBox;
 
         public DrawPolyLine()
         {
@@ -38,6 +39,7 @@ namespace Cii.Lar.DrawTools
         public DrawPolyLine(ZoomblePictureBoxControl pictureBox, int x1, int y1, int x2, int y2) 
             : base(pictureBox, x1, y1, x2, y2)
         {
+            this.pictureBox = pictureBox;
             InitializeGraphicsProperties();
             this.RegisterUpdateStatisticsHandler();
             this.GraphicsProperties.GraphicsPropertiesChangedHandler += pictureBox.GraphicsPropertiesChangedHandler;
@@ -64,8 +66,8 @@ namespace Cii.Lar.DrawTools
         public override RectangleF GetTextF(string name, Graphics g, int index)
         {
             SizeF sizeF = g.MeasureString(name, this.Font);
-            return new RectangleF(pointArray[0].X - sizeF.Width, pointArray[0].Y - sizeF.Height,
-                sizeF.Width, sizeF.Height);
+            return new RectangleF(pointArray[0].X - sizeF.Width / pictureBox.ScaleFactor, pointArray[0].Y - sizeF.Height / pictureBox.ScaleFactor,
+                sizeF.Width / pictureBox.ScaleFactor, sizeF.Height / pictureBox.ScaleFactor);
         }
 
         public bool CloseToFirstPoint(Point point)

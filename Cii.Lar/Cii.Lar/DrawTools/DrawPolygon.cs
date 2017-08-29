@@ -115,12 +115,13 @@ namespace Cii.Lar.DrawTools
         public void AddPoint(ZoomblePictureBoxControl pictureBox, Point point, bool checkClose)
         {
             bool addPoint = true;
+            Point p = pictureBox.GraphicInfo.ToLogicalPoint(point);
             if (checkClose)
             {
                 for (int i = 0; i < PointCount - 1; i++)   // does not check for last point
                 {
-                    Point des = Point.Ceiling(pointArray[i]);
-                    if (CloseToPoint(point, des))
+                    Point des = pictureBox.GraphicInfo.ToLogicalPoint(Point.Ceiling(pointArray[i]));
+                    if (CloseToPoint(p, des))
                     {
                         addPoint = false;
                     }
@@ -128,7 +129,7 @@ namespace Cii.Lar.DrawTools
             }
             if (addPoint)
             {
-                pointArray.Add(point);
+                pointArray.Add(p);
             }
         }
 
@@ -289,14 +290,15 @@ namespace Cii.Lar.DrawTools
         public void MoveLastHandleTo(ZoomblePictureBoxControl pictureBox, Point point)
         {
             if (PointCount == 0) return;
+            Point p = pictureBox.GraphicInfo.ToLogicalPoint(point);
 
-            if (PointCount > 3 && CloseToFirstPoint(pictureBox, point))
+            if (PointCount > 3 && CloseToFirstPoint(pictureBox, p))
             {
-                pointArray[PointCount - 1] = pointArray[0];
+                pointArray[PointCount - 1] = pictureBox.GraphicInfo.ToLogicalPointF(pointArray[0]);
             }
             else
             {
-                pointArray[PointCount - 1] = point;
+                pointArray[PointCount - 1] = p;
             }
             Console.WriteLine("Circumference:" + GetCircumference());
         }
@@ -339,7 +341,7 @@ namespace Cii.Lar.DrawTools
         {
             if (PointCount <= 0) return false;
 
-            Point first = Point.Ceiling(pointArray[0]);
+            Point first = pictureBox.GraphicInfo.ToLogicalPoint(Point.Ceiling(pointArray[0]));
 
             return CloseToPoint(first, point);
         }
