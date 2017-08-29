@@ -177,9 +177,21 @@ namespace Cii.Lar.DrawTools
 
         private double GetCircumference(PointF startPoint, PointF endPoint)
         {
+            float Scale = pictureBox.ScaleFactor * UnitOfMeasureFactor;
+
             float x = System.Math.Abs(endPoint.X - startPoint.X);
             float y = System.Math.Abs(endPoint.Y - startPoint.Y);
-            return Math.Sqrt(x * x + y * y);
+            return Math.Sqrt(x * x + y * y) / Scale;
+        }
+
+        private float UnitOfMeasureFactor
+        {
+            get { return MeasureSystem.CustomUnitToMicron(1, UnitOfMeasure); }
+        }
+
+        private MeasureSystem.enUniMis UnitOfMeasure
+        {
+            get { return pictureBox.UnitOfMeasure; }
         }
 
         public override bool HitTest(int nIndex, PointF dataPoint)
