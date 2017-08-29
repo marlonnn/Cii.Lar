@@ -23,6 +23,7 @@ namespace Cii.Lar.DrawTools
         protected float dataBottom;
 
         private Rectangle rectangle;
+        private ZoomblePictureBoxControl pictureBox;
         public DrawRectangle()
         {
             this.RegisterUpdateStatisticsHandler();
@@ -30,6 +31,7 @@ namespace Cii.Lar.DrawTools
 
         public DrawRectangle(ZoomblePictureBoxControl pictureBox, int x, int y, int width, int height) : this()
         {
+            this.pictureBox = pictureBox;
             InitializeGraphicsProperties();
             this.ObjectType = ObjectType.Rectangle;
             rectangle = new Rectangle(x, y, width, height);
@@ -82,7 +84,7 @@ namespace Cii.Lar.DrawTools
         public override RectangleF GetTextF(string name, Graphics g, int index)
         {
             SizeF sizeF = g.MeasureString(name, this.Font);
-            return new RectangleF(rectangle.X - sizeF.Width, rectangle.Y - sizeF.Height,
+            return this.pictureBox.GraphicInfo.ToLogicalRectangleF(rectangle.X - sizeF.Width, rectangle.Y - sizeF.Height,
                 sizeF.Width, sizeF.Height);
         }
 
@@ -177,7 +179,7 @@ namespace Cii.Lar.DrawTools
         public override void Move(ZoomblePictureBoxControl pictureBox, int deltaX, int deltaY)
         {
             Rectangle rect = GetRectangle();
-            SetRectangle( new Rectangle(rect.X + deltaX, rect.Y + deltaY, rect.Width, rect.Height));
+            SetRectangle(new Rectangle(rect.X + deltaX, rect.Y + deltaY, rect.Width, rect.Height));
         }
 
         /// <summary>

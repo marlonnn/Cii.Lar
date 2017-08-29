@@ -53,6 +53,8 @@ namespace Cii.Lar.DrawTools
             }
         }
 
+        private ZoomblePictureBoxControl pictureBox;
+
         public DrawLine()
         {
             InitializeGraphicsProperties();
@@ -63,6 +65,7 @@ namespace Cii.Lar.DrawTools
 
         public DrawLine(ZoomblePictureBoxControl pictureBox, int x1, int y1, int x2, int y2) : this()
         {
+            this.pictureBox = pictureBox;
             startDataPoint = new Point(x1, y1);
             endDataPoint = new Point(x2, y2);
             this.GraphicsProperties.GraphicsPropertiesChangedHandler += pictureBox.GraphicsPropertiesChangedHandler;
@@ -86,18 +89,20 @@ namespace Cii.Lar.DrawTools
         {
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            var v1 = pictureBox.GraphicInfo.ToLogicalCoordX(startDataPoint.X) - pictureBox.OffsetX;
             using (Pen pen = new Pen(Color.FromArgb(GraphicsProperties.Alpha, GraphicsProperties.Color), GraphicsProperties.PenWidth))
             {
-                g.DrawLine(pen, v1, pictureBox.GraphicInfo.ToLogicalCoordY(startDataPoint.Y) - pictureBox.OffsetY, 
-                    pictureBox.GraphicInfo.ToLogicalCoordX(endDataPoint.X) - pictureBox.OffsetX, pictureBox.GraphicInfo.ToLogicalCoordY(endDataPoint.Y) - pictureBox.OffsetY);
+                g.DrawLine(pen, 
+                    pictureBox.GraphicInfo.ToLogicalCoordX(startDataPoint.X) - pictureBox.OffsetX, 
+                    pictureBox.GraphicInfo.ToLogicalCoordY(startDataPoint.Y) - pictureBox.OffsetY, 
+                    pictureBox.GraphicInfo.ToLogicalCoordX(endDataPoint.X) - pictureBox.OffsetX,
+                    pictureBox.GraphicInfo.ToLogicalCoordY(endDataPoint.Y) - pictureBox.OffsetY);
             }
         }
 
         public override RectangleF GetTextF(string name, Graphics g, int index)
         {
             SizeF sizeF = g.MeasureString(name, this.Font);
-            return new RectangleF(startDataPoint.X - sizeF.Width, startDataPoint.Y - sizeF.Height / 2, 
+            return this.pictureBox.GraphicInfo.ToLogicalRectangleF(startDataPoint.X - sizeF.Width, startDataPoint.Y - sizeF.Height / 2, 
                 sizeF.Width, sizeF.Height);
         }
 

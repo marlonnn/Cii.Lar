@@ -205,6 +205,21 @@ namespace Cii.Lar.UI.Picture
             }
         }
 
+        public RectangleF ToLogicalRectangleF(float x, float y, float width, float height)
+        {
+            try
+            {
+                return new RectangleF(x / ScaleFactor + LogicalOrigin.X, y / ScaleFactor + LogicalOrigin.Y,
+                    width / ScaleFactor, height / ScaleFactor);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.GetLogger<ConversionInfo>().Error(ex.Message);
+                LogHelper.GetLogger<ConversionInfo>().Error(ex.StackTrace);
+                return RectangleF.Empty;
+            }
+        }
+
         public System.Drawing.Point ToLogicalPoint(System.Drawing.Point PhysicalPoint)
         {
             try
