@@ -106,22 +106,6 @@ namespace Cii.Lar.UI.Picture
             }
         }
 
-        public bool HScrollable
-        {
-            get
-            {
-                return this.HScroll;
-            }
-        }
-
-        public bool VScrollable
-        {
-            get
-            {
-                return this.VScroll;
-            }
-        }
-
         #region "Pan & zoom"
         public const float ZoomMultiplier = 1.25f;
         public const float PanFactorNoShift = 100f / 3f;
@@ -950,7 +934,7 @@ namespace Cii.Lar.UI.Picture
 
         public virtual void Redraw(bool forceGraphicCacheRebuild)
         {
-            Graphics GR = null;
+            Graphics g = null;
             try
             {
                 if ((this.IsDisposed))
@@ -965,22 +949,22 @@ namespace Cii.Lar.UI.Picture
                     return;
                 }
 
-                GR = GetScaledGraphicObject(myRedrawBackBuffer);
-                if (GR == null)
+                g = GetScaledGraphicObject(myRedrawBackBuffer);
+                if (g == null)
                     return;
 
-                GR.Clear(BackgroundColor);
+                g.Clear(BackgroundColor);
 
                 if (myShowPictureBoxImage)
                 {
-                    DrawPictureBoxImage(GR);
+                    DrawPictureBoxImage(g);
                 }
 
-                DrawGrids(GR);
+                DrawGrids(g);
 
                 if (GraphicsList != null)
                 {
-                    GraphicsList.Draw(GR, this);
+                    GraphicsList.Draw(g, this);
                 }
 
                 Refresh();
@@ -1004,9 +988,9 @@ namespace Cii.Lar.UI.Picture
             }
             finally
             {
-                if (GR != null)
+                if (g != null)
                 {
-                    GR.Dispose();
+                    g.Dispose();
                 }
             }
         }
@@ -1052,7 +1036,7 @@ namespace Cii.Lar.UI.Picture
             }
         }
 
-        private void DrawPictureBoxImage(Graphics GR)
+        private void DrawPictureBoxImage(Graphics g)
         {
             try
             {
@@ -1067,7 +1051,7 @@ namespace Cii.Lar.UI.Picture
                         myPictureBoxImageGR.Origin = myPictureBoxImageCustomOrigin;
                         break;
                 }
-                myPictureBoxImageGR.Draw(GR);
+                myPictureBoxImageGR.Draw(g);
             }
             catch (Exception ex)
             {
@@ -1076,19 +1060,19 @@ namespace Cii.Lar.UI.Picture
             }
         }
 
-        private void DrawGrids(Graphics GR)
+        private void DrawGrids(Graphics g)
         {
             if (myShowGrid)
             {
-                DrawGrid(GR, 0, GridStep, GridView, GridColor, SmartGridAdjust);
+                DrawGrid(g, 0, GridStep, GridView, GridColor, SmartGridAdjust);
             }
             if (myShowGrid)
             {
-                DrawAxes(GR);
+                DrawAxes(g);
             }
         }
 
-        private void DrawGrid(Graphics GR, int GridInitialOffset, int GridStep, GridKind GridMode, Color GridColor, bool SmartAdjust)
+        private void DrawGrid(Graphics g, int GridInitialOffset, int GridStep, GridKind GridMode, Color GridColor, bool SmartAdjust)
         {
             try
             {
@@ -1119,9 +1103,9 @@ namespace Cii.Lar.UI.Picture
                         {
                             for (iIterX = InitialX; iIterX <= FinalX; iIterX += GridStep)
                             {
-                                GR.DrawLine(myPen, iIterX + GridInitialOffset - 10 / ScaleFactor, iIterY + GridInitialOffset,
+                                g.DrawLine(myPen, iIterX + GridInitialOffset - 10 / ScaleFactor, iIterY + GridInitialOffset,
                                     iIterX + GridInitialOffset + 10 / ScaleFactor, iIterY + GridInitialOffset);
-                                GR.DrawLine(myPen, iIterX + GridInitialOffset, iIterY + GridInitialOffset - 10 / ScaleFactor,
+                                g.DrawLine(myPen, iIterX + GridInitialOffset, iIterY + GridInitialOffset - 10 / ScaleFactor,
                                     iIterX + GridInitialOffset, iIterY + GridInitialOffset + 10 / ScaleFactor);
                             }
                         }
@@ -1130,13 +1114,13 @@ namespace Cii.Lar.UI.Picture
                     case GridKind.FullLines:
                         for (iIterY = InitialY; iIterY <= FinalY; iIterY += GridStep)
                         {
-                            GR.DrawLine(myPen, LogicalOrigin.X, iIterY + GridInitialOffset, LogicalWidth + LogicalOrigin.X,
+                            g.DrawLine(myPen, LogicalOrigin.X, iIterY + GridInitialOffset, LogicalWidth + LogicalOrigin.X,
                                 iIterY + GridInitialOffset);
                         }
 
                         for (iIterX = InitialX; iIterX <= FinalX; iIterX += GridStep)
                         {
-                            GR.DrawLine(myPen, iIterX + GridInitialOffset, LogicalOrigin.Y, iIterX + GridInitialOffset,
+                            g.DrawLine(myPen, iIterX + GridInitialOffset, LogicalOrigin.Y, iIterX + GridInitialOffset,
                                 LogicalHeight + LogicalOrigin.Y);
                         }
 
@@ -1146,9 +1130,9 @@ namespace Cii.Lar.UI.Picture
                         {
                             for (iIterX = InitialX; iIterX <= FinalX; iIterX += GridStep)
                             {
-                                GR.DrawLine(myPen, iIterX + GridInitialOffset - 1 / ScaleFactor, iIterY + GridInitialOffset,
+                                g.DrawLine(myPen, iIterX + GridInitialOffset - 1 / ScaleFactor, iIterY + GridInitialOffset,
                                     iIterX + GridInitialOffset + 1 / ScaleFactor, iIterY + GridInitialOffset);
-                                GR.DrawLine(myPen, iIterX + GridInitialOffset, iIterY + GridInitialOffset - 1 / ScaleFactor,
+                                g.DrawLine(myPen, iIterX + GridInitialOffset, iIterY + GridInitialOffset - 1 / ScaleFactor,
                                     iIterX + GridInitialOffset, iIterY + GridInitialOffset + 1 / ScaleFactor);
                             }
                         }
@@ -1163,7 +1147,7 @@ namespace Cii.Lar.UI.Picture
             }
         }
 
-        private void DrawAxes(Graphics GR)
+        private void DrawAxes(Graphics g)
         {
             try
             {
@@ -1172,8 +1156,8 @@ namespace Cii.Lar.UI.Picture
                     return;
                 }
 
-                GR.DrawLine(new Pen(AxesColor, -1), 0, LogicalOrigin.Y, 0, LogicalOrigin.Y + LogicalHeight);
-                GR.DrawLine(new Pen(AxesColor, -1), LogicalOrigin.X, 0, LogicalOrigin.X + LogicalWidth, 0);
+                g.DrawLine(new Pen(AxesColor, -1), 0, LogicalOrigin.Y, 0, LogicalOrigin.Y + LogicalHeight);
+                g.DrawLine(new Pen(AxesColor, -1), LogicalOrigin.X, 0, LogicalOrigin.X + LogicalWidth, 0);
             }
             catch (Exception ex)
             {
@@ -1184,7 +1168,7 @@ namespace Cii.Lar.UI.Picture
 
         public void Refresh(bool _Invalidate = true)
         {
-            Graphics GR = null;
+            Graphics g = null;
             try
             {
                 if ((!this.Created) || (this.IsDisposed))
@@ -1197,16 +1181,16 @@ namespace Cii.Lar.UI.Picture
                     return;
                 }
 
-                GR = Graphics.FromImage(myRefreshBackBuffer);
+                g = Graphics.FromImage(myRefreshBackBuffer);
 
-                GR.DrawImageUnscaledAndClipped(myRedrawBackBuffer, this.ClientRectangle);
+                g.DrawImageUnscaledAndClipped(myRedrawBackBuffer, this.ClientRectangle);
 
                 if (myShowRulers)
                 {
-                    myRulers.Draw(GR);
+                    myRulers.Draw(g);
                 }
 
-                ScaleGraphicObject(ref GR);
+                ScaleGraphicObject(ref g);
 
                 if (_Invalidate)
                     Invalidate();
@@ -1219,20 +1203,20 @@ namespace Cii.Lar.UI.Picture
             }
             finally
             {
-                if (GR != null)
+                if (g != null)
                 {
-                    GR.Dispose();
+                    g.Dispose();
                 }
             }
         }
 
-        private void DrawResizePreview(Graphics GR)
+        private void DrawResizePreview(Graphics g)
         {
-            GR.Clear(BackgroundColor);
+            g.Clear(BackgroundColor);
 
-            ScaleGraphicObject(ref GR);
-            DrawGrids(GR);
-            GR.ResetTransform();
+            ScaleGraphicObject(ref g);
+            DrawGrids(g);
+            g.ResetTransform();
 
             if ((myRedrawBackBuffer == null) || (myRedrawBackBuffer.Width == 0) || (myRedrawBackBuffer.Width == 0))
             {
@@ -1241,11 +1225,11 @@ namespace Cii.Lar.UI.Picture
 
             if ((ResizeMode == ResizeMode.Normal))
             {
-                GR.DrawImage(myRedrawBackBuffer, Point.Empty);
+                g.DrawImage(myRedrawBackBuffer, Point.Empty);
 
                 if (myShowRulers)
                 {
-                    myRulers.Draw(GR);
+                    myRulers.Draw(g);
                 }
                 return;
             }
@@ -1260,11 +1244,11 @@ namespace Cii.Lar.UI.Picture
             bitmapOutputRect.Width = (int)(myRedrawBackBuffer.Width * tmpScaleFactor);
             bitmapOutputRect.Height = (int)(myRedrawBackBuffer.Height * tmpScaleFactor);
 
-            GR.DrawImage(myRedrawBackBuffer, bitmapOutputRect);
+            g.DrawImage(myRedrawBackBuffer, bitmapOutputRect);
 
             if (myShowRulers)
             {
-                myRulers.Draw(GR);
+                myRulers.Draw(g);
             }
         }
 
@@ -1369,14 +1353,9 @@ namespace Cii.Lar.UI.Picture
 
         private void OnResizeEnd(System.Object sender, System.EventArgs e)
         {
-            // Notifico che ho finito di gestire una serie di eventi di resize
             myIsBetweenResizeBeginEnd = false;
-            // Check se le dimensioni della PictureBox sono effettivamente cambiate
-            // NOTA: Serve perche' questa routine viene chiamata durante la gestione dell''evento OnResizeEnd(),
-            //       che viene chiamato anche quando sposto la form contenente la PictureBox.
             if ((myBeginResizeClientArea != this.ClientRectangle))
             {
-                // Genero un evento di cambio dimensione, in modo da forzare il ridisegno
                 OnSizeChanged(e);
             }
         }
@@ -2209,24 +2188,24 @@ namespace Cii.Lar.UI.Picture
         /// returns an object graphics with the plates to scaling and translation approaches
         /// the scale factor and the logicalorigin currently in use.
         /// </summary>
-        protected internal Graphics ScaleGraphicObject(ref Graphics GR)
+        protected internal Graphics ScaleGraphicObject(ref Graphics g)
         {
             try
             {
-                if (GR == null)
+                if (g == null)
                 {
                     return null;
                 }
 
                 if ((ScaleFactor <= 0.0))
                 {
-                    return GR;
+                    return g;
                 }
 
-                GR.ResetTransform();
-                GR.ScaleTransform(ScaleFactor, ScaleFactor);
-                GR.TranslateTransform(-LogicalOrigin.X, -LogicalOrigin.Y);
-                return GR;
+                g.ResetTransform();
+                g.ScaleTransform(ScaleFactor, ScaleFactor);
+                g.TranslateTransform(-LogicalOrigin.X, -LogicalOrigin.Y);
+                return g;
             }
             catch (Exception ex)
             {
@@ -2240,18 +2219,18 @@ namespace Cii.Lar.UI.Picture
         {
             try
             {
-                Graphics GR = Graphics.FromImage(myRefreshBackBuffer);
+                Graphics g = Graphics.FromImage(myRefreshBackBuffer);
 
                 if ((ScaleFactor <= 0.0))
                 {
-                    return GR;
+                    return g;
                 }
 
-                GR.ResetTransform();
+                g.ResetTransform();
 
-                GR.ScaleTransform(ScaleFactor, ScaleFactor);
-                GR.TranslateTransform(-LogicalOrigin.X, -LogicalOrigin.Y);
-                return GR;
+                g.ScaleTransform(ScaleFactor, ScaleFactor);
+                g.TranslateTransform(-LogicalOrigin.X, -LogicalOrigin.Y);
+                return g;
             }
             catch (Exception ex)
             {

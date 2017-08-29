@@ -265,15 +265,13 @@ namespace Cii.Lar.UI.Picture
             }
         }
 
-        public void DrawScaledNumber(Graphics GR, double value, float xCoord, float yCoord, float ScaleFactor, bool Horizontal)
+        public void DrawScaledNumber(Graphics g, double value, float xCoord, float yCoord, float ScaleFactor, bool Horizontal)
         {
             try
             {
-                // Calcolo le coordinate dei segmenti da tracciare
                 pixelList = new List<System.Drawing.Point>();
                 CreateSegmentsList(value, ref pixelList, Horizontal);
 
-                // Lista temporanea dei segmenti in coordinate logiche
                 logicCoordList = new List<Point>();
                 logicCoordList.Clear();
 
@@ -288,7 +286,7 @@ namespace Cii.Lar.UI.Picture
                     }
                     else
                     {
-                        GR.DrawLines(Pen, logicCoordList.ToArray());
+                        g.DrawLines(Pen, logicCoordList.ToArray());
                         logicCoordList.Clear();
                     }
                 }

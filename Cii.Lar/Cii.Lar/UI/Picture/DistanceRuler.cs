@@ -133,7 +133,7 @@ namespace Cii.Lar.UI.Picture
             return Convert.ToString(CutDecimals(Value, DesiredDecDigits));
         }
 
-        public void Painting(Graphics GR, double ScaleFactor = 1.0)
+        public void Painting(Graphics g, double ScaleFactor = 1.0)
         {
             if (!mouseCaptured)
             {
@@ -158,9 +158,9 @@ namespace Cii.Lar.UI.Picture
 
 
 
-                GR.DrawLine(wallpen, origin.X - OriginCrossArmLength, origin.Y, origin.X + OriginCrossArmLength, origin.Y);
-                GR.DrawLine(wallpen, origin.X, origin.Y - OriginCrossArmLength, origin.X, origin.Y + OriginCrossArmLength);
-                GR.DrawArc(wallpen, origin.X - OriginCrossArmLength, origin.Y - OriginCrossArmLength, 2 * OriginCrossArmLength, 2 * OriginCrossArmLength, 0, Convert.ToInt32(-CurrentAngle));
+                g.DrawLine(wallpen, origin.X - OriginCrossArmLength, origin.Y, origin.X + OriginCrossArmLength, origin.Y);
+                g.DrawLine(wallpen, origin.X, origin.Y - OriginCrossArmLength, origin.X, origin.Y + OriginCrossArmLength);
+                g.DrawArc(wallpen, origin.X - OriginCrossArmLength, origin.Y - OriginCrossArmLength, 2 * OriginCrossArmLength, 2 * OriginCrossArmLength, 0, Convert.ToInt32(-CurrentAngle));
 
                 using (System.Drawing.Drawing2D.Matrix mx = new System.Drawing.Drawing2D.Matrix())
                 {
@@ -169,23 +169,23 @@ namespace Cii.Lar.UI.Picture
                         string lineLength = (LineLength(origin, last, Scale) / ScaleFactor).ToString("F2");
                         string ls = string.Format("{0} ({1}°)", lineLength, strCutDecimals(CurrentAngle, 1));
                         //ls = string.Format(LineLength(origin, last, Scale) / ScaleFactor, "#.00") + "  (" + strCutDecimals(CurrentAngle, 1) + "�)";
-                        SizeF l = GR.MeasureString(ls, myPictureBoxControl.Font, myPictureBoxControl.ClientSize, sf);
+                        SizeF l = g.MeasureString(ls, myPictureBoxControl.Font, myPictureBoxControl.ClientSize, sf);
                         sf.LineAlignment = StringAlignment.Center;
                         sf.Alignment = StringAlignment.Center;
-                        GR.DrawLine(wallpen, origin, last);
+                        g.DrawLine(wallpen, origin, last);
                         mx.Translate(midPoint.X, midPoint.Y);
                         mx.Rotate(Angle(origin, last));
-                        GR.Transform = mx;
+                        g.Transform = mx;
                         Rectangle rt = new Rectangle(0, 0, (int)l.Width, (int)l.Height);
                         rt.Inflate(3, 3);
                         rt.Offset(-(int)(l.Width / 2), -(int)(l.Height / 2));
                         using (SolidBrush backBrush = new SolidBrush(myPictureBoxControl.BackgroundColor))
                         {
-                            GR.FillEllipse(backBrush, rt);
+                            g.FillEllipse(backBrush, rt);
                         }
                         using (SolidBrush foreBrush = new SolidBrush(myPictureBoxControl.ForeColor))
                         {
-                            GR.DrawString(ls, myPictureBoxControl.Font, foreBrush, 0, 0, sf);
+                            g.DrawString(ls, myPictureBoxControl.Font, foreBrush, 0, 0, sf);
                         }
                     }
                 }

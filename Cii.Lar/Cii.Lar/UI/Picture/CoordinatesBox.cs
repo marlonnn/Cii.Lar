@@ -141,15 +141,6 @@ namespace Cii.Lar.UI.Picture
                 myDrawingRect.Width = (int)(textBoxSize.Width + boxSize);
                 myDrawingRect.Height = (int)(textBoxSize.Height + boxSize);
 
-                if (myPictureBoxControl.HScrollable)
-                {
-                    myDrawingRect.Height -= 1;
-                }
-                if (myPictureBoxControl.VScrollable)
-                {
-                    myDrawingRect.Width -= 1;
-                }
-
                 g.FillRectangle(Brushes.White, myDrawingRect);
                 g.DrawRectangle(Pens.Black, myDrawingRect);
 
