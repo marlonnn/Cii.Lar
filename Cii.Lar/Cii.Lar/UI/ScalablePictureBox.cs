@@ -379,7 +379,7 @@ namespace Cii.Lar.UI
         private void InitializeTimer()
         {
             focusTimer = new Timer();
-            focusTimer.Enabled = true;
+            focusTimer.Enabled = false;
             focusTimer.Interval = 300;
             focusTimer.Tick += FocusTimer_Tick;
         }

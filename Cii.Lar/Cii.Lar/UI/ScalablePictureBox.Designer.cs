@@ -61,6 +61,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pictureTracker);
             this.Controls.Add(this.scalablePictureBoxImp);
+            this.DoubleBuffered = true;
             this.Name = "ScalablePictureBox";
             this.Size = new System.Drawing.Size(391, 255);
             this.ResumeLayout(false);

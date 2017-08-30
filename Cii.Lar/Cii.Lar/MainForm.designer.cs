@@ -55,6 +55,7 @@ namespace Cii.Lar
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonLaser = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSetting = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonFit = new System.Windows.Forms.ToolStripButton();
             this.scalablePictureBox = new Cii.Lar.UI.ScalablePictureBox();
             this.toolStripButtonOpen = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
@@ -102,6 +103,7 @@ namespace Cii.Lar
             this.toolStripSeparator2,
             this.toolStripButtonZoomOut,
             this.toolStripButtonZoomIn,
+            this.toolStripButtonFit,
             this.toolStripSeparator3,
             this.toolStripButtonScale,
             this.toolStripSeparator4,
@@ -131,11 +133,14 @@ namespace Cii.Lar
             // 
             // toolStripButtonVideo
             // 
+            // 
+            // toolStripButtonVideo
+            // 
             this.toolStripButtonVideo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonVideo.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonVideo.Image")));
+            this.toolStripButtonVideo.Image = global::Cii.Lar.Properties.Resources.video;
             this.toolStripButtonVideo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonVideo.Name = "toolStripButtonVideo";
-            this.toolStripButtonVideo.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonVideo.Size = new System.Drawing.Size(23, 20);
             this.toolStripButtonVideo.Text = global::Cii.Lar.Properties.Resources.toolStripButtonVideoStr;
             this.toolStripButtonVideo.Click += new System.EventHandler(this.toolStripButtonVideo_Click);
             // 
@@ -192,10 +197,10 @@ namespace Cii.Lar
             // toolStripButtonScale
             // 
             this.toolStripButtonScale.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonScale.Image = global::Cii.Lar.Properties.Resources.scale;
+            this.toolStripButtonScale.Image = global::Cii.Lar.Properties.Resources.ruler;
             this.toolStripButtonScale.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonScale.Name = "toolStripButtonScale";
-            this.toolStripButtonScale.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonScale.Size = new System.Drawing.Size(23, 20);
             this.toolStripButtonScale.Text = global::Cii.Lar.Properties.Resources.toolStripButtonScaleStr;
             this.toolStripButtonScale.Click += new System.EventHandler(this.toolStripButtonScale_Click);
             // 
@@ -207,10 +212,10 @@ namespace Cii.Lar
             // toolStripButtonLine
             // 
             this.toolStripButtonLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonLine.Image = global::Cii.Lar.Properties.Resources.measure;
+            this.toolStripButtonLine.Image = global::Cii.Lar.Properties.Resources.line;
             this.toolStripButtonLine.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonLine.Name = "toolStripButtonLine";
-            this.toolStripButtonLine.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonLine.Size = new System.Drawing.Size(23, 20);
             this.toolStripButtonLine.Text = global::Cii.Lar.Properties.Resources.toolStripButtonLineStr;
             this.toolStripButtonLine.Click += new System.EventHandler(this.toolStripButton_Click);
             // 
@@ -269,6 +274,16 @@ namespace Cii.Lar
             this.toolStripButtonSetting.Text = global::Cii.Lar.Properties.Resources.toolStripButtonSettingStr;
             this.toolStripButtonSetting.Click += new System.EventHandler(this.toolStripButtonSetting_Click);
             // 
+            // toolStripButtonFit
+            // 
+            this.toolStripButtonFit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonFit.Image = global::Cii.Lar.Properties.Resources.zoomFit;
+            this.toolStripButtonFit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonFit.Name = "toolStripButtonFit";
+            this.toolStripButtonFit.Size = new System.Drawing.Size(23, 20);
+            this.toolStripButtonFit.Text = "Zoom Fit";
+            this.toolStripButtonFit.ToolTipText = "Zoom Fit";
+            // 
             // scalablePictureBox
             // 
             this.scalablePictureBox.ActiveTool = Cii.Lar.UI.DrawToolType.None;
@@ -296,7 +311,7 @@ namespace Cii.Lar
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(740, 567);
-            this.Controls.Add(this.toolStrip1);
+            //this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.scalablePictureBox);
             this.Controls.Add(this.metroStatusBar1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -304,6 +319,7 @@ namespace Cii.Lar
             this.Name = "MainForm";
             this.ShowIcon = false;
             this.Text = "Lar-100";
+            this.DoubleBuffered = true;
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -320,21 +336,22 @@ namespace Cii.Lar
         private System.Windows.Forms.ToolStripButton toolStripButtonCapture;
         private System.Windows.Forms.ToolStripButton toolStripButtonVideo;
         private System.Windows.Forms.ToolStripButton toolStripFiles;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton toolStripButtonZoomOut;
         private System.Windows.Forms.ToolStripButton toolStripButtonZoomIn;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton toolStripButtonScale;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton toolStripButtonLine;
+        private System.Windows.Forms.ToolStripButton toolStripButtonRectangle;
+        private System.Windows.Forms.ToolStripButton toolStripButtonElliptical;
+        private System.Windows.Forms.ToolStripButton toolStripButtonPolygon;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton toolStripButtonLaser;
         private System.Windows.Forms.ToolStripButton toolStripButtonSetting;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripButton toolStripButtonElliptical;
-        private System.Windows.Forms.ToolStripButton toolStripButtonRectangle;
-        private System.Windows.Forms.ToolStripButton toolStripButtonPolygon;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripButton toolStripButtonFit;
         private System.Windows.Forms.ToolStripButton toolStripButtonOpen;
     }
 }
