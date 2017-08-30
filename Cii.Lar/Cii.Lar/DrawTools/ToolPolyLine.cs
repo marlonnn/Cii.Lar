@@ -1,5 +1,4 @@
 ﻿using Cii.Lar.UI;
-using Cii.Lar.UI.Picture;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -15,20 +14,25 @@ namespace Cii.Lar.DrawTools
     public class ToolPolyLine : ToolObject
     {
         private DrawPolyLine newPolyLine;
+
+        private static Cursor s_cursor = new Cursor(
+            new MemoryStream((byte[])new ResourceManager(typeof(CursorPictureBox)).GetObject("Pencil")));
+
         /// <summary>
         /// used for double click to end drawing polygon gate when in Continuous mode
         /// </summary>
         private bool cancelNewFlag = false;
         public ToolPolyLine()
         {
+            Cursor = s_cursor;
         }
 
-        public override void OnMouseDown(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
+        public override void OnMouseDown(CursorPictureBox pictureBox, MouseEventArgs e)
         {
             // operations are done in OnMouseUp
         }
 
-        public override void OnMouseUp(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
+        public override void OnMouseUp(CursorPictureBox pictureBox, MouseEventArgs e)
         {
             if (cancelNewFlag)
             {
@@ -59,10 +63,13 @@ namespace Cii.Lar.DrawTools
                 // Drawing is in process, so simply add a new point
                 newPolyLine.AddPoint(pictureBox, e.Location, true);
             }
+            pictureBox.Capture = false;
+            pictureBox.Refresh();
         }
 
-        public override void OnMouseMove(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
+        public override void OnMouseMove(CursorPictureBox pictureBox, MouseEventArgs e)
         {
+            pictureBox.Cursor = Cursor;
             // if new object creation is canceled
             if (!pictureBox.CreatingDrawObject) return;
 
@@ -72,13 +79,14 @@ namespace Cii.Lar.DrawTools
             Point point = new Point(e.X, e.Y);
             // move last point
             newPolyLine.MoveLastHandleTo(pictureBox, point);
+            pictureBox.Refresh();
         }
 
-        public override void OnMouseLeave(ZoomblePictureBoxControl pictureBox, System.EventArgs e)
+        public override void OnMouseLeave(CursorPictureBox pictureBox, System.EventArgs e)
         {
         }
 
-        public override void OnCancel(ZoomblePictureBoxControl pictureBox, bool cancelSelection)
+        public override void OnCancel(CursorPictureBox pictureBox, bool cancelSelection)
         {
             base.OnCancel(pictureBox, cancelSelection);
 
@@ -91,7 +99,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="drawArea"></param>
         /// <param name="e"></param>
-        public override void OnDoubleClick(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
+        public override void OnDoubleClick(CursorPictureBox pictureBox, MouseEventArgs e)
         {
             if (newPolyLine == null)
                 return;
@@ -109,7 +117,7 @@ namespace Cii.Lar.DrawTools
             pictureBox.GraphicsList[0].UpdateStatisticsInformation();
         }
 
-        private void EndCreating(ZoomblePictureBoxControl pictureBox)
+        private void EndCreating(CursorPictureBox pictureBox)
         {
             newPolyLine.Creating = false;
             newPolyLine = null;

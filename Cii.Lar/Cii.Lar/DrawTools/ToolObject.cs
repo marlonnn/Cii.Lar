@@ -1,5 +1,4 @@
 ﻿using Cii.Lar.UI;
-using Cii.Lar.UI.Picture;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -16,6 +15,22 @@ namespace Cii.Lar.DrawTools
     /// </summary>
     public abstract class ToolObject : Tool
     {
+        private Cursor cursor;
+
+        /// <summary>
+        /// Tool cursor.
+        /// </summary>
+        public Cursor Cursor
+        {
+            get
+            {
+                return cursor;
+            }
+            set
+            {
+                cursor = value;
+            }
+        }
 
         /// <summary>
         /// Left mouse is released.
@@ -23,7 +38,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="drawArea"></param>
         /// <param name="e"></param>
-        public override void OnMouseUp(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
+        public override void OnMouseUp(CursorPictureBox pictureBox, MouseEventArgs e)
         {
             // if new object creation is canceled
             //if (!pictureBox.CreatingDrawObject)
@@ -51,7 +66,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="pictureBox"></param>
         /// <param name="e"></param>
-        public override void OnMouseLeave(ZoomblePictureBoxControl pictureBox, EventArgs e)
+        public override void OnMouseLeave(CursorPictureBox pictureBox, EventArgs e)
         {
             OnMouseUp(pictureBox, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0));
         }
@@ -61,7 +76,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="drawArea"></param>
         /// <param name="cancelSelection"></param>
-        public override void OnCancel(ZoomblePictureBoxControl pictureBox, bool cancelSelection)
+        public override void OnCancel(CursorPictureBox pictureBox, bool cancelSelection)
         {
             // cancel adding 
             //if (drawArea.GraphicsList.Count > 0 && drawArea.GraphicsList[0].Creating)
@@ -75,7 +90,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="pictureBox"></param>
         /// <param name="o"></param>
-        protected void AddNewObject(ZoomblePictureBoxControl pictureBox, DrawObject o)
+        protected void AddNewObject(CursorPictureBox pictureBox, DrawObject o)
         {
             pictureBox.GraphicsList.UnselectAll();
 

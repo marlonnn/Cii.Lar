@@ -1,5 +1,4 @@
 ﻿using Cii.Lar.UI;
-using Cii.Lar.UI.Picture;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -18,21 +17,27 @@ namespace Cii.Lar.DrawTools
     /// </summary>
     public class ToolEllipse : ToolObject
     {
+        private static Cursor s_cursor = new Cursor(new MemoryStream((byte[])new ResourceManager(typeof(CursorPictureBox)).GetObject("Ellipse")));
+
         public ToolEllipse()
         {
+            Cursor = s_cursor;
         }
 
-        public override void OnMouseDown(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
+        public override void OnMouseDown(CursorPictureBox pictureBox, MouseEventArgs e)
         {
             AddNewObject(pictureBox, new DrawEllipse(pictureBox, e.X, e.Y, e.X, e.Y, 0.6));
         }
 
-        public override void OnMouseMove(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
+        public override void OnMouseMove(CursorPictureBox pictureBox, MouseEventArgs e)
         {
+            pictureBox.Cursor = Cursor;
+
             if (e.Button == MouseButtons.Left)
             {
                 Point point = new Point(e.X, e.Y);
                 pictureBox.GraphicsList[0].MoveHandleTo(pictureBox, point, 5);
+                pictureBox.Refresh();
             }
         }
     }

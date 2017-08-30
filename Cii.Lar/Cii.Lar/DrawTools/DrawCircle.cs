@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Drawing;
 using Cii.Lar.UI;
 using System.Drawing.Drawing2D;
-using Cii.Lar.UI.Picture;
 
 namespace Cii.Lar.DrawTools
 {
@@ -36,7 +35,7 @@ namespace Cii.Lar.DrawTools
             DrawAreaSize = new Size(30, 30);
         }
 
-        public DrawCircle(ZoomblePictureBoxControl pictureBox, PointF centerPoint) : this()
+        public DrawCircle(CursorPictureBox pictureBox, PointF centerPoint) : this()
         {
             CenterPoint = centerPoint;
             this.GraphicsProperties.GraphicsPropertiesChangedHandler += pictureBox.GraphicsPropertiesChangedHandler;
@@ -48,7 +47,7 @@ namespace Cii.Lar.DrawTools
             this.GraphicsProperties.Color = Color.Yellow;
         }
 
-        public override void Draw(Graphics g, ZoomblePictureBoxControl pictureBox)
+        public override void Draw(Graphics g, CursorPictureBox pictureBox)
         {
             if (circleForDraw == null)
             {
@@ -95,7 +94,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="handleNumber"></param>
         /// <returns></returns>
-        public override Point GetHandle(ZoomblePictureBoxControl pictureBox, int handleNumber)
+        public override Point GetHandle(CursorPictureBox pictureBox, int handleNumber)
         {
             float x = 0, y = 0, xCenter, yCenter;
 
@@ -134,7 +133,7 @@ namespace Cii.Lar.DrawTools
             throw new NotImplementedException();
         }
 
-        public override HitTestResult HitTestForSelection(ZoomblePictureBoxControl pictureBox, Point point)
+        public override HitTestResult HitTestForSelection(CursorPictureBox pictureBox, Point point)
         {
             throw new NotImplementedException();
         }

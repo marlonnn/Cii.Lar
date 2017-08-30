@@ -63,6 +63,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmptyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EmptyForm.Designer.cs">
+      <DependentUpon>EmptyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExpClass\Frame.cs" />
     <Compile Include="DrawTools\DrawCircle.cs" />
     <Compile Include="DrawTools\DrawEllipse.cs" />
     <Compile Include="DrawTools\DrawLine.cs" />
@@ -73,7 +80,6 @@
     <Compile Include="DrawTools\GraphicsList.cs" />
     <Compile Include="DrawTools\GraphicsProperties.cs" />
     <Compile Include="DrawTools\GraphicsPropertiesManager.cs" />
-    <Compile Include="DrawTools\Ruler.cs" />
     <Compile Include="DrawTools\Statistics.cs" />
     <Compile Include="DrawTools\Tool.cs" />
     <Compile Include="DrawTools\ToolCircle.cs" />
@@ -84,32 +90,7 @@
     <Compile Include="DrawTools\ToolPolygon.cs" />
     <Compile Include="DrawTools\ToolPolyLine.cs" />
     <Compile Include="DrawTools\ToolRectangle.cs" />
-    <Compile Include="EntryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EntryForm.Designer.cs">
-      <DependentUpon>EntryForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="EmptyForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EmptyForm.Designer.cs">
-      <DependentUpon>EmptyForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ExpClass\Frame.cs" />
-    <Compile Include="UI\Picture\CommonCursors.cs" />
-    <Compile Include="UI\Picture\ConversionInfo.cs" />
     <Compile Include="ExpClass\ExpManager.cs" />
-    <Compile Include="UI\Picture\CoordinatesBox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Picture\CoordinatesBox.Designer.cs">
-      <DependentUpon>CoordinatesBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Picture\CrossCursor.cs" />
-    <Compile Include="UI\Picture\DistanceRuler.cs" />
-    <Compile Include="UI\Picture\DrawNumberBitmap.cs" />
-    <Compile Include="UI\Picture\MeasureSystem.cs" />
     <Compile Include="ExpClass\Report.cs" />
     <Compile Include="ExpClass\ReportItemBase.cs" />
     <Compile Include="ExpClass\ReportPage.cs" />
@@ -171,21 +152,6 @@
     </Compile>
     <Compile Include="UI\ListViewItemArray.cs" />
     <Compile Include="UI\ListViewItemEx.cs" />
-    <Compile Include="UI\Picture\BackImageGraphics.cs" />
-    <Compile Include="UI\Picture\PublicTypes.cs" />
-    <Compile Include="UI\Picture\Rulers.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Picture\Rulers.Designer.cs">
-      <DependentUpon>Rulers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Picture\SelectionBoxElement.cs" />
-    <Compile Include="UI\Picture\ZoomblePictureBoxControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Picture\ZoomblePictureBoxControl.Designer.cs">
-      <DependentUpon>ZoomblePictureBoxControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\RulerAppearanceCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -293,12 +259,6 @@
     <Compile Include="UI\ScalablePictureBoxImp.Designer.cs">
       <DependentUpon>ScalablePictureBoxImp.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ToolbarControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\ToolbarControl.Designer.cs">
-      <DependentUpon>ToolbarControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\TransparentButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -306,9 +266,6 @@
       <DependentUpon>TransparentButton.cs</DependentUpon>
     </Compile>
     <Compile Include="Util.cs" />
-    <EmbeddedResource Include="EntryForm.resx">
-      <DependentUpon>EntryForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.zh-CN.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -336,7 +293,6 @@
     <EmbeddedResource Include="UI\LaserAppearanceCtrl.resx">
       <DependentUpon>LaserAppearanceCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Picture\ZoomblePictureBoxControl.resx" />
     <EmbeddedResource Include="UI\RulerAppearanceCtrl.resx">
       <DependentUpon>RulerAppearanceCtrl.cs</DependentUpon>
     </EmbeddedResource>
@@ -394,9 +350,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ScalablePictureBoxImp.resx">
       <DependentUpon>ScalablePictureBoxImp.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\ToolbarControl.resx">
-      <DependentUpon>ToolbarControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TransparentButton.resx">
       <DependentUpon>TransparentButton.cs</DependentUpon>

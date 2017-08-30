@@ -1,5 +1,4 @@
 ﻿using Cii.Lar.UI;
-using Cii.Lar.UI.Picture;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -25,17 +24,6 @@ namespace Cii.Lar.DrawTools
     /// </summary>
     public abstract class DrawObject
     {
-        protected ZoomblePictureBoxControl pictureBox;
-
-        protected float UnitOfMeasureFactor
-        {
-            get { return MeasureSystem.CustomUnitToMicron(1, UnitOfMeasure); }
-        }
-
-        protected MeasureSystem.enUniMis UnitOfMeasure
-        {
-            get { return pictureBox.UnitOfMeasure; }
-        }
         public ObjectType ObjectType;
 
         /// <summary>
@@ -87,7 +75,7 @@ namespace Cii.Lar.DrawTools
 
         protected void RegisterUpdateStatisticsHandler()
         {
-            this.UpdateStatisticInfoHandler += Program.ExpManager.Form.UpdateStatisticInfoHandler;
+            this.UpdateStatisticInfoHandler += Program.ExpManager.ScalablePictureBox.UpdateStatisticInfoHandler;
         }
 
         public void UpdateStatisticsInformation()
@@ -288,7 +276,7 @@ namespace Cii.Lar.DrawTools
 
         public abstract bool HitTest(int nIndex, PointF dataPoint);
 
-        public HitTestResult HitTest(ZoomblePictureBoxControl pictureBox, Point point, bool forSelection, bool hitTestHandle = true)
+        public HitTestResult HitTest(CursorPictureBox pictureBox, Point point, bool forSelection, bool hitTestHandle = true)
         {
             if (Selected && hitTestHandle)
             {
@@ -319,7 +307,7 @@ namespace Cii.Lar.DrawTools
             }
         }
 
-        protected virtual bool CheckHandleRegion(ZoomblePictureBoxControl pictureBox, int handleNumber, Point point)
+        protected virtual bool CheckHandleRegion(CursorPictureBox pictureBox, int handleNumber, Point point)
         {
             return (GetHandleRectangle(pictureBox, handleNumber).Contains(point));
         }
@@ -329,14 +317,14 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="drawArea"></param>
         /// <param name="point"></param>
-        public abstract HitTestResult HitTestForSelection(ZoomblePictureBoxControl pictureBox, Point point);
+        public abstract HitTestResult HitTestForSelection(CursorPictureBox pictureBox, Point point);
 
         /// <summary>
         /// Get handle point by 1-based number
         /// </summary>
         /// <param name="handleNumber"></param>
         /// <returns></returns>
-        public virtual Point GetHandle(ZoomblePictureBoxControl pictureBox, int handleNumber)
+        public virtual Point GetHandle(CursorPictureBox pictureBox, int handleNumber)
         {
             return new Point(0, 0);
         }
@@ -346,7 +334,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="handleNumber"></param>
         /// <returns></returns>
-        public virtual Rectangle GetHandleRectangle(ZoomblePictureBoxControl pictureBox, int handleNumber)
+        public virtual Rectangle GetHandleRectangle(CursorPictureBox pictureBox, int handleNumber)
         {
             Point point = GetHandle(pictureBox, handleNumber);
 
@@ -358,7 +346,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="deltaX"></param>
         /// <param name="deltaY"></param>
-        public virtual void Move(ZoomblePictureBoxControl pictureBox, int deltaX, int deltaY)
+        public virtual void Move(CursorPictureBox pictureBox, int deltaX, int deltaY)
         {
         }
 
@@ -367,7 +355,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="point"></param>
         /// <param name="handleNumber"></param>
-        public virtual void MoveHandleTo(ZoomblePictureBoxControl pictureBox, Point point, int handleNumber)
+        public virtual void MoveHandleTo(CursorPictureBox pictureBox, Point point, int handleNumber)
         {
         }
 
@@ -375,26 +363,17 @@ namespace Cii.Lar.DrawTools
         /// Draw object
         /// </summary>
         /// <param name="g"></param>
-        public virtual void Draw(Graphics g, ZoomblePictureBoxControl pictureBox)
+        public virtual void Draw(Graphics g, CursorPictureBox pictureBox)
         {
         }
 
-        public virtual void DrawTest(Graphics g, ZoomblePictureBoxControl pictureBox)
+        public virtual void DrawTest(Graphics g, CursorPictureBox pictureBox)
         {
-            try
-            {
-                using (SolidBrush brush = new SolidBrush(GraphicsPropertiesManager.GetPropertiesByName("Text").Color))
-                {
-                    RectangleF r = GetTextF(this.Name, g, this.ID);
-                    r.Offset(MovingOffset);
-                    g.DrawString(this.Name, pictureBox.GraphicInfo.ToLogicalFont(this.Font), brush, r);
-                }
-            }
-            catch (Exception ex)
-            {
-                LogHelper.GetLogger<DrawObject>().Error(ex.Message);
-                LogHelper.GetLogger<DrawObject>().Error(ex.StackTrace);
-            }
+            SolidBrush brush = new SolidBrush(GraphicsPropertiesManager.GetPropertiesByName("Text").Color);
+            RectangleF r = GetTextF(this.Name, g, this.ID);
+            r.Offset(MovingOffset);
+            g.DrawString(this.Name, this.Font, brush, r);
+            brush.Dispose();
         }
 
         public virtual RectangleF GetTextF(string name, Graphics g, int index)
@@ -402,12 +381,12 @@ namespace Cii.Lar.DrawTools
             return new RectangleF();
         }
 
-        public virtual void DrawTracker(Graphics g, ZoomblePictureBoxControl pictureBox)
+        public virtual void DrawTracker(Graphics g, CursorPictureBox pictureBox)
         {
             if (Selected)
             {
                 SolidBrush brush = new SolidBrush(Color.White);
-                Pen pen = new Pen(GraphicsPropertiesManager.GetPropertiesByName("Text").Color, 
+                Pen pen = new Pen(GraphicsPropertiesManager.GetPropertiesByName("Text").Color,
                     GraphicsPropertiesManager.GetPropertiesByName("Text").PenWidth);
 
                 for (int i = 1; i <= HandleCount; i++)

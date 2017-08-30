@@ -1,5 +1,4 @@
 ﻿using Cii.Lar.UI;
-using Cii.Lar.UI.Picture;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -44,7 +43,7 @@ namespace Cii.Lar.DrawTools
 
         }
 
-        public override void OnMouseDown(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
+        public override void OnMouseDown(CursorPictureBox pictureBox, MouseEventArgs e)
         {
             wasMove = false;
             Point point = new Point(e.X, e.Y);
@@ -155,7 +154,7 @@ namespace Cii.Lar.DrawTools
             pictureBox.Refresh();
         }
 
-        public override void OnMouseMove(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
+        public override void OnMouseMove(CursorPictureBox pictureBox, MouseEventArgs e)
         {
             Point point = new Point(e.X, e.Y);
             Point oldPoint = lastPoint;
@@ -244,7 +243,7 @@ namespace Cii.Lar.DrawTools
             //}
         }
 
-        public override void OnMouseUp(ZoomblePictureBoxControl pictureBox, MouseEventArgs e)
+        public override void OnMouseUp(CursorPictureBox pictureBox, MouseEventArgs e)
         {
             if (selectMode == SelectionMode.NetSelection)
             {
@@ -278,7 +277,7 @@ namespace Cii.Lar.DrawTools
             wasMove = false;
         }
 
-        public override void OnCancel(ZoomblePictureBoxControl pictureBox, bool cancelSelection)
+        public override void OnCancel(CursorPictureBox pictureBox, bool cancelSelection)
         {
 
         }

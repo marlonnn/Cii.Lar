@@ -1,5 +1,4 @@
 ﻿using Cii.Lar.UI;
-using Cii.Lar.UI.Picture;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -28,9 +27,8 @@ namespace Cii.Lar.DrawTools
             this.RegisterUpdateStatisticsHandler();
         }
 
-        public DrawRectangle(ZoomblePictureBoxControl pictureBox, int x, int y, int width, int height) : this()
+        public DrawRectangle(CursorPictureBox pictureBox, int x, int y, int width, int height) : this()
         {
-            this.pictureBox = pictureBox;
             InitializeGraphicsProperties();
             this.ObjectType = ObjectType.Rectangle;
             rectangle = new Rectangle(x, y, width, height);
@@ -42,8 +40,8 @@ namespace Cii.Lar.DrawTools
         {
             this.GraphicsProperties = GraphicsPropertiesManager.GetPropertiesByName("Rectangle");
             this.GraphicsProperties.Color = Color.BlueViolet;
-			this.GraphicsProperties.DrawObject = this;
-			this.GraphicsProperties.Alpha = (this.GraphicsProperties.Alpha == 0xFF || this.GraphicsProperties.Alpha == 0) ? 0xFF 
+            this.GraphicsProperties.DrawObject = this;
+            this.GraphicsProperties.Alpha = (this.GraphicsProperties.Alpha == 0xFF || this.GraphicsProperties.Alpha == 0) ? 0xFF
                 : this.GraphicsProperties.Alpha;
         }
 
@@ -60,12 +58,11 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="g"></param>
         /// <param name="pictureBox"></param>
-        public override void Draw(Graphics g, ZoomblePictureBoxControl pictureBox)
+        public override void Draw(Graphics g, CursorPictureBox pictureBox)
         {
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            Rectangle r = GetNormalizedRectangle(GetRectangle(), pictureBox);
-            r.Offset(-pictureBox.OffsetX, -pictureBox.OffsetY);
+            Rectangle r = GetNormalizedRectangle(GetRectangle());
             using (Pen pen = new Pen(Color.FromArgb(GraphicsProperties.Alpha, GraphicsProperties.Color), GraphicsProperties.PenWidth))
             {
                 if (IsMoving)
@@ -82,16 +79,13 @@ namespace Cii.Lar.DrawTools
         public override RectangleF GetTextF(string name, Graphics g, int index)
         {
             SizeF sizeF = g.MeasureString(name, this.Font);
-            RectangleF rectF = this.pictureBox.GraphicInfo.ToLogicalRectangleF(rectangle.X - sizeF.Width, rectangle.Y - sizeF.Height,
+            return new RectangleF(rectangle.X - sizeF.Width, rectangle.Y - sizeF.Height,
                 sizeF.Width, sizeF.Height);
-            rectF.Offset(-pictureBox.OffsetX, -pictureBox.OffsetY);
-            return rectF;
         }
 
-        public static Rectangle GetNormalizedRectangle(Rectangle r, ZoomblePictureBoxControl pictureBox)
+        public static Rectangle GetNormalizedRectangle(Rectangle r)
         {
-            // var v1 = pictureBox.GraphicInfo.ToLogicalRectangle(r.X, r.Y, r.X + r.Width, r.Y + r.Height);
-            return GetNormalizedRectangle(r.X, r.Y, r.X + r.Width, r.Y + r.Height, pictureBox);
+            return GetNormalizedRectangle(r.X, r.Y, r.X + r.Width, r.Y + r.Height);
         }
 
         /// <summary>
@@ -102,7 +96,7 @@ namespace Cii.Lar.DrawTools
         /// <param name="x2"></param>
         /// <param name="y2"></param>
         /// <returns></returns>
-        public static Rectangle GetNormalizedRectangle(int x1, int y1, int x2, int y2, ZoomblePictureBoxControl pictureBox)
+        public static Rectangle GetNormalizedRectangle(int x1, int y1, int x2, int y2)
         {
             if (x2 < x1)
             {
@@ -118,7 +112,7 @@ namespace Cii.Lar.DrawTools
                 y1 = tmp;
             }
 
-            return pictureBox.GraphicInfo.ToLogicalRectangle(x1, y1, x2 - x1, y2 - y1);
+            return new Rectangle(x1, y1, x2 - x1, y2 - y1);
         }
 
         /// <summary>
@@ -126,7 +120,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="handleNumber"></param>
         /// <returns></returns>
-        public override Point GetHandle(ZoomblePictureBoxControl pictureBox, int handleNumber)
+        public override Point GetHandle(CursorPictureBox pictureBox, int handleNumber)
         {
             int x, y, xCenter, yCenter;
             Rectangle rectangle = GetRectangle();
@@ -176,7 +170,7 @@ namespace Cii.Lar.DrawTools
 
         }
 
-        public override void Move(ZoomblePictureBoxControl pictureBox, int deltaX, int deltaY)
+        public override void Move(CursorPictureBox pictureBox, int deltaX, int deltaY)
         {
             Rectangle rect = GetRectangle();
             SetRectangle(new Rectangle(rect.X + deltaX, rect.Y + deltaY, rect.Width, rect.Height));
@@ -188,7 +182,7 @@ namespace Cii.Lar.DrawTools
         /// <param name="pictureBox"></param>
         /// <param name="point"></param>
         /// <param name="handleNumber"></param>
-        public override void MoveHandleTo(ZoomblePictureBoxControl pictureBox, Point point, int handleNumber)
+        public override void MoveHandleTo(CursorPictureBox pictureBox, Point point, int handleNumber)
         {
             int left = rectangle.Left;
             int top = rectangle.Top;
@@ -229,27 +223,24 @@ namespace Cii.Lar.DrawTools
             SetRectangle(rectangle);
             this.Statistics.Area = GetArea();
             this.Statistics.Circumference = GetCircumference();
-            //Console.WriteLine("area:" + this.Statistics.Area);
-            //Console.WriteLine("Circumference:" + this.Statistics.Circumference);
-            //Console.WriteLine("Height:" + rectangle.Height);
+            Console.WriteLine("area:" + this.Statistics.Area);
+            Console.WriteLine("Circumference:" + this.Statistics.Circumference);
+            Console.WriteLine("Height:" + rectangle.Height);
         }
 
-        private string GetCircumference()
+        private double GetCircumference()
         {
-            float Scale = pictureBox.ScaleFactor * UnitOfMeasureFactor;
-            return string.Format("{0:F2} {1}", 2 * (Math.Abs(rectangle.Width + rectangle.Height)) / Scale, UnitOfMeasure.ToString());
+            return 2 * (rectangle.Width + rectangle.Height);
         }
 
-        private string GetArea()
+        private double GetArea()
         {
-            float Scale = pictureBox.ScaleFactor * UnitOfMeasureFactor;
-            return string.Format("{0:F2} {1}²", rectangle.Width / Scale * rectangle.Height / Scale, 
-                UnitOfMeasure.ToString());
+            return rectangle.Width * rectangle.Height;
         }
 
         private void SetRectangle(Rectangle r)
         {
-            PointF dataLeftTop =  new PointF(r.Left, r.Top);
+            PointF dataLeftTop = new PointF(r.Left, r.Top);
             PointF dataRightBottom = new PointF(r.Right, r.Bottom);
             dataLeft = dataLeftTop.X;
             dataTop = dataLeftTop.Y;
@@ -306,7 +297,7 @@ namespace Cii.Lar.DrawTools
                && dataPoint.Y >= dataBottom && dataPoint.Y <= dataTop;
         }
 
-        public override HitTestResult HitTestForSelection(ZoomblePictureBoxControl pictureBox, Point point)
+        public override HitTestResult HitTestForSelection(CursorPictureBox pictureBox, Point point)
         {
             Rectangle rectGate = GetRectangle();
             Rectangle rectLarge = rectGate, rectSamll = rectGate;

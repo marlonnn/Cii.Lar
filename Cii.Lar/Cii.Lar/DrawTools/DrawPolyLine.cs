@@ -1,5 +1,4 @@
 ﻿using Cii.Lar.UI;
-using Cii.Lar.UI.Picture;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -35,10 +34,9 @@ namespace Cii.Lar.DrawTools
             this.ObjectType = ObjectType.Polygon;
         }
 
-        public DrawPolyLine(ZoomblePictureBoxControl pictureBox, int x1, int y1, int x2, int y2) 
+        public DrawPolyLine(CursorPictureBox pictureBox, int x1, int y1, int x2, int y2)
             : base(pictureBox, x1, y1, x2, y2)
         {
-            this.pictureBox = pictureBox;
             InitializeGraphicsProperties();
             this.RegisterUpdateStatisticsHandler();
             this.GraphicsProperties.GraphicsPropertiesChangedHandler += pictureBox.GraphicsPropertiesChangedHandler;
@@ -48,10 +46,10 @@ namespace Cii.Lar.DrawTools
         private void InitializeGraphicsProperties()
         {
             this.GraphicsProperties = GraphicsPropertiesManager.GetPropertiesByName("Polygon");
-			this.GraphicsProperties.DrawObject = this;
+            this.GraphicsProperties.DrawObject = this;
             this.GraphicsProperties.Color = Color.LawnGreen;
-            this.GraphicsProperties.Alpha = (this.GraphicsProperties.Alpha == 0xFF || this.GraphicsProperties.Alpha == 0) ? 0xFF 
-                : this.GraphicsProperties.Alpha;			
+            this.GraphicsProperties.Alpha = (this.GraphicsProperties.Alpha == 0xFF || this.GraphicsProperties.Alpha == 0) ? 0xFF
+                : this.GraphicsProperties.Alpha;
         }
 
         public override string Prefix
@@ -65,10 +63,8 @@ namespace Cii.Lar.DrawTools
         public override RectangleF GetTextF(string name, Graphics g, int index)
         {
             SizeF sizeF = g.MeasureString(name, this.Font);
-            RectangleF rectF = new RectangleF(pointArray[0].X - sizeF.Width / pictureBox.ScaleFactor, pointArray[0].Y - sizeF.Height / pictureBox.ScaleFactor,
-                sizeF.Width / pictureBox.ScaleFactor, sizeF.Height / pictureBox.ScaleFactor);
-            rectF.Offset(-pictureBox.OffsetX, -pictureBox.OffsetY);
-            return rectF;
+            return new RectangleF(pointArray[0].X - sizeF.Width, pointArray[0].Y - sizeF.Height,
+                sizeF.Width, sizeF.Height);
         }
 
         public bool CloseToFirstPoint(Point point)

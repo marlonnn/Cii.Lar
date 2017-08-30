@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Cii.Lar.DrawTools;
 using System.Drawing.Drawing2D;
+using Cii.Lar.DrawTools;
 
 namespace Cii.Lar.UI
 {
@@ -44,16 +44,20 @@ namespace Cii.Lar.UI
                         DrawPolyLine polygon = (DrawPolyLine)GraphicsList[0];
                         if (polygon != null && polygon.Creating)
                         {
-                            //tools[(int)DrawToolType.PolyLine].OnCancel(this, true);
+                            tools[(int)DrawToolType.PolyLine].OnCancel(this, true);
                         }
                     }
                 }
                 activeTool = value;
+                if (tools != null && activeTool != DrawToolType.None)
+                {
+                    Cursor = tools[(int)activeTool] is ToolPointer ? Cursors.Default : (tools[(int)activeTool] as ToolObject).Cursor;
+                }
                 Enabled = activeTool != DrawToolType.None;
             }
         }
 
-        internal void GraphicsPropertiesChangedHandler(DrawObject drawObject, GraphicsProperties graphicsProperties)
+        public void GraphicsPropertiesChangedHandler(DrawObject drawObject, GraphicsProperties graphicsProperties)
         {
             this.Invalidate();
         }
@@ -99,46 +103,65 @@ namespace Cii.Lar.UI
 
         private void CursorPictureBox_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            //tools[(int)activeTool].OnDoubleClick(this, e);
+            tools[(int)activeTool].OnDoubleClick(this, e);
         }
 
         private void CursorPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-            //if (e.Button == MouseButtons.Left)
-            //{
-            //    tools[(int)activeTool].OnMouseUp(this, e);
-            //}
+            if (e.Button == MouseButtons.Left)
+            {
+                tools[(int)activeTool].OnMouseUp(this, e);
+            }
         }
 
         private void CursorPictureBox_MouseMove(object sender, MouseEventArgs e)
         {
-            //if (e.Button == MouseButtons.Left || e.Button == MouseButtons.None)
-            //{
-            //    tools[(int)activeTool].OnMouseMove(this, e);
-            //}
-            //else
-            //{
-            //    this.Cursor = Cursors.Default;
-            //}
+            if (e.Button == MouseButtons.Left || e.Button == MouseButtons.None)
+            {
+                tools[(int)activeTool].OnMouseMove(this, e);
+            }
+            else
+            {
+                this.Cursor = Cursors.Default;
+            }
         }
 
         private void CursorPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            //if (e.Button == MouseButtons.Left)
-            //{
-            //    tools[(int)activeTool].OnMouseDown(this, e);
-            //}
+            if (e.Button == MouseButtons.Left)
+            {
+                tools[(int)activeTool].OnMouseDown(this, e);
+            }
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            //if (GraphicsList != null)
-            //{
-            //    e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            //    GraphicsList.Draw(e.Graphics, this);
-            //}
-            //DrawNetSelection(e.Graphics);
+            if (GraphicsList != null)
+            {
+                e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                GraphicsList.Draw(e.Graphics, this);
+            }
+            DrawNetSelection(e.Graphics);
+        }
+
+        private void DrawNetSelection(Graphics graphics)
+        {
+            if (RectNetSelection.IsEmpty)
+            {
+                return;
+            }
+            SmoothingMode mode = graphics.SmoothingMode;
+            graphics.SmoothingMode = SmoothingMode.Default;
+
+            Pen pen = new Pen(Color.DimGray, 1);
+            pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+
+            RectNetSelection = DrawRectangle.GetNormalizedRectangle(RectNetSelection);
+            graphics.DrawRectangle(pen, RectNetSelection);
+
+            pen.Dispose();
+            graphics.SmoothingMode = mode;
         }
     }
 }

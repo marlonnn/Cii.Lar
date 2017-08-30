@@ -13,7 +13,6 @@ namespace Cii.Lar.DrawTools
     using UI;
     using System.Drawing.Drawing2D;
     using System.Windows.Forms;
-    using UI.Picture;
 
     /// <summary>
     /// Polygon graphic object
@@ -21,7 +20,7 @@ namespace Cii.Lar.DrawTools
     /// </summary>
     public class DrawPolygon : DrawLine
     {
-        protected static System.Resources.ResourceManager resourceManager = new System.Resources.ResourceManager(typeof(ZoomblePictureBoxControl));
+        protected static System.Resources.ResourceManager resourceManager = new System.Resources.ResourceManager(typeof(CursorPictureBox));
 
         protected static Cursor handleCursor = new Cursor(new System.IO.MemoryStream((byte[])resourceManager.GetObject("PolyHandle")));
         protected PointFList pointArray;
@@ -45,14 +44,14 @@ namespace Cii.Lar.DrawTools
             drawAreaSize = DefaultDrawAreaSize;
         }
 
-        public DrawPolygon(ZoomblePictureBoxControl pictureBox, List<PointF> dataPoints) : this()
+        public DrawPolygon(CursorPictureBox pictureBox, List<PointF> dataPoints) : this()
         {
             pointArray = new PointFList(dataPoints);
             pointArrayProportion = new PointFList();
 
         }
 
-        public DrawPolygon(ZoomblePictureBoxControl pictureBox, int x1, int y1, int x2, int y2) : this()
+        public DrawPolygon(CursorPictureBox pictureBox, int x1, int y1, int x2, int y2) : this()
         {
             pointArray = new PointFList();
             pointArrayProportion = new PointFList();
@@ -61,7 +60,7 @@ namespace Cii.Lar.DrawTools
             AddPoint(pictureBox, new Point(x2, y2), false);
         }
 
-        public override void Move(ZoomblePictureBoxControl pictureBox, int deltaX, int deltaY)
+        public override void Move(CursorPictureBox pictureBox, int deltaX, int deltaY)
         {
             int n = pointArray.Count;
             Point point;
@@ -80,7 +79,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="g"></param>
         /// <param name="pictureBox"></param>
-        public override void Draw(Graphics g, ZoomblePictureBoxControl pictureBox)
+        public override void Draw(Graphics g, CursorPictureBox pictureBox)
         {
             Point p1 = Point.Empty; // previous point
             Point p2 = Point.Empty; // current point
@@ -94,13 +93,11 @@ namespace Cii.Lar.DrawTools
                 {
                     p1 = Point.Ceiling(enumerator.Current);
                     p1.Offset(MovingOffset);
-                    p1.Offset(new Point(-pictureBox.OffsetX, - pictureBox.OffsetY));
                 }
                 while (enumerator.MoveNext())
                 {
                     p2 = Point.Ceiling(enumerator.Current);
                     p2.Offset(MovingOffset);
-                    p2.Offset(new Point(-pictureBox.OffsetX, -pictureBox.OffsetY));
                     g.DrawLine(pen, p1, p2);
                     p1 = p2;
                 }
@@ -109,22 +106,20 @@ namespace Cii.Lar.DrawTools
                 {
                     p2 = Point.Ceiling(enumerator.Current);
                     p2.Offset(MovingOffset);
-                    p2.Offset(new Point(-pictureBox.OffsetX, -pictureBox.OffsetY));
                     g.DrawLine(pen, p1, p2);
                 }
             }
         }
 
-        public void AddPoint(ZoomblePictureBoxControl pictureBox, Point point, bool checkClose)
+        public void AddPoint(CursorPictureBox pictureBox, Point point, bool checkClose)
         {
             bool addPoint = true;
-            Point p = pictureBox.GraphicInfo.ToLogicalPoint(point);
             if (checkClose)
             {
                 for (int i = 0; i < PointCount - 1; i++)   // does not check for last point
                 {
-                    Point des = pictureBox.GraphicInfo.ToLogicalPoint(Point.Ceiling(pointArray[i]));
-                    if (CloseToPoint(p, des))
+                    Point des = Point.Ceiling(pointArray[i]);
+                    if (CloseToPoint(point, des))
                     {
                         addPoint = false;
                     }
@@ -132,7 +127,7 @@ namespace Cii.Lar.DrawTools
             }
             if (addPoint)
             {
-                pointArray.Add(p);
+                pointArray.Add(point);
             }
         }
 
@@ -141,7 +136,7 @@ namespace Cii.Lar.DrawTools
             return Math.Abs(src.X - des.X) <= 3 && Math.Abs(src.Y - des.Y) <= 3;
         }
 
-        public override void DrawTracker(Graphics g, ZoomblePictureBoxControl pictureBox)
+        public override void DrawTracker(Graphics g, CursorPictureBox pictureBox)
         {
             if (!Selected)
             {
@@ -149,7 +144,7 @@ namespace Cii.Lar.DrawTools
             }
 
             SolidBrush brush = new SolidBrush(Color.White);
-            Pen pen = new Pen(GraphicsPropertiesManager.GetPropertiesByName("Text").Color, 
+            Pen pen = new Pen(GraphicsPropertiesManager.GetPropertiesByName("Text").Color,
                 GraphicsPropertiesManager.GetPropertiesByName("Text").PenWidth);
 
             for (int i = 1; i <= HandleCount; i++)
@@ -266,10 +261,10 @@ namespace Cii.Lar.DrawTools
             return false;
         }
 
-        public override HitTestResult HitTestForSelection(ZoomblePictureBoxControl pictureBox, Point point0)
+        public override HitTestResult HitTestForSelection(CursorPictureBox pictureBox, Point point0)
         {
             //transfer point according to const draw area size for hit test
-            Point point = new Point(point0.X * pictureBox.Width, point0.Y *pictureBox.Height);
+            Point point = new Point(point0.X * pictureBox.Width, point0.Y * pictureBox.Height);
             GraphicsPath pathOut = AreaPath.Clone() as GraphicsPath;
             Pen pen = new Pen(Color.Black, SelectionHitTestWidth * 2);
             pathOut.Widen(pen);
@@ -290,25 +285,22 @@ namespace Cii.Lar.DrawTools
             return result ? new HitTestResult(ElementType.Gate, 0) : new HitTestResult(ElementType.Nothing, -1);
         }
 
-        public void MoveLastHandleTo(ZoomblePictureBoxControl pictureBox, Point point)
+        public void MoveLastHandleTo(CursorPictureBox pictureBox, Point point)
         {
             if (PointCount == 0) return;
-            Point p = pictureBox.GraphicInfo.ToLogicalPoint(point);
 
-            if (PointCount > 3 && CloseToFirstPoint(pictureBox, p))
+            if (PointCount > 3 && CloseToFirstPoint(pictureBox, point))
             {
-                pointArray[PointCount - 1] = pictureBox.GraphicInfo.ToLogicalPointF(pointArray[0]);
+                pointArray[PointCount - 1] = pointArray[0];
             }
             else
             {
-                pointArray[PointCount - 1] = p;
+                pointArray[PointCount - 1] = point;
             }
-            this.Statistics.Area = GetArea();
-            this.Statistics.Circumference = GetCircumference();
             Console.WriteLine("Circumference:" + GetCircumference());
         }
 
-        private string GetCircumference()
+        private double GetCircumference()
         {
             Point p1 = Point.Empty; // previous point
             Point p2 = Point.Empty; // current point
@@ -334,21 +326,19 @@ namespace Cii.Lar.DrawTools
                 p2 = Point.Ceiling(enumerator.Current);
                 p2.Offset(MovingOffset);
             }
-            return string.Format("{0:F2} {1}", sum / UnitOfMeasureFactor, UnitOfMeasure.ToString());
+            return sum;
         }
 
-        private string GetArea()
+        private double GetArea()
         {
-            //Calculate polygon area
-            //return string.Format("{0:F2} {1}²", "Unknown", UnitOfMeasure.ToString());
-            return "Unknown";
+            return 0;
         }
 
-        public bool CloseToFirstPoint(ZoomblePictureBoxControl pictureBox, Point point)
+        public bool CloseToFirstPoint(CursorPictureBox pictureBox, Point point)
         {
             if (PointCount <= 0) return false;
 
-            Point first = pictureBox.GraphicInfo.ToLogicalPoint(Point.Ceiling(pointArray[0]));
+            Point first = Point.Ceiling(pointArray[0]);
 
             return CloseToPoint(first, point);
         }
@@ -358,7 +348,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="handleNumber"></param>
         /// <returns></returns>
-        public override Rectangle GetHandleRectangle(ZoomblePictureBoxControl pictureBox, int handleNumber)
+        public override Rectangle GetHandleRectangle(CursorPictureBox pictureBox, int handleNumber)
         {
             Point point = GetHandle(pictureBox, handleNumber);
 
@@ -403,7 +393,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="handleNumber"></param>
         /// <returns></returns>
-        public override Point GetHandle(ZoomblePictureBoxControl pictureBox, int handleNumber)
+        public override Point GetHandle(CursorPictureBox pictureBox, int handleNumber)
         {
             if (handleNumber < 1)
             {

@@ -38,7 +38,7 @@ namespace Cii.Lar
             IsMdiContainer = true;
             InitializeComponent();
             InitializeToolStrip();
-            //Program.ExpManager.ScalablePictureBox = this.scalablePictureBox;
+            Program.ExpManager.ScalablePictureBox = this.scalablePictureBox;
             //this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
             resources = new ComponentResourceManager(typeof(MainForm));

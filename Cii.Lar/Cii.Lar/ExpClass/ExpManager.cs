@@ -1,6 +1,5 @@
 ﻿using Cii.Lar.DrawTools;
 using Cii.Lar.UI;
-using Cii.Lar.UI.Picture;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,30 +15,17 @@ namespace Cii.Lar.ExpClass
     /// </summary>
     public class ExpManager
     {
-        private ZoomblePictureBoxControl pictureBox;
+        private ScalablePictureBox scalablePictureBox;
 
-        public ZoomblePictureBoxControl PictureBox
+        public ScalablePictureBox ScalablePictureBox
         {
             get
             {
-                return this.pictureBox;
+                return this.scalablePictureBox;
             }
             set
             {
-                pictureBox = value;
-            }
-        }
-
-        private EntryForm form;
-        public EntryForm Form
-        {
-            get
-            {
-                return form;
-            }
-            set
-            {
-                form = value;
+                scalablePictureBox = value;
             }
         }
 
@@ -51,7 +37,7 @@ namespace Cii.Lar.ExpClass
         public int GetNextDrawObjectID()
         {
             List<int> objectIDs = new List<int>();
-            foreach (DrawObject o in PictureBox.GraphicsList)
+            foreach (DrawObject o in ScalablePictureBox.GraphicsList)
             {
                 if (o is DrawCircle)
                 {
@@ -116,7 +102,7 @@ namespace Cii.Lar.ExpClass
         /// </summary>
         private void CommandLine()
         {
-            this.PictureBox.ActiveTool = DrawToolType.Line;
+            this.scalablePictureBox.ActiveTool = DrawToolType.Line;
         }
 
         /// <summary>
@@ -124,7 +110,7 @@ namespace Cii.Lar.ExpClass
         /// </summary>
         private void CommandRectangle()
         {
-            this.PictureBox.ActiveTool = DrawToolType.Rectangle;
+            this.scalablePictureBox.ActiveTool = DrawToolType.Rectangle;
         }
 
         /// <summary>
@@ -132,7 +118,7 @@ namespace Cii.Lar.ExpClass
         /// </summary>
         private void CommandEllipse()
         {
-            this.PictureBox.ActiveTool = DrawToolType.Ellipse;
+            this.scalablePictureBox.ActiveTool = DrawToolType.Ellipse;
         }
 
         /// <summary>
@@ -140,12 +126,12 @@ namespace Cii.Lar.ExpClass
         /// </summary>
         private void CommandPolyLine()
         {
-            this.PictureBox.ActiveTool = DrawToolType.PolyLine;
+            this.scalablePictureBox.ActiveTool = DrawToolType.PolyLine;
         }
 
         private void CommandPointer()
         {
-            this.PictureBox.ActiveTool = DrawToolType.Pointer;
+            this.scalablePictureBox.ActiveTool = DrawToolType.Pointer;
         }
 
         /// <summary>
@@ -153,7 +139,7 @@ namespace Cii.Lar.ExpClass
         /// </summary>
         private void CommandCircle()
         {
-            this.PictureBox.ActiveTool = DrawToolType.Circle;
+            this.scalablePictureBox.ActiveTool = DrawToolType.Circle;
         }
     }
 }
