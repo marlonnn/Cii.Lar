@@ -1088,56 +1088,57 @@ namespace Cii.Lar.UI.Picture
                 {
                     GridStep = (int)myRulers.GetRulerStep();
                 }
-
                 int InitialX = (int)(Math.Ceiling((double)(LogicalOrigin.X / GridStep)) * GridStep);
                 int InitialY = (int)(Math.Ceiling((double)(LogicalOrigin.Y / GridStep)) * GridStep);
-                Pen myPen = new Pen(GridColor);
                 int FinalX = (int)(Math.Floor((double)((LogicalOrigin.X + LogicalWidth) / GridStep)) * GridStep);
                 int FinalY = (int)(Math.Floor((double)((LogicalOrigin.Y + LogicalHeight) / GridStep)) * GridStep);
                 int iIterX = 0;
                 int iIterY = 0;
-                switch (GridMode)
+                using (Pen myPen = new Pen(GridColor))
                 {
-                    case GridKind.Crosses:
-                        for (iIterY = InitialY; iIterY <= FinalY; iIterY += GridStep)
-                        {
+                    switch (GridMode)
+                    {
+                        case GridKind.Crosses:
+                            for (iIterY = InitialY; iIterY <= FinalY; iIterY += GridStep)
+                            {
+                                for (iIterX = InitialX; iIterX <= FinalX; iIterX += GridStep)
+                                {
+                                    g.DrawLine(myPen, iIterX + GridInitialOffset - 10 / ScaleFactor, iIterY + GridInitialOffset,
+                                        iIterX + GridInitialOffset + 10 / ScaleFactor, iIterY + GridInitialOffset);
+                                    g.DrawLine(myPen, iIterX + GridInitialOffset, iIterY + GridInitialOffset - 10 / ScaleFactor,
+                                        iIterX + GridInitialOffset, iIterY + GridInitialOffset + 10 / ScaleFactor);
+                                }
+                            }
+
+                            break;
+                        case GridKind.FullLines:
+                            for (iIterY = InitialY; iIterY <= FinalY; iIterY += GridStep)
+                            {
+                                g.DrawLine(myPen, LogicalOrigin.X, iIterY + GridInitialOffset, LogicalWidth + LogicalOrigin.X,
+                                    iIterY + GridInitialOffset);
+                            }
+
                             for (iIterX = InitialX; iIterX <= FinalX; iIterX += GridStep)
                             {
-                                g.DrawLine(myPen, iIterX + GridInitialOffset - 10 / ScaleFactor, iIterY + GridInitialOffset,
-                                    iIterX + GridInitialOffset + 10 / ScaleFactor, iIterY + GridInitialOffset);
-                                g.DrawLine(myPen, iIterX + GridInitialOffset, iIterY + GridInitialOffset - 10 / ScaleFactor,
-                                    iIterX + GridInitialOffset, iIterY + GridInitialOffset + 10 / ScaleFactor);
+                                g.DrawLine(myPen, iIterX + GridInitialOffset, LogicalOrigin.Y, iIterX + GridInitialOffset,
+                                    LogicalHeight + LogicalOrigin.Y);
                             }
-                        }
 
-                        break;
-                    case GridKind.FullLines:
-                        for (iIterY = InitialY; iIterY <= FinalY; iIterY += GridStep)
-                        {
-                            g.DrawLine(myPen, LogicalOrigin.X, iIterY + GridInitialOffset, LogicalWidth + LogicalOrigin.X,
-                                iIterY + GridInitialOffset);
-                        }
-
-                        for (iIterX = InitialX; iIterX <= FinalX; iIterX += GridStep)
-                        {
-                            g.DrawLine(myPen, iIterX + GridInitialOffset, LogicalOrigin.Y, iIterX + GridInitialOffset,
-                                LogicalHeight + LogicalOrigin.Y);
-                        }
-
-                        break;
-                    case GridKind.Points:
-                        for (iIterY = InitialY; iIterY <= FinalY; iIterY += GridStep)
-                        {
-                            for (iIterX = InitialX; iIterX <= FinalX; iIterX += GridStep)
+                            break;
+                        case GridKind.Points:
+                            for (iIterY = InitialY; iIterY <= FinalY; iIterY += GridStep)
                             {
-                                g.DrawLine(myPen, iIterX + GridInitialOffset - 1 / ScaleFactor, iIterY + GridInitialOffset,
-                                    iIterX + GridInitialOffset + 1 / ScaleFactor, iIterY + GridInitialOffset);
-                                g.DrawLine(myPen, iIterX + GridInitialOffset, iIterY + GridInitialOffset - 1 / ScaleFactor,
-                                    iIterX + GridInitialOffset, iIterY + GridInitialOffset + 1 / ScaleFactor);
+                                for (iIterX = InitialX; iIterX <= FinalX; iIterX += GridStep)
+                                {
+                                    g.DrawLine(myPen, iIterX + GridInitialOffset - 1 / ScaleFactor, iIterY + GridInitialOffset,
+                                        iIterX + GridInitialOffset + 1 / ScaleFactor, iIterY + GridInitialOffset);
+                                    g.DrawLine(myPen, iIterX + GridInitialOffset, iIterY + GridInitialOffset - 1 / ScaleFactor,
+                                        iIterX + GridInitialOffset, iIterY + GridInitialOffset + 1 / ScaleFactor);
+                                }
                             }
-                        }
 
-                        break;
+                            break;
+                    }
                 }
             }
             catch (Exception ex)
@@ -1155,9 +1156,11 @@ namespace Cii.Lar.UI.Picture
                 {
                     return;
                 }
-                //Console.WriteLine(string.Format());
-                g.DrawLine(new Pen(AxesColor, -1), 0, LogicalOrigin.Y, 0, LogicalOrigin.Y + LogicalHeight);
-                g.DrawLine(new Pen(AxesColor, -1), LogicalOrigin.X, 0, LogicalOrigin.X + LogicalWidth, 0);
+                using (Pen pen = new Pen(AxesColor, -1))
+                {
+                    g.DrawLine(pen, 0, LogicalOrigin.Y, 0, LogicalOrigin.Y + LogicalHeight);
+                    g.DrawLine(pen, LogicalOrigin.X, 0, LogicalOrigin.X + LogicalWidth, 0);
+                }
             }
             catch (Exception ex)
             {
@@ -1579,11 +1582,13 @@ namespace Cii.Lar.UI.Picture
 
                 //this.OffsetX = LogicalArea.X - tmpArea.X;
                 //this.OffsetY = LogicalArea.Y - tmpArea.Y;
-
+                //Console.WriteLine(string.Format("zoom forward--->X offset: {0}, Y offset: {1}", tmpArea.X - LogicalArea.X, tmpArea.Y - LogicalArea.Y));
+                //Console.WriteLine(string.Format("Original X: {0}, Y: {1}", LogicalOrigin.X, LogicalOrigin.Y));
+                //var dx = tmpArea.left - LogicalOrigin.X;
+                //var dy = tmpArea.top - LogicalOrigin.Y;
+                //Console.WriteLine(string.Format("delt X: {0}, delt Y: {1}", dx, dy));
                 LogicalArea = tmpArea;
 
-                Console.WriteLine(string.Format("zoom forward--->X offset: {0}, Y offset: {1}", this.GraphicInfo.ToLogicalCoordX(ZoomCenter.X - LogicalCenter.X), 
-                    this.GraphicInfo.ToLogicalCoordY(ZoomCenter.Y - LogicalCenter.Y)));
                 Redraw();
             }
             catch (Exception ex)
