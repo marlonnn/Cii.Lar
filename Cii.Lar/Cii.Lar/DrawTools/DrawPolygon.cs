@@ -300,10 +300,12 @@ namespace Cii.Lar.DrawTools
             {
                 pointArray[PointCount - 1] = p;
             }
+            this.Statistics.Area = GetArea();
+            this.Statistics.Circumference = GetCircumference();
             Console.WriteLine("Circumference:" + GetCircumference());
         }
 
-        private double GetCircumference()
+        private string GetCircumference()
         {
             Point p1 = Point.Empty; // previous point
             Point p2 = Point.Empty; // current point
@@ -329,12 +331,14 @@ namespace Cii.Lar.DrawTools
                 p2 = Point.Ceiling(enumerator.Current);
                 p2.Offset(MovingOffset);
             }
-            return sum;
+            return string.Format("{0:F2} {1}", sum / UnitOfMeasureFactor, UnitOfMeasure.ToString());
         }
 
-        private double GetArea()
+        private string GetArea()
         {
-            return 0;
+            //Calculate polygon area
+            //return string.Format("{0:F2} {1}²", "Unknown", UnitOfMeasure.ToString());
+            return "Unknown";
         }
 
         public bool CloseToFirstPoint(ZoomblePictureBoxControl pictureBox, Point point)

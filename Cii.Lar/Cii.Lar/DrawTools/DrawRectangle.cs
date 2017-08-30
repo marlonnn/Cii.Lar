@@ -23,7 +23,6 @@ namespace Cii.Lar.DrawTools
         protected float dataBottom;
 
         private Rectangle rectangle;
-        private ZoomblePictureBoxControl pictureBox;
         public DrawRectangle()
         {
             this.RegisterUpdateStatisticsHandler();
@@ -229,19 +228,22 @@ namespace Cii.Lar.DrawTools
             SetRectangle(rectangle);
             this.Statistics.Area = GetArea();
             this.Statistics.Circumference = GetCircumference();
-            Console.WriteLine("area:" + this.Statistics.Area);
-            Console.WriteLine("Circumference:" + this.Statistics.Circumference);
-            Console.WriteLine("Height:" + rectangle.Height);
+            //Console.WriteLine("area:" + this.Statistics.Area);
+            //Console.WriteLine("Circumference:" + this.Statistics.Circumference);
+            //Console.WriteLine("Height:" + rectangle.Height);
         }
 
-        private double GetCircumference()
+        private string GetCircumference()
         {
-            return 2*(rectangle.Width + rectangle.Height);
+            float Scale = pictureBox.ScaleFactor * UnitOfMeasureFactor;
+            return string.Format("{0:F2} {1}", 2 * (Math.Abs(rectangle.Width + rectangle.Height)) / Scale, UnitOfMeasure.ToString());
         }
 
-        private double GetArea()
+        private string GetArea()
         {
-            return rectangle.Width * rectangle.Height;
+            float Scale = pictureBox.ScaleFactor * UnitOfMeasureFactor;
+            return string.Format("{0:F2} {1}²", rectangle.Width / Scale * rectangle.Height / Scale, 
+                UnitOfMeasure.ToString());
         }
 
         private void SetRectangle(Rectangle r)

@@ -29,7 +29,6 @@ namespace Cii.Lar.DrawTools
             get { return setProportion; }
             set { setProportion = value; }
         }
-        private ZoomblePictureBoxControl pictureBox;
 
         public DrawPolyLine()
         {

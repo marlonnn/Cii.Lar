@@ -40,14 +40,14 @@ namespace Cii.Lar.UI
             // 
             // closeButton
             // 
-            this.closeButton.Location = new System.Drawing.Point(269, 3);
+            this.closeButton.Location = new System.Drawing.Point(369, 3);
             // 
             // panel
             // 
             this.panel.Controls.Add(this.listViewEx);
             this.panel.Location = new System.Drawing.Point(3, 25);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(282, 230);
+            this.panel.Size = new System.Drawing.Size(382, 230);
             this.panel.TabIndex = 1;
             // 
             // listViewEx
@@ -61,7 +61,7 @@ namespace Cii.Lar.UI
             this.listViewEx.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listViewEx.Location = new System.Drawing.Point(0, 0);
             this.listViewEx.Name = "listViewEx";
-            this.listViewEx.Size = new System.Drawing.Size(282, 230);
+            this.listViewEx.Size = new System.Drawing.Size(382, 230);
             this.listViewEx.TabIndex = 0;
             this.listViewEx.UseCompatibleStateImageBehavior = false;
             this.listViewEx.View = System.Windows.Forms.View.Details;
@@ -78,6 +78,7 @@ namespace Cii.Lar.UI
             // columnHeader3
             // 
             this.columnHeader3.Text = "Area";
+            this.columnHeader3.Width = 200;
             // 
             // columnHeader4
             // 
@@ -105,7 +106,7 @@ namespace Cii.Lar.UI
             this.Controls.Add(this.panel);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "StatisticsCtrl";
-            this.Size = new System.Drawing.Size(288, 284);
+            this.Size = new System.Drawing.Size(388, 284);
             this.Controls.SetChildIndex(this.panel, 0);
             this.Controls.SetChildIndex(this.closeButton, 0);
             this.Controls.SetChildIndex(this.btnAppearance, 0);

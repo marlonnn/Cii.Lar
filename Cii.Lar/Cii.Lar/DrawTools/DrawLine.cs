@@ -53,13 +53,11 @@ namespace Cii.Lar.DrawTools
             }
         }
 
-        private ZoomblePictureBoxControl pictureBox;
-
         public DrawLine()
         {
             InitializeGraphicsProperties();
             this.ObjectType = ObjectType.Line;
-            this.Statistics.Area = 0;
+            this.Statistics.Area = "null";
             this.RegisterUpdateStatisticsHandler();
         }
 
@@ -171,27 +169,17 @@ namespace Cii.Lar.DrawTools
             {
                 endDataPoint = point;
             }
-            this.Statistics.Circumference = (float)GetCircumference(startDataPoint, endDataPoint);
+            this.Statistics.Circumference = GetCircumference(startDataPoint, endDataPoint);
             //Console.WriteLine(this.Statistics.Circumference);
         }
 
-        private double GetCircumference(PointF startPoint, PointF endPoint)
+        private string GetCircumference(PointF startPoint, PointF endPoint)
         {
             float Scale = pictureBox.ScaleFactor * UnitOfMeasureFactor;
 
             float x = System.Math.Abs(endPoint.X - startPoint.X);
             float y = System.Math.Abs(endPoint.Y - startPoint.Y);
-            return Math.Sqrt(x * x + y * y) / Scale;
-        }
-
-        private float UnitOfMeasureFactor
-        {
-            get { return MeasureSystem.CustomUnitToMicron(1, UnitOfMeasure); }
-        }
-
-        private MeasureSystem.enUniMis UnitOfMeasure
-        {
-            get { return pictureBox.UnitOfMeasure; }
+            return string.Format("{0:F2} {1}", Math.Sqrt(x * x + y * y) / Scale, UnitOfMeasure.ToString());
         }
 
         public override bool HitTest(int nIndex, PointF dataPoint)

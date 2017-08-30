@@ -257,7 +257,7 @@
             this.btUmMicron.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btUmMicron.Name = "btUmMicron";
             this.btUmMicron.Size = new System.Drawing.Size(117, 22);
-            this.btUmMicron.Text = "micron";
+            this.btUmMicron.Text = "um";
             this.btUmMicron.Click += new System.EventHandler(this.btUmMicron_Click);
             // 
             // btUmDmm

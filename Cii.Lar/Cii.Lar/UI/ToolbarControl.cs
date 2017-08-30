@@ -60,7 +60,7 @@ namespace Cii.Lar.UI
                         case MeasureSystem.enUniMis.meters:
                             btUmMeters.Checked = true;
                             break;
-                        case MeasureSystem.enUniMis.micron:
+                        case MeasureSystem.enUniMis.um:
                             btUmMicron.Checked = true;
                             break;
                         case MeasureSystem.enUniMis.mm:
@@ -139,7 +139,7 @@ namespace Cii.Lar.UI
                 }
                 else if (object.ReferenceEquals(sender, btUmMicron))
                 {
-                    LinkedPictureBox.UnitOfMeasure = MeasureSystem.enUniMis.micron;
+                    LinkedPictureBox.UnitOfMeasure = MeasureSystem.enUniMis.um;
                 }
                 else if (object.ReferenceEquals(sender, btUmMillimeters))
                 {

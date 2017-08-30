@@ -124,7 +124,7 @@ namespace Cii.Lar.UI.Picture
                 }
                 else
                 {
-                    if (UnitOfMeasure != MeasureSystem.enUniMis.micron)
+                    if (UnitOfMeasure != MeasureSystem.enUniMis.um)
                     {
                         textToDraw = "X=" + xValue.ToString("0000.00") + ", Y=" + yValue.ToString("0000.00") + UnitOfMeasureString;
                     }

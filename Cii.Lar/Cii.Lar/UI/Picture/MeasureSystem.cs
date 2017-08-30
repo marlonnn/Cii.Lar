@@ -13,7 +13,7 @@ namespace Cii.Lar.UI.Picture
 
         public enum enUniMis
         {
-            micron = 0,
+            um = 0,
             mm = 1,
             inches = 2,
             dmm = 3,
@@ -26,7 +26,7 @@ namespace Cii.Lar.UI.Picture
             get { return myUserUnit; }
             set
             {
-                if ((value == enUniMis.dmm) | (value == enUniMis.inches) | (value == enUniMis.micron) | (value == enUniMis.mm) | (value == enUniMis.meters))
+                if ((value == enUniMis.dmm) | (value == enUniMis.inches) | (value == enUniMis.um) | (value == enUniMis.mm) | (value == enUniMis.meters))
                 {
                     if (myUserUnit != value)
                     {
@@ -41,7 +41,7 @@ namespace Cii.Lar.UI.Picture
         {
             try
             {
-                UserUnit = enUniMis.micron;
+                UserUnit = enUniMis.um;
             }
             catch (Exception ex)
             {
@@ -55,7 +55,7 @@ namespace Cii.Lar.UI.Picture
             double retValue = 0;
             try
             {
-                if (CustomUnit == enUniMis.micron)
+                if (CustomUnit == enUniMis.um)
                 {
                     return Measure_micron;
                 }
@@ -73,7 +73,7 @@ namespace Cii.Lar.UI.Picture
                                 retValue = Convert.ToDouble(retValue * 100) / 100;
                             }
                             break;
-                        case enUniMis.micron:
+                        case enUniMis.um:
                             retValue = Measure_micron;
                             break;
                         case enUniMis.mm:
@@ -133,7 +133,7 @@ namespace Cii.Lar.UI.Picture
                         // 1 inch = 25400 micron ...
                         retVal = Convert.ToInt32(25400 * MeasureValue);
                         break;
-                    case enUniMis.micron:
+                    case enUniMis.um:
                         retVal = Convert.ToInt32(MeasureValue);
                         break;
                     case enUniMis.meters:
@@ -191,8 +191,8 @@ namespace Cii.Lar.UI.Picture
                 {
                     case enUniMis.inches:
                         return "inches";
-                    case enUniMis.micron:
-                        return "micron";
+                    case enUniMis.um:
+                        return "um";
                     case enUniMis.mm:
                         return "mm";
                     case enUniMis.meters:

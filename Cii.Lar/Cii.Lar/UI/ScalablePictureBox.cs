@@ -127,8 +127,8 @@ namespace Cii.Lar.UI
         {
             ListViewItem lvi = new ListViewItem();
             lvi.Text = drawObject.Name;
-            lvi.SubItems.Add(statistics.Circumference.ToString());
-            lvi.SubItems.Add(statistics.Area.ToString());
+            lvi.SubItems.Add(statistics.Circumference);
+            lvi.SubItems.Add(statistics.Area);
             StatisticsControl.StatisticsListView.Items.Add(lvi);
             ListViewItemEx listViewItemEx = new ListViewItemEx(lvi, drawObject);
             AddEmbeddedControlToListView(listViewItemEx);

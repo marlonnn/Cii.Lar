@@ -25,6 +25,17 @@ namespace Cii.Lar.DrawTools
     /// </summary>
     public abstract class DrawObject
     {
+        protected ZoomblePictureBoxControl pictureBox;
+
+        protected float UnitOfMeasureFactor
+        {
+            get { return MeasureSystem.CustomUnitToMicron(1, UnitOfMeasure); }
+        }
+
+        protected MeasureSystem.enUniMis UnitOfMeasure
+        {
+            get { return pictureBox.UnitOfMeasure; }
+        }
         public ObjectType ObjectType;
 
         /// <summary>

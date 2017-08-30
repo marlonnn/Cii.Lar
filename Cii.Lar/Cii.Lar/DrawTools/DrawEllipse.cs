@@ -80,7 +80,6 @@ namespace Cii.Lar.DrawTools
         }
 
         private Size drawAreaSize = DefaultDrawAreaSize; // store draw area size for data point hit test
-        private ZoomblePictureBoxControl pictureBox;
 
         public DrawEllipse()
         {
@@ -218,8 +217,8 @@ namespace Cii.Lar.DrawTools
             UpdateEllipseForHit();
             this.Statistics.Area = GetArea();
             this.Statistics.Circumference = GetCircumference();
-            //Console.WriteLine("area:" + GetArea());
-            //Console.WriteLine("Circumference:" + GetCircumference());
+            Console.WriteLine("area:" + GetArea());
+            Console.WriteLine("Circumference:" + GetCircumference());
             //Console.WriteLine("Height:" + ellipseForDraw.Rectangle.Height);
             //Console.WriteLine("Width:" + ellipseForDraw.Rectangle.Width);
         }
@@ -229,9 +228,12 @@ namespace Cii.Lar.DrawTools
         /// 半轴长（a）与短半轴长（b）
         /// </summary>
         /// <returns></returns>
-        private double GetCircumference()
+        private string GetCircumference()
         {
-            return 2 * Math.PI * (ellipseForDraw.Rectangle.Height / 2) + 4 * (ellipseForDraw.Rectangle.Width / 2 - ellipseForDraw.Rectangle.Height / 2);
+            float Scale = pictureBox.ScaleFactor * UnitOfMeasureFactor;
+            return string.Format("{0:F2} {1}", 
+                (2 * Math.PI * (ellipseForDraw.Rectangle.Height / 2) + 4 * (ellipseForDraw.Rectangle.Width / 2 - ellipseForDraw.Rectangle.Height / 2)) / UnitOfMeasureFactor, 
+                UnitOfMeasure.ToString());
         }
 
         /// <summary>
@@ -239,9 +241,9 @@ namespace Cii.Lar.DrawTools
         /// 半轴长（a）与短半轴长（b）
         /// </summary>
         /// <returns></returns>
-        private double GetArea()
+        private string GetArea()
         {
-            return Math.PI * (ellipseForDraw.Rectangle.Width / 2) * (ellipseForDraw.Rectangle.Height / 2);
+            return string.Format("{0:F2} {1}²", Math.PI * (ellipseForDraw.Rectangle.Width / (2 * UnitOfMeasureFactor)) * (ellipseForDraw.Rectangle.Height / (2 * UnitOfMeasureFactor)), UnitOfMeasure.ToString());
         }
 
         /// <summary>
