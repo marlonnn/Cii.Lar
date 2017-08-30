@@ -1155,7 +1155,7 @@ namespace Cii.Lar.UI.Picture
                 {
                     return;
                 }
-
+                //Console.WriteLine(string.Format());
                 g.DrawLine(new Pen(AxesColor, -1), 0, LogicalOrigin.Y, 0, LogicalOrigin.Y + LogicalHeight);
                 g.DrawLine(new Pen(AxesColor, -1), LogicalOrigin.X, 0, LogicalOrigin.X + LogicalWidth, 0);
             }
@@ -1577,10 +1577,11 @@ namespace Cii.Lar.UI.Picture
                 myLastVisibleAreaRequested = myLastVisibleAreaRequested.ExpandFromFixedPoint(1f / ZoomMultiplier, LogicalCenter);
                 myLastVisibleAreaRequested.Offset(ZoomCenter.X - LogicalCenter.X, ZoomCenter.Y - LogicalCenter.Y);
 
+                //this.OffsetX = LogicalArea.X - tmpArea.X;
+                //this.OffsetY = LogicalArea.Y - tmpArea.Y;
+
                 LogicalArea = tmpArea;
 
-                //this.OffsetX = (int)this.GraphicInfo.ToLogicalCoordX(ZoomCenter.X - LogicalCenter.X);
-                //this.OffsetY = (int)this.GraphicInfo.ToLogicalCoordY(ZoomCenter.Y - LogicalCenter.Y);
                 Console.WriteLine(string.Format("zoom forward--->X offset: {0}, Y offset: {1}", this.GraphicInfo.ToLogicalCoordX(ZoomCenter.X - LogicalCenter.X), 
                     this.GraphicInfo.ToLogicalCoordY(ZoomCenter.Y - LogicalCenter.Y)));
                 Redraw();

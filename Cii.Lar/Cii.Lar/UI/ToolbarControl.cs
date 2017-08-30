@@ -11,6 +11,9 @@ using Cii.Lar.UI.Picture;
 using static Cii.Lar.UI.Picture.PublicTypes;
 using Cii.Lar.SysClass;
 using DevComponents.DotNetBar;
+using Cii.Lar.ExpClass;
+using System.IO;
+using System.Threading;
 
 namespace Cii.Lar.UI
 {
@@ -91,6 +94,7 @@ namespace Cii.Lar.UI
         {
             InitializeComponent();
             InitializeToolStrip();
+            InitTimer();
             //this.btMeasure.Click += btMeasure_Click;
         }
 
@@ -313,8 +317,64 @@ namespace Cii.Lar.UI
             }
         }
 
+        private System.Windows.Forms.Timer playTimer;
+        List<Frame> frames = new List<Frame>();
+        private void InitTimer()
+        {
+            this.playTimer = new System.Windows.Forms.Timer();
+            this.playTimer.Tick += new System.EventHandler(this.PlayTimer_Tick);
+            this.playTimer.Interval = 200;
+            this.playTimer.Enabled = false;
+        }
+        int index = 0;
+        private void PlayTimer_Tick(object sender, EventArgs e)
+        {
+            if (frames != null && frames.Count > 0)
+            {
+                LinkedPictureBox.Image = Image.FromFile(frames[index].FileFullName);
+                LinkedPictureBox.ZoomToDefaultRect();
+                index++;
+                if (index == frames.Count)
+                {
+                    index = 0;
+                }
+            }
+        }
+
         private void btLoad_Click(object sender, EventArgs e)
         {
+            //using (FolderBrowserDialog ofd = new FolderBrowserDialog())
+            //{
+            //    ofd.Description = "请选择将要播放帧图的文件夹";
+            //    ofd.RootFolder = Environment.SpecialFolder.Desktop;
+            //    ofd.SelectedPath = System.Environment.CurrentDirectory + "\\Images";
+            //    if (ofd.ShowDialog() == DialogResult.OK)
+            //    {
+            //        frames.Clear();
+            //        string fileFolder = ofd.SelectedPath;
+            //        DirectoryInfo folder = new DirectoryInfo(fileFolder);
+            //        try
+            //        {
+            //            FileInfo[] fileInfos = folder.GetFiles();
+            //            Array.Sort(fileInfos, delegate (FileInfo x, FileInfo y)
+            //            {
+            //                return Int32.Parse(Path.GetFileNameWithoutExtension(x.Name)).CompareTo
+            //                (Int32.Parse(Path.GetFileNameWithoutExtension(y.Name)));
+            //            });
+            //            foreach (FileInfo info in fileInfos)
+            //            {
+            //                var v = Path.GetFileNameWithoutExtension(info.Name);
+            //                Frame frame = new Frame(info.FullName, fileFolder);
+            //                //Thread.Sleep(100);
+            //                frames.Add(frame);
+            //            }
+            //            this.playTimer.Enabled = true;
+            //        }
+            //        catch (Exception ee)
+            //        {
+            //        }
+            //    }
+            //}
             try
             {
                 OpenFileDialog OpenImageDialog = new System.Windows.Forms.OpenFileDialog();

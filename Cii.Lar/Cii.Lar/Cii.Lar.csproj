@@ -96,6 +96,7 @@
     <Compile Include="EmptyForm.Designer.cs">
       <DependentUpon>EmptyForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExpClass\Frame.cs" />
     <Compile Include="UI\Picture\CommonCursors.cs" />
     <Compile Include="UI\Picture\ConversionInfo.cs" />
     <Compile Include="ExpClass\ExpManager.cs" />
