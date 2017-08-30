@@ -65,8 +65,10 @@ namespace Cii.Lar.DrawTools
         public override RectangleF GetTextF(string name, Graphics g, int index)
         {
             SizeF sizeF = g.MeasureString(name, this.Font);
-            return new RectangleF(pointArray[0].X - sizeF.Width / pictureBox.ScaleFactor, pointArray[0].Y - sizeF.Height / pictureBox.ScaleFactor,
+            RectangleF rectF = new RectangleF(pointArray[0].X - sizeF.Width / pictureBox.ScaleFactor, pointArray[0].Y - sizeF.Height / pictureBox.ScaleFactor,
                 sizeF.Width / pictureBox.ScaleFactor, sizeF.Height / pictureBox.ScaleFactor);
+            rectF.Offset(-pictureBox.OffsetX, -pictureBox.OffsetY);
+            return rectF;
         }
 
         public bool CloseToFirstPoint(Point point)

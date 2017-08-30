@@ -86,7 +86,6 @@ namespace Cii.Lar.DrawTools
         public override void Draw(Graphics g, ZoomblePictureBoxControl pictureBox)
         {
             g.SmoothingMode = SmoothingMode.AntiAlias;
-
             using (Pen pen = new Pen(Color.FromArgb(GraphicsProperties.Alpha, GraphicsProperties.Color), GraphicsProperties.PenWidth))
             {
                 g.DrawLine(pen, 
@@ -100,8 +99,10 @@ namespace Cii.Lar.DrawTools
         public override RectangleF GetTextF(string name, Graphics g, int index)
         {
             SizeF sizeF = g.MeasureString(name, this.Font);
-            return pictureBox.GraphicInfo.ToLogicalRectangleF(startDataPoint.X - sizeF.Width, startDataPoint.Y - sizeF.Height / 2,
-                sizeF.Width, sizeF.Height);
+            RectangleF rectF = pictureBox.GraphicInfo.ToLogicalRectangleF(startDataPoint.X - sizeF.Width, startDataPoint.Y - sizeF.Height / 2,
+                sizeF.Width, sizeF.Height); ;
+            rectF.Offset(-pictureBox.OffsetX, -pictureBox.OffsetY);
+            return rectF;
         }
 
         public override int HandleCount

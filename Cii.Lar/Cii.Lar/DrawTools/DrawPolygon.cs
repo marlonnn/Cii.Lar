@@ -94,11 +94,13 @@ namespace Cii.Lar.DrawTools
                 {
                     p1 = Point.Ceiling(enumerator.Current);
                     p1.Offset(MovingOffset);
+                    p1.Offset(new Point(-pictureBox.OffsetX, - pictureBox.OffsetY));
                 }
                 while (enumerator.MoveNext())
                 {
                     p2 = Point.Ceiling(enumerator.Current);
                     p2.Offset(MovingOffset);
+                    p2.Offset(new Point(-pictureBox.OffsetX, -pictureBox.OffsetY));
                     g.DrawLine(pen, p1, p2);
                     p1 = p2;
                 }
@@ -107,6 +109,7 @@ namespace Cii.Lar.DrawTools
                 {
                     p2 = Point.Ceiling(enumerator.Current);
                     p2.Offset(MovingOffset);
+                    p2.Offset(new Point(-pictureBox.OffsetX, -pictureBox.OffsetY));
                     g.DrawLine(pen, p1, p2);
                 }
             }

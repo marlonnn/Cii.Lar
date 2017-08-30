@@ -65,8 +65,7 @@ namespace Cii.Lar.DrawTools
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
             Rectangle r = GetNormalizedRectangle(GetRectangle(), pictureBox);
-            //r.Offset(new Point(pictureBox.OffsetX, pictureBox.OffsetY));
-            Rectangle newRect = new Rectangle(r.X - pictureBox.OffsetX, r.Y - pictureBox.OffsetY, r.Width, r.Height);
+            r.Offset(-pictureBox.OffsetX, -pictureBox.OffsetY);
             using (Pen pen = new Pen(Color.FromArgb(GraphicsProperties.Alpha, GraphicsProperties.Color), GraphicsProperties.PenWidth))
             {
                 if (IsMoving)
@@ -76,15 +75,17 @@ namespace Cii.Lar.DrawTools
                 }
 
                 rectangle.Offset(MovingOffset);
-                g.DrawRectangle(pen, newRect);
+                g.DrawRectangle(pen, r);
             }
         }
 
         public override RectangleF GetTextF(string name, Graphics g, int index)
         {
             SizeF sizeF = g.MeasureString(name, this.Font);
-            return this.pictureBox.GraphicInfo.ToLogicalRectangleF(rectangle.X - sizeF.Width, rectangle.Y - sizeF.Height,
+            RectangleF rectF = this.pictureBox.GraphicInfo.ToLogicalRectangleF(rectangle.X - sizeF.Width, rectangle.Y - sizeF.Height,
                 sizeF.Width, sizeF.Height);
+            rectF.Offset(-pictureBox.OffsetX, -pictureBox.OffsetY);
+            return rectF;
         }
 
         public static Rectangle GetNormalizedRectangle(Rectangle r, ZoomblePictureBoxControl pictureBox)

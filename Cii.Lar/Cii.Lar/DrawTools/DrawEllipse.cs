@@ -155,6 +155,7 @@ namespace Cii.Lar.DrawTools
                     g.Transform = DrawMatrix;
 
                     g.TranslateTransform(MovingOffset.X, MovingOffset.Y, MatrixOrder.Append);
+                    ellipseForDraw.Rectangle.Offset(-pictureBox.OffsetX, -pictureBox.OffsetY);
                     g.DrawEllipse(pen, ellipseForDraw.Rectangle);
 
                     g.Transform = OrgMatrix;
