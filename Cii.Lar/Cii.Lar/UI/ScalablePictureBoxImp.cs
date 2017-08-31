@@ -314,7 +314,7 @@ namespace Cii.Lar.UI
             }
         }
 
-        private void ScalePictureBoxToFit()
+        public void ScalePictureBoxToFit()
         {
             if (this.Picture == null)
             {
@@ -420,14 +420,28 @@ namespace Cii.Lar.UI
             if (delta > 0)
             {
                 //Zoom in
-                this.ScalePercent += delta / 12;
+                if (IsCtrlKeyPressed)
+                {
+                    ZoomLeft(PanFactorWithShift);
+                }
+                else if (IsShiftKeyPressed)
+                {
+                    ZoomUp(PanFactorWithShift);
+                }
             }
             else if (delta < 0)
             {
                 //Zoom out
-                this.ScalePercent -= (delta) / (-12);
+                if (IsCtrlKeyPressed)
+                {
+                    ZoomRight(PanFactorWithShift);
+                }
+                if (IsShiftKeyPressed)
+                {
+                    ZoomDown(PanFactorWithShift);
+                }
             }
-            ScaleImage();
+            //ScaleImage();
         }
 
         /// <summary>
@@ -445,5 +459,69 @@ namespace Cii.Lar.UI
                 PictureBoxPaintedEvent(thisControlClientRect, this.pictureBox.ClientRectangle);
             }
         }
+
+        #region Zoom Left、Right、Up、Down
+        private void ZoomLeft(float factor)
+        {
+            int offsetX = (int)(this.Width * factor / 100f);
+            Point location = this.pictureBox.Location;
+            location.Offset(-offsetX, 0);
+            this.pictureBox.Location = location;
+            Invalidate();
+        }
+
+        private void ZoomRight(float factor)
+        {
+            int offsetX = (int)(this.Width * factor / 100f);
+            Point location = this.pictureBox.Location;
+            location.Offset(offsetX, 0);
+            this.pictureBox.Location = location;
+            Invalidate();
+        }
+
+        private void ZoomUp(float factor)
+        {
+            int offsetY = (int)(this.Height * factor / 100f);
+            Point location = this.pictureBox.Location;
+            location.Offset(0, -offsetY);
+            this.pictureBox.Location = location;
+            Invalidate();
+        }
+
+        private void ZoomDown(float factor)
+        {
+            int offsetY = (int)(this.Height * factor / 100f);
+            Point location = this.pictureBox.Location;
+            location.Offset(0, offsetY);
+            this.pictureBox.Location = location;
+            Invalidate();
+        } 
+        #endregion
+
+        #region "Pan & zoom"
+        public float ZoomMultiplier = 1.25f;
+        public float ZoomDivide = 0.85f;
+        public const float PanFactorNoShift = 100f / 3f;
+        public const float PanFactorWithShift = 10f;
+        #endregion
+
+        #region "Check key pressed"
+
+        /// <summary>
+        /// returns true if the shift key is pressed
+        /// </summary>
+        public static bool IsShiftKeyPressed
+        {
+            get { return (Control.ModifierKeys & Keys.Shift) != 0; }
+        }
+        public static bool IsAltKeyPressed
+        {
+            get { return (Control.ModifierKeys & Keys.Alt) != 0; }
+        }
+        public static bool IsCtrlKeyPressed
+        {
+            get { return (Control.ModifierKeys & Keys.Control) != 0; }
+        }
+        #endregion
     }
 }

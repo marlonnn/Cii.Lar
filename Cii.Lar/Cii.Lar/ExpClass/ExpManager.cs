@@ -57,6 +57,7 @@ namespace Cii.Lar.ExpClass
                 case ToolStripAction.ZoomIn:
                     break;
                 case ToolStripAction.ZoomFit:
+                    this.ScalablePictureBox.ScalablePictureBoxImp.ScalePictureBoxToFit();
                     break;
                 case ToolStripAction.Scale:
                     break;

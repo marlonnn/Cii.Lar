@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DrawTools\MeasureSystem.cs" />
+    <Compile Include="DrawTools\Rulers.cs" />
     <Compile Include="EmptyForm.cs">
       <SubType>Form</SubType>
     </Compile>

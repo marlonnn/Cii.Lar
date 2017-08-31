@@ -43,6 +43,7 @@ namespace Cii.Lar.DrawTools
             properties.Add(new GraphicsProperties("Polygon"));
             properties.Add(new GraphicsProperties("Circle"));
             properties.Add(new GraphicsProperties("Text"));
+            properties.Add(new GraphicsProperties("Ruler"));
         }
 
         /// <summary>
@@ -72,6 +73,9 @@ namespace Cii.Lar.DrawTools
                     break;
                 case "Text":
                     propertie = properties[5];
+                    break;
+                case "Ruler":
+                    propertie = properties[6];
                     break;
                 default:
                     propertie = properties[0];

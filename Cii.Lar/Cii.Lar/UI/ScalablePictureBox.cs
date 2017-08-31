@@ -279,6 +279,14 @@ namespace Cii.Lar.UI
             this.pictureTracker.PictureTrackerClosed += new PictureTracker.PictureTrackerClosedHandler(this.PictureTracker_PictureTrackerClosed);
         }
 
+        public ScalablePictureBoxImp ScalablePictureBoxImp
+        {
+            get
+            {
+                return this.scalablePictureBoxImp;
+            }
+        }
+
         /// <summary>
         /// initialize all the base controls
         /// </summary>
@@ -385,8 +393,8 @@ namespace Cii.Lar.UI
         private void InitializeTimer()
         {
             focusTimer = new Timer();
-            focusTimer.Enabled = false;
-            focusTimer.Interval = 300;
+            focusTimer.Enabled = true;
+            focusTimer.Interval = 1000;
             focusTimer.Tick += FocusTimer_Tick;
         }
 
