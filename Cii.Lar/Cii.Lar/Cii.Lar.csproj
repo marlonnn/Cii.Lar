@@ -64,12 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DrawTools\MeasureSystem.cs" />
-    <Compile Include="EntryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EntryForm.Designer.cs">
-      <DependentUpon>EntryForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="EmptyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +105,7 @@
     <Compile Include="SysClass\JsonFile.cs" />
     <Compile Include="SysClass\Patient.cs" />
     <Compile Include="SysClass\SysConfig.cs" />
+    <Compile Include="ToolStripEventArgs.cs" />
     <Compile Include="UI\ArrayChangedEventArgs.cs" />
     <Compile Include="UI\BaseCtrl.cs">
       <SubType>UserControl</SubType>
@@ -273,9 +268,6 @@
       <DependentUpon>TransparentButton.cs</DependentUpon>
     </Compile>
     <Compile Include="Util.cs" />
-    <EmbeddedResource Include="EntryForm.resx">
-      <DependentUpon>EntryForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.zh-CN.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
