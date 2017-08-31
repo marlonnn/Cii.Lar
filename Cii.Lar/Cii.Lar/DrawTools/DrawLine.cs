@@ -56,12 +56,13 @@ namespace Cii.Lar.DrawTools
         {
             InitializeGraphicsProperties();
             this.ObjectType = ObjectType.Line;
-            this.Statistics.Area = 0;
+            this.Statistics.Area = "null";
             this.RegisterUpdateStatisticsHandler();
         }
 
         public DrawLine(CursorPictureBox pictureBox, int x1, int y1, int x2, int y2) : this()
         {
+            this.pictureBox = pictureBox;
             startDataPoint = new Point(x1, y1);
             endDataPoint = new Point(x2, y2);
             this.GraphicsProperties.GraphicsPropertiesChangedHandler += pictureBox.GraphicsPropertiesChangedHandler;
@@ -163,15 +164,15 @@ namespace Cii.Lar.DrawTools
             {
                 endDataPoint = point;
             }
-            this.Statistics.Circumference = (float)GetCircumference(startDataPoint, endDataPoint);
+            this.Statistics.Circumference = GetCircumference(startDataPoint, endDataPoint);
             Console.WriteLine(this.Statistics.Circumference);
         }
 
-        private double GetCircumference(PointF startPoint, PointF endPoint)
+        private string GetCircumference(PointF startPoint, PointF endPoint)
         {
             float x = System.Math.Abs(endPoint.X - startPoint.X);
             float y = System.Math.Abs(endPoint.Y - startPoint.Y);
-            return Math.Sqrt(x * x + y * y);
+            return string.Format("{0:F2} {1}", Math.Sqrt(x * x + y * y) / UnitOfMeasureFactor, pictureBox.UnitOfMeasure.ToString());
         }
 
         public override bool HitTest(int nIndex, PointF dataPoint)

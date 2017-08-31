@@ -143,7 +143,7 @@ namespace Cii.Lar.UI
         /// Get picture box control
         /// </summary>
         [Bindable(false)]
-        public PictureBox PictureBox
+        public CursorPictureBox PictureBox
         {
             get
             {

@@ -26,6 +26,16 @@ namespace Cii.Lar.DrawTools
     {
         public ObjectType ObjectType;
 
+        protected CursorPictureBox pictureBox;
+
+        protected double UnitOfMeasureFactor
+        {
+            get
+            {
+                return MeasureSystem.CustomUnitToMicron(1, pictureBox.UnitOfMeasure);
+            }
+        }
+
         /// <summary>
         /// GraphicsPropertiesManager: include all the draw object graphics properties
         /// </summary>

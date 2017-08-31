@@ -387,6 +387,7 @@
     <Content Include="Resources\1.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\unit.png" />
     <Content Include="Resources\line.png" />
     <Content Include="Resources\ruler.png" />
     <Content Include="Resources\camera.png" />

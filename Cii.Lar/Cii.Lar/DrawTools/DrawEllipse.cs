@@ -97,6 +97,7 @@ namespace Cii.Lar.DrawTools
 
         public DrawEllipse(CursorPictureBox pictureBox, int x1, int y1, int x2, int y2, double c) : this()
         {
+            this.pictureBox = pictureBox;
             this.ObjectType = ObjectType.Ellipse;
 
             startPoint = new PointF(x1, y1);
@@ -228,9 +229,11 @@ namespace Cii.Lar.DrawTools
         /// 半轴长（a）与短半轴长（b）
         /// </summary>
         /// <returns></returns>
-        private double GetCircumference()
+        private string GetCircumference()
         {
-            return 2 * Math.PI * (ellipseForDraw.Rectangle.Height / 2) + 4 * (ellipseForDraw.Rectangle.Width / 2 - ellipseForDraw.Rectangle.Height / 2);
+            var length = (2 * Math.PI * (ellipseForDraw.Rectangle.Height / 2) + 
+                4 * (ellipseForDraw.Rectangle.Width / 2 - ellipseForDraw.Rectangle.Height / 2)) / UnitOfMeasureFactor;
+            return string.Format("{0:F2} {1}", length, pictureBox.UnitOfMeasure.ToString());
         }
 
         /// <summary>
@@ -238,9 +241,10 @@ namespace Cii.Lar.DrawTools
         /// 半轴长（a）与短半轴长（b）
         /// </summary>
         /// <returns></returns>
-        private double GetArea()
+        private string GetArea()
         {
-            return Math.PI * (ellipseForDraw.Rectangle.Width / 2) * (ellipseForDraw.Rectangle.Height / 2);
+            var area = Math.PI * (ellipseForDraw.Rectangle.Width / (2 * UnitOfMeasureFactor)) * (ellipseForDraw.Rectangle.Height / (2 * UnitOfMeasureFactor));
+            return string.Format("{0:F2} {1}²", area, pictureBox.UnitOfMeasure.ToString());
         }
 
         /// <summary>

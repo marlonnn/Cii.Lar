@@ -9,10 +9,11 @@ namespace Cii.Lar.DrawTools
     public enum enUniMis
     {
         um = 0,
-        mm = 1,
-        inches = 2,
-        dmm = 3,
-        meters = 4
+        dmm = 1,
+        mm = 2,
+        cm = 3,
+        inches = 4,
+        meters = 5
     }
 
     public class MeasureSystem
@@ -26,7 +27,7 @@ namespace Cii.Lar.DrawTools
             get { return myUserUnit; }
             set
             {
-                if ((value == enUniMis.dmm) | (value == enUniMis.inches) | (value == enUniMis.um) | (value == enUniMis.mm) | (value == enUniMis.meters))
+                if ((value == enUniMis.dmm) | (value == enUniMis.inches) | (value == enUniMis.um) | (value == enUniMis.mm) | (value == enUniMis.meters) | (value == enUniMis.cm))
                 {
                     if (myUserUnit != value)
                     {
@@ -50,6 +51,33 @@ namespace Cii.Lar.DrawTools
             }
         }
 
-
+        public static double CustomUnitToMicron(double MeasureValue, enUniMis CustomUnit)
+        {
+            double retVal = 0;
+            //Converto in micron ...
+            switch (CustomUnit)
+            {
+                case enUniMis.inches:
+                    // 1 inch = 25400 micron ...
+                    retVal = 25.4 * MeasureValue;
+                    break;
+                case enUniMis.um:
+                    retVal = MeasureValue / 1000;
+                    break;
+                case enUniMis.meters:
+                    retVal = 1000 * MeasureValue;
+                    break;
+                case enUniMis.cm:
+                    retVal = 10 * MeasureValue;
+                    break;
+                case enUniMis.mm:
+                    retVal = MeasureValue;
+                    break;
+                case enUniMis.dmm:
+                    retVal = MeasureValue / 10;
+                    break;
+            }
+            return retVal;
+        }
     }
 }

@@ -12,9 +12,9 @@ namespace Cii.Lar.DrawTools
     /// </summary>
     public class Statistics
     {
-        private double circumference;
+        private string circumference;
 
-        public double Circumference
+        public string Circumference
         {
             get
             {
@@ -26,9 +26,9 @@ namespace Cii.Lar.DrawTools
             }
         }
 
-        private double area;
+        private string area;
 
-        public double Area
+        public string Area
         {
             get
             {
@@ -45,7 +45,7 @@ namespace Cii.Lar.DrawTools
 
         }
 
-        public Statistics(double circumference, double area)
+        public Statistics(string circumference, string area)
         {
             this.circumference = circumference;
             this.area = area;

@@ -45,10 +45,17 @@
             this.toolStripButtonRectangle = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonElliptical = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonPolygon = new System.Windows.Forms.ToolStripButton();
+            this.toolStripDropDownButtonUnit = new System.Windows.Forms.ToolStripDropDownButton();
+            this.btnUm = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnDmm = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnMm = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnInches = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnMeters = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonLaser = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSetting = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonOpen = new System.Windows.Forms.ToolStripButton();
+            this.btnCm = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,6 +85,7 @@
             this.toolStripButtonRectangle,
             this.toolStripButtonElliptical,
             this.toolStripButtonPolygon,
+            this.toolStripDropDownButtonUnit,
             this.toolStripSeparator5,
             this.toolStripButtonLaser,
             this.toolStripButtonSetting,
@@ -224,6 +232,72 @@
             this.toolStripButtonPolygon.Text = global::Cii.Lar.Properties.Resources.toolStripButtonPolygonStr;
             this.toolStripButtonPolygon.Click += new System.EventHandler(this.toolStripButtonClick);
             // 
+            // toolStripDropDownButtonUnit
+            // 
+            this.toolStripDropDownButtonUnit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButtonUnit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnUm,
+            this.btnDmm,
+            this.btnMm,
+            this.btnCm,
+            this.btnInches,
+            this.btnMeters});
+            this.toolStripDropDownButtonUnit.Image = global::Cii.Lar.Properties.Resources.unit;
+            this.toolStripDropDownButtonUnit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButtonUnit.Name = "toolStripDropDownButtonUnit";
+            this.toolStripDropDownButtonUnit.Size = new System.Drawing.Size(29, 22);
+            this.toolStripDropDownButtonUnit.Text = "toolStripDropDownButton1";
+            // 
+            // btnUm
+            // 
+            this.btnUm.Name = "btnUm";
+            this.btnUm.Size = new System.Drawing.Size(152, 22);
+            this.btnUm.Text = "um";
+            this.btnUm.ToolTipText = "um";
+            this.btnUm.Click += new System.EventHandler(this.btnMenuItem_Click);
+            // 
+            // btnDmm
+            // 
+            this.btnDmm.Name = "btnDmm";
+            this.btnDmm.Size = new System.Drawing.Size(152, 22);
+            this.btnDmm.Text = "mm/10";
+            this.btnDmm.ToolTipText = "mm/10";
+            this.btnDmm.Click += new System.EventHandler(this.btnMenuItem_Click);
+            // 
+            // btnMm
+            // 
+            this.btnMm.Checked = true;
+            this.btnMm.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.btnMm.Name = "btnMm";
+            this.btnMm.Size = new System.Drawing.Size(152, 22);
+            this.btnMm.Text = "mm";
+            this.btnMm.ToolTipText = "mm";
+            this.btnMm.Click += new System.EventHandler(this.btnMenuItem_Click);
+            // 
+            // btnCm
+            // 
+            this.btnCm.Name = "btnCm";
+            this.btnCm.Size = new System.Drawing.Size(152, 22);
+            this.btnCm.Text = "cm";
+            this.btnCm.ToolTipText = "cm";
+            this.btnCm.Click += new System.EventHandler(this.btnMenuItem_Click);
+            // 
+            // btnInches
+            // 
+            this.btnInches.Name = "btnInches";
+            this.btnInches.Size = new System.Drawing.Size(152, 22);
+            this.btnInches.Text = "inches";
+            this.btnInches.ToolTipText = "inches";
+            this.btnInches.Click += new System.EventHandler(this.btnMenuItem_Click);
+            // 
+            // btnMeters
+            // 
+            this.btnMeters.Name = "btnMeters";
+            this.btnMeters.Size = new System.Drawing.Size(152, 22);
+            this.btnMeters.Text = "meters";
+            this.btnMeters.ToolTipText = "meters";
+            this.btnMeters.Click += new System.EventHandler(this.btnMenuItem_Click);
+            // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
@@ -258,6 +332,7 @@
             this.toolStripButtonOpen.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonOpen.Text = "Open";
             this.toolStripButtonOpen.Click += new System.EventHandler(this.toolStripButtonClick);
+
             // 
             // ControlCtrl
             // 
@@ -299,5 +374,12 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonSetting;
         private System.Windows.Forms.ToolStripButton toolStripButtonFit;
         private System.Windows.Forms.ToolStripButton toolStripButtonOpen;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButtonUnit;
+        private System.Windows.Forms.ToolStripMenuItem btnUm;
+        private System.Windows.Forms.ToolStripMenuItem btnDmm;
+        private System.Windows.Forms.ToolStripMenuItem btnInches;
+        private System.Windows.Forms.ToolStripMenuItem btnMeters;
+        private System.Windows.Forms.ToolStripMenuItem btnMm;
+        private System.Windows.Forms.ToolStripMenuItem btnCm;
     }
 }

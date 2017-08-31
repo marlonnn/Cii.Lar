@@ -30,9 +30,6 @@ namespace Cii.Lar
         private ComponentResourceManager resources;
         private SysConfig sysConfig;
 
-        private int CurrentScalePercent = 100;
-        private FilesForm filesForm;
-
         public MainForm()
         {
             IsMdiContainer = true;

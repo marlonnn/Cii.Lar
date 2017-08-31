@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Cii.Lar.DrawTools;
 
 namespace Cii.Lar.UI
 {
@@ -43,6 +44,50 @@ namespace Cii.Lar.UI
             ToolStripButton toolStripButton = sender as ToolStripButton;
             ToolStripAction action = (ToolStripAction)toolStripButton.Tag;
             StripButtonClickHandler?.Invoke(sender, new ToolStripEventArgs(action));
+        }
+
+        private void btnMenuItem_Click(object sender, EventArgs e)
+        {
+            if (object.ReferenceEquals(sender, btnDmm))
+            {
+                Program.ExpManager.ScalablePictureBox.PictureBox.UnitOfMeasure = enUniMis.dmm;
+            }
+            else if (object.ReferenceEquals(sender, btnInches))
+            {
+                Program.ExpManager.ScalablePictureBox.PictureBox.UnitOfMeasure = enUniMis.inches;
+            }
+            else if (object.ReferenceEquals(sender, btnMeters))
+            {
+                Program.ExpManager.ScalablePictureBox.PictureBox.UnitOfMeasure = enUniMis.meters;
+            }
+            else if (object.ReferenceEquals(sender, btnMm))
+            {
+                Program.ExpManager.ScalablePictureBox.PictureBox.UnitOfMeasure = enUniMis.mm;
+            }
+            else if (object.ReferenceEquals(sender, btnUm))
+            {
+                Program.ExpManager.ScalablePictureBox.PictureBox.UnitOfMeasure = enUniMis.um;
+            }
+            else if (object.ReferenceEquals(sender, btnCm))
+            {
+                Program.ExpManager.ScalablePictureBox.PictureBox.UnitOfMeasure = enUniMis.cm;
+            }
+            RefreshChechStates(sender);
+        }
+
+        private void RefreshChechStates(object sender)
+        {
+            btnDmm.Checked = false;
+            btnInches.Checked = false;
+            btnMeters.Checked = false;
+            btnUm.Checked = false;
+            btnMm.Checked = false;
+            btnCm.Checked = false;
+            ToolStripMenuItem item = sender as ToolStripMenuItem;
+            if (item != null)
+            {
+                item.Checked = true;
+            }
         }
     }
 }

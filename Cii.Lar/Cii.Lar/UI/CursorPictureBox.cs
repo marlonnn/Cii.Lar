@@ -92,6 +92,26 @@ namespace Cii.Lar.UI
             set;
         }
 
+        public event OnMeasureUnitChangedEventHandler OnMeasureUnitChanged;
+        public delegate void OnMeasureUnitChangedEventHandler(enUniMis unit);
+        public const enUniMis DefaultUnitOfMeasure = enUniMis.mm;
+        private enUniMis myUnitOfMeasure = DefaultUnitOfMeasure;
+
+        public enUniMis UnitOfMeasure
+        {
+            get
+            {
+                return myUnitOfMeasure;
+            }
+            set
+            {
+                if (value != myUnitOfMeasure)
+                {
+                    myUnitOfMeasure = value;
+                    OnMeasureUnitChanged?.Invoke(value);
+                }
+            }
+        }
         public CursorPictureBox()
         {
             InitializeComponent();

@@ -26,6 +26,8 @@ namespace Cii.Lar.UI
     /// </summary>
     public partial class ScalablePictureBox : UserControl
     {
+        private DrawObject drawObject;
+
         private bool myIsChangingAutoScroll = false;
 
         /// <summary>
@@ -125,14 +127,18 @@ namespace Cii.Lar.UI
         /// <param name="statistics"></param>
         private void AppendItems(DrawObject drawObject, Statistics statistics)
         {
-            ListViewItem lvi = new ListViewItem();
-            lvi.Text = drawObject.Name;
-            lvi.SubItems.Add(statistics.Circumference.ToString());
-            lvi.SubItems.Add(statistics.Area.ToString());
-            StatisticsControl.StatisticsListView.Items.Add(lvi);
-            ListViewItemEx listViewItemEx = new ListViewItemEx(lvi, drawObject);
-            AddEmbeddedControlToListView(listViewItemEx);
-            EnableAppearanceButton();
+            if (this.drawObject == null || drawObject.Name != this.drawObject.Name)
+            {
+                this.drawObject = drawObject;
+                ListViewItem lvi = new ListViewItem();
+                lvi.Text = drawObject.Name;
+                lvi.SubItems.Add(statistics.Circumference.ToString());
+                lvi.SubItems.Add(statistics.Area.ToString());
+                StatisticsControl.StatisticsListView.Items.Add(lvi);
+                ListViewItemEx listViewItemEx = new ListViewItemEx(lvi, drawObject);
+                AddEmbeddedControlToListView(listViewItemEx);
+                EnableAppearanceButton();
+            }
         }
 
         /// <summary>
@@ -412,7 +418,7 @@ namespace Cii.Lar.UI
         /// Get picture box control
         /// </summary>
         [Bindable(false)]
-        public PictureBox PictureBox
+        public CursorPictureBox PictureBox
         {
             get
             {

@@ -29,6 +29,7 @@ namespace Cii.Lar.DrawTools
 
         public DrawRectangle(CursorPictureBox pictureBox, int x, int y, int width, int height) : this()
         {
+            this.pictureBox = pictureBox;
             InitializeGraphicsProperties();
             this.ObjectType = ObjectType.Rectangle;
             rectangle = new Rectangle(x, y, width, height);
@@ -228,14 +229,16 @@ namespace Cii.Lar.DrawTools
             Console.WriteLine("Height:" + rectangle.Height);
         }
 
-        private double GetCircumference()
+        private string GetCircumference()
         {
-            return 2 * (rectangle.Width + rectangle.Height);
+            var length = 2 * Math.Abs(rectangle.Width + rectangle.Height) / UnitOfMeasureFactor;
+            return string.Format("{0:F2} {1}", length, pictureBox.UnitOfMeasure.ToString());
         }
 
-        private double GetArea()
+        private string GetArea()
         {
-            return rectangle.Width * rectangle.Height;
+            var area = (rectangle.Width / UnitOfMeasureFactor) * (rectangle.Height / UnitOfMeasureFactor);
+            return string.Format("{0:F2} {1}²", area, pictureBox.UnitOfMeasure.ToString());
         }
 
         private void SetRectangle(Rectangle r)

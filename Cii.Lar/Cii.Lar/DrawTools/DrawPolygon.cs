@@ -53,6 +53,7 @@ namespace Cii.Lar.DrawTools
 
         public DrawPolygon(CursorPictureBox pictureBox, int x1, int y1, int x2, int y2) : this()
         {
+            this.pictureBox = pictureBox;
             pointArray = new PointFList();
             pointArrayProportion = new PointFList();
 
@@ -297,10 +298,12 @@ namespace Cii.Lar.DrawTools
             {
                 pointArray[PointCount - 1] = point;
             }
+            this.Statistics.Circumference = GetCircumference();
+            this.Statistics.Area = "Unknown";
             Console.WriteLine("Circumference:" + GetCircumference());
         }
 
-        private double GetCircumference()
+        private string GetCircumference()
         {
             Point p1 = Point.Empty; // previous point
             Point p2 = Point.Empty; // current point
@@ -317,7 +320,7 @@ namespace Cii.Lar.DrawTools
                 p2.Offset(MovingOffset);
                 float x = System.Math.Abs(p2.X - p1.X);
                 float y = System.Math.Abs(p2.Y - p1.Y);
-                sum += Math.Sqrt(x * x + y * y);
+                sum += Math.Sqrt(x * x + y * y) / UnitOfMeasureFactor;
                 p1 = p2;
             }
             enumerator.Reset();
@@ -326,7 +329,7 @@ namespace Cii.Lar.DrawTools
                 p2 = Point.Ceiling(enumerator.Current);
                 p2.Offset(MovingOffset);
             }
-            return sum;
+            return string.Format("{0:F2} {1}", sum, pictureBox.UnitOfMeasure.ToString());
         }
 
         private double GetArea()
