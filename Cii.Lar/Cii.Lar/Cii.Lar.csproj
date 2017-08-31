@@ -64,6 +64,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DrawTools\MeasureSystem.cs" />
+    <Compile Include="EntryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EntryForm.Designer.cs">
+      <DependentUpon>EntryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EmptyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -267,7 +273,13 @@
     <Compile Include="UI\TransparentButton.Designer.cs">
       <DependentUpon>TransparentButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\ZWPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Util.cs" />
+    <EmbeddedResource Include="EntryForm.resx">
+      <DependentUpon>EntryForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.zh-CN.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
