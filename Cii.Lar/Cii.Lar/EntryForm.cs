@@ -20,9 +20,7 @@ namespace Cii.Lar
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            this.zwPictureBox.Enabled = true;
-            this.zwPictureBox.Focus();
-            this.zwPictureBox.OffsetX = (this.zwPictureBox.Width - this.zwPictureBox.Image.Width) / 2;
+            this.zwPictureBox.LoadImage();
         }
     }
 }

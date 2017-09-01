@@ -28,19 +28,32 @@ namespace Cii.Lar
         /// </summary>
         private void InitializeComponent()
         {
+            this.controlCtrl = new Cii.Lar.UI.ControlCtrl();
             this.zwPictureBox = new Cii.Lar.UI.ZWPictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.zwPictureBox)).BeginInit();
             this.SuspendLayout();
+            // 
+            // controlCtrl
+            // 
+            this.controlCtrl.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.controlCtrl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.controlCtrl.Location = new System.Drawing.Point(0, 0);
+            this.controlCtrl.Name = "controlCtrl";
+            this.controlCtrl.ShowIndex = 0;
+            this.controlCtrl.Size = new System.Drawing.Size(726, 25);
+            this.controlCtrl.TabIndex = 1;
+            this.controlCtrl.Title = "";
             // 
             // zwPictureBox
             // 
             this.zwPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.zwPictureBox.Location = new System.Drawing.Point(-5, 2);
+            this.zwPictureBox.Location = new System.Drawing.Point(0, 0);
             this.zwPictureBox.Name = "zwPictureBox";
-            this.zwPictureBox.Size = new System.Drawing.Size(737, 563);
-            this.zwPictureBox.Enabled = true;
+            this.zwPictureBox.OffsetX = 0;
+            this.zwPictureBox.OffsetY = 0;
+            this.zwPictureBox.Size = new System.Drawing.Size(726, 563);
             this.zwPictureBox.TabIndex = 0;
             this.zwPictureBox.TabStop = false;
             // 
@@ -49,12 +62,12 @@ namespace Cii.Lar
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(726, 560);
+            this.Controls.Add(this.controlCtrl);
             this.Controls.Add(this.zwPictureBox);
-            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "EntryForm";
             this.ShowIcon = false;
-            this.Text = "DotNetBar Metro-Bill";
+            this.Text = "Lar-100";
             ((System.ComponentModel.ISupportInitialize)(this.zwPictureBox)).EndInit();
             this.ResumeLayout(false);
 
@@ -63,6 +76,7 @@ namespace Cii.Lar
         #endregion
 
         private UI.ZWPictureBox zwPictureBox;
+        private UI.ControlCtrl controlCtrl;
     }
 }
 

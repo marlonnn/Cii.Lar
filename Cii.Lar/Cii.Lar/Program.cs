@@ -42,7 +42,7 @@ namespace Cii.Lar
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new EntryForm());
         }
 
         private static void Initialize(CultureInfo sysDefault)
