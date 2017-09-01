@@ -18,17 +18,17 @@ namespace Cii.Lar.ExpClass
     /// </summary>
     public class ExpManager
     {
-        private ScalablePictureBox scalablePictureBox;
+        private ZWPictureBox pictureBox;
 
-        public ScalablePictureBox ScalablePictureBox
+        public ZWPictureBox ZWPictureBox
         {
             get
             {
-                return this.scalablePictureBox;
+                return this.pictureBox;
             }
             set
             {
-                scalablePictureBox = value;
+                pictureBox = value;
             }
         }
 
@@ -57,7 +57,7 @@ namespace Cii.Lar.ExpClass
                 case ToolStripAction.ZoomIn:
                     break;
                 case ToolStripAction.ZoomFit:
-                    this.ScalablePictureBox.ScalablePictureBoxImp.ScalePictureBoxToFit();
+                    this.ZWPictureBox.ZoomFit();
                     break;
                 case ToolStripAction.Scale:
                     break;
@@ -66,14 +66,17 @@ namespace Cii.Lar.ExpClass
                 case ToolStripAction.Ellipse:
                 case ToolStripAction.Polygon:
                     SetMeasureTool(e.Action, false);
-                    this.ScalablePictureBox.ShowBaseCtrl(true, 2);
+                    this.ZWPictureBox.ShowBaseCtrl(true, 2);
+                    break;
+                case ToolStripAction.Move:
+                    SetMeasureTool(e.Action, false);
                     break;
                 case ToolStripAction.Laser:
                     SetMeasureTool(e.Action, false);
-                    this.ScalablePictureBox.ShowBaseCtrl(true, 0);
+                    this.ZWPictureBox.ShowBaseCtrl(true, 0);
                     break;
                 case ToolStripAction.Setting:
-                    this.ScalablePictureBox.ShowBaseCtrl(true, 4);
+                    this.ZWPictureBox.ShowBaseCtrl(true, 4);
                     break;
                 case ToolStripAction.OpenFile:
                     OpenFile();
@@ -85,7 +88,7 @@ namespace Cii.Lar.ExpClass
         {
             try
             {
-                using (Bitmap bitmap = new Bitmap(this.ScalablePictureBox.PictureBox.Image))
+                using (Bitmap bitmap = new Bitmap(this.ZWPictureBox.Image))
                 {
                     string fileName = string.Format("{0}\\{1}.png", SysConfig.GetSysConfig().StorePath, DateTime.Now.ToString("yyyyMMddHHmmsss"));
                     bitmap.Save(fileName);
@@ -101,7 +104,7 @@ namespace Cii.Lar.ExpClass
 
         private void ShowToastNotification()
         {
-            ToastNotification.Show(this.ScalablePictureBox, "Screenshot success",
+            ToastNotification.Show(this.ZWPictureBox, "Screenshot success",
                 global::Cii.Lar.Properties.Resources.capture, 1000, eToastGlowColor.Blue,
                 eToastPosition.MiddleCenter);
         }
@@ -116,7 +119,7 @@ namespace Cii.Lar.ExpClass
                 OpenImageDialog.ShowDialog();
                 if (OpenImageDialog.FileName.Length > 0)
                 {
-                    this.ScalablePictureBox.Picture = new Bitmap(OpenImageDialog.FileName);
+                    //this.ZWPictureBox.Picture = new Bitmap(OpenImageDialog.FileName);
                 }
             }
             catch (Exception ex)
@@ -128,7 +131,7 @@ namespace Cii.Lar.ExpClass
         public int GetNextDrawObjectID()
         {
             List<int> objectIDs = new List<int>();
-            foreach (DrawObject o in ScalablePictureBox.GraphicsList)
+            foreach (DrawObject o in ZWPictureBox.GraphicsList)
             {
                 if (o is DrawCircle)
                 {
@@ -173,6 +176,9 @@ namespace Cii.Lar.ExpClass
                 case ToolStripAction.Laser:
                     CommandCircle();
                     break;
+                case ToolStripAction.Move:
+                    CommandMove();
+                    break;
                 default:
                     CommandPointer();
                     break;
@@ -216,7 +222,7 @@ namespace Cii.Lar.ExpClass
         /// </summary>
         private void CommandLine()
         {
-            this.scalablePictureBox.ActiveTool = DrawToolType.Line;
+            this.pictureBox.ActiveTool = DrawToolType.Line;
         }
 
         /// <summary>
@@ -224,7 +230,7 @@ namespace Cii.Lar.ExpClass
         /// </summary>
         private void CommandRectangle()
         {
-            this.scalablePictureBox.ActiveTool = DrawToolType.Rectangle;
+            this.pictureBox.ActiveTool = DrawToolType.Rectangle;
         }
 
         /// <summary>
@@ -232,7 +238,7 @@ namespace Cii.Lar.ExpClass
         /// </summary>
         private void CommandEllipse()
         {
-            this.scalablePictureBox.ActiveTool = DrawToolType.Ellipse;
+            this.pictureBox.ActiveTool = DrawToolType.Ellipse;
         }
 
         /// <summary>
@@ -240,12 +246,12 @@ namespace Cii.Lar.ExpClass
         /// </summary>
         private void CommandPolyLine()
         {
-            this.scalablePictureBox.ActiveTool = DrawToolType.PolyLine;
+            this.pictureBox.ActiveTool = DrawToolType.PolyLine;
         }
 
         private void CommandPointer()
         {
-            this.scalablePictureBox.ActiveTool = DrawToolType.Pointer;
+            this.pictureBox.ActiveTool = DrawToolType.Pointer;
         }
 
         /// <summary>
@@ -253,7 +259,12 @@ namespace Cii.Lar.ExpClass
         /// </summary>
         private void CommandCircle()
         {
-            this.scalablePictureBox.ActiveTool = DrawToolType.Circle;
+            this.pictureBox.ActiveTool = DrawToolType.Circle;
+        }
+
+        private void CommandMove()
+        {
+            this.pictureBox.ActiveTool = DrawToolType.Move;
         }
     }
 }

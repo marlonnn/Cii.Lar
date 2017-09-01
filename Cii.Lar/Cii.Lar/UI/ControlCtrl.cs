@@ -34,6 +34,7 @@ namespace Cii.Lar.UI
             toolStripButtonRectangle.Tag = ToolStripAction.Rectangle;
             toolStripButtonElliptical.Tag = ToolStripAction.Ellipse;
             toolStripButtonPolygon.Tag = ToolStripAction.Polygon;
+            toolStripButtonMove.Tag = ToolStripAction.Move;
             toolStripButtonLaser.Tag = ToolStripAction.Laser;
             toolStripButtonSetting.Tag = ToolStripAction.Setting;
             toolStripButtonOpen.Tag = ToolStripAction.OpenFile;
@@ -50,27 +51,27 @@ namespace Cii.Lar.UI
         {
             if (object.ReferenceEquals(sender, btnDmm))
             {
-                Program.ExpManager.ScalablePictureBox.PictureBox.UnitOfMeasure = enUniMis.dmm;
+                Program.ExpManager.ZWPictureBox.UnitOfMeasure = enUniMis.dmm;
             }
             else if (object.ReferenceEquals(sender, btnInches))
             {
-                Program.ExpManager.ScalablePictureBox.PictureBox.UnitOfMeasure = enUniMis.inches;
+                Program.ExpManager.ZWPictureBox.UnitOfMeasure = enUniMis.inches;
             }
             else if (object.ReferenceEquals(sender, btnMeters))
             {
-                Program.ExpManager.ScalablePictureBox.PictureBox.UnitOfMeasure = enUniMis.meters;
+                Program.ExpManager.ZWPictureBox.UnitOfMeasure = enUniMis.meters;
             }
             else if (object.ReferenceEquals(sender, btnMm))
             {
-                Program.ExpManager.ScalablePictureBox.PictureBox.UnitOfMeasure = enUniMis.mm;
+                Program.ExpManager.ZWPictureBox.UnitOfMeasure = enUniMis.mm;
             }
             else if (object.ReferenceEquals(sender, btnUm))
             {
-                Program.ExpManager.ScalablePictureBox.PictureBox.UnitOfMeasure = enUniMis.um;
+                Program.ExpManager.ZWPictureBox.UnitOfMeasure = enUniMis.um;
             }
             else if (object.ReferenceEquals(sender, btnCm))
             {
-                Program.ExpManager.ScalablePictureBox.PictureBox.UnitOfMeasure = enUniMis.cm;
+                Program.ExpManager.ZWPictureBox.UnitOfMeasure = enUniMis.cm;
             }
             RefreshChechStates(sender);
         }

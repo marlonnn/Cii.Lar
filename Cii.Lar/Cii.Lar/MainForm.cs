@@ -35,7 +35,7 @@ namespace Cii.Lar
             IsMdiContainer = true;
             InitializeComponent();
             this.controlCtrl.StripButtonClickHandler += Program.ExpManager.StripButtonClickHandler;
-            Program.ExpManager.ScalablePictureBox = this.scalablePictureBox;
+            //Program.ExpManager.ScalablePictureBox = this.scalablePictureBox;
             //this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
             resources = new ComponentResourceManager(typeof(MainForm));
@@ -48,7 +48,7 @@ namespace Cii.Lar
             //for test
             //string defaultImage = string.Format("{0}\\Resources\\1.bmp", System.Environment.CurrentDirectory);
             //this.scalablePictureBox.Picture = new Bitmap(defaultImage);
-            this.ActiveControl = this.scalablePictureBox.PictureBox;
+            //this.ActiveControl = this.scalablePictureBox.PictureBox;
 
             sysConfig.PropertyChanged += MainForm_PropertyChanged;
 
@@ -65,11 +65,11 @@ namespace Cii.Lar
 
         private void MainForm_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape && !e.Handled && this.scalablePictureBox.ActiveTool != DrawToolType.Pointer)
-            {
-                Program.ExpManager.SetMeasureTool(MeasureTools.Pointer);
-                e.Handled = true;
-            }
+            //if (e.KeyCode == Keys.Escape && !e.Handled && this.scalablePictureBox.ActiveTool != DrawToolType.Pointer)
+            //{
+            //    Program.ExpManager.SetMeasureTool(MeasureTools.Pointer);
+            //    e.Handled = true;
+            //}
         }
     }
 }

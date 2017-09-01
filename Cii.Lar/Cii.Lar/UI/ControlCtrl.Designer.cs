@@ -49,13 +49,14 @@
             this.btnUm = new System.Windows.Forms.ToolStripMenuItem();
             this.btnDmm = new System.Windows.Forms.ToolStripMenuItem();
             this.btnMm = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnCm = new System.Windows.Forms.ToolStripMenuItem();
             this.btnInches = new System.Windows.Forms.ToolStripMenuItem();
             this.btnMeters = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonLaser = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSetting = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonOpen = new System.Windows.Forms.ToolStripButton();
-            this.btnCm = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButtonMove = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,6 +82,7 @@
             this.toolStripSeparator3,
             this.toolStripButtonScale,
             this.toolStripSeparator4,
+            this.toolStripButtonMove,
             this.toolStripButtonLine,
             this.toolStripButtonRectangle,
             this.toolStripButtonElliptical,
@@ -251,7 +253,7 @@
             // btnUm
             // 
             this.btnUm.Name = "btnUm";
-            this.btnUm.Size = new System.Drawing.Size(152, 22);
+            this.btnUm.Size = new System.Drawing.Size(113, 22);
             this.btnUm.Text = "um";
             this.btnUm.ToolTipText = "um";
             this.btnUm.Click += new System.EventHandler(this.btnMenuItem_Click);
@@ -259,7 +261,7 @@
             // btnDmm
             // 
             this.btnDmm.Name = "btnDmm";
-            this.btnDmm.Size = new System.Drawing.Size(152, 22);
+            this.btnDmm.Size = new System.Drawing.Size(113, 22);
             this.btnDmm.Text = "mm/10";
             this.btnDmm.ToolTipText = "mm/10";
             this.btnDmm.Click += new System.EventHandler(this.btnMenuItem_Click);
@@ -269,7 +271,7 @@
             this.btnMm.Checked = true;
             this.btnMm.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btnMm.Name = "btnMm";
-            this.btnMm.Size = new System.Drawing.Size(152, 22);
+            this.btnMm.Size = new System.Drawing.Size(113, 22);
             this.btnMm.Text = "mm";
             this.btnMm.ToolTipText = "mm";
             this.btnMm.Click += new System.EventHandler(this.btnMenuItem_Click);
@@ -277,7 +279,7 @@
             // btnCm
             // 
             this.btnCm.Name = "btnCm";
-            this.btnCm.Size = new System.Drawing.Size(152, 22);
+            this.btnCm.Size = new System.Drawing.Size(113, 22);
             this.btnCm.Text = "cm";
             this.btnCm.ToolTipText = "cm";
             this.btnCm.Click += new System.EventHandler(this.btnMenuItem_Click);
@@ -285,7 +287,7 @@
             // btnInches
             // 
             this.btnInches.Name = "btnInches";
-            this.btnInches.Size = new System.Drawing.Size(152, 22);
+            this.btnInches.Size = new System.Drawing.Size(113, 22);
             this.btnInches.Text = "inches";
             this.btnInches.ToolTipText = "inches";
             this.btnInches.Click += new System.EventHandler(this.btnMenuItem_Click);
@@ -293,7 +295,7 @@
             // btnMeters
             // 
             this.btnMeters.Name = "btnMeters";
-            this.btnMeters.Size = new System.Drawing.Size(152, 22);
+            this.btnMeters.Size = new System.Drawing.Size(113, 22);
             this.btnMeters.Text = "meters";
             this.btnMeters.ToolTipText = "meters";
             this.btnMeters.Click += new System.EventHandler(this.btnMenuItem_Click);
@@ -332,7 +334,16 @@
             this.toolStripButtonOpen.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonOpen.Text = "Open";
             this.toolStripButtonOpen.Click += new System.EventHandler(this.toolStripButtonClick);
-
+            // 
+            // toolStripButtonMove
+            // 
+            this.toolStripButtonMove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonMove.Image = global::Cii.Lar.Properties.Resources.hand;
+            this.toolStripButtonMove.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonMove.Name = "toolStripButtonMove";
+            this.toolStripButtonMove.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonMove.Text = "Move";
+            this.toolStripButtonMove.Click += new System.EventHandler(this.toolStripButtonClick);
             // 
             // ControlCtrl
             // 
@@ -381,5 +392,6 @@
         private System.Windows.Forms.ToolStripMenuItem btnMeters;
         private System.Windows.Forms.ToolStripMenuItem btnMm;
         private System.Windows.Forms.ToolStripMenuItem btnCm;
+        private System.Windows.Forms.ToolStripButton toolStripButtonMove;
     }
 }

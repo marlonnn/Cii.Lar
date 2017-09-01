@@ -20,6 +20,7 @@ namespace Cii.Lar
         Rectangle,
         Ellipse,
         Polygon,
+        Move,
         Laser,
         Setting,
         OpenFile

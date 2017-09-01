@@ -26,7 +26,7 @@ namespace Cii.Lar.DrawTools
     {
         public ObjectType ObjectType;
 
-        protected CursorPictureBox pictureBox;
+        protected ZWPictureBox pictureBox;
 
         protected double UnitOfMeasureFactor
         {
@@ -85,7 +85,7 @@ namespace Cii.Lar.DrawTools
 
         protected void RegisterUpdateStatisticsHandler()
         {
-            this.UpdateStatisticInfoHandler += Program.ExpManager.ScalablePictureBox.UpdateStatisticInfoHandler;
+            this.UpdateStatisticInfoHandler += Program.ExpManager.ZWPictureBox.UpdateStatisticInfoHandler;
         }
 
         public void UpdateStatisticsInformation()
@@ -286,7 +286,7 @@ namespace Cii.Lar.DrawTools
 
         public abstract bool HitTest(int nIndex, PointF dataPoint);
 
-        public HitTestResult HitTest(CursorPictureBox pictureBox, Point point, bool forSelection, bool hitTestHandle = true)
+        public HitTestResult HitTest(ZWPictureBox pictureBox, Point point, bool forSelection, bool hitTestHandle = true)
         {
             if (Selected && hitTestHandle)
             {
@@ -317,7 +317,7 @@ namespace Cii.Lar.DrawTools
             }
         }
 
-        protected virtual bool CheckHandleRegion(CursorPictureBox pictureBox, int handleNumber, Point point)
+        protected virtual bool CheckHandleRegion(ZWPictureBox pictureBox, int handleNumber, Point point)
         {
             return (GetHandleRectangle(pictureBox, handleNumber).Contains(point));
         }
@@ -327,14 +327,14 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="drawArea"></param>
         /// <param name="point"></param>
-        public abstract HitTestResult HitTestForSelection(CursorPictureBox pictureBox, Point point);
+        public abstract HitTestResult HitTestForSelection(ZWPictureBox pictureBox, Point point);
 
         /// <summary>
         /// Get handle point by 1-based number
         /// </summary>
         /// <param name="handleNumber"></param>
         /// <returns></returns>
-        public virtual Point GetHandle(CursorPictureBox pictureBox, int handleNumber)
+        public virtual Point GetHandle(ZWPictureBox pictureBox, int handleNumber)
         {
             return new Point(0, 0);
         }
@@ -344,7 +344,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="handleNumber"></param>
         /// <returns></returns>
-        public virtual Rectangle GetHandleRectangle(CursorPictureBox pictureBox, int handleNumber)
+        public virtual Rectangle GetHandleRectangle(ZWPictureBox pictureBox, int handleNumber)
         {
             Point point = GetHandle(pictureBox, handleNumber);
 
@@ -356,7 +356,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="deltaX"></param>
         /// <param name="deltaY"></param>
-        public virtual void Move(CursorPictureBox pictureBox, int deltaX, int deltaY)
+        public virtual void Move(ZWPictureBox pictureBox, int deltaX, int deltaY)
         {
         }
 
@@ -365,7 +365,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="point"></param>
         /// <param name="handleNumber"></param>
-        public virtual void MoveHandleTo(CursorPictureBox pictureBox, Point point, int handleNumber)
+        public virtual void MoveHandleTo(ZWPictureBox pictureBox, Point point, int handleNumber)
         {
         }
 
@@ -373,11 +373,11 @@ namespace Cii.Lar.DrawTools
         /// Draw object
         /// </summary>
         /// <param name="g"></param>
-        public virtual void Draw(Graphics g, CursorPictureBox pictureBox)
+        public virtual void Draw(Graphics g, ZWPictureBox pictureBox)
         {
         }
 
-        public virtual void DrawTest(Graphics g, CursorPictureBox pictureBox)
+        public virtual void DrawTest(Graphics g, ZWPictureBox pictureBox)
         {
             SolidBrush brush = new SolidBrush(GraphicsPropertiesManager.GetPropertiesByName("Text").Color);
             RectangleF r = GetTextF(this.Name, g, this.ID);
@@ -391,7 +391,7 @@ namespace Cii.Lar.DrawTools
             return new RectangleF();
         }
 
-        public virtual void DrawTracker(Graphics g, CursorPictureBox pictureBox)
+        public virtual void DrawTracker(Graphics g, ZWPictureBox pictureBox)
         {
             if (Selected)
             {

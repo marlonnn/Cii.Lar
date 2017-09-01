@@ -43,7 +43,7 @@ namespace Cii.Lar.DrawTools
 
         }
 
-        public override void OnMouseDown(CursorPictureBox pictureBox, MouseEventArgs e)
+        public override void OnMouseDown(ZWPictureBox pictureBox, MouseEventArgs e)
         {
             wasMove = false;
             Point point = new Point(e.X, e.Y);
@@ -154,7 +154,7 @@ namespace Cii.Lar.DrawTools
             pictureBox.Refresh();
         }
 
-        public override void OnMouseMove(CursorPictureBox pictureBox, MouseEventArgs e)
+        public override void OnMouseMove(ZWPictureBox pictureBox, MouseEventArgs e)
         {
             Point point = new Point(e.X, e.Y);
             Point oldPoint = lastPoint;
@@ -243,7 +243,7 @@ namespace Cii.Lar.DrawTools
             //}
         }
 
-        public override void OnMouseUp(CursorPictureBox pictureBox, MouseEventArgs e)
+        public override void OnMouseUp(ZWPictureBox pictureBox, MouseEventArgs e)
         {
             if (selectMode == SelectionMode.NetSelection)
             {
@@ -277,7 +277,7 @@ namespace Cii.Lar.DrawTools
             wasMove = false;
         }
 
-        public override void OnCancel(CursorPictureBox pictureBox, bool cancelSelection)
+        public override void OnCancel(ZWPictureBox pictureBox, bool cancelSelection)
         {
 
         }

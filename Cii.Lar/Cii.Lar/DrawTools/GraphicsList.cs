@@ -54,7 +54,7 @@ namespace Cii.Lar.DrawTools
             return graphicsList.GetEnumerator();
         }
 
-        public void Draw(Graphics g, CursorPictureBox pictureBox)
+        public void Draw(Graphics g, ZWPictureBox pictureBox)
         {
             int n = graphicsList.Count;
             DrawObject o;
@@ -104,6 +104,32 @@ namespace Cii.Lar.DrawTools
             obj.Name = obj.Prefix + obj.ID.ToString();
 
             OnDrawObjsChanged(new ArrayChangedEventArgs<DrawObject>(obj, ArrayChangedType.ItemAdded, refreshWhenAdded));
+        }
+
+        /// <summary>
+        /// Remove object by index.
+        /// Used for Undo.
+        /// </summary>
+        public void RemoveAt(int index)
+        {
+            DrawObject o = graphicsList[index];
+            //             if (o.DrawArea != null) o.DrawArea.EndTextBoxEdit(false);            
+            graphicsList.RemoveAt(index);
+
+            //onGateRemoved();
+            OnDrawObjsChanged(new ArrayChangedEventArgs<DrawObject>(o, ArrayChangedType.ItemRemoved));
+        }
+
+        /// <summary>
+        /// Delete last added object from the list
+        /// (used for Undo operation).
+        /// </summary>
+        public void DeleteLastAddedObject()
+        {
+            if (graphicsList.Count > 0)
+            {
+                RemoveAt(0);
+            }
         }
 
         /// <summary>

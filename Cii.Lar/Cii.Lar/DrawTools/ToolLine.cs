@@ -18,19 +18,19 @@ namespace Cii.Lar.DrawTools
     public class ToolLine : ToolObject
     {
         private static Cursor s_cursor = new Cursor(new MemoryStream((byte[])new ResourceManager(typeof(
-            CursorPictureBox)).GetObject("Line")));
+            ZWPictureBox)).GetObject("Line")));
 
         public ToolLine()
         {
             Cursor = s_cursor;
         }
 
-        public override void OnMouseDown(CursorPictureBox pictureBox, MouseEventArgs e)
+        public override void OnMouseDown(ZWPictureBox pictureBox, MouseEventArgs e)
         {
             AddNewObject(pictureBox, new DrawLine(pictureBox, e.X, e.Y, e.X + 1, e.Y + 1));
         }
 
-        public override void OnMouseMove(CursorPictureBox pictureBox, MouseEventArgs e)
+        public override void OnMouseMove(ZWPictureBox pictureBox, MouseEventArgs e)
         {
             pictureBox.Cursor = Cursor;
 

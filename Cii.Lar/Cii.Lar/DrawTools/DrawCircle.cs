@@ -35,7 +35,7 @@ namespace Cii.Lar.DrawTools
             DrawAreaSize = new Size(30, 30);
         }
 
-        public DrawCircle(CursorPictureBox pictureBox, PointF centerPoint) : this()
+        public DrawCircle(ZWPictureBox pictureBox, PointF centerPoint) : this()
         {
             CenterPoint = centerPoint;
             this.GraphicsProperties.GraphicsPropertiesChangedHandler += pictureBox.GraphicsPropertiesChangedHandler;
@@ -47,7 +47,7 @@ namespace Cii.Lar.DrawTools
             this.GraphicsProperties.Color = Color.Yellow;
         }
 
-        public override void Draw(Graphics g, CursorPictureBox pictureBox)
+        public override void Draw(Graphics g, ZWPictureBox pictureBox)
         {
             if (circleForDraw == null)
             {
@@ -94,7 +94,7 @@ namespace Cii.Lar.DrawTools
         /// </summary>
         /// <param name="handleNumber"></param>
         /// <returns></returns>
-        public override Point GetHandle(CursorPictureBox pictureBox, int handleNumber)
+        public override Point GetHandle(ZWPictureBox pictureBox, int handleNumber)
         {
             float x = 0, y = 0, xCenter, yCenter;
 
@@ -133,7 +133,7 @@ namespace Cii.Lar.DrawTools
             throw new NotImplementedException();
         }
 
-        public override HitTestResult HitTestForSelection(CursorPictureBox pictureBox, Point point)
+        public override HitTestResult HitTestForSelection(ZWPictureBox pictureBox, Point point)
         {
             throw new NotImplementedException();
         }

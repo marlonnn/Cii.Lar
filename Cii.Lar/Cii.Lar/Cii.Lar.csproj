@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="DrawTools\MeasureSystem.cs" />
     <Compile Include="DrawTools\Rulers.cs" />
+    <Compile Include="DrawTools\ToolMove.cs" />
     <Compile Include="EmptyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,12 +126,6 @@
     </Compile>
     <Compile Include="UI\ControlCtrl.Designer.cs">
       <DependentUpon>ControlCtrl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\CursorPictureBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="UI\CursorPictureBox.Designer.cs">
-      <DependentUpon>CursorPictureBox.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\AssignForm.cs">
       <SubType>Form</SubType>
@@ -256,18 +251,6 @@
     <Compile Include="UI\PictureTracker.Designer.cs">
       <DependentUpon>PictureTracker.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ScalablePictureBox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\ScalablePictureBox.Designer.cs">
-      <DependentUpon>ScalablePictureBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\ScalablePictureBoxImp.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\ScalablePictureBoxImp.Designer.cs">
-      <DependentUpon>ScalablePictureBoxImp.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\TransparentButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -290,11 +273,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ControlCtrl.resx">
       <DependentUpon>ControlCtrl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\CursorPictureBox.resx">
-      <DependentUpon>CursorPictureBox.cs</DependentUpon>
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>CursorPictureBox1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\AssignForm.resx">
       <DependentUpon>AssignForm.cs</DependentUpon>
@@ -360,14 +338,13 @@
     <EmbeddedResource Include="UI\PictureTracker.resx">
       <DependentUpon>PictureTracker.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\ScalablePictureBox.resx">
-      <DependentUpon>ScalablePictureBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\ScalablePictureBoxImp.resx">
-      <DependentUpon>ScalablePictureBoxImp.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\TransparentButton.resx">
       <DependentUpon>TransparentButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ZWPictureBox.resx">
+      <DependentUpon>ZWPictureBox.cs</DependentUpon>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ZWPictureBox.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -391,6 +368,7 @@
     </Content>
     <Content Include="DrawTools\Cross.cur" />
     <Content Include="DrawTools\Ellipse.cur" />
+    <Content Include="DrawTools\hand.png" />
     <Content Include="DrawTools\Line.cur" />
     <Content Include="DrawTools\Pencil.cur" />
     <Content Include="DrawTools\PolyHandle.cur" />
@@ -400,6 +378,7 @@
     <Content Include="Resources\1.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\hand.png" />
     <Content Include="Resources\unit.png" />
     <Content Include="Resources\line.png" />
     <Content Include="Resources\ruler.png" />

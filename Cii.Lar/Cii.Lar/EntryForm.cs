@@ -14,6 +14,8 @@ namespace Cii.Lar
         public EntryForm()
         {
             InitializeComponent();
+            Program.ExpManager.ZWPictureBox = this.zwPictureBox;
+            this.controlCtrl.StripButtonClickHandler += Program.ExpManager.StripButtonClickHandler;
             this.WindowState = FormWindowState.Maximized;
         }
 

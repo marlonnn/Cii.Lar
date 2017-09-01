@@ -27,16 +27,16 @@ namespace Cii.Lar.DrawTools
             }
         }
 
-        private ScalablePictureBoxImp scalablePictureBoxImp;
+        private ZWPictureBox pictureBox;
 
         public Rulers()
         {
 
         }
 
-        public Rulers(ScalablePictureBoxImp scalablePictureBoxImp)
+        public Rulers(ZWPictureBox pictureBox)
         {
-            this.scalablePictureBoxImp = scalablePictureBoxImp;
+            this.pictureBox = pictureBox;
         }
 
         public void DrawHorizonRalRuler(Graphics g)
@@ -44,7 +44,7 @@ namespace Cii.Lar.DrawTools
             using (Pen pen = new Pen(GraphicsPropertiesManager.GetPropertiesByName("Ruler").Color,
                 GraphicsPropertiesManager.GetPropertiesByName("Ruler").PenWidth))
             {
-                g.DrawLine(pen, 0, scalablePictureBoxImp.Height / 2, scalablePictureBoxImp.Width, scalablePictureBoxImp.Height / 2);
+                g.DrawLine(pen, 0, pictureBox.Height / 2, pictureBox.Width, pictureBox.Height / 2);
             }
         }
     }

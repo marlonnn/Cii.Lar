@@ -34,7 +34,7 @@ namespace Cii.Lar.DrawTools
             this.ObjectType = ObjectType.Polygon;
         }
 
-        public DrawPolyLine(CursorPictureBox pictureBox, int x1, int y1, int x2, int y2)
+        public DrawPolyLine(ZWPictureBox pictureBox, int x1, int y1, int x2, int y2)
             : base(pictureBox, x1, y1, x2, y2)
         {
             InitializeGraphicsProperties();
