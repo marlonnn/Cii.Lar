@@ -218,6 +218,17 @@ namespace Cii.Lar.UI
         }
 
         private float zoom = 1; 
+        public float Zoom
+        {
+            get
+            {
+                return zoom;
+            }
+            set
+            {
+                zoom = value;
+            }
+        }
         #endregion
 
         public ZWPictureBox()
@@ -371,10 +382,13 @@ namespace Cii.Lar.UI
             }
         }
 
+        public int StartOffsetX = 0;
+
         public void LoadImage()
         {
             this.Image = Image.FromFile(string.Format("{0}\\Resources\\1.bmp", System.Environment.CurrentDirectory));
-            this.OffsetX = (this.Width - this.Image.Width) / 2;
+            StartOffsetX = (this.Width - this.Image.Width) / 2;
+            this.OffsetX = StartOffsetX;
             InitializeBaseCtrls();
 
         }
@@ -637,7 +651,7 @@ namespace Cii.Lar.UI
                 }
                 else
                 {
-                    zoom += 1F;
+                    zoom += 0.2F;
                     ZoomOnMouseCenter(e, oldzoom);
                 }
             }
@@ -655,7 +669,7 @@ namespace Cii.Lar.UI
                 {
                     if (zoom > 1)
                     {
-                        zoom = Math.Max(zoom - 1F, 0.01F);
+                        zoom = Math.Max(zoom - 0.2F, 0.01F);
                         ZoomOnMouseCenter(e, oldzoom);
                     }
                 }
@@ -663,7 +677,6 @@ namespace Cii.Lar.UI
 
             this.Refresh();
         }
-
         /// <summary>
         /// Handles the Paint event
         /// </summary>
@@ -676,7 +689,8 @@ namespace Cii.Lar.UI
                 {
                     e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
                     e.Graphics.ScaleTransform(zoom, zoom);
-                    e.Graphics.DrawImage(this.Image, offsetX, offsetY);
+                    e.Graphics.TranslateTransform(OffsetX, OffsetY);
+                    e.Graphics.DrawImage(this.Image, 0, 0);
                 }
                 if (GraphicsList != null)
                 {
@@ -713,6 +727,7 @@ namespace Cii.Lar.UI
 
         private void ZoomOnMouseCenter(MouseEventArgs e, float oldzoom)
         {
+            Test();
             Point mousePosNow = e.Location;
 
             // Where location of the mouse in the pictureframe
@@ -730,6 +745,17 @@ namespace Cii.Lar.UI
             // Where to move image to keep focus on one point
             offsetX = newImageX - oldImageX + offsetX;
             offsetY = newImageY - oldImageY + offsetY;
+        }
+
+        public void Test()
+        {
+            if (GraphicsList != null && GraphicsList.Count > 0 )
+            {
+                foreach (var drawObject in GraphicsList)
+                {
+                    drawObject.Zooming = true;
+                }
+            }
         }
 
         #region "Check key pressed"

@@ -55,6 +55,7 @@ namespace Cii.Lar.DrawTools
         public DrawLine()
         {
             InitializeGraphicsProperties();
+            Zooming = false;
             this.ObjectType = ObjectType.Line;
             this.Statistics.Area = "null";
             this.RegisterUpdateStatisticsHandler();
@@ -88,6 +89,14 @@ namespace Cii.Lar.DrawTools
 
             using (Pen pen = new Pen(Color.FromArgb(GraphicsProperties.Alpha, GraphicsProperties.Color), GraphicsProperties.PenWidth))
             {
+                g.ResetTransform();
+                if (Zooming)
+                {
+                    g.ScaleTransform(pictureBox.Zoom, pictureBox.Zoom);
+                    g.TranslateTransform(pictureBox.OffsetX, pictureBox.OffsetY);
+                    g.DrawLine(pen, startDataPoint.X, startDataPoint.Y, endDataPoint.X, endDataPoint.Y);
+                    return;
+                }
                 g.DrawLine(pen, startDataPoint.X, startDataPoint.Y, endDataPoint.X, endDataPoint.Y);
             }
         }
@@ -95,7 +104,7 @@ namespace Cii.Lar.DrawTools
         public override RectangleF GetTextF(string name, Graphics g, int index)
         {
             SizeF sizeF = g.MeasureString(name, this.Font);
-            return new RectangleF(startDataPoint.X - sizeF.Width, startDataPoint.Y - sizeF.Height / 2,
+            return new RectangleF(startDataPoint.X - sizeF.Width /*- pictureBox.StartOffsetX*/, startDataPoint.Y - sizeF.Height / 2,
                 sizeF.Width, sizeF.Height);
         }
 

@@ -368,7 +368,6 @@
     </Content>
     <Content Include="DrawTools\Cross.cur" />
     <Content Include="DrawTools\Ellipse.cur" />
-    <Content Include="DrawTools\hand.png" />
     <Content Include="DrawTools\Line.cur" />
     <Content Include="DrawTools\Pencil.cur" />
     <Content Include="DrawTools\PolyHandle.cur" />
