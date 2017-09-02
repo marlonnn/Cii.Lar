@@ -164,10 +164,12 @@
             this.sliderThickness.LabelVisible = false;
             this.sliderThickness.Location = new System.Drawing.Point(127, 86);
             this.sliderThickness.Name = "sliderThickness";
+            this.sliderThickness.Maximum = 10;
+            this.sliderThickness.Minimum = 1;
             this.sliderThickness.Size = new System.Drawing.Size(150, 21);
             this.sliderThickness.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.sliderThickness.TabIndex = 18;
-            this.sliderThickness.Value = 0;
+            this.sliderThickness.Value = 1;
             this.sliderThickness.ValueChanged += new System.EventHandler(this.sliderThickness_ValueChanged);
             // 
             // lblThickness
