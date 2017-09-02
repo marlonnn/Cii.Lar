@@ -31,11 +31,12 @@ namespace Cii.Lar.DrawTools
 
         public override void OnMouseDown(ZWPictureBox pictureBox, MouseEventArgs e)
         {
-            newPolygon = new DrawPolygon(pictureBox, e.X, e.Y, e.X + 1, e.Y + 1);
+            Point point = new Point((int)(e.X / pictureBox.Zoom - pictureBox.OffsetX), (int)(e.Y / pictureBox.Zoom - pictureBox.OffsetY));
+            newPolygon = new DrawPolygon(pictureBox, point.X, point.Y, point.X + 1, point.Y + 1);
             AddNewObject(pictureBox, newPolygon);
 
-            lastX = e.X;
-            lastY = e.Y;
+            lastX = point.X;
+            lastY = point.Y;
         }
 
         public override void OnMouseMove(ZWPictureBox pictureBox, MouseEventArgs e)
@@ -50,8 +51,8 @@ namespace Cii.Lar.DrawTools
             {
                 return;
             }
-            Point point = new Point(e.X, e.Y);
-            int distance = (e.X - lastX) * (e.X - lastX) + (e.Y - lastY) * (e.Y - lastY);
+            Point point = new Point((int)(e.X / pictureBox.Zoom - pictureBox.OffsetX), (int)(e.Y / pictureBox.Zoom - pictureBox.OffsetY));
+            int distance = (point.X - lastX) * (point.X - lastX) + (point.Y - lastY) * (point.Y - lastY);
 
             if (distance < minDistance)
             {
@@ -63,8 +64,8 @@ namespace Cii.Lar.DrawTools
             {
                 // Add new point
                 newPolygon.AddPoint(pictureBox, point, false);
-                lastX = e.X;
-                lastY = e.Y;
+                lastX = point.X;
+                lastY = point.Y;
             }
             pictureBox.Refresh();
         }

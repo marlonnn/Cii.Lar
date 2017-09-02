@@ -27,7 +27,8 @@ namespace Cii.Lar.DrawTools
 
         public override void OnMouseDown(ZWPictureBox pictureBox, MouseEventArgs e)
         {
-            AddNewObject(pictureBox, new DrawLine(pictureBox, e.X, e.Y, e.X + 1, e.Y + 1));
+            Point point = new Point((int)(e.X / pictureBox.Zoom - pictureBox.OffsetX), (int)(e.Y / pictureBox.Zoom - pictureBox.OffsetY));
+            AddNewObject(pictureBox, new DrawLine(pictureBox, point.X, point.Y, point.X + 1, point.Y + 1));
         }
 
         public override void OnMouseMove(ZWPictureBox pictureBox, MouseEventArgs e)
@@ -38,7 +39,7 @@ namespace Cii.Lar.DrawTools
             {
                 if (e.Button == MouseButtons.Left)
                 {
-                    Point point = new Point(e.X, e.Y);
+                    Point point = new Point((int)(e.X / pictureBox.Zoom - pictureBox.OffsetX), (int)(e.Y / pictureBox.Zoom - pictureBox.OffsetY));
                     pictureBox.GraphicsList[0].MoveHandleTo(pictureBox, point, 2);
                     pictureBox.Refresh();
                 }

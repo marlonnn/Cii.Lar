@@ -89,14 +89,6 @@ namespace Cii.Lar.DrawTools
 
             using (Pen pen = new Pen(Color.FromArgb(GraphicsProperties.Alpha, GraphicsProperties.Color), GraphicsProperties.PenWidth))
             {
-                g.ResetTransform();
-                if (Zooming)
-                {
-                    g.ScaleTransform(pictureBox.Zoom, pictureBox.Zoom);
-                    g.TranslateTransform(pictureBox.OffsetX, pictureBox.OffsetY);
-                    g.DrawLine(pen, startDataPoint.X, startDataPoint.Y, endDataPoint.X, endDataPoint.Y);
-                    return;
-                }
                 g.DrawLine(pen, startDataPoint.X, startDataPoint.Y, endDataPoint.X, endDataPoint.Y);
             }
         }

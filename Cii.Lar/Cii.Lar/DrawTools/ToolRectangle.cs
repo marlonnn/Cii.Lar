@@ -26,7 +26,8 @@ namespace Cii.Lar.DrawTools
 
         public override void OnMouseDown(ZWPictureBox pictureBox, MouseEventArgs e)
         {
-            AddNewObject(pictureBox, new DrawRectangle(pictureBox, e.X, e.Y, 1, 1));
+            Point point = new Point((int)(e.X / pictureBox.Zoom - pictureBox.OffsetX), (int)(e.Y / pictureBox.Zoom - pictureBox.OffsetY));
+            AddNewObject(pictureBox, new DrawRectangle(pictureBox, point.X, point.Y, 1, 1));
         }
 
         public override void OnMouseMove(ZWPictureBox pictureBox, MouseEventArgs e)
@@ -37,7 +38,7 @@ namespace Cii.Lar.DrawTools
             {
                 if (e.Button == MouseButtons.Left)
                 {
-                    Point point = new Point(e.X, e.Y);
+                    Point point = new Point((int)(e.X / pictureBox.Zoom - pictureBox.OffsetX), (int)(e.Y / pictureBox.Zoom - pictureBox.OffsetY));
                     pictureBox.GraphicsList[0].MoveHandleTo(pictureBox, point, 5);
                     pictureBox.Refresh();
                 }

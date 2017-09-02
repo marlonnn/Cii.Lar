@@ -48,7 +48,8 @@ namespace Cii.Lar.DrawTools
 
             if (newPolyLine == null)
             {
-                newPolyLine = new DrawPolyLine(pictureBox, e.X, e.Y, e.X + 1, e.Y + 1);
+                Point point = new Point((int)(e.X / pictureBox.Zoom - pictureBox.OffsetX), (int)(e.Y / pictureBox.Zoom - pictureBox.OffsetY));
+                newPolyLine = new DrawPolyLine(pictureBox, point.X, point.Y, point.X + 1, point.Y + 1);
                 AddNewObject(pictureBox, newPolyLine);
             }
             else
@@ -61,7 +62,8 @@ namespace Cii.Lar.DrawTools
                     return;
                 }
                 // Drawing is in process, so simply add a new point
-                newPolyLine.AddPoint(pictureBox, e.Location, true);
+                Point point = new Point((int)(e.X / pictureBox.Zoom - pictureBox.OffsetX), (int)(e.Y / pictureBox.Zoom - pictureBox.OffsetY));
+                newPolyLine.AddPoint(pictureBox, point, true);
             }
             pictureBox.Capture = false;
             pictureBox.Refresh();
@@ -76,7 +78,7 @@ namespace Cii.Lar.DrawTools
             if (newPolyLine == null)
                 return; // precaution
 
-            Point point = new Point(e.X, e.Y);
+            Point point = new Point((int)(e.X / pictureBox.Zoom - pictureBox.OffsetX), (int)(e.Y / pictureBox.Zoom - pictureBox.OffsetY));
             // move last point
             newPolyLine.MoveLastHandleTo(pictureBox, point);
             pictureBox.Refresh();
