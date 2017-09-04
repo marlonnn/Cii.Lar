@@ -42,6 +42,7 @@ namespace Cii.Lar.UI
     /// </summary>
     public partial class ZWPictureBox : PictureBox
     {
+        private Rulers rulers;
         private DrawObject drawObject;
         //Set this to Tag of delete Button
         private ListViewItemArray listViewItemArray;
@@ -237,6 +238,7 @@ namespace Cii.Lar.UI
             this.SetStyle(ControlStyles.UserPaint |
                           ControlStyles.AllPaintingInWmPaint |
                           ControlStyles.OptimizedDoubleBuffer, true);
+            rulers = new Rulers(this);
             listViewItemArray = new ListViewItemArray();
             GraphicsList = new GraphicsList();
             this.GraphicsList.DrawObjsChanged += GraphicsList_DrawObjsChanged;
@@ -695,6 +697,10 @@ namespace Cii.Lar.UI
                 if (GraphicsList != null)
                 {
                     GraphicsList.Draw(e.Graphics, this);
+                }
+                if (rulers != null)
+                {
+                    rulers.Draw(e.Graphics);
                 }
             }
             catch (Exception ex)
