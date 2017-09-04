@@ -27,7 +27,8 @@ namespace Cii.Lar.DrawTools
 
         public override void OnMouseDown(ZWPictureBox pictureBox, MouseEventArgs e)
         {
-            AddNewObject(pictureBox, new DrawCircle(pictureBox, new PointF(e.X, e.Y)));
+            Point point = new Point((int)(e.X / pictureBox.Zoom - pictureBox.OffsetX), (int)(e.Y / pictureBox.Zoom - pictureBox.OffsetY));
+            AddNewObject(pictureBox, new DrawCircle(pictureBox, new PointF(point.X, point.Y)));
         }
 
         public override void OnMouseMove(ZWPictureBox pictureBox, MouseEventArgs e)
