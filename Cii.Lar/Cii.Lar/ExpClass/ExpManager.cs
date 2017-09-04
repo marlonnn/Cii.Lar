@@ -60,6 +60,10 @@ namespace Cii.Lar.ExpClass
                     this.ZWPictureBox.ZoomFit();
                     break;
                 case ToolStripAction.Scale:
+                    ToolStripButton toolStripButton = sender as ToolStripButton;
+                    toolStripButton.Checked = !toolStripButton.Checked;
+                    this.ZWPictureBox.Rulers.ShowRulers = toolStripButton.Checked;
+                    this.ZWPictureBox.Invalidate();
                     break;
                 case ToolStripAction.Line:
                 case ToolStripAction.Rectangle:

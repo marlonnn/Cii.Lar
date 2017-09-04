@@ -15,6 +15,19 @@ namespace Cii.Lar.UI
     {
         public delegate void StripButtonClick(object sender, ToolStripEventArgs e);
         public StripButtonClick StripButtonClickHandler;
+
+        private ZWPictureBox pictureBox;
+        public ZWPictureBox PictureBox
+        {
+            get
+            {
+                return pictureBox;
+            }
+            set
+            {
+                pictureBox = value;
+            }
+        }
         public ControlCtrl()
         {
             InitializeComponent();
@@ -45,6 +58,12 @@ namespace Cii.Lar.UI
             ToolStripButton toolStripButton = sender as ToolStripButton;
             ToolStripAction action = (ToolStripAction)toolStripButton.Tag;
             StripButtonClickHandler?.Invoke(sender, new ToolStripEventArgs(action));
+            RefreshButtonState();
+        }
+
+        private void RefreshButtonState()
+        {
+            toolStripButtonScale.Checked = this.pictureBox.Rulers.ShowRulers;
         }
 
         private void btnMenuItem_Click(object sender, EventArgs e)

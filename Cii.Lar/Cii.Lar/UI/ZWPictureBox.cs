@@ -43,6 +43,14 @@ namespace Cii.Lar.UI
     public partial class ZWPictureBox : PictureBox
     {
         private Rulers rulers;
+        public Rulers Rulers
+        {
+            get
+            {
+                return rulers;
+            }
+        }
+
         private DrawObject drawObject;
         //Set this to Tag of delete Button
         private ListViewItemArray listViewItemArray;

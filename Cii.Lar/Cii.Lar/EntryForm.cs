@@ -22,6 +22,7 @@ namespace Cii.Lar
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+            this.controlCtrl.PictureBox = this.zwPictureBox;
             this.zwPictureBox.LoadImage();
         }
     }
