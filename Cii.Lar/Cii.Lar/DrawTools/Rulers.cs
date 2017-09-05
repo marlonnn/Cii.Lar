@@ -44,7 +44,7 @@ namespace Cii.Lar.DrawTools
 
         private ZWPictureBox pictureBox;
 
-        private float rulerStep = 50;
+        private float rulerStep = 100;
 
         public float RulerStep
         {
@@ -246,6 +246,73 @@ namespace Cii.Lar.DrawTools
             return aValue.ToString("0.###");
         }
 
+        private List<Point> pixelList;
+        private List<Point> logicalList;
+        public void DrawScaledNumber(Graphics g, double value, float xCoord, float yCoord, float ScaleFactor, bool Horizontal)
+        {
+            pixelList = new List<Point>();
+            CreateSegmentsList(value, ref pixelList, Horizontal);
+
+            logicalList = new List<Point>();
+
+            Point tmpLogicPoint = default(Point);
+            for (int iIter = 0; iIter <= pixelList.Count - 1; iIter++)
+            {
+                if (pixelList[iIter].X != int.MaxValue)
+                {
+                    tmpLogicPoint.X = (int)(pixelList[iIter].X / ScaleFactor + xCoord);
+                    tmpLogicPoint.Y = (int)(pixelList[iIter].Y / ScaleFactor + yCoord);
+                    logicalList.Add(tmpLogicPoint);
+                }
+                else
+                {
+                    using (Pen pen = new Pen(GraphicsPropertiesManager.GetPropertiesByName("Ruler").Color,
+                        GraphicsPropertiesManager.GetPropertiesByName("Ruler").PenWidth))
+                    {
+                        g.DrawLines(pen, logicalList.ToArray());
+                        logicalList.Clear();
+                    }
+                }
+            }
+        }
+
+        private void CreateSegmentsList(double value, ref List<System.Drawing.Point> pointList, bool Horizontal)
+        {
+            pointList.Clear();
+
+            string strValue = ValueString(value);
+            int alignmentOffset = -MaskWidth(value) / 2;
+
+            Point[] actualSign = null;
+            char actualChar = '\0';
+
+            for (int actualIndex = 0; actualIndex <= strValue.Length - 1; actualIndex++)
+            {
+                actualChar = strValue.ToCharArray()[actualIndex];
+                actualSign = signsTable[actualChar];
+
+                System.Drawing.Point newPoint = default(System.Drawing.Point);
+                int xCoord = 0;
+                int yCoord = 0;
+                pointList.Capacity = pointList.Count + actualSign.Length + 1;
+                for (int i = 0; i <= actualSign.Length - 1; i++)
+                {
+                    xCoord = (DigitWidth * actualIndex) + actualSign[i].X + alignmentOffset;
+                    yCoord = actualSign[i].Y;
+                    if (Horizontal)
+                    {
+                        newPoint = new System.Drawing.Point(xCoord, yCoord);
+                    }
+                    else
+                    {
+                        newPoint = new System.Drawing.Point(yCoord, -xCoord);
+                    }
+                    pointList.Add(newPoint);
+                }
+                pointList.Add(new System.Drawing.Point(int.MaxValue, int.MaxValue));
+            }
+        }
+
         public void Draw(Graphics g)
         {
             if (ShowRulers)
@@ -275,9 +342,12 @@ namespace Cii.Lar.DrawTools
                 g.DrawLine(pen, x1Coord, pictureBox.Height / 2 - 10, x1Coord, pictureBox.Height / 2);
                 g.DrawLine(pen, x1Coord + RulerStep / 2, pictureBox.Height / 2 - 5, x1Coord + RulerStep / 2, pictureBox.Height / 2);
 
+                DrawScaledNumber(g, x1Coord - pictureBox.Width / 2, x1Coord, pictureBox.Height / 2 - 20, 1, true);
                 //2.X < 0
                 g.DrawLine(pen, x2Coord, pictureBox.Height / 2 - 10, x2Coord, pictureBox.Height / 2);
                 g.DrawLine(pen, x2Coord + RulerStep / 2, pictureBox.Height / 2 - 5, x2Coord + RulerStep / 2, pictureBox.Height / 2);
+
+                DrawScaledNumber(g, x2Coord - pictureBox.Width / 2, x2Coord, pictureBox.Height / 2 - 20, 1, true);
                 x2Coord -= RulerStep;
             }
 
@@ -298,9 +368,11 @@ namespace Cii.Lar.DrawTools
                 //1.Y > 0
                 g.DrawLine(pen, pictureBox.Width / 2 - 10, y1Coord, pictureBox.Width / 2, y1Coord);
                 g.DrawLine(pen, pictureBox.Width / 2 - 5, y1Coord + RulerStep / 2, pictureBox.Width / 2, y1Coord + RulerStep / 2);
+                DrawScaledNumber(g, y1Coord - pictureBox.Height / 2, pictureBox.Width / 2 - 20, y1Coord, 1, true);
 
                 g.DrawLine(pen, pictureBox.Width / 2 - 10, y2Coord, pictureBox.Width / 2, y2Coord);
                 g.DrawLine(pen, pictureBox.Width / 2 - 5, y2Coord + RulerStep / 2, pictureBox.Width / 2, y2Coord + RulerStep / 2);
+                DrawScaledNumber(g, y2Coord - pictureBox.Height / 2, pictureBox.Width / 2 - 20, y2Coord, 1, true);
                 y2Coord -= RulerStep;
             }
             g.DrawLine(pen, pictureBox.Width / 2, 0, pictureBox.Width / 2, pictureBox.Height);
