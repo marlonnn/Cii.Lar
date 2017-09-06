@@ -336,19 +336,30 @@ namespace Cii.Lar.DrawTools
         {
             float x1Coord = pictureBox.Width / 2;
             float x2Coord = pictureBox.Width / 2;
+            float x1 = 0;
+            float x2 = 0;
             for ( ; x1Coord < pictureBox.Width; x1Coord += RulerStep)
             {
                 //1.X > 0
                 g.DrawLine(pen, x1Coord, pictureBox.Height / 2 - 10, x1Coord, pictureBox.Height / 2);
                 g.DrawLine(pen, x1Coord + RulerStep / 2, pictureBox.Height / 2 - 5, x1Coord + RulerStep / 2, pictureBox.Height / 2);
 
-                DrawScaledNumber(g, x1Coord - pictureBox.Width / 2, x1Coord, pictureBox.Height / 2 - 20, 1, true);
+                if (x1 != 0)
+                {
+                    DrawScaledNumber(g, x1, x1Coord, pictureBox.Height / 2 - 20, 1, true);
+                }
+                x1 += this.rulerStep;
+
                 //2.X < 0
                 g.DrawLine(pen, x2Coord, pictureBox.Height / 2 - 10, x2Coord, pictureBox.Height / 2);
                 g.DrawLine(pen, x2Coord + RulerStep / 2, pictureBox.Height / 2 - 5, x2Coord + RulerStep / 2, pictureBox.Height / 2);
 
-                DrawScaledNumber(g, x2Coord - pictureBox.Width / 2, x2Coord, pictureBox.Height / 2 - 20, 1, true);
+                if (x2 != 0)
+                {
+                    DrawScaledNumber(g, x2, x2Coord, pictureBox.Height / 2 - 20, 1, true);
+                }
                 x2Coord -= RulerStep;
+                x2 -= this.rulerStep;
             }
 
             g.DrawLine(pen, 0, pictureBox.Height / 2, pictureBox.Width, pictureBox.Height / 2);
@@ -363,17 +374,29 @@ namespace Cii.Lar.DrawTools
         {
             float y1Coord = pictureBox.Height / 2;
             float y2Coord = pictureBox.Height / 2;
+            float y1 = 0;
+            float y2 = 0;
             for ( ; y1Coord < pictureBox.Height; y1Coord += RulerStep)
             {
                 //1.Y > 0
                 g.DrawLine(pen, pictureBox.Width / 2 - 10, y1Coord, pictureBox.Width / 2, y1Coord);
                 g.DrawLine(pen, pictureBox.Width / 2 - 5, y1Coord + RulerStep / 2, pictureBox.Width / 2, y1Coord + RulerStep / 2);
-                DrawScaledNumber(g, y1Coord - pictureBox.Height / 2, pictureBox.Width / 2 - 20, y1Coord, 1, true);
+
+                if (y1 != 0)
+                {
+                    DrawScaledNumber(g, y1, pictureBox.Width / 2 - 20, y1Coord - 2, 1, true);
+                }
+                y1 += this.rulerStep;
 
                 g.DrawLine(pen, pictureBox.Width / 2 - 10, y2Coord, pictureBox.Width / 2, y2Coord);
                 g.DrawLine(pen, pictureBox.Width / 2 - 5, y2Coord + RulerStep / 2, pictureBox.Width / 2, y2Coord + RulerStep / 2);
-                DrawScaledNumber(g, y2Coord - pictureBox.Height / 2, pictureBox.Width / 2 - 20, y2Coord, 1, true);
+
+                if (y2 != 0)
+                {
+                    DrawScaledNumber(g, y2, pictureBox.Width / 2 - 20, y2Coord - 2, 1, true);
+                }
                 y2Coord -= RulerStep;
+                y2 -= this.rulerStep;
             }
             g.DrawLine(pen, pictureBox.Width / 2, 0, pictureBox.Width / 2, pictureBox.Height);
         }
