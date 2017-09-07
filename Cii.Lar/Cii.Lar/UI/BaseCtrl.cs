@@ -25,7 +25,7 @@ namespace Cii.Lar.UI
         /// title font
         /// </summary>
         protected Font font = new System.Drawing.Font("Times New Roman", 9.75F,
-            ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))),
+            ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold))),
             System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 
         /// <summary>
