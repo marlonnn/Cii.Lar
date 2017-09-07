@@ -89,7 +89,7 @@ namespace Cii.Lar.UI
 
         protected override void RefreshUI()
         {
-            this.Title = global::Cii.Lar.Properties.Resources.StrStatisticsTitle;
+            this.Title = global::Cii.Lar.Properties.Resources.StrRulerAppearanceTitle;
             foreach (var item in this.Controls)
             {
                 LabelX label = item as LabelX;
