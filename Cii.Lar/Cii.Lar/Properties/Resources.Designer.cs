@@ -318,6 +318,24 @@ namespace Cii.Lar.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Laser Appearance.
+        /// </summary>
+        internal static string StrLaserAppearanceTitle {
+            get {
+                return ResourceManager.GetString("StrLaserAppearanceTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Laser Control.
+        /// </summary>
+        internal static string StrLaserCtrlTitle {
+            get {
+                return ResourceManager.GetString("StrLaserCtrlTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         internal static string StrOK {

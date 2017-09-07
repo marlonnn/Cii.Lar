@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevComponents.DotNetBar;
 
 namespace Cii.Lar.UI
 {
@@ -16,8 +17,9 @@ namespace Cii.Lar.UI
     /// </summary>
     public partial class LaserCtrl : BaseCtrl
     {
-        public LaserCtrl()
+        public LaserCtrl() : base()
         {
+            resources = new ComponentResourceManager(typeof(LaserCtrl));
             this.ShowIndex = 0;
             InitializeComponent();
         }
@@ -55,6 +57,12 @@ namespace Cii.Lar.UI
         private void btnAppearance_Click(object sender, EventArgs e)
         {
             ClickDelegateHandler?.Invoke(sender, "Laser Appearance");
+        }
+
+        protected override void RefreshUI()
+        {
+            base.RefreshUI();
+            this.Title = global::Cii.Lar.Properties.Resources.StrLaserCtrlTitle;
         }
     }
 }

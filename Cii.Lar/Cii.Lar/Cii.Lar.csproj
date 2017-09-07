@@ -283,11 +283,17 @@
     <EmbeddedResource Include="UI\ImageForm.resx">
       <DependentUpon>ImageForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\LaserAppearanceCtrl.zh-CN.resx">
+      <DependentUpon>LaserAppearanceCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\LaserCtrl.resx">
       <DependentUpon>LaserCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\LaserAppearanceCtrl.resx">
       <DependentUpon>LaserAppearanceCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\LaserCtrl.zh-CN.resx">
+      <DependentUpon>LaserCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\RulerAppearanceCtrl.resx">
       <DependentUpon>RulerAppearanceCtrl.cs</DependentUpon>

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cii.Lar.DrawTools;
+using DevComponents.DotNetBar;
 
 namespace Cii.Lar.UI
 {
@@ -21,8 +22,9 @@ namespace Cii.Lar.UI
 
         private GraphicsProperties graphicsProperties;
 
-        public LaserAppearanceCtrl()
+        public LaserAppearanceCtrl() : base()
         {
+            resources = new ComponentResourceManager(typeof(LaserAppearanceCtrl));
             this.ShowIndex = 1;
             graphicsProperties = graphicsPropertiesManager.GetPropertiesByName("Circle");
             InitializeComponent();
@@ -68,6 +70,12 @@ namespace Cii.Lar.UI
             {
                 graphicsProperties.ChangeColor(value);
             }
+        }
+
+        protected override void RefreshUI()
+        {
+            base.RefreshUI();
+            this.Title = global::Cii.Lar.Properties.Resources.StrLaserCtrlTitle;
         }
     }
 }

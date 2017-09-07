@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cii.Lar.SysClass;
+using DevComponents.DotNetBar;
 
 namespace Cii.Lar.UI
 {
@@ -69,12 +70,12 @@ namespace Cii.Lar.UI
         {
             InitializeComponent();
             sysConfig = SysConfig.GetSysConfig();
+            sysConfig.PropertyChanged += SysConfig_PropertyChanged;
             this.Load += BaseCtrl_Load;
         }
 
         private void BaseCtrl_Load(object sender, EventArgs e)
         {
-            sysConfig.PropertyChanged += SysConfig_PropertyChanged;
         }
 
         private void SysConfig_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -87,7 +88,19 @@ namespace Cii.Lar.UI
 
         protected virtual void RefreshUI()
         {
-
+            foreach (var item in this.Controls)
+            {
+                ButtonX btnX = item as ButtonX;
+                if (btnX != null)
+                {
+                    resources.ApplyResources(btnX, btnX.Name);
+                }
+                LabelX lblX = item as LabelX;
+                if (lblX != null)
+                {
+                    resources.ApplyResources(lblX, lblX.Name);
+                }
+            }
         }
 
         protected virtual void closeButton_Click(object sender, EventArgs e)

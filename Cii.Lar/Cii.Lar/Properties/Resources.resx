@@ -244,4 +244,10 @@
   <data name="StrRulerAppearanceTitle" xml:space="preserve">
     <value>Ruler Appearance</value>
   </data>
+  <data name="StrLaserCtrlTitle" xml:space="preserve">
+    <value>Laser Control</value>
+  </data>
+  <data name="StrLaserAppearanceTitle" xml:space="preserve">
+    <value>Laser Appearance</value>
+  </data>
 </root>

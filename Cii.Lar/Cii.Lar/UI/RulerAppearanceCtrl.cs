@@ -89,15 +89,8 @@ namespace Cii.Lar.UI
 
         protected override void RefreshUI()
         {
+            base.RefreshUI();
             this.Title = global::Cii.Lar.Properties.Resources.StrRulerAppearanceTitle;
-            foreach (var item in this.Controls)
-            {
-                LabelX label = item as LabelX;
-                if (label != null)
-                {
-                    resources.ApplyResources(label, label.Name);
-                }
-            }
             resources.ApplyResources(this.btnLaserCtrl, btnLaserCtrl.Name);
             this.Invalidate();
         }
