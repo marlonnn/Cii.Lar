@@ -53,8 +53,10 @@ namespace Cii.Lar.ExpClass
                     filesForm.ShowDialog();
                     break;
                 case ToolStripAction.ZoomOut:
+                    this.ZWPictureBox.ZoonOut();
                     break;
                 case ToolStripAction.ZoomIn:
+                    this.ZWPictureBox.ZoomIn();
                     break;
                 case ToolStripAction.ZoomFit:
                     this.ZWPictureBox.ZoomFit();

@@ -55,7 +55,6 @@ namespace Cii.Lar.DrawTools
         public DrawLine()
         {
             InitializeGraphicsProperties();
-            Zooming = false;
             this.ObjectType = ObjectType.Line;
             this.Statistics.Area = "null";
             this.RegisterUpdateStatisticsHandler();

@@ -24,7 +24,6 @@ namespace Cii.Lar.DrawTools
     /// </summary>
     public abstract class DrawObject
     {
-        public bool Zooming;
         public ObjectType ObjectType;
 
         protected ZWPictureBox pictureBox;

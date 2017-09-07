@@ -642,6 +642,37 @@ namespace Cii.Lar.UI
             this.Invalidate();
         }
 
+        private Point mousePos = Point.Empty;
+
+        public void ZoomIn()
+        {
+            float oldzoom = zoom;
+            if (mousePos == Point.Empty)
+            {
+                mousePos = new Point(this.Width / 2, this.Height / 2);
+            }
+            MouseEventArgs args = new MouseEventArgs(new MouseButtons(), 1, mousePos.X, mousePos.Y, 0);
+            zoom += 0.2F;
+            ZoomOnMouseCenter(args, oldzoom);
+            this.Invalidate();
+        }
+
+        public void ZoonOut()
+        {
+            if (zoom > 1)
+            {
+                float oldzoom = zoom;
+                if (mousePos == Point.Empty)
+                {
+                    mousePos = new Point(this.Width / 2, this.Height / 2);
+                }
+                MouseEventArgs args = new MouseEventArgs(new MouseButtons(), 1, mousePos.X, mousePos.Y, 0);
+                zoom = Math.Max(zoom - 0.2F, 0.01F);
+                ZoomOnMouseCenter(args, oldzoom);
+                this.Invalidate();
+            }
+        }
+
         /// <summary>
         /// Handles the MouseWheel event.
         /// </summary>
@@ -741,7 +772,7 @@ namespace Cii.Lar.UI
 
         private void ZoomOnMouseCenter(MouseEventArgs e, float oldzoom)
         {
-            Test();
+            mousePos = e.Location;
             Point mousePosNow = e.Location;
 
             // Where location of the mouse in the pictureframe
@@ -759,17 +790,6 @@ namespace Cii.Lar.UI
             // Where to move image to keep focus on one point
             offsetX = newImageX - oldImageX + offsetX;
             offsetY = newImageY - oldImageY + offsetY;
-        }
-
-        public void Test()
-        {
-            if (GraphicsList != null && GraphicsList.Count > 0 )
-            {
-                foreach (var drawObject in GraphicsList)
-                {
-                    drawObject.Zooming = true;
-                }
-            }
         }
 
         #region "Check key pressed"
