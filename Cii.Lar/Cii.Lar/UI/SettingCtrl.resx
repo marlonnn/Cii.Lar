@@ -117,4 +117,282 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="closeButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>197, 1</value>
+  </data>
+  <data name="&gt;&gt;closeButton.Name" xml:space="preserve">
+    <value>closeButton</value>
+  </data>
+  <data name="&gt;&gt;closeButton.Type" xml:space="preserve">
+    <value>Cii.Lar.UI.TransparentButton, Cii.Lar, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;closeButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;closeButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="labelItemLanguage.Text" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="comboItem1.Text" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="comboItem1.Value" xml:space="preserve">
+    <value>en-US</value>
+  </data>
+  <data name="comboItem2.Text" xml:space="preserve">
+    <value>简体中文</value>
+  </data>
+  <data name="comboItem2.Value" xml:space="preserve">
+    <value>zh-CN</value>
+  </data>
+  <data name="itemPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 182</value>
+  </data>
+  <data name="itemPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 53</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="itemPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="itemPanel1.Text" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="&gt;&gt;itemPanel1.Name" xml:space="preserve">
+    <value>itemPanel1</value>
+  </data>
+  <data name="&gt;&gt;itemPanel1.Type" xml:space="preserve">
+    <value>DevComponents.DotNetBar.ItemPanel, DevComponents.DotNetBar2, Version=11.1.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04</value>
+  </data>
+  <data name="&gt;&gt;itemPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;itemPanel1.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="buttonSelect.Location" type="System.Drawing.Point, System.Drawing">
+    <value>165, 20</value>
+  </data>
+  <data name="buttonSelect.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 21</value>
+  </data>
+  <data name="buttonSelect.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="buttonSelect.Text" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="&gt;&gt;buttonSelect.Name" xml:space="preserve">
+    <value>buttonSelect</value>
+  </data>
+  <data name="&gt;&gt;buttonSelect.Type" xml:space="preserve">
+    <value>DevComponents.DotNetBar.ButtonX, DevComponents.DotNetBar2, Version=11.1.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04</value>
+  </data>
+  <data name="&gt;&gt;buttonSelect.Parent" xml:space="preserve">
+    <value>itemPanel2</value>
+  </data>
+  <data name="&gt;&gt;buttonSelect.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 44</value>
+  </data>
+  <data name="buttonSave.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 21</value>
+  </data>
+  <data name="buttonSave.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="buttonSave.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="&gt;&gt;buttonSave.Name" xml:space="preserve">
+    <value>buttonSave</value>
+  </data>
+  <data name="&gt;&gt;buttonSave.Type" xml:space="preserve">
+    <value>DevComponents.DotNetBar.ButtonX, DevComponents.DotNetBar2, Version=11.1.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04</value>
+  </data>
+  <data name="&gt;&gt;buttonSave.Parent" xml:space="preserve">
+    <value>itemPanel2</value>
+  </data>
+  <data name="&gt;&gt;buttonSave.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="labelItemStoragePath.Text" xml:space="preserve">
+    <value>Storage Path</value>
+  </data>
+  <data name="textBoxItemStoragePath.Text" xml:space="preserve">
+    <value>textBoxItem1</value>
+  </data>
+  <data name="itemPanel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 241</value>
+  </data>
+  <data name="itemPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 72</value>
+  </data>
+  <data name="itemPanel2.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="itemPanel2.Text" xml:space="preserve">
+    <value>itemPanel2</value>
+  </data>
+  <data name="&gt;&gt;itemPanel2.Name" xml:space="preserve">
+    <value>itemPanel2</value>
+  </data>
+  <data name="&gt;&gt;itemPanel2.Type" xml:space="preserve">
+    <value>DevComponents.DotNetBar.ItemPanel, DevComponents.DotNetBar2, Version=11.1.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04</value>
+  </data>
+  <data name="&gt;&gt;itemPanel2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;itemPanel2.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="labelItemCamera.Text" xml:space="preserve">
+    <value>Camera</value>
+  </data>
+  <data name="itemPanelCamera.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 57</value>
+  </data>
+  <data name="itemPanelCamera.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 119</value>
+  </data>
+  <data name="itemPanelCamera.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="itemPanelCamera.Text" xml:space="preserve">
+    <value>itemPanel3</value>
+  </data>
+  <data name="&gt;&gt;itemPanelCamera.Name" xml:space="preserve">
+    <value>itemPanelCamera</value>
+  </data>
+  <data name="&gt;&gt;itemPanelCamera.Type" xml:space="preserve">
+    <value>DevComponents.DotNetBar.ItemPanel, DevComponents.DotNetBar2, Version=11.1.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04</value>
+  </data>
+  <data name="&gt;&gt;itemPanelCamera.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;itemPanelCamera.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="buttonItemSimulator.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="buttonItemSimulator.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="buttonItemSimulator.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="buttonItemSimulator.Text" xml:space="preserve">
+    <value>Open Simulator Mode</value>
+  </data>
+  <data name="&gt;&gt;buttonItemSimulator.Name" xml:space="preserve">
+    <value>buttonItemSimulator</value>
+  </data>
+  <data name="&gt;&gt;buttonItemSimulator.Type" xml:space="preserve">
+    <value>DevComponents.DotNetBar.ButtonX, DevComponents.DotNetBar2, Version=11.1.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04</value>
+  </data>
+  <data name="buttonSysInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 28</value>
+  </data>
+  <data name="buttonSysInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 23</value>
+  </data>
+  <data name="buttonSysInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="buttonSysInfo.Text" xml:space="preserve">
+    <value>System Infomation</value>
+  </data>
+  <data name="&gt;&gt;buttonSysInfo.Name" xml:space="preserve">
+    <value>buttonSysInfo</value>
+  </data>
+  <data name="&gt;&gt;buttonSysInfo.Type" xml:space="preserve">
+    <value>DevComponents.DotNetBar.ButtonX, DevComponents.DotNetBar2, Version=11.1.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04</value>
+  </data>
+  <data name="&gt;&gt;buttonSysInfo.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;buttonSysInfo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 560</value>
+  </data>
+  <data name="&gt;&gt;labelItemLanguage.Name" xml:space="preserve">
+    <value>labelItemLanguage</value>
+  </data>
+  <data name="&gt;&gt;labelItemLanguage.Type" xml:space="preserve">
+    <value>DevComponents.DotNetBar.LabelItem, DevComponents.DotNetBar2, Version=11.1.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04</value>
+  </data>
+  <data name="&gt;&gt;comboBoxItemLanguage.Name" xml:space="preserve">
+    <value>comboBoxItemLanguage</value>
+  </data>
+  <data name="&gt;&gt;comboBoxItemLanguage.Type" xml:space="preserve">
+    <value>DevComponents.DotNetBar.ComboBoxItem, DevComponents.DotNetBar2, Version=11.1.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04</value>
+  </data>
+  <data name="&gt;&gt;comboItem1.Name" xml:space="preserve">
+    <value>comboItem1</value>
+  </data>
+  <data name="&gt;&gt;comboItem1.Type" xml:space="preserve">
+    <value>DevComponents.Editors.ComboItem, DevComponents.DotNetBar2, Version=11.1.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04</value>
+  </data>
+  <data name="&gt;&gt;comboItem2.Name" xml:space="preserve">
+    <value>comboItem2</value>
+  </data>
+  <data name="&gt;&gt;comboItem2.Type" xml:space="preserve">
+    <value>DevComponents.Editors.ComboItem, DevComponents.DotNetBar2, Version=11.1.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04</value>
+  </data>
+  <data name="&gt;&gt;labelItemStoragePath.Name" xml:space="preserve">
+    <value>labelItemStoragePath</value>
+  </data>
+  <data name="&gt;&gt;labelItemStoragePath.Type" xml:space="preserve">
+    <value>DevComponents.DotNetBar.LabelItem, DevComponents.DotNetBar2, Version=11.1.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04</value>
+  </data>
+  <data name="&gt;&gt;itemContainer1.Name" xml:space="preserve">
+    <value>itemContainer1</value>
+  </data>
+  <data name="&gt;&gt;itemContainer1.Type" xml:space="preserve">
+    <value>DevComponents.DotNetBar.ItemContainer, DevComponents.DotNetBar2, Version=11.1.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04</value>
+  </data>
+  <data name="&gt;&gt;textBoxItemStoragePath.Name" xml:space="preserve">
+    <value>textBoxItemStoragePath</value>
+  </data>
+  <data name="&gt;&gt;textBoxItemStoragePath.Type" xml:space="preserve">
+    <value>DevComponents.DotNetBar.TextBoxItem, DevComponents.DotNetBar2, Version=11.1.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04</value>
+  </data>
+  <data name="&gt;&gt;labelItemCamera.Name" xml:space="preserve">
+    <value>labelItemCamera</value>
+  </data>
+  <data name="&gt;&gt;labelItemCamera.Type" xml:space="preserve">
+    <value>DevComponents.DotNetBar.LabelItem, DevComponents.DotNetBar2, Version=11.1.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04</value>
+  </data>
+  <data name="&gt;&gt;itemContainer3.Name" xml:space="preserve">
+    <value>itemContainer3</value>
+  </data>
+  <data name="&gt;&gt;itemContainer3.Type" xml:space="preserve">
+    <value>DevComponents.DotNetBar.ItemContainer, DevComponents.DotNetBar2, Version=11.1.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>SettingCtrl</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>Cii.Lar.UI.BaseCtrl, Cii.Lar, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;$this.Title" xml:space="preserve">
+    <value>Setting</value>
+  </data>
 </root>

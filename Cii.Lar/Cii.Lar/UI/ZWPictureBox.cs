@@ -77,6 +77,10 @@ namespace Cii.Lar.UI
 
         #region BaseCtrl
         private BaseCtrl baseCtrl;
+        [BrowsableAttribute(false)]
+        [System.ComponentModel.Localizable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BaseCtrl BaseCtrl
         {
             get
@@ -86,7 +90,10 @@ namespace Cii.Lar.UI
         }
 
         private List<BaseCtrl> controls;
-
+        [BrowsableAttribute(false)]
+        [System.ComponentModel.Localizable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public StatisticsCtrl StatisticsControl
         {
             get
@@ -98,7 +105,10 @@ namespace Cii.Lar.UI
 
         #region Draw tools
         private Tool[] tools;                 // array of tools
-
+        [BrowsableAttribute(false)]
+        [System.ComponentModel.Localizable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Tool[] Tools
         {
             get
@@ -111,7 +121,10 @@ namespace Cii.Lar.UI
             }
         }
         private DrawToolType activeTool;      // active drawing tool
-
+        [BrowsableAttribute(false)]
+        [System.ComponentModel.Localizable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DrawToolType ActiveTool
         {
             get
@@ -146,7 +159,10 @@ namespace Cii.Lar.UI
         }
 
         private GraphicsList drawObjects;
-
+        [BrowsableAttribute(false)]
+        [System.ComponentModel.Localizable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public GraphicsList GraphicsList
         {
             get

@@ -1,3 +1,4 @@
+using Cii.Lar.SysClass;
 using DevComponents.DotNetBar;
 using System;
 using System.Collections.Generic;
@@ -45,11 +46,13 @@ namespace Cii.Lar.UI
             }
         }
 
-        public StatisticsCtrl()
+        public StatisticsCtrl() : base()
         {
             this.ShowIndex = 2;
             InitializeComponent();
+            resources = new ComponentResourceManager(typeof(StatisticsCtrl));
         }
+
 
         /// <summary>
         /// close the StatisticsCtrl control when close button clicked
@@ -66,6 +69,16 @@ namespace Cii.Lar.UI
         private void btnAppearance_Click(object sender, EventArgs e)
         {
             ClickDelegateHandler?.Invoke(sender, "Ruler Appearance");
+        }
+
+        protected override void RefreshUI()
+        {
+            this.Title = global::Cii.Lar.Properties.Resources.StrStatisticsTitle;
+            resources.ApplyResources(this.columnHeader1, "columnHeader1");
+            resources.ApplyResources(this.columnHeader2, "columnHeader2");
+            resources.ApplyResources(this.columnHeader3, "columnHeader3");
+            resources.ApplyResources(btnAppearance, btnAppearance.Name);
+            this.Invalidate();
         }
     }
 }

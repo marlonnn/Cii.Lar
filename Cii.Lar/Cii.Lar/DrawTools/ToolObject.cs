@@ -17,6 +17,8 @@ namespace Cii.Lar.DrawTools
     {
         private Cursor cursor;
 
+        [System.ComponentModel.Localizable(false)]
+
         /// <summary>
         /// Tool cursor.
         /// </summary>

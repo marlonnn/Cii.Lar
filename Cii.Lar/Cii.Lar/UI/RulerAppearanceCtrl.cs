@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cii.Lar.DrawTools;
+using DevComponents.DotNetBar;
 
 namespace Cii.Lar.UI
 {
@@ -16,8 +17,9 @@ namespace Cii.Lar.UI
         private GraphicsPropertiesManager graphicsPropertiesManager = GraphicsPropertiesManager.GraphicsManagerSingleInstance();
 
         private GraphicsProperties graphicsProperties;
-        public RulerAppearanceCtrl()
+        public RulerAppearanceCtrl() : base()
         {
+            resources = new ComponentResourceManager(typeof(RulerAppearanceCtrl));
             this.ShowIndex = 3;
             InitializeComponent();
         }
@@ -83,6 +85,21 @@ namespace Cii.Lar.UI
             {
                 graphicsProperties.ChangeColor(value);
             }
+        }
+
+        protected override void RefreshUI()
+        {
+            this.Title = global::Cii.Lar.Properties.Resources.StrStatisticsTitle;
+            foreach (var item in this.Controls)
+            {
+                LabelX label = item as LabelX;
+                if (label != null)
+                {
+                    resources.ApplyResources(label, label.Name);
+                }
+            }
+            resources.ApplyResources(this.btnLaserCtrl, btnLaserCtrl.Name);
+            this.Invalidate();
         }
     }
 }

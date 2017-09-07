@@ -117,26 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="buttonSaveStr" xml:space="preserve">
-    <value>保存</value>
-  </data>
-  <data name="buttonSelectStr" xml:space="preserve">
-    <value>选择</value>
-  </data>
-  <data name="buttonSysInfoStr" xml:space="preserve">
-    <value>系统信息</value>
-  </data>
   <data name="labelItem1Str" xml:space="preserve">
     <value>准备就绪</value>
   </data>
   <data name="labelItemLanguageStr" xml:space="preserve">
     <value>语言</value>
-  </data>
-  <data name="labelItemStoragePathStr" xml:space="preserve">
-    <value>存储路径</value>
-  </data>
-  <data name="settingFormTitleStr" xml:space="preserve">
-    <value>设置</value>
   </data>
   <data name="StrCreateReport" xml:space="preserve">
     <value>点击报告按钮创建技术支持请求。</value>
@@ -153,40 +138,13 @@
   <data name="StrUnknownErrorMsg" xml:space="preserve">
     <value>遇到未知错误，请重启程序。</value>
   </data>
-  <data name="toolStripButtonCaptureStr" xml:space="preserve">
-    <value>截屏</value>
-  </data>
-  <data name="toolStripButtonEllipticalStr" xml:space="preserve">
-    <value>椭圆</value>
-  </data>
-  <data name="toolStripButtonLaserStr" xml:space="preserve">
-    <value>激光</value>
-  </data>
-  <data name="toolStripButtonLineStr" xml:space="preserve">
-    <value>直线</value>
-  </data>
-  <data name="toolStripButtonPolygonStr" xml:space="preserve">
-    <value>多边形</value>
-  </data>
-  <data name="toolStripButtonRectangleStr" xml:space="preserve">
-    <value>矩形</value>
-  </data>
-  <data name="toolStripButtonScaleStr" xml:space="preserve">
-    <value>测量</value>
-  </data>
-  <data name="toolStripButtonSettingStr" xml:space="preserve">
+  <data name="StrSetting" xml:space="preserve">
     <value>设置</value>
   </data>
-  <data name="toolStripButtonVideoStr" xml:space="preserve">
-    <value>录制视频</value>
+  <data name="StrStatisticsTitle" xml:space="preserve">
+    <value>统计信息</value>
   </data>
-  <data name="toolStripButtonZoomInStr" xml:space="preserve">
-    <value>放大</value>
-  </data>
-  <data name="toolStripButtonZoomOutStr" xml:space="preserve">
-    <value>缩小</value>
-  </data>
-  <data name="toolStripFilesStr" xml:space="preserve">
-    <value>文件归档</value>
+  <data name="StrRulerAppearanceTitle" xml:space="preserve">
+    <value>测量工具显示</value>
   </data>
 </root>

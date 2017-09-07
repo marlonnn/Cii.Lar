@@ -28,8 +28,10 @@ namespace Cii.Lar.UI
                 pictureBox = value;
             }
         }
-        public ControlCtrl()
+
+        public ControlCtrl() : base()
         {
+            resources = new ComponentResourceManager(typeof(ControlCtrl));
             InitializeComponent();
             InitializeToolStrip();
         }
@@ -107,6 +109,31 @@ namespace Cii.Lar.UI
             if (item != null)
             {
                 item.Checked = true;
+            }
+        }
+
+        public void RefreshUI()
+        {
+            foreach (var item in this.toolStrip1.Items)
+            {
+                ToolStripButton tsb = item as ToolStripButton;
+                if (tsb != null)
+                {
+                    resources.ApplyResources(tsb, tsb.Name);
+                }
+                ToolStripDropDownButton tsbdd = item as ToolStripDropDownButton;
+                if (tsbdd != null)
+                {
+                    resources.ApplyResources(tsbdd, tsbdd.Name);
+                    foreach (var dropItem in tsbdd.DropDownItems)
+                    {
+                        ToolStripMenuItem tsmi = dropItem as ToolStripMenuItem;
+                        if (tsmi != null)
+                        {
+                            resources.ApplyResources(tsmi, tsmi.Name);
+                        }
+                    }
+                }
             }
         }
     }

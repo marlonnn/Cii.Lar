@@ -127,20 +127,8 @@
   <data name="scale" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\scale.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="toolStripButtonZoomInStr" xml:space="preserve">
-    <value>Zoom In</value>
-  </data>
   <data name="unit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\unit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="toolStripButtonLineStr" xml:space="preserve">
-    <value>Line</value>
-  </data>
-  <data name="toolStripButtonSettingStr" xml:space="preserve">
-    <value>Setting</value>
-  </data>
-  <data name="buttonSelectStr" xml:space="preserve">
-    <value>Select</value>
   </data>
   <data name="open" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\open.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -151,9 +139,6 @@
   <data name="polygon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\polygon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="toolStripButtonCaptureStr" xml:space="preserve">
-    <value>Capture Screen</value>
-  </data>
   <data name="ruler" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ruler.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -163,26 +148,17 @@
   <data name="zoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\zoom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="toolStripButtonPolygonStr" xml:space="preserve">
-    <value>Ploygon</value>
-  </data>
   <data name="copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\copy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="StrReport" xml:space="preserve">
     <value>Report</value>
   </data>
-  <data name="buttonSysInfoStr" xml:space="preserve">
-    <value>System Infomation</value>
-  </data>
   <data name="setting" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\setting.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Zoom in" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Zoom in.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="toolStripButtonRectangleStr" xml:space="preserve">
-    <value>Rectangle</value>
   </data>
   <data name="StrUnknownErrorMsg" xml:space="preserve">
     <value>Encountered an unknown error. Please restart the program.</value>
@@ -192,12 +168,6 @@
   </data>
   <data name="laser" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\laser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="toolStripFilesStr" xml:space="preserve">
-    <value>File Archiving</value>
-  </data>
-  <data name="toolStripButtonZoomOutStr" xml:space="preserve">
-    <value>Zoom Out</value>
   </data>
   <data name="zoomFit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\zoomFit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -217,20 +187,11 @@
   <data name="elliptical" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\elliptical.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="toolStripButtonVideoStr" xml:space="preserve">
-    <value>Capture Video</value>
-  </data>
-  <data name="toolStripButtonEllipticalStr" xml:space="preserve">
-    <value>Elliptical</value>
-  </data>
   <data name="line" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\line.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="files" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\files.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="toolStripButtonScaleStr" xml:space="preserve">
-    <value>Scale</value>
   </data>
   <data name="rectangular" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\rectangular.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -247,9 +208,6 @@
   <data name="delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="labelItemStoragePathStr" xml:space="preserve">
-    <value>Storage Path</value>
-  </data>
   <data name="um" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\um.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -262,12 +220,6 @@
   <data name="view" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\view.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="settingFormTitleStr" xml:space="preserve">
-    <value>Setting</value>
-  </data>
-  <data name="toolStripButtonLaserStr" xml:space="preserve">
-    <value>Laser</value>
-  </data>
   <data name="Zoom out" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Zoom out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -277,13 +229,19 @@
   <data name="measure" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\measure.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="buttonSaveStr" xml:space="preserve">
-    <value>Save</value>
-  </data>
   <data name="print preview" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\print preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="hand" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\hand.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StrSetting" xml:space="preserve">
+    <value>Setting</value>
+  </data>
+  <data name="StrStatisticsTitle" xml:space="preserve">
+    <value>Statistics Information</value>
+  </data>
+  <data name="StrRulerAppearanceTitle" xml:space="preserve">
+    <value>Ruler Appearance</value>
   </data>
 </root>

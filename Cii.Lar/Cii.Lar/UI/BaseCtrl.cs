@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Cii.Lar.SysClass;
 
 namespace Cii.Lar.UI
 {
@@ -16,6 +17,9 @@ namespace Cii.Lar.UI
     /// </summary>
     public partial class BaseCtrl : UserControl
     {
+        protected ComponentResourceManager resources;
+        protected SysConfig sysConfig;
+
         /// <summary>
         /// title font
         /// </summary>
@@ -64,6 +68,26 @@ namespace Cii.Lar.UI
         public BaseCtrl()
         {
             InitializeComponent();
+            sysConfig = SysConfig.GetSysConfig();
+            this.Load += BaseCtrl_Load;
+        }
+
+        private void BaseCtrl_Load(object sender, EventArgs e)
+        {
+            sysConfig.PropertyChanged += SysConfig_PropertyChanged;
+        }
+
+        private void SysConfig_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == sysConfig.GetPropertyName(() => sysConfig.UICulture))
+            {
+                RefreshUI();
+            }
+        }
+
+        protected virtual void RefreshUI()
+        {
+
         }
 
         protected virtual void closeButton_Click(object sender, EventArgs e)

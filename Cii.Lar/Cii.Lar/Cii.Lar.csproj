@@ -277,6 +277,9 @@
     <EmbeddedResource Include="UI\AssignForm.resx">
       <DependentUpon>AssignForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\ControlCtrl.zh-CN.resx">
+      <DependentUpon>ControlCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\ImageForm.resx">
       <DependentUpon>ImageForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -288,6 +291,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\RulerAppearanceCtrl.resx">
       <DependentUpon>RulerAppearanceCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\RulerAppearanceCtrl.zh-CN.resx">
+      <DependentUpon>RulerAppearanceCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SettingCtrl.zh-CN.resx">
+      <DependentUpon>SettingCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\SliderCtrl.resx">
       <DependentUpon>SliderCtrl.cs</DependentUpon>
@@ -312,6 +321,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ReportPageUI.resx">
       <DependentUpon>ReportPageUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\StatisticsCtrl.zh-CN.resx">
+      <DependentUpon>StatisticsCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\SystemInfoForm.resx">
       <DependentUpon>SystemInfoForm.cs</DependentUpon>

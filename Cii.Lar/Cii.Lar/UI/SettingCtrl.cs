@@ -1,4 +1,5 @@
 using Cii.Lar.SysClass;
+using DevComponents.DotNetBar;
 using DevComponents.Editors;
 using System;
 using System.Collections.Generic;
@@ -12,23 +13,18 @@ namespace Cii.Lar.UI
 {
     public partial class SettingCtrl : BaseCtrl
     {
-        private ComponentResourceManager resources;
-
         private SystemInfoForm systemInfoForm;
-        private SysConfig sysConfig;
 
         public delegate void UpdateTimerState(bool enable);
         public UpdateTimerState UpdateTimerStatesHandler;
 
-        public SettingCtrl()
+        public SettingCtrl() : base()
         {
             this.ShowIndex = 4;
             InitializeComponent();
             resources = new ComponentResourceManager(typeof(SettingCtrl));
-            sysConfig = SysConfig.GetSysConfig();
             this.textBoxItemStoragePath.Text = sysConfig.StorePath;
             UpdateComboLanguage();
-            this.Load += SettingForm_Load;
         }
 
         /// <summary>
@@ -43,19 +39,6 @@ namespace Cii.Lar.UI
                     comboBoxItemLanguage.SelectedItem = item;
                     break;
                 }
-            }
-        }
-
-        private void SettingForm_Load(object sender, EventArgs e)
-        {
-            sysConfig.PropertyChanged += SysConfig_PropertyChanged;
-        }
-
-        private void SysConfig_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == sysConfig.GetPropertyName(() => sysConfig.UICulture))
-            {
-                sysConfig.RefreshUICulture(resources, this);
             }
         }
 
@@ -87,14 +70,44 @@ namespace Cii.Lar.UI
         private void ComboBoxItemLanguage_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             string language = this.comboBoxItemLanguage.SelectedItem.ToString();
-            var v = ((ComboItem)comboBoxItemLanguage.SelectedItem).Value.ToString();
-            SysConfig.GetSysConfig().UICulture = v;
+            var culture = ((ComboItem)comboBoxItemLanguage.SelectedItem).Value.ToString();
+            SysConfig.GetSysConfig().UICulture = culture;
         }
 
         private void comboBoxItemLanguage_ExpandChange(object sender, EventArgs e)
         {
             var v = this.comboBoxItemLanguage.Expanded;
             UpdateTimerStatesHandler?.Invoke(!this.comboBoxItemLanguage.Expanded);
+        }
+
+        protected override void RefreshUI()
+        {
+            this.Title = global::Cii.Lar.Properties.Resources.StrSetting;
+            resources.ApplyResources(this.labelItemLanguage, labelItemLanguage.Name);
+            resources.ApplyResources(this.labelItemStoragePath, labelItemStoragePath.Name);
+            resources.ApplyResources(this.labelItemCamera, labelItemCamera.Name);
+            foreach (var ctrl in this.Controls)
+            {
+                ButtonX btnX = ctrl as ButtonX;
+                if (btnX != null)
+                {
+                    resources.ApplyResources(btnX, btnX.Name);
+                }
+
+                ItemPanel itemPanel = ctrl as ItemPanel;
+                if (itemPanel != null)
+                {
+                    foreach (var itemCtrl in itemPanel.Controls)
+                    {
+                        ButtonX subBtnX = itemCtrl as ButtonX;
+                        if (subBtnX != null)
+                        {
+                            resources.ApplyResources(subBtnX, subBtnX.Name);
+                        }
+                    }
+                }
+            }
+            this.Invalidate();
         }
     }
 }

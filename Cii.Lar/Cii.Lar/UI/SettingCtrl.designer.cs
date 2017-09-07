@@ -28,6 +28,7 @@ namespace Cii.Lar.UI
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingCtrl));
             this.itemPanel1 = new DevComponents.DotNetBar.ItemPanel();
             this.labelItemLanguage = new DevComponents.DotNetBar.LabelItem();
             this.comboBoxItemLanguage = new DevComponents.DotNetBar.ComboBoxItem();
@@ -49,7 +50,7 @@ namespace Cii.Lar.UI
             // 
             // closeButton
             // 
-            this.closeButton.Location = new System.Drawing.Point(197, 1);
+            resources.ApplyResources(this.closeButton, "closeButton");
             // 
             // itemPanel1
             // 
@@ -65,16 +66,13 @@ namespace Cii.Lar.UI
             this.comboBoxItemLanguage});
             this.itemPanel1.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
             this.itemPanel1.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-            this.itemPanel1.Location = new System.Drawing.Point(3, 182);
+            resources.ApplyResources(this.itemPanel1, "itemPanel1");
             this.itemPanel1.Name = "itemPanel1";
-            this.itemPanel1.Size = new System.Drawing.Size(209, 53);
-            this.itemPanel1.TabIndex = 2;
-            this.itemPanel1.Text = "Language";
             // 
             // labelItemLanguage
             // 
             this.labelItemLanguage.Name = "labelItemLanguage";
-            this.labelItemLanguage.Text = global::Cii.Lar.Properties.Resources.labelItemLanguageStr;
+            resources.ApplyResources(this.labelItemLanguage, "labelItemLanguage");
             // 
             // comboBoxItemLanguage
             // 
@@ -89,13 +87,11 @@ namespace Cii.Lar.UI
             // 
             // comboItem1
             // 
-            this.comboItem1.Text = "English";
-            this.comboItem1.Value = "en-US";
+            resources.ApplyResources(this.comboItem1, "comboItem1");
             // 
             // comboItem2
             // 
-            this.comboItem2.Text = "¼òÌåÖÐÎÄ";
-            this.comboItem2.Value = "zh-CN";
+            resources.ApplyResources(this.comboItem2, "comboItem2");
             // 
             // itemPanel2
             // 
@@ -112,40 +108,31 @@ namespace Cii.Lar.UI
             this.itemContainer1});
             this.itemPanel2.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
             this.itemPanel2.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-            this.itemPanel2.Location = new System.Drawing.Point(3, 241);
+            resources.ApplyResources(this.itemPanel2, "itemPanel2");
             this.itemPanel2.Name = "itemPanel2";
-            this.itemPanel2.Size = new System.Drawing.Size(209, 72);
-            this.itemPanel2.TabIndex = 3;
-            this.itemPanel2.Text = "itemPanel2";
             // 
             // buttonSelect
             // 
             this.buttonSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.buttonSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonSelect.Location = new System.Drawing.Point(165, 20);
+            resources.ApplyResources(this.buttonSelect, "buttonSelect");
             this.buttonSelect.Name = "buttonSelect";
-            this.buttonSelect.Size = new System.Drawing.Size(41, 21);
             this.buttonSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonSelect.TabIndex = 1;
-            this.buttonSelect.Text = "Select";
             this.buttonSelect.Click += new System.EventHandler(this.buttonSelect_Click);
             // 
             // buttonSave
             // 
             this.buttonSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.buttonSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonSave.Location = new System.Drawing.Point(6, 44);
+            resources.ApplyResources(this.buttonSave, "buttonSave");
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(41, 21);
             this.buttonSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonSave.TabIndex = 5;
-            this.buttonSave.Text = "Save";
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // labelItemStoragePath
             // 
             this.labelItemStoragePath.Name = "labelItemStoragePath";
-            this.labelItemStoragePath.Text = global::Cii.Lar.Properties.Resources.labelItemStoragePathStr;
+            resources.ApplyResources(this.labelItemStoragePath, "labelItemStoragePath");
             // 
             // itemContainer1
             // 
@@ -164,7 +151,7 @@ namespace Cii.Lar.UI
             // textBoxItemStoragePath
             // 
             this.textBoxItemStoragePath.Name = "textBoxItemStoragePath";
-            this.textBoxItemStoragePath.Text = "textBoxItem1";
+            resources.ApplyResources(this.textBoxItemStoragePath, "textBoxItemStoragePath");
             this.textBoxItemStoragePath.TextBoxWidth = 160;
             this.textBoxItemStoragePath.WatermarkColor = System.Drawing.SystemColors.GrayText;
             // 
@@ -182,16 +169,13 @@ namespace Cii.Lar.UI
             this.itemContainer3});
             this.itemPanelCamera.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
             this.itemPanelCamera.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-            this.itemPanelCamera.Location = new System.Drawing.Point(3, 57);
+            resources.ApplyResources(this.itemPanelCamera, "itemPanelCamera");
             this.itemPanelCamera.Name = "itemPanelCamera";
-            this.itemPanelCamera.Size = new System.Drawing.Size(209, 119);
-            this.itemPanelCamera.TabIndex = 4;
-            this.itemPanelCamera.Text = "itemPanel3";
             // 
             // labelItemCamera
             // 
             this.labelItemCamera.Name = "labelItemCamera";
-            this.labelItemCamera.Text = "Camera";
+            resources.ApplyResources(this.labelItemCamera, "labelItemCamera");
             // 
             // itemContainer3
             // 
@@ -209,37 +193,29 @@ namespace Cii.Lar.UI
             // buttonItemSimulator
             // 
             this.buttonItemSimulator.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonItemSimulator.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.buttonItemSimulator, "buttonItemSimulator");
             this.buttonItemSimulator.Name = "buttonItemSimulator";
             this.buttonItemSimulator.Shape = new DevComponents.DotNetBar.RoundRectangleShapeDescriptor(2);
-            this.buttonItemSimulator.Size = new System.Drawing.Size(0, 0);
-            this.buttonItemSimulator.TabIndex = 0;
-            this.buttonItemSimulator.Text = "Open Simulator Mode";
             // 
             // buttonSysInfo
             // 
             this.buttonSysInfo.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.buttonSysInfo.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonSysInfo.Location = new System.Drawing.Point(3, 28);
+            resources.ApplyResources(this.buttonSysInfo, "buttonSysInfo");
             this.buttonSysInfo.Name = "buttonSysInfo";
-            this.buttonSysInfo.Size = new System.Drawing.Size(210, 23);
             this.buttonSysInfo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonSysInfo.TabIndex = 5;
-            this.buttonSysInfo.Text = "System Infomation";
             this.buttonSysInfo.Click += new System.EventHandler(this.buttonSysInfo_Click);
             // 
             // SettingCtrl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.buttonSysInfo);
             this.Controls.Add(this.itemPanelCamera);
             this.Controls.Add(this.itemPanel2);
             this.Controls.Add(this.itemPanel1);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "SettingCtrl";
-            this.Size = new System.Drawing.Size(216, 560);
-            this.Title = "Setting";
+            this.Title = global::Cii.Lar.Properties.Resources.StrSetting;
             this.Controls.SetChildIndex(this.itemPanel1, 0);
             this.Controls.SetChildIndex(this.itemPanel2, 0);
             this.Controls.SetChildIndex(this.itemPanelCamera, 0);

@@ -28,6 +28,7 @@ namespace Cii.Lar.UI
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StatisticsCtrl));
             this.panel = new System.Windows.Forms.Panel();
             this.listViewEx = new Cii.Lar.UI.ListViewEx();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -40,15 +41,13 @@ namespace Cii.Lar.UI
             // 
             // closeButton
             // 
-            this.closeButton.Location = new System.Drawing.Point(339, 3);
+            resources.ApplyResources(this.closeButton, "closeButton");
             // 
             // panel
             // 
             this.panel.Controls.Add(this.listViewEx);
-            this.panel.Location = new System.Drawing.Point(3, 25);
+            resources.ApplyResources(this.panel, "panel");
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(352, 230);
-            this.panel.TabIndex = 1;
             // 
             // listViewEx
             // 
@@ -57,56 +56,45 @@ namespace Cii.Lar.UI
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
-            this.listViewEx.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listViewEx.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listViewEx.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.listViewEx, "listViewEx");
             this.listViewEx.Name = "listViewEx";
-            this.listViewEx.Size = new System.Drawing.Size(302, 230);
-            this.listViewEx.TabIndex = 0;
             this.listViewEx.UseCompatibleStateImageBehavior = false;
             this.listViewEx.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "Name";
+            resources.ApplyResources(this.columnHeader1, "columnHeader1");
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Circumference";
-            this.columnHeader2.Width = 100;
+            resources.ApplyResources(this.columnHeader2, "columnHeader2");
             // 
             // columnHeader3
             // 
-            this.columnHeader3.Text = "Area";
-            this.columnHeader3.Width = 120;
+            resources.ApplyResources(this.columnHeader3, "columnHeader3");
             // 
             // columnHeader4
             // 
-            this.columnHeader4.Text = "";
-            this.columnHeader4.Width = 40;
+            resources.ApplyResources(this.columnHeader4, "columnHeader4");
             // 
             // btnAppearance
             // 
             this.btnAppearance.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnAppearance.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnAppearance.Location = new System.Drawing.Point(3, 256);
+            resources.ApplyResources(this.btnAppearance, "btnAppearance");
             this.btnAppearance.Name = "btnAppearance";
-            this.btnAppearance.Size = new System.Drawing.Size(75, 23);
             this.btnAppearance.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnAppearance.TabIndex = 2;
-            this.btnAppearance.Text = "Appearance";
             this.btnAppearance.Click += new System.EventHandler(this.btnAppearance_Click);
             // 
             // StatisticsCtrl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.Controls.Add(this.btnAppearance);
             this.Controls.Add(this.panel);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "StatisticsCtrl";
-            this.Size = new System.Drawing.Size(358, 284);
+            this.Title = global::Cii.Lar.Properties.Resources.StrStatisticsTitle;
             this.Controls.SetChildIndex(this.panel, 0);
             this.Controls.SetChildIndex(this.closeButton, 0);
             this.Controls.SetChildIndex(this.btnAppearance, 0);
