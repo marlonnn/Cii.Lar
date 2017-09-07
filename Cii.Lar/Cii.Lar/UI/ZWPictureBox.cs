@@ -577,6 +577,18 @@ namespace Cii.Lar.UI
             DrawReversibleRect(draggingBaseCtrlRectangle);
         }
 
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape && this.ActiveTool != UI.DrawToolType.Pointer)
+            {
+                this.ActiveTool = DrawToolType.Pointer;
+            }
+            else if (e.Control && e.KeyCode == Keys.M)
+            {
+                this.ActiveTool = DrawToolType.Move;
+            }
+        }
+
         protected override void OnMouseDoubleClick(MouseEventArgs e)
         {
             tools[(int)activeTool].OnDoubleClick(this, e);
