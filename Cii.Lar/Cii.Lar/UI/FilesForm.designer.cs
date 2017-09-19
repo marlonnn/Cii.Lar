@@ -95,9 +95,9 @@ namespace Cii.Lar
             // 
             // imageListView
             // 
-            this.imageListView.DefaultImage = null;
+            this.imageListView.DefaultImage = global::Cii.Lar.Properties.Resources.image;
             this.imageListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.imageListView.ErrorImage = null;
+            this.imageListView.ErrorImage = global::Cii.Lar.Properties.Resources.exclamation;
             this.imageListView.HeaderFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.imageListView.Location = new System.Drawing.Point(0, 0);
             this.imageListView.Name = "imageListView";

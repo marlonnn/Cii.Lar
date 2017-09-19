@@ -136,7 +136,6 @@ namespace Cii.Lar.UI
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
-            CurrentImage.Dispose();
             this.DialogResult = DialogResult.OK;
         }
 

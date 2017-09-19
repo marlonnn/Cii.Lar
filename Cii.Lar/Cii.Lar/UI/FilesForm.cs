@@ -20,17 +20,24 @@ namespace Cii.Lar
     {
         private AssignForm assignForm;
         private ReportForm reportFrom;
+        private VideoForm videoForm;
+        private List<string> videoFiles;
         public FilesForm()
         {
             this.WindowState = FormWindowState.Maximized;
             InitializeComponent();
+            videoFiles = new List<string>();
             string folderName = SysConfig.GetSysConfig().StorePath;
-            string[] extesnsions = new string[] { ".png", ".wmv" };
+            string[] extesnsions = new string[] { ".png", ".avi" };
             var files = GetFiles(folderName, extesnsions, SearchOption.TopDirectoryOnly);
             //this.imageListView.View = Manina.Windows.Forms.View.Gallery;
             foreach (var file in files)
             {
                 imageListView.Items.Add(file.ToString());
+                if (Path.GetExtension(file.ToString()) == ".avi")
+                {
+                    videoFiles.Add(file.ToString());
+                }
             }
             imageForm = new ImageForm();
             imageForm.DeleteImageItemHandler += DeleteImageItemHandler;
@@ -140,15 +147,26 @@ namespace Cii.Lar
                 ImageListViewItem item = this.imageListView.Items.FocusedItem;
                 if (item != null)
                 {
-                    string fileName = item.FileName;
-                    imageForm.Text = item.Text;
-                    imageForm.ImageListViewItem = item;
-                    imageForm.FileName = fileName;
-                    DialogResult dr = imageForm.ShowDialog();
-                    if (dr == DialogResult.OK && imageForm.IsAssign)
+                    var fileExtension = Path.GetExtension(item.FileName);
+                    if (fileExtension == ".avi")
                     {
-                        DeleteImageItemHandler(item);
-                        File.Delete(item.FileName);
+                        string fileName = item.FileName;
+                        //int v = videoFiles.FindIndex(file => { return file == fileName; });
+                        videoForm = new VideoForm(videoFiles, fileName);
+                        videoForm.ShowDialog();
+                    }
+                    else if (fileExtension == ".png")
+                    {
+                        string fileName = item.FileName;
+                        imageForm.Text = item.Text;
+                        imageForm.ImageListViewItem = item;
+                        imageForm.FileName = fileName;
+                        DialogResult dr = imageForm.ShowDialog();
+                        if (dr == DialogResult.OK && imageForm.IsAssign)
+                        {
+                            DeleteImageItemHandler(item);
+                            File.Delete(item.FileName);
+                        }
                     }
                 }
             }

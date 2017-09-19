@@ -133,6 +133,12 @@
     <Compile Include="UI\AssignForm.designer.cs">
       <DependentUpon>AssignForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\VideoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\VideoForm.designer.cs">
+      <DependentUpon>VideoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\ImageForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -359,6 +365,9 @@
     <EmbeddedResource Include="UI\TransparentButton.resx">
       <DependentUpon>TransparentButton.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\VideoForm.resx">
+      <DependentUpon>VideoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\ZWPictureBox.resx">
       <DependentUpon>ZWPictureBox.cs</DependentUpon>
       <Generator>ResXFileCodeGenerator</Generator>
@@ -395,7 +404,9 @@
     <Content Include="Resources\1.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\exclamation.png" />
     <Content Include="Resources\hand.png" />
+    <Content Include="Resources\image.png" />
     <Content Include="Resources\unit.png" />
     <Content Include="Resources\line.png" />
     <Content Include="Resources\ruler.png" />
@@ -436,7 +447,25 @@
       <Name>ImageListView</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <COMReference Include="AxWMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
