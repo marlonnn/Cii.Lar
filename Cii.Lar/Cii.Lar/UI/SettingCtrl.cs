@@ -86,6 +86,9 @@ namespace Cii.Lar.UI
             resources.ApplyResources(this.labelItemLanguage, labelItemLanguage.Name);
             resources.ApplyResources(this.labelItemStoragePath, labelItemStoragePath.Name);
             resources.ApplyResources(this.labelItemCamera, labelItemCamera.Name);
+            resources.ApplyResources(this.lense, lense.Name);
+            resources.ApplyResources(this.btnDelete, btnDelete.Name);
+            this.itemContainer2.Refresh();
             foreach (var ctrl in this.Controls)
             {
                 ButtonX btnX = ctrl as ButtonX;
@@ -108,6 +111,71 @@ namespace Cii.Lar.UI
                 }
             }
             this.Invalidate();
+        }
+
+        private void SettingCtrl_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Create a new object lense
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// delete existing lense
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            var lense = comboBoxItemLense.SelectedItem;
+            if (lense != null)
+            {
+                int index = SysConfig.GetSysConfig().Lenses.FindIndex(l => (l.ToString() == lense.ToString()));
+                SysConfig.GetSysConfig().DeleteLense(lense.ToString());
+                comboBoxItemLense.Items.Clear();
+                comboBoxItemLense.Items.AddRange(SysConfig.GetSysConfig().Lenses.ToArray());
+                comboBoxItemLense.SelectedIndex = index - 1;
+
+            }
+        }
+
+        private void textBoxLense_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                int factor = 0;
+                Int32.TryParse(textBoxLense.Text, out factor);
+                if (factor != 0)
+                {
+                    Lense lense = new Lense(factor);
+                    if (SysConfig.GetSysConfig().AddLense(lense))
+                    {
+                        UpdateComBoxItemLense(lense);
+                    }
+
+                }
+                else
+                {
+                    //should input correct lense factor
+                    //TO DO
+                }
+            }
+        }
+
+        private void UpdateComBoxItemLense(Lense lense)
+        {
+            comboBoxItemLense.Items.Clear();
+            comboBoxItemLense.Items.AddRange(SysConfig.GetSysConfig().Lenses.ToArray());
+            int index = SysConfig.GetSysConfig().Lenses.FindIndex(l => (l.ToString() == lense.ToString()));
+            comboBoxItemLense.SelectedIndex = index;
         }
     }
 }

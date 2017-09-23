@@ -73,6 +73,38 @@ namespace Cii.Lar.SysClass
             }
         }
 
+        private List<Lense> lenses;
+
+        public List<Lense> Lenses
+        {
+            get { return lenses; }
+            set { lenses = value; }
+        }
+
+        public bool AddLense(Lense newLense)
+        {
+            var lense = Lenses.Find(l => (l.Factor == newLense.Factor));
+            if (lense == null)
+            {
+                //create a new lense
+                Lenses.Add(newLense);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void DeleteLense(string lense)
+        {
+            var item = Lenses.Find(l => (l.ToString() == lense));
+            if (item != null)
+            {
+                Lenses.Remove(item);
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged<T>(Expression<Func<T>> propertyId)
@@ -97,6 +129,7 @@ namespace Cii.Lar.SysClass
         {
             this.storagePath = string.Format("{0}\\Archive",System.Environment.CurrentDirectory);
             this.archivePath = string.Format("{0}\\Archive", System.Environment.CurrentDirectory);
+            lenses = new List<Lense>();
         }
 
         public CultureInfo GetSysDefaultCulture()

@@ -111,6 +111,7 @@
     <Compile Include="SimpleLogger.cs" />
     <Compile Include="SysClass\AllPatients.cs" />
     <Compile Include="SysClass\JsonFile.cs" />
+    <Compile Include="SysClass\Lense.cs" />
     <Compile Include="SysClass\Patient.cs" />
     <Compile Include="SysClass\SysConfig.cs" />
     <Compile Include="ToolStripEventArgs.cs" />

@@ -45,6 +45,12 @@ namespace Cii.Lar.UI
             this.itemContainer3 = new DevComponents.DotNetBar.ItemContainer();
             this.buttonItemSimulator = new DevComponents.DotNetBar.ButtonX();
             this.buttonSysInfo = new DevComponents.DotNetBar.ButtonX();
+            this.itemPanel3 = new DevComponents.DotNetBar.ItemPanel();
+            this.lense = new DevComponents.DotNetBar.LabelItem();
+            this.comboBoxItemLense = new DevComponents.DotNetBar.ComboBoxItem();
+            this.itemContainer2 = new DevComponents.DotNetBar.ItemContainer();
+            this.btnDelete = new DevComponents.DotNetBar.ButtonItem();
+            this.textBoxLense = new DevComponents.DotNetBar.TextBoxItem();
             this.itemPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -206,21 +212,79 @@ namespace Cii.Lar.UI
             this.buttonSysInfo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonSysInfo.Click += new System.EventHandler(this.buttonSysInfo_Click);
             // 
+            // itemPanel3
+            // 
+            // 
+            // 
+            // 
+            this.itemPanel3.BackgroundStyle.Class = "ItemPanel";
+            this.itemPanel3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemPanel3.ContainerControlProcessDialogKey = true;
+            this.itemPanel3.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.lense,
+            this.comboBoxItemLense,
+            this.itemContainer2});
+            this.itemPanel3.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+            this.itemPanel3.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+            resources.ApplyResources(this.itemPanel3, "itemPanel3");
+            this.itemPanel3.Name = "itemPanel3";
+            // 
+            // lense
+            // 
+            this.lense.Name = "lense";
+            resources.ApplyResources(this.lense, "lense");
+            // 
+            // comboBoxItemLense
+            // 
+            this.comboBoxItemLense.DropDownHeight = 106;
+            this.comboBoxItemLense.ItemHeight = 16;
+            this.comboBoxItemLense.Name = "comboBoxItemLense";
+            // 
+            // itemContainer2
+            // 
+            // 
+            // 
+            // 
+            this.itemContainer2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemContainer2.Name = "itemContainer2";
+            this.itemContainer2.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.textBoxLense,
+            this.btnDelete});
+            // 
+            // 
+            // 
+            this.itemContainer2.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Name = "btnDelete";
+            resources.ApplyResources(this.btnDelete, "btnDelete");
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // textBoxLense
+            // 
+            this.textBoxLense.Name = "textBoxLense";
+            this.textBoxLense.WatermarkColor = System.Drawing.SystemColors.GrayText;
+            this.textBoxLense.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxLense_KeyPress);
+            // 
             // SettingCtrl
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.itemPanel3);
             this.Controls.Add(this.buttonSysInfo);
             this.Controls.Add(this.itemPanelCamera);
             this.Controls.Add(this.itemPanel2);
             this.Controls.Add(this.itemPanel1);
             this.Name = "SettingCtrl";
             this.Title = global::Cii.Lar.Properties.Resources.StrSetting;
+            this.Load += new System.EventHandler(this.SettingCtrl_Load);
             this.Controls.SetChildIndex(this.itemPanel1, 0);
             this.Controls.SetChildIndex(this.itemPanel2, 0);
             this.Controls.SetChildIndex(this.itemPanelCamera, 0);
             this.Controls.SetChildIndex(this.buttonSysInfo, 0);
             this.Controls.SetChildIndex(this.closeButton, 0);
+            this.Controls.SetChildIndex(this.itemPanel3, 0);
             this.itemPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -243,6 +307,12 @@ namespace Cii.Lar.UI
         private DevComponents.DotNetBar.ButtonX buttonSysInfo;
         private DevComponents.Editors.ComboItem comboItem1;
         private DevComponents.Editors.ComboItem comboItem2;
+        private DevComponents.DotNetBar.ItemPanel itemPanel3;
+        private DevComponents.DotNetBar.LabelItem lense;
+        private DevComponents.DotNetBar.ComboBoxItem comboBoxItemLense;
+        private DevComponents.DotNetBar.ItemContainer itemContainer2;
+        private DevComponents.DotNetBar.ButtonItem btnDelete;
+        private DevComponents.DotNetBar.TextBoxItem textBoxLense;
     }
 }
 
