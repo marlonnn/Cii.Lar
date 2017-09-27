@@ -31,6 +31,8 @@ namespace Cii.Lar
         {
             get { return expManager; }
         }
+
+        public static EntryForm EntryForm;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -42,7 +44,8 @@ namespace Cii.Lar
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new EntryForm());
+            EntryForm = new EntryForm();
+            Application.Run(EntryForm);
         }
 
         private static void Initialize(CultureInfo sysDefault)

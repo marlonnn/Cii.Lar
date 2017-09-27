@@ -34,7 +34,7 @@
             this.toolStripButtonVideo = new System.Windows.Forms.ToolStripButton();
             this.toolStripFiles = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
+            this.comboBoxLense = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonZoomOut = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonZoomIn = new System.Windows.Forms.ToolStripButton();
@@ -74,7 +74,7 @@
             this.toolStripButtonVideo,
             this.toolStripFiles,
             this.toolStripSeparator1,
-            this.toolStripComboBox1,
+            this.comboBoxLense,
             this.toolStripSeparator2,
             this.toolStripButtonZoomOut,
             this.toolStripButtonZoomIn,
@@ -123,10 +123,10 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             // 
-            // toolStripComboBox1
+            // comboBoxLense
             // 
-            this.toolStripComboBox1.Name = "toolStripComboBox1";
-            resources.ApplyResources(this.toolStripComboBox1, "toolStripComboBox1");
+            this.comboBoxLense.Name = "comboBoxLense";
+            resources.ApplyResources(this.comboBoxLense, "comboBoxLense");
             // 
             // toolStripSeparator2
             // 
@@ -319,7 +319,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonVideo;
         private System.Windows.Forms.ToolStripButton toolStripFiles;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
+        private System.Windows.Forms.ToolStripComboBox comboBoxLense;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton toolStripButtonZoomOut;
         private System.Windows.Forms.ToolStripButton toolStripButtonZoomIn;

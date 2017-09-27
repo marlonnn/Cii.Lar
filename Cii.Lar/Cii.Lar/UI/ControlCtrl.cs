@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cii.Lar.DrawTools;
+using Cii.Lar.SysClass;
 
 namespace Cii.Lar.UI
 {
@@ -15,6 +16,14 @@ namespace Cii.Lar.UI
     {
         public delegate void StripButtonClick(object sender, ToolStripEventArgs e);
         public StripButtonClick StripButtonClickHandler;
+
+        public void UpdateLenseHandler(Lense lense)
+        {
+            comboBoxLense.Items.Clear();
+            comboBoxLense.Items.AddRange(SysConfig.GetSysConfig().Lenses.ToArray());
+            int index = SysConfig.GetSysConfig().Lenses.FindIndex(l => (l.ToString() == lense.ToString()));
+            comboBoxLense.SelectedIndex = index;
+        }
 
         private ZWPictureBox pictureBox;
         public ZWPictureBox PictureBox
@@ -34,6 +43,7 @@ namespace Cii.Lar.UI
             resources = new ComponentResourceManager(typeof(ControlCtrl));
             InitializeComponent();
             InitializeToolStrip();
+            InitializeLenses();
         }
 
         private void InitializeToolStrip()
@@ -53,6 +63,16 @@ namespace Cii.Lar.UI
             toolStripButtonLaser.Tag = ToolStripAction.Laser;
             toolStripButtonSetting.Tag = ToolStripAction.Setting;
             toolStripButtonOpen.Tag = ToolStripAction.OpenFile;
+        }
+
+        private void InitializeLenses()
+        {
+            List<Lense> lenses = SysConfig.GetSysConfig().Lenses;
+            if (lenses != null && lenses.Count > 0)
+            {
+                comboBoxLense.Items.AddRange(lenses.ToArray());
+                comboBoxLense.SelectedIndex = 0;
+            }
         }
 
         private void toolStripButtonClick(object sender, EventArgs e)

@@ -1,4 +1,5 @@
 using Cii.Lar.SysClass;
+using Cii.Lar.UI;
 using DevComponents.DotNetBar;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,15 @@ namespace Cii.Lar
     {
         private ComponentResourceManager resources;
         private SysConfig sysConfig;
+
+        public ControlCtrl ControlCtrl
+        {
+            get
+            {
+                return this.controlCtrl;
+            }
+        }
+
         public EntryForm()
         {
             InitializeComponent();
@@ -28,6 +38,7 @@ namespace Cii.Lar
         {
             base.OnLoad(e);
             this.controlCtrl.PictureBox = this.zwPictureBox;
+            this.zwPictureBox.RegisterHandler();
             this.zwPictureBox.LoadImage();
             sysConfig.PropertyChanged += EntryForm_PropertyChanged;
         }

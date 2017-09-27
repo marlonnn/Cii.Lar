@@ -18,6 +18,9 @@ namespace Cii.Lar.UI
         public delegate void UpdateTimerState(bool enable);
         public UpdateTimerState UpdateTimerStatesHandler;
 
+        public delegate void UpdateLense(Lense lense);
+        public UpdateLense UpdateLenseHandler;
+
         public SettingCtrl() : base()
         {
             this.ShowIndex = 4;
@@ -159,6 +162,7 @@ namespace Cii.Lar.UI
                     if (SysConfig.GetSysConfig().AddLense(lense))
                     {
                         UpdateComBoxItemLense(lense);
+                        UpdateLenseHandler?.Invoke(lense);
                     }
 
                 }

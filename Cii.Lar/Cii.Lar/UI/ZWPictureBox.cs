@@ -90,6 +90,8 @@ namespace Cii.Lar.UI
         }
 
         private List<BaseCtrl> controls;
+        private SettingCtrl settingCtrl;
+
         [BrowsableAttribute(false)]
         [System.ComponentModel.Localizable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -297,9 +299,14 @@ namespace Cii.Lar.UI
             //rulerAppearance.UpdateTimerStatesHandler += UpdateTimerStatesHandler;
             controls.Add(rulerAppearance);
 
-            SettingCtrl settingCtrl = new SettingCtrl();
+            settingCtrl = new SettingCtrl();
             //settingCtrl.UpdateTimerStatesHandler += UpdateTimerStatesHandler;
             controls.Add(settingCtrl);
+        }
+
+        public void RegisterHandler()
+        {
+            settingCtrl.UpdateLenseHandler += Program.EntryForm.ControlCtrl.UpdateLenseHandler;
         }
 
         /// <summary>
