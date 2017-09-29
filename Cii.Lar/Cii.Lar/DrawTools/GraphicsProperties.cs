@@ -97,6 +97,41 @@ namespace Cii.Lar.DrawTools
             }
         }
 
+        /// <summary>
+        /// use for laser circle target size
+        /// </summary>
+        private int targetSize = 1;
+
+        public int TargetSize
+        {
+            get { return this.targetSize; }
+            set
+            {
+                if (value != this.targetSize)
+                {
+                    this.targetSize = value;
+                    GraphicsPropertiesChangedHandler?.Invoke(DrawObject, this);
+                }
+            }
+        }
+
+        /// <summary>
+        /// use for laser circle exclusion target size
+        /// </summary>
+        private int exclusionSize = 2;
+
+        public int ExclusionSize
+        {
+            get { return this.exclusionSize; }
+            set
+            {
+                if (value != this.exclusionSize)
+                {
+                    this.exclusionSize = value;
+                    GraphicsPropertiesChangedHandler?.Invoke(DrawObject, this);
+                }
+            }
+        }
         private DrawObject drawObject;
 
         public DrawObject DrawObject

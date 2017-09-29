@@ -55,12 +55,20 @@ namespace Cii.Lar.UI
 
         private void slideTargetSize_ValueChanged(object sender, EventArgs e)
         {
-
+            var value = this.sliderTargetSize.Value;
+            if (graphicsProperties != null)
+            {
+                graphicsProperties.TargetSize = value;
+            }
         }
 
         private void slideZoneSize_ValueChanged(object sender, EventArgs e)
         {
-
+            var value = this.sliderZoneSize.Value;
+            if (graphicsProperties != null)
+            {
+                graphicsProperties.ExclusionSize = value;
+            }
         }
 
         private void sliderZoneColour_ValueChanged(object sender, EventArgs e)

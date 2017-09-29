@@ -15,30 +15,62 @@ namespace Cii.Lar.DrawTools
     /// </summary>
     public class DrawCircle : DrawObject
     {
-        private Circle circleForDraw = null;
+        private Circle outterCircle = null;
+        public Circle OutterCircle
+        {
+            get { return outterCircle; }
+            private set
+            {
+                if (value != outterCircle)
+                {
+                    outterCircle = value;
+                }
+            }
+        }
 
+        private Circle innerCircle = null;
+        public Circle InnerCircle
+        {
+            get { return innerCircle; }
+            private set
+            {
+                if (value != innerCircle)
+                {
+                    innerCircle = value;
+                }
+            }
+        }
         public PointF CenterPoint
         {
             get;
             set;
         }
 
-        public Size DrawAreaSize
-        {
-            get;
-            set;
-        }
+        public Size OutterCircleSize { get; set; }
 
+        public Size InnerCircleSize { get; set; }
         public DrawCircle()
         {
             InitializeGraphicsProperties();
-            DrawAreaSize = new Size(30, 30);
+            OutterCircleSize = new Size(30, 30);
+            InnerCircleSize = new Size(28, 28);
         }
 
         public DrawCircle(ZWPictureBox pictureBox, PointF centerPoint) : this()
         {
+            this.pictureBox = pictureBox;
             CenterPoint = centerPoint;
-            this.GraphicsProperties.GraphicsPropertiesChangedHandler += pictureBox.GraphicsPropertiesChangedHandler;
+            this.GraphicsProperties.GraphicsPropertiesChangedHandler += GraphicsPropertiesChangedHandler;
+        }
+
+        private void GraphicsPropertiesChangedHandler(DrawObject drawObject, GraphicsProperties graphicsProperties)
+        {
+            OutterCircleSize = new Size((30 + this.GraphicsProperties.ExclusionSize) * this.GraphicsProperties.TargetSize, 
+                (30 + this.GraphicsProperties.ExclusionSize) * this.GraphicsProperties.TargetSize);
+            InnerCircleSize = new Size(27 * this.GraphicsProperties.TargetSize, 27 * this.GraphicsProperties.TargetSize);
+            OutterCircle = new Circle(CenterPoint, OutterCircleSize);
+            InnerCircle = new Circle(CenterPoint, InnerCircleSize);
+            pictureBox.GraphicsPropertiesChangedHandler(drawObject, graphicsProperties);
         }
 
         private void InitializeGraphicsProperties()
@@ -49,43 +81,26 @@ namespace Cii.Lar.DrawTools
 
         public override void Draw(Graphics g, ZWPictureBox pictureBox)
         {
-            if (circleForDraw == null)
+            if (OutterCircle == null)
             {
-                circleForDraw = new Circle(CenterPoint, DrawAreaSize);
+                OutterCircle = new Circle(CenterPoint, OutterCircleSize);
+            }
+            if (InnerCircle == null)
+            {
+                InnerCircle = new Circle(CenterPoint, InnerCircleSize);
             }
             //path for the outer and inner circles
-            //using (GraphicsPath path = new GraphicsPath())
-            //using (SolidBrush brush = new SolidBrush(this.Color))
-            using (Pen pen = new Pen(this.GraphicsProperties.Color, this.GraphicsProperties.PenWidth))
+            g.CompositingQuality = CompositingQuality.HighQuality;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            using (GraphicsPath path = new GraphicsPath())
+            using (SolidBrush brush = new SolidBrush(this.GraphicsProperties.Color))
             {
-                g.DrawEllipse(pen, circleForDraw.Rectangle.X, circleForDraw.Rectangle.Y,
-                    circleForDraw.Rectangle.Width, circleForDraw.Rectangle.Height);
-                //path.AddEllipse(circleForDraw.Rectangle.X, circleForDraw.Rectangle.Y,
-                //    circleForDraw.Rectangle.Width, circleForDraw.Rectangle.Height);
-                //path.AddEllipse(circleForDraw.Rectangle.X - circleForDraw.Rectangle.Width / 4, circleForDraw.Rectangle.Y - circleForDraw.Rectangle.Width / 4,
-                //        circleForDraw.Rectangle.Width / 2, circleForDraw.Rectangle.Height / 2);
-                //g.FillPath(brush, path);
+                path.AddEllipse(OutterCircle.Rectangle.X, OutterCircle.Rectangle.Y,
+                    OutterCircle.Rectangle.Width, OutterCircle.Rectangle.Height);
+                path.AddEllipse(InnerCircle.Rectangle.X, InnerCircle.Rectangle.Y,
+                    InnerCircle.Rectangle.Width, InnerCircle.Rectangle.Height);
+                g.FillPath(brush, path);
             }
-            //GraphicsPath path1 = new GraphicsPath();
-            //GraphicsPath path2 = new GraphicsPath();
-            //SolidBrush brush = new SolidBrush(this.Color);
-            //path1.AddEllipse(circleForDraw.Rectangle.X, circleForDraw.Rectangle.Y,
-            //    circleForDraw.Rectangle.Width, circleForDraw.Rectangle.Height);
-            //path2.AddEllipse(circleForDraw.Rectangle.X - circleForDraw.Rectangle.Width / 4, circleForDraw.Rectangle.Y - circleForDraw.Rectangle.Width / 4,
-            //    circleForDraw.Rectangle.Width / 4, circleForDraw.Rectangle.Height / 4);
-            //// Create a region from the Outer circle.
-            //Region region = new Region(path1);
-
-            //// Exclude the Inner circle from the region
-            //region.Exclude(path2);
-
-            //// Draw the region to your Graphics object
-            //g.FillRegion(brush, region);
-
-            //brush.Dispose();
-            //path1.Dispose();
-            //path2.Dispose();
-            //region.Dispose();
         }
 
 
@@ -98,7 +113,7 @@ namespace Cii.Lar.DrawTools
         {
             float x = 0, y = 0, xCenter, yCenter;
 
-            RectangleF rect = circleForDraw.Rectangle;
+            RectangleF rect = outterCircle.Rectangle;
             xCenter = rect.X + rect.Width / 2;
             yCenter = rect.Y + rect.Height / 2;
 
@@ -167,7 +182,7 @@ namespace Cii.Lar.DrawTools
             {
                 get
                 {
-                    return new RectangleF(CenterPoint.X - DrawAreaSize.Width / 2, CenterPoint.Y - DrawAreaSize.Width / 2, DrawAreaSize.Width, DrawAreaSize.Height);
+                    return new RectangleF(CenterPoint.X - DrawAreaSize.Width / 2f, CenterPoint.Y - DrawAreaSize.Width / 2f, DrawAreaSize.Width, DrawAreaSize.Height);
                 }
             }
 

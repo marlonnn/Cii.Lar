@@ -134,9 +134,11 @@
             this.sliderTargetSize.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.sliderTargetSize.LabelVisible = false;
             resources.ApplyResources(this.sliderTargetSize, "sliderTargetSize");
+            this.sliderTargetSize.Maximum = 10;
+            this.sliderTargetSize.Minimum = 1;
             this.sliderTargetSize.Name = "sliderTargetSize";
             this.sliderTargetSize.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.sliderTargetSize.Value = 0;
+            this.sliderTargetSize.Value = 1;
             this.sliderTargetSize.ValueChanged += new System.EventHandler(this.slideTargetSize_ValueChanged);
             // 
             // lblZoneSize
@@ -156,9 +158,10 @@
             this.sliderZoneSize.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.sliderZoneSize.LabelVisible = false;
             resources.ApplyResources(this.sliderZoneSize, "sliderZoneSize");
+            this.sliderZoneSize.Minimum = 2;
             this.sliderZoneSize.Name = "sliderZoneSize";
             this.sliderZoneSize.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.sliderZoneSize.Value = 0;
+            this.sliderZoneSize.Value = 2;
             this.sliderZoneSize.ValueChanged += new System.EventHandler(this.slideZoneSize_ValueChanged);
             // 
             // lblZoneColour
