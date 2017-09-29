@@ -42,6 +42,17 @@ namespace Cii.Lar.UI
     /// </summary>
     public partial class ZWPictureBox : PictureBox
     {
+        private ImageTracker imageTracker;
+        /// <summary>
+        /// last mouse position of mouse dragging
+        /// </summary>
+        Point lastMousePos;
+
+        /// <summary>
+        /// indicating mouse dragging mode of picture tracker control
+        /// </summary>
+        private bool isDraggingPictureTracker = false;
+
         private Rulers rulers;
         public Rulers Rulers
         {
@@ -271,6 +282,7 @@ namespace Cii.Lar.UI
 
             Initialize();
             InitializeControls();
+            InitializeImageTracker();
         }
 
         private void GraphicsList_DrawObjsChanged(object sender, ArrayChangedEventArgs<DrawObject> e)
@@ -286,6 +298,74 @@ namespace Cii.Lar.UI
             }
         }
 
+        private void InitializeImageTracker()
+        {
+            this.imageTracker = new ImageTracker();
+            this.imageTracker.Location = new System.Drawing.Point(5, 30);
+            this.imageTracker.Size = new System.Drawing.Size(137, 102);
+            this.imageTracker.TabIndex = 1;
+            //this.imageTracker.ScalePercent = 0;
+            this.imageTracker.MouseDown += new System.Windows.Forms.MouseEventHandler(this.imageTracker_MouseDown);
+            this.imageTracker.MouseMove += new System.Windows.Forms.MouseEventHandler(this.imageTracker_MouseMove);
+            this.imageTracker.MouseUp += new System.Windows.Forms.MouseEventHandler(this.imageTracker_MouseUp);
+            this.Controls.Add(this.imageTracker);
+        }
+
+        private void imageTracker_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isDraggingPictureTracker)
+            {
+                // caculating next candidate dragging rectangle
+                Point newPos = new Point(draggingRectangle.Location.X + e.X - lastMousePos.X,
+                                         draggingRectangle.Location.Y + e.Y - lastMousePos.Y);
+                Rectangle newPictureTrackerArea = draggingRectangle;
+                newPictureTrackerArea.Location = newPos;
+
+                // saving current mouse position to be used for next dragging
+                lastMousePos = new Point(e.X, e.Y);
+
+                // dragging picture tracker only when the candidate dragging rectangle
+                // is within this ScalablePictureBox control
+                if (ClientRectangle.Contains(newPictureTrackerArea))
+                {
+                    // removing previous rubber-band frame
+                    DrawReversibleRect(draggingRectangle);
+
+                    // updating dragging rectangle
+                    draggingRectangle = newPictureTrackerArea;
+
+                    // drawing new rubber-band frame
+                    DrawReversibleRect(draggingRectangle);
+                }
+            }
+        }
+
+        private void imageTracker_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (isDraggingPictureTracker)
+            {
+                isDraggingPictureTracker = false;
+
+                // erase dragging rectangle
+                DrawReversibleRect(draggingRectangle);
+
+                // move the picture tracker control to the new position
+                imageTracker.Location = draggingRectangle.Location;
+            }
+        }
+
+        private void imageTracker_MouseDown(object sender, MouseEventArgs e)
+        {
+            isDraggingPictureTracker = true;    // Make a note that we are dragging picture tracker control
+
+            // Store the last mouse poit for this rubber-band rectangle.
+            lastMousePos.X = e.X;
+            lastMousePos.Y = e.Y;
+
+            // draw initial dragging rectangle
+            draggingRectangle = imageTracker.Bounds;
+            DrawReversibleRect(draggingRectangle);
+        }
         /// <summary>
         /// initialize all the base controls
         /// </summary>
@@ -423,6 +503,7 @@ namespace Cii.Lar.UI
             StartOffsetX = (this.Width - this.Image.Width) / 2;
             this.OffsetX = StartOffsetX;
             InitializeBaseCtrls();
+            imageTracker.Picture = this.Image;
 
         }
 
