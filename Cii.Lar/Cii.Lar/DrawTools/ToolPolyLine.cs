@@ -117,6 +117,7 @@ namespace Cii.Lar.DrawTools
             cancelNewFlag = true;
 
             pictureBox.GraphicsList[0].UpdateStatisticsInformation();
+            Cursor = Cursors.Default;
         }
 
         private void EndCreating(ZWPictureBox pictureBox)
