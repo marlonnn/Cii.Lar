@@ -59,7 +59,7 @@ namespace Cii.Lar.DrawTools
                 if (e.Button == MouseButtons.Left)
                 {
                     pictureBox.GraphicsList[0].UpdateStatisticsInformation();
-                    Cursor = Cursors.Default;
+                    pictureBox.ActiveTool = DrawToolType.Pointer;
                 }
             }
         }
