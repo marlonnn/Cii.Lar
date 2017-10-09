@@ -13,6 +13,28 @@ namespace Cii.Lar.UI
     public partial class ImageTracker : UserControl
     {
         /// <summary>
+        /// indicate if is the highlight rectangle dragging
+        /// </summary>
+        private bool isDragging = false;
+
+        /// <summary>
+        /// last mouse position in dragging highlight rectangle
+        /// </summary>
+        private Point lastMousePosOfDragging = new Point(0, 0);
+
+        /// <summary>
+        /// Scroll picture event handler
+        /// </summary>
+        /// <param name="xMovementRate">horizontal scroll movement rate which may be nagtive value</param>
+        /// <param name="yMovementRate">vertical scroll movement rate which may be nagtive value</param>
+        public delegate void ScrollPictureEventHandler(float xMovementRate, float yMovementRate);
+
+        /// <summary>
+        /// Scroll picture event to ask ScalablePictureBox to scroll picture
+        /// </summary>
+        public event ScrollPictureEventHandler ScrollPictureEvent;
+
+        /// <summary>
         /// image thumbnail for tracking image.
         /// We make thumbnail of original picture for performance consideration
         /// instead of using original picture for tracking.
@@ -45,6 +67,7 @@ namespace Cii.Lar.UI
                 if (value != zoomRate)
                 {
                     zoomRate = value;
+                    this.Visible = zoomRate != 100;
                     this.Invalidate();
                 }
             }
@@ -95,7 +118,30 @@ namespace Cii.Lar.UI
 
         public void OnPicturePainted(Rectangle showingRect, Rectangle pictureBoxRect)
         {
+            Region regionToInvalidate;
+            if (highlightingRect.IsEmpty)
+            {
+                //After start or picture change redraw the entire thumbnail.
+                regionToInvalidate = new Region(picturePanel.ClientRectangle);
+            }
+            else
+            {
+                // Redraw the thumbnail part covered till now.
+                regionToInvalidate = new Region(highlightingRect);
+            }
+            float widthScale = (float)showingRect.Width / (float)pictureBoxRect.Width;
+            float xPosScale = (float)showingRect.X / (float)pictureBoxRect.Width;
+            float heightScale = (float)showingRect.Height / (float)pictureBoxRect.Height;
+            float yPosScale = (float)showingRect.Y / (float)pictureBoxRect.Height;
+            highlightingRect = new Rectangle((int)(this.pictureDestRect.X + this.pictureDestRect.Width * xPosScale),
+            (int)(this.pictureDestRect.Y + this.pictureDestRect.Height * yPosScale),
+            (int)(this.pictureDestRect.Width * widthScale),
+            (int)(this.pictureDestRect.Height * heightScale));
 
+            regionToInvalidate.Union(highlightingRect); // Also redraw the part now highlighted.
+
+            // Redraw only old and new highlighted rectangles
+            picturePanel.Invalidate(regionToInvalidate);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -108,7 +154,7 @@ namespace Cii.Lar.UI
             e.Graphics.DrawRectangle(Pens.Navy, borderRect);
 
             // draw zoom rate text
-            e.Graphics.DrawString("Zoom rate:" + ScalePercent + "%", zoomRateFont, Brushes.Navy, 3, 3);
+            e.Graphics.DrawString("Zoom rate:" + (int)ScalePercent + "%", zoomRateFont, Brushes.Navy, 3, 3);
         }
 
         private int offsetX;
@@ -135,6 +181,53 @@ namespace Cii.Lar.UI
             {
                 offsetY = value;
             }
+        }
+
+        /// <summary>
+        /// begin to drag highlight rectangle if mouse is down within the highlight rectangle
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void picturePanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (this.highlightingRect.Contains(e.X, e.Y))
+            {
+                isDragging = true;
+                lastMousePosOfDragging = new Point(e.X, e.Y);
+            }
+        }
+
+        /// <summary>
+        /// fire scroll picture event when highlight rectangle is dragged
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void picturePanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (ScrollPictureEvent != null && isDragging &&
+                (lastMousePosOfDragging.X != e.X || lastMousePosOfDragging.Y != e.Y))
+            {
+                int offsetX = e.X - lastMousePosOfDragging.X;
+                int offsetY = e.Y - lastMousePosOfDragging.Y;
+                lastMousePosOfDragging = new Point(e.X, e.Y);
+
+                // 1.Calculate horizontal and vertical mouse movement rates relative to the pictureDestRect
+                //   the mouse movement rates may be nagtive value if mouse moved to left or up
+                // 2.Raise ScrollPictureEvent to scroll actual picture in the ScalablePictureBox
+                float xMovementRate = (float)offsetX / (float)pictureDestRect.Width;
+                float yMovementRate = (float)offsetY / (float)pictureDestRect.Height;
+                ScrollPictureEvent(xMovementRate, yMovementRate);
+            }
+        }
+
+        /// <summary>
+        /// end dragging highlight rectangle
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void picturePanel_MouseUp(object sender, MouseEventArgs e)
+        {
+            isDragging = false;
         }
 
         private void picturePanel_Paint(object sender, PaintEventArgs e)

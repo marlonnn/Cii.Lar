@@ -50,5 +50,9 @@ namespace Cii.Lar
                 sysConfig.RefreshUICulture(resources, this);
             }
         }
+
+        private void ZwPictureBox_OnMeasureUnitChanged(DrawTools.enUniMis unit)
+        {
+        }
     }
 }

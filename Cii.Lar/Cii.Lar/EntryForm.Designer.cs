@@ -51,6 +51,7 @@ namespace Cii.Lar
             this.zwPictureBox.OffsetY = 0;
             this.zwPictureBox.TabStop = false;
             this.zwPictureBox.UnitOfMeasure = Cii.Lar.DrawTools.enUniMis.mm;
+            this.zwPictureBox.OnMeasureUnitChanged += ZwPictureBox_OnMeasureUnitChanged;
             this.zwPictureBox.Zoom = 1F;
             // 
             // EntryForm

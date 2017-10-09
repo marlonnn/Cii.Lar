@@ -43,6 +43,19 @@ namespace Cii.Lar.UI
     public partial class ZWPictureBox : PictureBox
     {
         private ImageTracker imageTracker;
+
+        /// <summary>
+        /// delegate of PictureBox painted event handler
+        /// </summary>
+        /// <param name="visibleAreaRect">currently visible area of picture</param>
+        /// <param name="pictureBoxRect">picture box area</param>
+        public delegate void PictureBoxPaintedEventHandler(Rectangle visibleAreaRect, Rectangle pictureBoxRect);
+
+        /// <summary>
+        /// PictureBox painted event
+        /// </summary>
+        public event PictureBoxPaintedEventHandler PictureBoxPaintedEvent;
+
         /// <summary>
         /// last mouse position of mouse dragging
         /// </summary>
@@ -283,6 +296,8 @@ namespace Cii.Lar.UI
             Initialize();
             InitializeControls();
             InitializeImageTracker();
+
+            this.PictureBoxPaintedEvent += imageTracker.OnPicturePainted;
         }
 
         private void GraphicsList_DrawObjsChanged(object sender, ArrayChangedEventArgs<DrawObject> e)
@@ -308,6 +323,7 @@ namespace Cii.Lar.UI
             this.imageTracker.MouseDown += new System.Windows.Forms.MouseEventHandler(this.imageTracker_MouseDown);
             this.imageTracker.MouseMove += new System.Windows.Forms.MouseEventHandler(this.imageTracker_MouseMove);
             this.imageTracker.MouseUp += new System.Windows.Forms.MouseEventHandler(this.imageTracker_MouseUp);
+            this.imageTracker.Visible = false;
             this.Controls.Add(this.imageTracker);
         }
 
@@ -831,7 +847,7 @@ namespace Cii.Lar.UI
                     }
                 }
             }
-
+            this.imageTracker.ScalePercent = zoom * 100;
             this.Refresh();
         }
         /// <summary>
@@ -842,6 +858,14 @@ namespace Cii.Lar.UI
         {
             try
             {
+                if (PictureBoxPaintedEvent != null)
+                {
+                    Rectangle controlClientRect = ClientRectangle;
+                    controlClientRect.X -= OffsetX;
+                    controlClientRect.Y -= OffsetY;
+                    PictureBoxPaintedEvent(controlClientRect, this.ClientRectangle);
+                }
+
                 if (this.Image != null)
                 {
                     e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
@@ -857,6 +881,7 @@ namespace Cii.Lar.UI
                 {
                     rulers.Draw(e.Graphics);
                 }
+
             }
             catch (Exception ex)
             {
