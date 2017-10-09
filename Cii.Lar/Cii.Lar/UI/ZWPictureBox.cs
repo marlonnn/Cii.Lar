@@ -771,6 +771,7 @@ namespace Cii.Lar.UI
             this.OffsetX = (this.Width - this.Image.Width) / 2;
             this.OffsetY = 0;
             this.zoom = 1;
+            this.imageTracker.ScalePercent = zoom * 100;
             this.Invalidate();
         }
 
@@ -786,6 +787,7 @@ namespace Cii.Lar.UI
             MouseEventArgs args = new MouseEventArgs(new MouseButtons(), 1, mousePos.X, mousePos.Y, 0);
             zoom += 0.2F;
             ZoomOnMouseCenter(args, oldzoom);
+            this.imageTracker.ScalePercent = zoom * 100;
             this.Invalidate();
         }
 
@@ -801,6 +803,7 @@ namespace Cii.Lar.UI
                 MouseEventArgs args = new MouseEventArgs(new MouseButtons(), 1, mousePos.X, mousePos.Y, 0);
                 zoom = Math.Max(zoom - 0.2F, 0.01F);
                 ZoomOnMouseCenter(args, oldzoom);
+                this.imageTracker.ScalePercent = zoom * 100;
                 this.Invalidate();
             }
         }
