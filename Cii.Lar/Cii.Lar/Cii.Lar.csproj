@@ -63,9 +63,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DrawTools\Circle.cs" />
+    <Compile Include="DrawTools\DrawMultipleCircle.cs" />
     <Compile Include="DrawTools\MeasureSystem.cs" />
     <Compile Include="DrawTools\Rulers.cs" />
     <Compile Include="DrawTools\ToolMove.cs" />
+    <Compile Include="DrawTools\ToolMultipleCircle.cs" />
     <Compile Include="EmptyForm.cs">
       <SubType>Form</SubType>
     </Compile>

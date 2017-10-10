@@ -163,34 +163,5 @@ namespace Cii.Lar.DrawTools
                 return 4;
             }
         }
-
-        public class Circle
-        {
-            public PointF CenterPoint
-            {
-                get;
-                set;
-            }
-
-            public Size DrawAreaSize
-            {
-                get;
-                set;
-            }
-
-            public RectangleF Rectangle
-            {
-                get
-                {
-                    return new RectangleF(CenterPoint.X - DrawAreaSize.Width / 2f, CenterPoint.Y - DrawAreaSize.Width / 2f, DrawAreaSize.Width, DrawAreaSize.Height);
-                }
-            }
-
-            public Circle(PointF centerPoint, Size drawAreaSize)
-            {
-                CenterPoint = centerPoint;
-                DrawAreaSize = drawAreaSize;
-            }
-        }
     }
 }
