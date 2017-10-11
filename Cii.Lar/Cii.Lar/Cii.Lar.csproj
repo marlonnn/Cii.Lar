@@ -111,6 +111,11 @@
     <Compile Include="MessageBoxManager.cs" />
     <Compile Include="MiniDump.cs" />
     <Compile Include="NativeMethods.cs" />
+    <Compile Include="Res\LaserCtrl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LaserCtrl.resx</DependentUpon>
+    </Compile>
     <Compile Include="SimpleLogger.cs" />
     <Compile Include="SysClass\AllPatients.cs" />
     <Compile Include="SysClass\JsonFile.cs" />
@@ -284,6 +289,11 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.zh-CN.resx" />
+    <EmbeddedResource Include="Res\LaserCtrl.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LaserCtrl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Res\LaserCtrl.zh-CN.resx" />
     <EmbeddedResource Include="UI\BaseCtrl.resx">
       <DependentUpon>BaseCtrl.cs</DependentUpon>
     </EmbeddedResource>

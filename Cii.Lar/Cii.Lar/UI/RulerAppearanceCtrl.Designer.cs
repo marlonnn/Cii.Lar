@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RulerAppearanceCtrl));
             this.line1 = new DevComponents.DotNetBar.Controls.Line();
-            this.btnLaserCtrl = new DevComponents.DotNetBar.ButtonX();
+            this.btnLaserCtrl = new System.Windows.Forms.Button();
             this.sliderColour = new DevComponents.DotNetBar.Controls.Slider();
             this.lblZColour = new DevComponents.DotNetBar.LabelX();
             this.sliderTickLength = new DevComponents.DotNetBar.Controls.Slider();
@@ -61,10 +61,8 @@
             // btnLaserCtrl
             // 
             this.btnLaserCtrl.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnLaserCtrl.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             resources.ApplyResources(this.btnLaserCtrl, "btnLaserCtrl");
             this.btnLaserCtrl.Name = "btnLaserCtrl";
-            this.btnLaserCtrl.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnLaserCtrl.Click += new System.EventHandler(this.btnLaserCtrl_Click);
             // 
             // sliderColour
@@ -266,7 +264,7 @@
         #endregion
 
         private DevComponents.DotNetBar.Controls.Line line1;
-        private DevComponents.DotNetBar.ButtonX btnLaserCtrl;
+        private System.Windows.Forms.Button btnLaserCtrl;
         private DevComponents.DotNetBar.Controls.Slider sliderColour;
         private DevComponents.DotNetBar.LabelX lblZColour;
         private DevComponents.DotNetBar.Controls.Slider sliderTickLength;

@@ -35,16 +35,16 @@ namespace Cii.Lar.UI
             this.comboItem1 = new DevComponents.Editors.ComboItem();
             this.comboItem2 = new DevComponents.Editors.ComboItem();
             this.itemPanel2 = new DevComponents.DotNetBar.ItemPanel();
-            this.buttonSelect = new DevComponents.DotNetBar.ButtonX();
-            this.buttonSave = new DevComponents.DotNetBar.ButtonX();
+            this.buttonSelect = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
             this.labelItemStoragePath = new DevComponents.DotNetBar.LabelItem();
             this.itemContainer1 = new DevComponents.DotNetBar.ItemContainer();
             this.textBoxItemStoragePath = new DevComponents.DotNetBar.TextBoxItem();
             this.itemPanelCamera = new DevComponents.DotNetBar.ItemPanel();
             this.labelItemCamera = new DevComponents.DotNetBar.LabelItem();
             this.itemContainer3 = new DevComponents.DotNetBar.ItemContainer();
-            this.buttonItemSimulator = new DevComponents.DotNetBar.ButtonX();
-            this.buttonSysInfo = new DevComponents.DotNetBar.ButtonX();
+            this.buttonItemSimulator = new System.Windows.Forms.Button();
+            this.buttonSysInfo = new System.Windows.Forms.Button();
             this.itemPanel3 = new DevComponents.DotNetBar.ItemPanel();
             this.lense = new DevComponents.DotNetBar.LabelItem();
             this.comboBoxItemLense = new DevComponents.DotNetBar.ComboBoxItem();
@@ -120,19 +120,15 @@ namespace Cii.Lar.UI
             // buttonSelect
             // 
             this.buttonSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             resources.ApplyResources(this.buttonSelect, "buttonSelect");
             this.buttonSelect.Name = "buttonSelect";
-            this.buttonSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonSelect.Click += new System.EventHandler(this.buttonSelect_Click);
             // 
             // buttonSave
             // 
             this.buttonSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             resources.ApplyResources(this.buttonSave, "buttonSave");
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // labelItemStoragePath
@@ -201,15 +197,12 @@ namespace Cii.Lar.UI
             this.buttonItemSimulator.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             resources.ApplyResources(this.buttonItemSimulator, "buttonItemSimulator");
             this.buttonItemSimulator.Name = "buttonItemSimulator";
-            this.buttonItemSimulator.Shape = new DevComponents.DotNetBar.RoundRectangleShapeDescriptor(2);
             // 
             // buttonSysInfo
             // 
             this.buttonSysInfo.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonSysInfo.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             resources.ApplyResources(this.buttonSysInfo, "buttonSysInfo");
             this.buttonSysInfo.Name = "buttonSysInfo";
-            this.buttonSysInfo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonSysInfo.Click += new System.EventHandler(this.buttonSysInfo_Click);
             // 
             // itemPanel3
@@ -301,10 +294,10 @@ namespace Cii.Lar.UI
         private DevComponents.DotNetBar.ItemPanel itemPanelCamera;
         private DevComponents.DotNetBar.LabelItem labelItemCamera;
         private DevComponents.DotNetBar.ItemContainer itemContainer3;
-        private DevComponents.DotNetBar.ButtonX buttonItemSimulator;
-        private DevComponents.DotNetBar.ButtonX buttonSelect;
-        private DevComponents.DotNetBar.ButtonX buttonSave;
-        private DevComponents.DotNetBar.ButtonX buttonSysInfo;
+        private System.Windows.Forms.Button buttonItemSimulator;
+        private System.Windows.Forms.Button buttonSelect;
+        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button buttonSysInfo;
         private DevComponents.Editors.ComboItem comboItem1;
         private DevComponents.Editors.ComboItem comboItem2;
         private DevComponents.DotNetBar.ItemPanel itemPanel3;

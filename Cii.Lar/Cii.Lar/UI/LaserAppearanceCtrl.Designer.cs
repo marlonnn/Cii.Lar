@@ -42,7 +42,7 @@
             this.sliderZoneSize = new DevComponents.DotNetBar.Controls.Slider();
             this.lblZoneColour = new DevComponents.DotNetBar.LabelX();
             this.sliderZoneColour = new DevComponents.DotNetBar.Controls.Slider();
-            this.btnLaserCtrl = new DevComponents.DotNetBar.ButtonX();
+            this.btnLaserCtrl = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // closeButton
@@ -189,10 +189,8 @@
             // btnLaserCtrl
             // 
             this.btnLaserCtrl.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnLaserCtrl.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             resources.ApplyResources(this.btnLaserCtrl, "btnLaserCtrl");
             this.btnLaserCtrl.Name = "btnLaserCtrl";
-            this.btnLaserCtrl.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnLaserCtrl.Click += new System.EventHandler(this.btnLaserCtrl_Click);
             // 
             // LaserAppearanceCtrl
@@ -249,6 +247,6 @@
         private DevComponents.DotNetBar.LabelX lblZoneSize;
         private DevComponents.DotNetBar.Controls.Slider sliderZoneSize;
         private DevComponents.DotNetBar.Controls.Slider sliderZoneColour;
-        private DevComponents.DotNetBar.ButtonX btnLaserCtrl;
+        private System.Windows.Forms.Button btnLaserCtrl;
     }
 }

@@ -35,7 +35,7 @@ namespace Cii.Lar.UI
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnAppearance = new DevComponents.DotNetBar.ButtonX();
+            this.btnAppearance = new System.Windows.Forms.Button();
             this.panel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,10 +80,8 @@ namespace Cii.Lar.UI
             // btnAppearance
             // 
             this.btnAppearance.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnAppearance.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             resources.ApplyResources(this.btnAppearance, "btnAppearance");
             this.btnAppearance.Name = "btnAppearance";
-            this.btnAppearance.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnAppearance.Click += new System.EventHandler(this.btnAppearance_Click);
             // 
             // StatisticsCtrl
@@ -111,7 +109,7 @@ namespace Cii.Lar.UI
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
-        private DevComponents.DotNetBar.ButtonX btnAppearance;
+        private System.Windows.Forms.Button btnAppearance;
     }
 }
 

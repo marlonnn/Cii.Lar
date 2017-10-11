@@ -18,6 +18,8 @@ namespace Cii.Lar.UI
     /// </summary>
     public partial class SliderCtrl : UserControl
     {
+        public delegate void SliderValueChanged(object sender, EventArgs e);
+        public SliderValueChanged SliderValueChangedHandler;
         public Slider Slider
         {
             get
@@ -44,6 +46,11 @@ namespace Cii.Lar.UI
         public SliderCtrl()
         {
             InitializeComponent();
+        }
+
+        private void Slide_ValueChanged(object sender, EventArgs e)
+        {
+            SliderValueChangedHandler?.Invoke(sender, e);
         }
     }
 }

@@ -34,7 +34,7 @@ namespace Cii.Lar.UI
             }
         }
 
-        public ButtonX BtnAppearance
+        public Button BtnAppearance
         {
             get
             {

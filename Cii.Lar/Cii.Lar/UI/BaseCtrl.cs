@@ -90,7 +90,7 @@ namespace Cii.Lar.UI
         {
             foreach (var item in this.Controls)
             {
-                ButtonX btnX = item as ButtonX;
+                Button btnX = item as Button;
                 if (btnX != null)
                 {
                     resources.ApplyResources(btnX, btnX.Name);

@@ -94,7 +94,7 @@ namespace Cii.Lar.UI
             this.itemContainer2.Refresh();
             foreach (var ctrl in this.Controls)
             {
-                ButtonX btnX = ctrl as ButtonX;
+                Button btnX = ctrl as Button;
                 if (btnX != null)
                 {
                     resources.ApplyResources(btnX, btnX.Name);
@@ -105,7 +105,7 @@ namespace Cii.Lar.UI
                 {
                     foreach (var itemCtrl in itemPanel.Controls)
                     {
-                        ButtonX subBtnX = itemCtrl as ButtonX;
+                        Button subBtnX = itemCtrl as Button;
                         if (subBtnX != null)
                         {
                             resources.ApplyResources(subBtnX, subBtnX.Name);

@@ -131,7 +131,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;closeButton.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>0</value>
   </data>
   <data name="lblPulseWidth.Location" type="System.Drawing.Point, System.Drawing">
     <value>73, 37</value>
@@ -158,25 +158,25 @@
   <data name="&gt;&gt;lblPulseWidth.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="sliderCtrl1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="sliderCtrl.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 62</value>
   </data>
-  <data name="sliderCtrl1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="sliderCtrl.Size" type="System.Drawing.Size, System.Drawing">
     <value>261, 19</value>
   </data>
-  <data name="sliderCtrl1.TabIndex" type="System.Int32, mscorlib">
+  <data name="sliderCtrl.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;sliderCtrl1.Name" xml:space="preserve">
-    <value>sliderCtrl1</value>
+  <data name="&gt;&gt;sliderCtrl.Name" xml:space="preserve">
+    <value>sliderCtrl</value>
   </data>
-  <data name="&gt;&gt;sliderCtrl1.Type" xml:space="preserve">
+  <data name="&gt;&gt;sliderCtrl.Type" xml:space="preserve">
     <value>Cii.Lar.UI.SliderCtrl, Cii.Lar, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;sliderCtrl1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;sliderCtrl.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;sliderCtrl1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;sliderCtrl.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="line1.Location" type="System.Drawing.Point, System.Drawing">
@@ -273,7 +273,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnFire.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="line2.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 156</value>
@@ -297,7 +297,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;line2.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="btnAlignLaser.Location" type="System.Drawing.Point, System.Drawing">
     <value>41, 189</value>
@@ -321,7 +321,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnAlignLaser.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="btnHoleSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>41, 218</value>
@@ -345,7 +345,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnHoleSize.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="btnAppearance.Location" type="System.Drawing.Point, System.Drawing">
     <value>41, 247</value>
@@ -369,7 +369,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnAppearance.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
