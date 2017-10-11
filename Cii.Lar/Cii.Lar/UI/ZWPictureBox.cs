@@ -693,6 +693,8 @@ namespace Cii.Lar.UI
             DrawReversibleRect(draggingBaseCtrlRectangle);
         }
 
+        public delegate void EscapeFullScreen();
+        public EscapeFullScreen EscapeFullScreenHandler;
         protected override void OnKeyDown(KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape && this.ActiveTool != UI.DrawToolType.Pointer)
@@ -703,6 +705,11 @@ namespace Cii.Lar.UI
             {
                 this.ActiveTool = DrawToolType.Move;
             }
+            else if (e.Control && e.KeyCode == Keys.F)
+            {
+                EscapeFullScreenHandler?.Invoke();
+            }
+
         }
 
         protected override void OnMouseDoubleClick(MouseEventArgs e)

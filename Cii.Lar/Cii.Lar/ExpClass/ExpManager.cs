@@ -122,6 +122,7 @@ namespace Cii.Lar.ExpClass
                 string strFilter = "All file (*.*)|*.*|JPEG File Interchange Format (*.jpg;*.jpeg)|*.jpg;*.jpeg|Portable Network Graphics (*.png)|*.png|Tiff Format(*.tiff)|*.tiff|Graphics Interchange Format (*.gif)|*.gif";
                 System.Windows.Forms.OpenFileDialog OpenImageDialog = new System.Windows.Forms.OpenFileDialog();
                 OpenImageDialog.Filter = strFilter;
+                OpenImageDialog.InitialDirectory = string.Format("{0}\\Resources\\Simulator", System.Environment.CurrentDirectory);
                 OpenImageDialog.ShowDialog();
                 if (OpenImageDialog.FileName.Length > 0)
                 {
