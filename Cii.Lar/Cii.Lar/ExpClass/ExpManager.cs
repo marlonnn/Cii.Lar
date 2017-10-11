@@ -125,7 +125,7 @@ namespace Cii.Lar.ExpClass
                 OpenImageDialog.ShowDialog();
                 if (OpenImageDialog.FileName.Length > 0)
                 {
-                    //this.ZWPictureBox.Picture = new Bitmap(OpenImageDialog.FileName);
+                    this.ZWPictureBox.LoadImage(OpenImageDialog.FileName);
                 }
             }
             catch (Exception ex)

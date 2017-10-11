@@ -515,19 +515,31 @@ namespace Cii.Lar.UI
 
         public void LoadImage()
         {
-            this.Image = Image.FromFile(string.Format("{0}\\Resources\\1.bmp", System.Environment.CurrentDirectory));
+            this.Image = Image.FromFile(string.Format("{0}\\Resources\\Simulator\\egg.bmp", System.Environment.CurrentDirectory));
             StartOffsetX = (this.Width - this.Image.Width) / 2;
             this.OffsetX = StartOffsetX;
+            this.OffsetY = (this.Height - this.Image.Height) / 2;
             InitializeBaseCtrls();
             imageTracker.Picture = this.Image;
+        }
 
+        public void LoadImage(string imageFile)
+        {
+            this.Image = Image.FromFile(imageFile);
+            StartOffsetX = (this.Width - this.Image.Width) / 2;
+            this.OffsetX = StartOffsetX;
+            this.OffsetY = (this.Height - this.Image.Height) / 2;
+            imageTracker.Picture = this.Image;
+            this.zoom = 1;
+            this.imageTracker.ScalePercent = zoom * 100;
+            this.Invalidate();
         }
 
         private void InitializeBaseCtrls()
         {
             foreach (var ctrl in this.controls)
             {
-                ctrl.Location = new Point(5, 30);
+                ctrl.Location = new Point(this.Width - ctrl.Width - 5, 30);
                 ctrl.ClickDelegateHandler += new BaseCtrl.ClickDelegate(this.ClickDelegateHandler);
                 ctrl.MouseDown += BaseCtrl_MouseDown;
                 ctrl.MouseMove += BaseCtrl_MouseMove;
@@ -769,7 +781,8 @@ namespace Cii.Lar.UI
         public void ZoomFit()
         {
             this.OffsetX = (this.Width - this.Image.Width) / 2;
-            this.OffsetY = 0;
+            //this.OffsetY = 0;
+            this.OffsetY = (this.Height - this.Image.Height) / 2;
             this.zoom = 1;
             this.imageTracker.ScalePercent = zoom * 100;
             this.Invalidate();

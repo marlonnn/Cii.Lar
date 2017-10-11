@@ -53,6 +53,7 @@
             // 
             this.lblPulseWidth.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblPulseWidth.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblPulseWidth.BackColor = System.Drawing.Color.Gray;
             resources.ApplyResources(this.lblPulseWidth, "lblPulseWidth");
             this.lblPulseWidth.Name = "lblPulseWidth";
             // 

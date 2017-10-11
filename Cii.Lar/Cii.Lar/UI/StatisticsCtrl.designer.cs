@@ -90,7 +90,7 @@ namespace Cii.Lar.UI
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BackColor = System.Drawing.Color.Gray;
             this.Controls.Add(this.btnAppearance);
             this.Controls.Add(this.panel);
             this.Name = "StatisticsCtrl";

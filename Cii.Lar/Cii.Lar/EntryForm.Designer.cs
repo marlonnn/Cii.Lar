@@ -46,6 +46,7 @@ namespace Cii.Lar
             // zwPictureBox
             // 
             resources.ApplyResources(this.zwPictureBox, "zwPictureBox");
+            this.zwPictureBox.BackColor = System.Drawing.Color.Gray;
             this.zwPictureBox.Name = "zwPictureBox";
             this.zwPictureBox.OffsetX = 0;
             this.zwPictureBox.OffsetY = 0;
