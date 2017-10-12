@@ -18,107 +18,6 @@ namespace Cii.Lar.DrawTools
     {
         private Timer timer;
 
-        private int index = 1;
-        private int seperatorAngle = 5;
-
-        private int numberOfArcs;
-        public int NumberOfArcs
-        {
-            get { return numberOfArcs; }
-            set
-            {
-                if (value <= 0)
-                {
-                    throw new ArgumentOutOfRangeException("Value must be greater than zero");
-                }
-                if ((360 % value) != 0)
-                {
-                    throw new ArgumentException("360 should be divisible by NumberOfArcs property. 360 is not divisible by " + 
-                        value.ToString());
-                }
-                if (value != this.numberOfArcs)
-                {
-                    this.numberOfArcs = value;
-                }
-            }
-        }
-
-        private int ringThickness;
-        public int RingThickness
-        {
-            get { return ringThickness; }
-            set
-            {
-                if (value <= 0)
-                {
-                    throw new ArgumentOutOfRangeException("Value must be greater than zero");
-                }
-                // Value cannot be bigger than the rectanle.
-                int limit = Math.Min((int)this.OutterCircle.Rectangle.Width, (int)this.OutterCircle.Rectangle.Height) / 2;
-                if (value >= limit)
-                {
-                    throw new ArgumentOutOfRangeException(string.Format("Value must be smaller than {0} for this size, {1}", 
-                        limit, this.OutterCircle.Rectangle.ToString()));
-                }
-
-                if (value != ringThickness)
-                {
-                    this.ringThickness = value;
-                }
-            }
-        }
-
-        private Color ringColor;
-        public Color RingColor
-        {
-            get
-            {
-                if (ringColor == Color.Empty)
-                {
-                    return Color.White;
-                }
-                return ringColor;
-            }
-            set
-            {
-                ringColor = value;
-            }
-        }
-
-        private Color foreColor;
-        public Color ForeColor
-        {
-            get
-            {
-                if (foreColor == Color.Empty)
-                {
-                    return Color.White;
-                }
-                return foreColor;
-            }
-            set
-            {
-                foreColor = value;
-            }
-        }
-
-        private int numberOfTail;
-        public int NumberOfTail
-        {
-            get { return numberOfTail; }
-            set
-            {
-                if (value < 0)
-                {
-                    throw new ArgumentOutOfRangeException("Value can not be zero");
-                }
-                if (value != numberOfTail)
-                {
-                    numberOfTail = value;
-                }
-            }
-        }
-
         public int Interval
         {
             get
@@ -128,20 +27,6 @@ namespace Cii.Lar.DrawTools
             set
             {
                 this.timer.Interval = value;
-            }
-        }
-
-        private int PieAngle
-        {
-            get
-            {
-                // value is the pie that will be drawn and the seperator angle
-                int angleOfPieWithSeperator = 360 / this.NumberOfArcs;
-
-                // This is the pie that will be drawn to the client
-                int pieAngle = angleOfPieWithSeperator - this.seperatorAngle;
-
-                return pieAngle;
             }
         }
 
@@ -179,13 +64,49 @@ namespace Cii.Lar.DrawTools
         public Size OutterCircleSize { get; set; }
 
         public Size InnerCircleSize { get; set; }
+
+        private bool flashing;
+        private int flickCount;
+        public bool Flashing
+        {
+            get { return flashing; }
+            set
+            {
+                flickCount = 0;
+                this.flashing = value;
+                if (value)
+                {
+                    this.timer.Enabled = value;
+                    this.timer.Start();
+                    flickCount = -1;
+                    this.timer_Tick(null, null);
+                }
+                else
+                {
+                    this.timer.Enabled = value;
+                    this.timer.Stop();
+                }
+                if (this.pictureBox != null)
+                    this.pictureBox.Invalidate();
+            } 
+        }
+
+        private SolidBrush brush;
         public DrawCircle()
         {
             InitializeGraphicsProperties();
-            InitializeArcs();
-            //InitializeTimer();
+            InitializeTimer();
             OutterCircleSize = new Size(60, 60);
             InnerCircleSize = new Size(38, 38);
+        }
+
+        private void InitializeTimer()
+        {
+            this.timer = new Timer();
+            this.timer.Interval = 300; // Each 150 miliseconds, the progress circle will be drawn again
+            this.timer.Tick += new EventHandler(timer_Tick);
+            //this.timer.Enabled = true;
+            Flashing = true;
         }
 
         public DrawCircle(ZWPictureBox pictureBox, PointF centerPoint) : this()
@@ -211,110 +132,18 @@ namespace Cii.Lar.DrawTools
             this.GraphicsProperties.Color = Color.Yellow;
         }
 
-        private void InitializeArcs()
-        {
-            this.index = 1;
-            this.numberOfArcs = 8;
-            this.ringThickness = 10;
-            this.foreColor = Color.Gold;
-            this.ringColor = Color.White;
-            this.numberOfTail = 4;
-        }
-
-        private void InitializeTimer()
-        {
-            this.timer = new Timer();
-            this.timer.Interval = 150; // Each 150 miliseconds, the progress circle will be drawn again
-            this.timer.Tick += new EventHandler(timer_Tick);
-            this.timer.Enabled = true;
-        }
-
-        /// <summary>
-        /// This method draws the static, non-animation part.
-        /// </summary>
-        /// <param name="grp"></param>
-        private void FillEmptyArcs(Graphics grp)
-        {
-            int startAngle = 0;
-
-            for (int i = 0; i < this.NumberOfArcs; i++)
-            {
-                this.DrawFilledArc(grp, this.RingColor, startAngle);
-
-                startAngle += this.PieAngle + this.seperatorAngle;
-            }
-        }
-
-        private void DrawFilledArc(Graphics grp, Color color, int startAngle)
-        {
-            grp.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-
-            RectangleF main = this.OutterCircle.Rectangle;
-
-            // If there is no region to be drawn, then this method terminates itself
-            if (main.Width - (2 * this.ringThickness) < 1 || main.Height - (2 * this.ringThickness) <= 1)
-                return;
-
-            // Calculates the region that will be filled
-            GraphicsPath outerPath = new GraphicsPath();
-            outerPath.AddPie(OutterCircle.Rectangle.X, OutterCircle.Rectangle.Y,
-                    OutterCircle.Rectangle.Width, OutterCircle.Rectangle.Height, startAngle, this.PieAngle);
-
-            //RectangleF sub = new RectangleF(main.X + this.ringThickness, main.Y + this.ringThickness, main.Width - (2 * this.ringThickness), main.Height - (2 * this.ringThickness));
-            GraphicsPath innerPath = new GraphicsPath();
-            innerPath.AddPie(OutterCircle.Rectangle.X + this.ringThickness, OutterCircle.Rectangle.Y + this.ringThickness,
-                    OutterCircle.Rectangle.Width - (2 * this.ringThickness), OutterCircle.Rectangle.Height - (2 * this.ringThickness), startAngle - 1, this.PieAngle + 2);
-
-            Region mainRegion = new Region(outerPath);
-            Region subRegion = new Region(innerPath);
-            mainRegion.Exclude(subRegion);
-
-            // Fill that region
-            grp.FillRegion(new SolidBrush(color), mainRegion);
-        }
-
-        /// <summary>
-        /// Draws the animation part
-        /// </summary>
-        private void FillPieAndTail()
-        {
-            Color color = this.ForeColor;
-
-            for (int i = 0; i <= this.NumberOfTail; i++)
-            {
-                this.FillPieAccordingToTheIndex(this.index - i, color);
-
-                // If there is tail, then the tail color is the lighter of the ForeColor
-                color = ControlPaint.Light(color);
-            }
-
-            // Background Pie
-            this.FillPieAccordingToTheIndex(this.index - (this.NumberOfTail + 1), this.RingColor);
-        }
-
-        private void FillPieAccordingToTheIndex(int index, Color color)
-        {
-            int count = index % this.NumberOfArcs;
-            int angle = count * (this.PieAngle + this.seperatorAngle);
-
-            using (Graphics grp = this.pictureBox.CreateGraphics())
-            {
-                grp.SmoothingMode = SmoothingMode.HighQuality;
-                this.DrawFilledArc(grp, color, angle);
-            }
-        }
-
         private void timer_Tick(object sender, EventArgs e)
         {
-            this.ChangeIndex();
-        }
-        private void ChangeIndex()
-        {
-            // Fills the animation part
-            this.FillPieAndTail();
 
-            // After the invocation of this method, index is changed. So at another invocation of this method, next pie will be drawn
-            this.index = (this.index + 1) % this.NumberOfArcs;
+            flickCount++;
+            if (this.pictureBox != null)
+            {
+                this.pictureBox.Invalidate();
+            }
+            //if (flickCount == 6)
+            //{
+            //    Flashing = false;
+            //}
         }
 
         public override void Draw(Graphics g, ZWPictureBox pictureBox)
@@ -331,20 +160,45 @@ namespace Cii.Lar.DrawTools
             g.CompositingQuality = CompositingQuality.HighQuality;
             g.SmoothingMode = SmoothingMode.AntiAlias;
             using (GraphicsPath path = new GraphicsPath())
-            using (SolidBrush brush = new SolidBrush(this.GraphicsProperties.Color))
             {
+                if (Flashing)
+                {
+                    brush = new SolidBrush(this.flickCount % 2 == 1 ? this.GraphicsProperties.Color : Color.LightSalmon);
+                }
+                else
+                {
+                    brush = new SolidBrush(this.GraphicsProperties.Color);
+                }
+
                 path.AddEllipse(OutterCircle.Rectangle.X, OutterCircle.Rectangle.Y,
                     OutterCircle.Rectangle.Width, OutterCircle.Rectangle.Height);
                 path.AddEllipse(InnerCircle.Rectangle.X, InnerCircle.Rectangle.Y,
                     InnerCircle.Rectangle.Width, InnerCircle.Rectangle.Height);
                 g.FillPath(brush, path);
             }
+            DrawCross(g);
+            brush.Dispose();
+        }
 
-            //// Fill static ring part
-            //this.FillEmptyArcs(g);
+        private void DrawCross(Graphics g)
+        {
+            g.DrawLine(new Pen(Color.Black, 1f), 
+                InnerCircle.CenterPoint.X, InnerCircle.CenterPoint.Y - InnerCircle.Rectangle.Width / 2,
+                InnerCircle.CenterPoint.X, InnerCircle.CenterPoint.Y + InnerCircle.Rectangle.Width / 2);
 
-            //// Fill animation part
-            //this.FillPieAndTail();
+            g.DrawLine(new Pen(Color.Black, 1f),
+                InnerCircle.CenterPoint.X - InnerCircle.Rectangle.Width / 2, InnerCircle.CenterPoint.Y,
+                InnerCircle.CenterPoint.X + InnerCircle.Rectangle.Width / 2, InnerCircle.CenterPoint.Y);
+        }
+
+        /// <summary>
+        /// Mouse move to new point
+        /// </summary>
+        /// <param name="pictureBox"></param>
+        /// <param name="point"></param>
+        /// <param name="handleNumber"></param>
+        public override void MoveHandleTo(ZWPictureBox pictureBox, Point point, int handleNumber)
+        {
         }
 
 
