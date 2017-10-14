@@ -123,6 +123,9 @@
   <data name="btnNew.Text" xml:space="preserve">
     <value>新建</value>
   </data>
+  <data name="btnSimulator.Text" xml:space="preserve">
+    <value>开启模拟模式</value>
+  </data>
   <data name="buttonItemSimulator.Text" xml:space="preserve">
     <value>开启仿真模式</value>
   </data>
@@ -143,6 +146,15 @@
   </data>
   <data name="labelItemStoragePath.Text" xml:space="preserve">
     <value>存储路径</value>
+  </data>
+  <data name="lblConnectedInfo.Text" xml:space="preserve">
+    <value>没有连接录像设备</value>
+  </data>
+  <data name="lblLaser.Text" xml:space="preserve">
+    <value>激光</value>
+  </data>
+  <data name="lblSimulator.Text" xml:space="preserve">
+    <value>模拟图像</value>
   </data>
   <data name="lense.Text" xml:space="preserve">
     <value>物镜</value>

@@ -435,7 +435,7 @@
     <Content Include="Resources\Simulator\Embryo.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Simulator\Embtyo 8 Cell.bmp">
+    <Content Include="Resources\Simulator\Embryo 8 Cell.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Simulator\Sperm.bmp">

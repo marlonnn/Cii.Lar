@@ -41,17 +41,35 @@ namespace Cii.Lar.UI
             this.itemContainer1 = new DevComponents.DotNetBar.ItemContainer();
             this.textBoxItemStoragePath = new DevComponents.DotNetBar.TextBoxItem();
             this.itemPanelCamera = new DevComponents.DotNetBar.ItemPanel();
+            this.btnSimulator = new System.Windows.Forms.Button();
             this.labelItemCamera = new DevComponents.DotNetBar.LabelItem();
             this.itemContainer3 = new DevComponents.DotNetBar.ItemContainer();
+            this.lblConnectedInfo = new DevComponents.DotNetBar.LabelItem();
+            this.itemContainer4 = new DevComponents.DotNetBar.ItemContainer();
+            this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
+            this.lblSimulator = new DevComponents.DotNetBar.LabelItem();
+            this.cmbImage = new DevComponents.DotNetBar.ComboBoxItem();
+            this.comboItem7 = new DevComponents.Editors.ComboItem();
+            this.comboItem8 = new DevComponents.Editors.ComboItem();
+            this.comboItem9 = new DevComponents.Editors.ComboItem();
+            this.comboItem10 = new DevComponents.Editors.ComboItem();
             this.buttonItemSimulator = new System.Windows.Forms.Button();
             this.buttonSysInfo = new System.Windows.Forms.Button();
             this.itemPanel3 = new DevComponents.DotNetBar.ItemPanel();
             this.lense = new DevComponents.DotNetBar.LabelItem();
             this.comboBoxItemLense = new DevComponents.DotNetBar.ComboBoxItem();
             this.itemContainer2 = new DevComponents.DotNetBar.ItemContainer();
-            this.btnDelete = new DevComponents.DotNetBar.ButtonItem();
             this.textBoxLense = new DevComponents.DotNetBar.TextBoxItem();
+            this.btnDelete = new DevComponents.DotNetBar.ButtonItem();
+            this.itemPanel4 = new DevComponents.DotNetBar.ItemPanel();
+            this.lblLaser = new DevComponents.DotNetBar.LabelItem();
+            this.cmbLaser = new DevComponents.DotNetBar.ComboBoxItem();
+            this.comboItem5 = new DevComponents.Editors.ComboItem();
+            this.comboItem6 = new DevComponents.Editors.ComboItem();
+            this.comboItem3 = new DevComponents.Editors.ComboItem();
+            this.comboItem4 = new DevComponents.Editors.ComboItem();
             this.itemPanel2.SuspendLayout();
+            this.itemPanelCamera.SuspendLayout();
             this.SuspendLayout();
             // 
             // closeButton
@@ -166,13 +184,24 @@ namespace Cii.Lar.UI
             this.itemPanelCamera.BackgroundStyle.Class = "ItemPanel";
             this.itemPanelCamera.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.itemPanelCamera.ContainerControlProcessDialogKey = true;
+            this.itemPanelCamera.Controls.Add(this.btnSimulator);
             this.itemPanelCamera.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.labelItemCamera,
-            this.itemContainer3});
+            this.itemContainer3,
+            this.itemContainer4,
+            this.lblSimulator,
+            this.cmbImage});
             this.itemPanelCamera.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
             this.itemPanelCamera.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
             resources.ApplyResources(this.itemPanelCamera, "itemPanelCamera");
             this.itemPanelCamera.Name = "itemPanelCamera";
+            // 
+            // btnSimulator
+            // 
+            this.btnSimulator.BackColor = System.Drawing.Color.Gray;
+            resources.ApplyResources(this.btnSimulator, "btnSimulator");
+            this.btnSimulator.Name = "btnSimulator";
+            this.btnSimulator.UseVisualStyleBackColor = false;
             // 
             // labelItemCamera
             // 
@@ -185,12 +214,72 @@ namespace Cii.Lar.UI
             // 
             // 
             this.itemContainer3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.itemContainer3.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+            this.itemContainer3.HorizontalItemAlignment = DevComponents.DotNetBar.eHorizontalItemsAlignment.Center;
             this.itemContainer3.Name = "itemContainer3";
+            this.itemContainer3.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.lblConnectedInfo});
             // 
             // 
             // 
             this.itemContainer3.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // lblConnectedInfo
+            // 
+            this.lblConnectedInfo.Name = "lblConnectedInfo";
+            resources.ApplyResources(this.lblConnectedInfo, "lblConnectedInfo");
+            // 
+            // itemContainer4
+            // 
+            // 
+            // 
+            // 
+            this.itemContainer4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemContainer4.HorizontalItemAlignment = DevComponents.DotNetBar.eHorizontalItemsAlignment.Center;
+            this.itemContainer4.Name = "itemContainer4";
+            this.itemContainer4.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItem1});
+            // 
+            // 
+            // 
+            this.itemContainer4.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // buttonItem1
+            // 
+            this.buttonItem1.Name = "buttonItem1";
+            resources.ApplyResources(this.buttonItem1, "buttonItem1");
+            // 
+            // lblSimulator
+            // 
+            this.lblSimulator.Name = "lblSimulator";
+            resources.ApplyResources(this.lblSimulator, "lblSimulator");
+            // 
+            // cmbImage
+            // 
+            this.cmbImage.DropDownHeight = 106;
+            this.cmbImage.ItemHeight = 16;
+            this.cmbImage.Items.AddRange(new object[] {
+            this.comboItem7,
+            this.comboItem8,
+            this.comboItem9,
+            this.comboItem10});
+            this.cmbImage.Name = "cmbImage";
+            this.cmbImage.SelectedIndexChanged += new System.EventHandler(this.cmbImage_SelectedIndexChanged);
+            // 
+            // comboItem7
+            // 
+            resources.ApplyResources(this.comboItem7, "comboItem7");
+            // 
+            // comboItem8
+            // 
+            resources.ApplyResources(this.comboItem8, "comboItem8");
+            // 
+            // comboItem9
+            // 
+            resources.ApplyResources(this.comboItem9, "comboItem9");
+            // 
+            // comboItem10
+            // 
+            resources.ApplyResources(this.comboItem10, "comboItem10");
             // 
             // buttonItemSimulator
             // 
@@ -248,22 +337,70 @@ namespace Cii.Lar.UI
             // 
             this.itemContainer2.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             // 
-            // btnDelete
-            // 
-            this.btnDelete.Name = "btnDelete";
-            resources.ApplyResources(this.btnDelete, "btnDelete");
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
             // textBoxLense
             // 
             this.textBoxLense.Name = "textBoxLense";
             this.textBoxLense.WatermarkColor = System.Drawing.SystemColors.GrayText;
             this.textBoxLense.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxLense_KeyPress);
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Name = "btnDelete";
+            resources.ApplyResources(this.btnDelete, "btnDelete");
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // itemPanel4
+            // 
+            // 
+            // 
+            // 
+            this.itemPanel4.BackgroundStyle.Class = "ItemPanel";
+            this.itemPanel4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemPanel4.ContainerControlProcessDialogKey = true;
+            this.itemPanel4.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.lblLaser,
+            this.cmbLaser});
+            this.itemPanel4.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+            this.itemPanel4.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+            resources.ApplyResources(this.itemPanel4, "itemPanel4");
+            this.itemPanel4.Name = "itemPanel4";
+            // 
+            // lblLaser
+            // 
+            this.lblLaser.Name = "lblLaser";
+            resources.ApplyResources(this.lblLaser, "lblLaser");
+            // 
+            // cmbLaser
+            // 
+            this.cmbLaser.DropDownHeight = 106;
+            this.cmbLaser.ItemHeight = 16;
+            this.cmbLaser.Items.AddRange(new object[] {
+            this.comboItem5,
+            this.comboItem6});
+            this.cmbLaser.Name = "cmbLaser";
+            this.cmbLaser.SelectedIndexChanged += new System.EventHandler(this.cmbLaser_SelectedIndexChanged);
+            // 
+            // comboItem5
+            // 
+            resources.ApplyResources(this.comboItem5, "comboItem5");
+            // 
+            // comboItem6
+            // 
+            resources.ApplyResources(this.comboItem6, "comboItem6");
+            // 
+            // comboItem3
+            // 
+            resources.ApplyResources(this.comboItem3, "comboItem3");
+            // 
+            // comboItem4
+            // 
+            resources.ApplyResources(this.comboItem4, "comboItem4");
+            // 
             // SettingCtrl
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.itemPanel4);
             this.Controls.Add(this.itemPanel3);
             this.Controls.Add(this.buttonSysInfo);
             this.Controls.Add(this.itemPanelCamera);
@@ -278,7 +415,9 @@ namespace Cii.Lar.UI
             this.Controls.SetChildIndex(this.buttonSysInfo, 0);
             this.Controls.SetChildIndex(this.closeButton, 0);
             this.Controls.SetChildIndex(this.itemPanel3, 0);
+            this.Controls.SetChildIndex(this.itemPanel4, 0);
             this.itemPanel2.ResumeLayout(false);
+            this.itemPanelCamera.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -293,7 +432,6 @@ namespace Cii.Lar.UI
         private DevComponents.DotNetBar.TextBoxItem textBoxItemStoragePath;
         private DevComponents.DotNetBar.ItemPanel itemPanelCamera;
         private DevComponents.DotNetBar.LabelItem labelItemCamera;
-        private DevComponents.DotNetBar.ItemContainer itemContainer3;
         private System.Windows.Forms.Button buttonItemSimulator;
         private System.Windows.Forms.Button buttonSelect;
         private System.Windows.Forms.Button buttonSave;
@@ -306,6 +444,24 @@ namespace Cii.Lar.UI
         private DevComponents.DotNetBar.ItemContainer itemContainer2;
         private DevComponents.DotNetBar.ButtonItem btnDelete;
         private DevComponents.DotNetBar.TextBoxItem textBoxLense;
+        private DevComponents.DotNetBar.ItemContainer itemContainer3;
+        private DevComponents.DotNetBar.LabelItem lblConnectedInfo;
+        private DevComponents.DotNetBar.ItemContainer itemContainer4;
+        private DevComponents.DotNetBar.ButtonItem buttonItem1;
+        private System.Windows.Forms.Button btnSimulator;
+        private DevComponents.DotNetBar.ItemPanel itemPanel4;
+        private DevComponents.Editors.ComboItem comboItem3;
+        private DevComponents.Editors.ComboItem comboItem4;
+        private DevComponents.DotNetBar.LabelItem lblLaser;
+        private DevComponents.DotNetBar.ComboBoxItem cmbLaser;
+        private DevComponents.DotNetBar.ComboBoxItem cmbImage;
+        private DevComponents.DotNetBar.LabelItem lblSimulator;
+        private DevComponents.Editors.ComboItem comboItem5;
+        private DevComponents.Editors.ComboItem comboItem6;
+        private DevComponents.Editors.ComboItem comboItem7;
+        private DevComponents.Editors.ComboItem comboItem8;
+        private DevComponents.Editors.ComboItem comboItem9;
+        private DevComponents.Editors.ComboItem comboItem10;
     }
 }
 

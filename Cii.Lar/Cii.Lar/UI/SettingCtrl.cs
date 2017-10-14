@@ -21,6 +21,8 @@ namespace Cii.Lar.UI
         public delegate void UpdateLense(Lense lense);
         public UpdateLense UpdateLenseHandler;
 
+        public delegate void UpdateSimulatorImage(int selectIndex);
+        public UpdateSimulatorImage UpdateSimulatorImageHandler;
         public SettingCtrl() : base()
         {
             this.ShowIndex = 4;
@@ -89,6 +91,9 @@ namespace Cii.Lar.UI
             resources.ApplyResources(this.labelItemLanguage, labelItemLanguage.Name);
             resources.ApplyResources(this.labelItemStoragePath, labelItemStoragePath.Name);
             resources.ApplyResources(this.labelItemCamera, labelItemCamera.Name);
+            resources.ApplyResources(this.lblConnectedInfo, lblConnectedInfo.Name);
+            resources.ApplyResources(this.lblLaser, lblLaser.Name);
+            resources.ApplyResources(this.lblSimulator, lblSimulator.Name);
             resources.ApplyResources(this.lense, lense.Name);
             resources.ApplyResources(this.btnDelete, btnDelete.Name);
             this.itemContainer2.Refresh();
@@ -180,6 +185,17 @@ namespace Cii.Lar.UI
             comboBoxItemLense.Items.AddRange(SysConfig.GetSysConfig().Lenses.ToArray());
             int index = SysConfig.GetSysConfig().Lenses.FindIndex(l => (l.ToString() == lense.ToString()));
             comboBoxItemLense.SelectedIndex = index;
+        }
+
+        private void cmbImage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //change simulator image
+            UpdateSimulatorImageHandler?.Invoke(cmbImage.SelectedIndex);
+        }
+
+        private void cmbLaser_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
