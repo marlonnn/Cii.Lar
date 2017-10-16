@@ -195,7 +195,15 @@ namespace Cii.Lar.UI
 
         private void cmbLaser_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            switch (cmbLaser.SelectedIndex)
+            {
+                case 0:
+                    Program.ExpManager.LaserType = ExpClass.LaserType.SaturnFixed;
+                    break;
+                case 1:
+                    Program.ExpManager.LaserType = ExpClass.LaserType.SaturnActive;
+                    break;
+            }
         }
     }
 }

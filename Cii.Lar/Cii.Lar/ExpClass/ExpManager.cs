@@ -12,6 +12,11 @@ using System.Windows.Forms;
 
 namespace Cii.Lar.ExpClass
 {
+    public enum LaserType
+    {
+        SaturnFixed,
+        SaturnActive
+    }
     /// <summary>
     /// ExpManager to set measure tool to scalable picture box
     /// Author:Zhong Wen 2017/07/28
@@ -32,6 +37,7 @@ namespace Cii.Lar.ExpClass
             }
         }
 
+        public LaserType LaserType = LaserType.SaturnFixed;
         private FilesForm filesForm;
 
         public ExpManager()
@@ -181,7 +187,14 @@ namespace Cii.Lar.ExpClass
                     CommandPolyLine();
                     break;
                 case ToolStripAction.Laser:
-                    CommandCircle();
+                    if (LaserType == LaserType.SaturnFixed)
+                    {
+                        CommandCircle();
+                    }
+                    else if (LaserType == LaserType.SaturnActive)
+                    {
+                        CommandMultipleCircle();
+                    }
                     break;
                 case ToolStripAction.Move:
                     CommandMove();
@@ -267,6 +280,11 @@ namespace Cii.Lar.ExpClass
         private void CommandCircle()
         {
             this.pictureBox.ActiveTool = DrawToolType.Circle;
+        }
+
+        private void CommandMultipleCircle()
+        {
+            this.pictureBox.ActiveTool = DrawToolType.MultipleCircle;
         }
 
         private void CommandMove()

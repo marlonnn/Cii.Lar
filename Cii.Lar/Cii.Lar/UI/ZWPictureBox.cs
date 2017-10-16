@@ -32,6 +32,7 @@ namespace Cii.Lar.UI
         Polygon,
         PolyLine,
         Circle,
+        MultipleCircle,
         Move,
         NumberOfDrawTools
     }
@@ -586,6 +587,7 @@ namespace Cii.Lar.UI
             Tools[(int)DrawToolType.Polygon] = new ToolPolygon();
             Tools[(int)DrawToolType.PolyLine] = new ToolPolyLine();
             Tools[(int)DrawToolType.Circle] = new ToolCircle();
+            Tools[(int)DrawToolType.MultipleCircle] = new ToolMultipleCircle();
             Tools[(int)DrawToolType.Move] = new ToolMove();
         }
 

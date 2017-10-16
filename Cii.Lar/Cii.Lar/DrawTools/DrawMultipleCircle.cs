@@ -88,7 +88,7 @@ namespace Cii.Lar.DrawTools
         public DrawMultipleCircle()
         {
             InitializeGraphicsProperties();
-            OutterCircleSize = new Size(40, 40);
+            OutterCircleSize = new Size(50, 50);
             InnerCircleSize = new Size(30, 30);
 
             OutterCircles = new List<Circle>();
