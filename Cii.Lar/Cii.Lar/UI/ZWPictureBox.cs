@@ -10,6 +10,9 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using Cii.Lar.DrawTools;
 using System.Threading;
+using Cii.Lar.Laser;
+using System.IO;
+using System.Resources;
 
 namespace Cii.Lar.UI
 {
@@ -43,6 +46,35 @@ namespace Cii.Lar.UI
     /// </summary>
     public partial class ZWPictureBox : PictureBox
     {
+        private static Cursor s_cursor = new Cursor(new MemoryStream((byte[])new ResourceManager(typeof(ZWPictureBox)).GetObject("Cross")));
+        private BaseLaser laser;
+        public BaseLaser Laser
+        {
+            get { return this.laser; }
+            set { this.laser = value; }
+        }
+
+        private bool laserFunction;
+        public bool LaserFunction
+        {
+            get { return laserFunction; }
+            set
+            {
+                if (value != laserFunction)
+                {
+                    laserFunction = value;
+                    if (value)
+                    {
+                        this.Cursor = s_cursor;
+                    }
+                    else
+                    {
+                        this.Cursor = Cursors.Default;
+                    }
+                }
+            }
+        }
+
         private ImageTracker imageTracker;
 
         /// <summary>
@@ -289,6 +321,7 @@ namespace Cii.Lar.UI
             this.SetStyle(ControlStyles.UserPaint |
                           ControlStyles.AllPaintingInWmPaint |
                           ControlStyles.OptimizedDoubleBuffer, true);
+            this.laser = new FixedLaser(this);
             rulers = new Rulers(this);
             listViewItemArray = new ListViewItemArray();
             GraphicsList = new GraphicsList();
@@ -760,16 +793,26 @@ namespace Cii.Lar.UI
             {
                 if (!mousePressed)
                 {
-                    if (activeTool == DrawToolType.Move)
+                    if (LaserFunction)
                     {
-                        mousePressed = true;
-                        mouseDownPoint = e.Location;
-                        startX = OffsetX;
-                        startY = OffsetY;
+                        if (laser != null)
+                        {
+                            laser.OnMouseDown(this, e);
+                        }
                     }
                     else
                     {
-                        tools[(int)activeTool].OnMouseDown(this, e);
+                        if (activeTool == DrawToolType.Move)
+                        {
+                            mousePressed = true;
+                            mouseDownPoint = e.Location;
+                            startX = OffsetX;
+                            startY = OffsetY;
+                        }
+                        else
+                        {
+                            tools[(int)activeTool].OnMouseDown(this, e);
+                        }
                     }
                 }
             }
@@ -782,9 +825,19 @@ namespace Cii.Lar.UI
             mousePressed = false;
             if (e.Button == MouseButtons.Left)
             {
-                if (activeTool != DrawToolType.Move)
+                if (LaserFunction)
                 {
-                    tools[(int)activeTool].OnMouseUp(this, e);
+                    if (laser != null)
+                    {
+                        laser.OnMouseUp(this, e);
+                    }
+                }
+                else
+                {
+                    if (activeTool != DrawToolType.Move)
+                    {
+                        tools[(int)activeTool].OnMouseUp(this, e);
+                    }
                 }
             }
         }
@@ -793,22 +846,32 @@ namespace Cii.Lar.UI
         /// </summary>
         protected override void OnMouseMove(MouseEventArgs e)
         {
-            if ((e.Button == MouseButtons.Left || e.Button == MouseButtons.None) && ActiveTool != DrawToolType.Move)
+            if (LaserFunction)
             {
-
-                tools[(int)activeTool].OnMouseMove(this, e);
+                if (laser != null)
+                {
+                    laser.OnMouseMove(this, e);
+                }
             }
-            else if (e.Button == MouseButtons.Left && ActiveTool == DrawToolType.Move)
+            else
             {
-                Point mousePosNow = e.Location;
+                if ((e.Button == MouseButtons.Left || e.Button == MouseButtons.None) && ActiveTool != DrawToolType.Move)
+                {
 
-                int deltaX = mousePosNow.X - mouseDownPoint.X;
-                int deltaY = mousePosNow.Y - mouseDownPoint.Y;
+                    tools[(int)activeTool].OnMouseMove(this, e);
+                }
+                else if (e.Button == MouseButtons.Left && ActiveTool == DrawToolType.Move)
+                {
+                    Point mousePosNow = e.Location;
 
-                OffsetX = (int)(startX + deltaX / zoom);
-                OffsetY = (int)(startY + deltaY / zoom);
+                    int deltaX = mousePosNow.X - mouseDownPoint.X;
+                    int deltaY = mousePosNow.Y - mouseDownPoint.Y;
 
-                this.Invalidate();
+                    OffsetX = (int)(startX + deltaX / zoom);
+                    OffsetY = (int)(startY + deltaY / zoom);
+
+                    this.Invalidate();
+                }
             }
         }
 
@@ -931,7 +994,13 @@ namespace Cii.Lar.UI
                 {
                     rulers.Draw(e.Graphics);
                 }
-
+                if (LaserFunction)
+                {
+                    if (laser != null)
+                    {
+                        laser.OnPaint(e);
+                    }
+                }
             }
             catch (Exception ex)
             {

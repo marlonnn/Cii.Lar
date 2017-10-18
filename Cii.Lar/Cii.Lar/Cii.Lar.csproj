@@ -107,6 +107,9 @@
     <Compile Include="ExpClass\ReportItemBase.cs" />
     <Compile Include="ExpClass\ReportPage.cs" />
     <Compile Include="ExpClass\ReportPictureItem.cs" />
+    <Compile Include="Laser\ActiveLaser.cs" />
+    <Compile Include="Laser\FixedLaser.cs" />
+    <Compile Include="Laser\BaseLaser.cs" />
     <Compile Include="LogHelper.cs" />
     <Compile Include="MessageBoxManager.cs" />
     <Compile Include="MiniDump.cs" />

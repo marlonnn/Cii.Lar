@@ -1,4 +1,5 @@
 ﻿using Cii.Lar.DrawTools;
+using Cii.Lar.Laser;
 using Cii.Lar.SysClass;
 using Cii.Lar.UI;
 using DevComponents.DotNetBar;
@@ -37,12 +38,33 @@ namespace Cii.Lar.ExpClass
             }
         }
 
-        public LaserType LaserType = LaserType.SaturnFixed;
+        private LaserType laserType;
+
+        public LaserType LaserType
+        {
+            get { return this.laserType; }
+            set
+            {
+                if (value != this.laserType)
+                {
+                    laserType = value;
+                    switch (value)
+                    {
+                        case LaserType.SaturnFixed:
+                            this.pictureBox.Laser = new FixedLaser(this.pictureBox);
+                            break;
+                        case LaserType.SaturnActive:
+                            this.pictureBox.Laser = new ActiveLaser(this.pictureBox);
+                            break;
+                    }
+                }
+            }
+        }
         private FilesForm filesForm;
 
         public ExpManager()
         {
-
+            LaserType = LaserType.SaturnFixed;
         }
 
         public void StripButtonClickHandler(object sender, ToolStripEventArgs e)
@@ -50,24 +72,31 @@ namespace Cii.Lar.ExpClass
             switch (e.Action)
             {
                 case ToolStripAction.Capture:
+                    this.ZWPictureBox.LaserFunction = false;
                     CaptureImage();
                     break;
                 case ToolStripAction.Video:
+                    this.ZWPictureBox.LaserFunction = false;
                     break;
                 case ToolStripAction.Archive:
+                    this.ZWPictureBox.LaserFunction = false;
                     filesForm = new FilesForm();
                     filesForm.ShowDialog();
                     break;
                 case ToolStripAction.ZoomOut:
+                    this.ZWPictureBox.LaserFunction = false;
                     this.ZWPictureBox.ZoonOut();
                     break;
                 case ToolStripAction.ZoomIn:
+                    this.ZWPictureBox.LaserFunction = false;
                     this.ZWPictureBox.ZoomIn();
                     break;
                 case ToolStripAction.ZoomFit:
+                    this.ZWPictureBox.LaserFunction = false;
                     this.ZWPictureBox.ZoomFit();
                     break;
                 case ToolStripAction.Scale:
+                    this.ZWPictureBox.LaserFunction = false;
                     ToolStripButton toolStripButton = sender as ToolStripButton;
                     toolStripButton.Checked = !toolStripButton.Checked;
                     this.ZWPictureBox.Rulers.ShowRulers = toolStripButton.Checked;
@@ -77,6 +106,7 @@ namespace Cii.Lar.ExpClass
                 case ToolStripAction.Rectangle:
                 case ToolStripAction.Ellipse:
                 case ToolStripAction.Polygon:
+                    this.ZWPictureBox.LaserFunction = false;
                     SetMeasureTool(e.Action, false);
                     this.ZWPictureBox.ShowBaseCtrl(true, 2);
                     break;
@@ -84,13 +114,16 @@ namespace Cii.Lar.ExpClass
                     SetMeasureTool(e.Action, false);
                     break;
                 case ToolStripAction.Laser:
-                    SetMeasureTool(e.Action, false);
+                    //SetMeasureTool(e.Action, false);
+                    this.ZWPictureBox.LaserFunction = true;
                     this.ZWPictureBox.ShowBaseCtrl(true, 0);
                     break;
                 case ToolStripAction.Setting:
+                    this.ZWPictureBox.LaserFunction = false;
                     this.ZWPictureBox.ShowBaseCtrl(true, 4);
                     break;
                 case ToolStripAction.OpenFile:
+                    this.ZWPictureBox.LaserFunction = false;
                     OpenFile();
                     break;
             }

@@ -30,6 +30,7 @@ namespace Cii.Lar.UI
             resources = new ComponentResourceManager(typeof(SettingCtrl));
             this.textBoxItemStoragePath.Text = sysConfig.StorePath;
             UpdateComboLanguage();
+            InitializeLaserType();
         }
 
         /// <summary>
@@ -45,6 +46,11 @@ namespace Cii.Lar.UI
                     break;
                 }
             }
+        }
+
+        private void InitializeLaserType()
+        {
+            cmbLaser.SelectedIndex = 0;
         }
 
         private void buttonSelect_Click(object sender, EventArgs e)

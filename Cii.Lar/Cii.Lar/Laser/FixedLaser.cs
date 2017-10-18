@@ -1,0 +1,123 @@
+﻿using Cii.Lar.DrawTools;
+using Cii.Lar.UI;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Cii.Lar.Laser
+{
+    public class FixedLaser : BaseLaser
+    {
+        private Circle outterCircle = null;
+        public Circle OutterCircle
+        {
+            get { return outterCircle; }
+            private set
+            {
+                if (value != outterCircle)
+                {
+                    outterCircle = value;
+                }
+            }
+        }
+
+        private Circle innerCircle = null;
+        public Circle InnerCircle
+        {
+            get { return innerCircle; }
+            private set
+            {
+                if (value != innerCircle)
+                {
+                    innerCircle = value;
+                }
+            }
+        }
+        public PointF CenterPoint
+        {
+            get;
+            set;
+        }
+
+        public Size OutterCircleSize { get; set; }
+
+        public Size InnerCircleSize { get; set; }
+
+        public FixedLaser(ZWPictureBox pictureBox) : base()
+        {
+            this.pictureBox = pictureBox;
+            OutterCircleSize = new Size(60, 60);
+            InnerCircleSize = new Size(38, 38);
+            this.GraphicsProperties.GraphicsPropertiesChangedHandler += GraphicsPropertiesChangedHandler;
+        }
+        private void GraphicsPropertiesChangedHandler(DrawObject drawObject, GraphicsProperties graphicsProperties)
+        {
+            OutterCircleSize = new Size((60 + this.GraphicsProperties.ExclusionSize) * this.GraphicsProperties.TargetSize,
+                (60 + this.GraphicsProperties.ExclusionSize) * this.GraphicsProperties.TargetSize);
+            InnerCircleSize = new Size(38 * this.GraphicsProperties.TargetSize, 38 * this.GraphicsProperties.TargetSize);
+            OutterCircle = new Circle(CenterPoint, OutterCircleSize);
+            InnerCircle = new Circle(CenterPoint, InnerCircleSize);
+            this.pictureBox.Invalidate();
+        }
+
+        public override void OnMouseDown(ZWPictureBox pictureBox, MouseEventArgs e)
+        {
+            Point point = new Point((int)(e.X / pictureBox.Zoom - pictureBox.OffsetX), (int)(e.Y / pictureBox.Zoom - pictureBox.OffsetY));
+            CenterPoint = new PointF(point.X, point.Y);
+            this.pictureBox.Invalidate();
+        }
+
+        public override void OnMouseMove(ZWPictureBox pictureBox, MouseEventArgs e)
+        {
+            base.OnMouseMove(pictureBox, e);
+        }
+
+        public override void OnMouseUp(ZWPictureBox pictureBox, MouseEventArgs e)
+        {
+            base.OnMouseUp(pictureBox, e);
+        }
+
+        public override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            if (CenterPoint.IsEmpty)
+            {
+                return;
+            }
+            Graphics g = e.Graphics;
+            OutterCircle = new Circle(CenterPoint, OutterCircleSize);
+            InnerCircle = new Circle(CenterPoint, InnerCircleSize);
+            //path for the outer and inner circles
+            g.CompositingQuality = CompositingQuality.HighQuality;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            using (GraphicsPath path = new GraphicsPath())
+            {
+                brush = new SolidBrush(this.GraphicsProperties.Color);
+
+                path.AddEllipse(OutterCircle.Rectangle.X, OutterCircle.Rectangle.Y,
+                    OutterCircle.Rectangle.Width, OutterCircle.Rectangle.Height);
+                path.AddEllipse(InnerCircle.Rectangle.X, InnerCircle.Rectangle.Y,
+                    InnerCircle.Rectangle.Width, InnerCircle.Rectangle.Height);
+                g.FillPath(brush, path);
+            }
+            DrawCross(g);
+            brush.Dispose();
+        }
+
+        private void DrawCross(Graphics g)
+        {
+            g.DrawLine(new Pen(Color.Black, 1f),
+                InnerCircle.CenterPoint.X, InnerCircle.CenterPoint.Y - InnerCircle.Rectangle.Width / 2,
+                InnerCircle.CenterPoint.X, InnerCircle.CenterPoint.Y + InnerCircle.Rectangle.Width / 2);
+
+            g.DrawLine(new Pen(Color.Black, 1f),
+                InnerCircle.CenterPoint.X - InnerCircle.Rectangle.Width / 2, InnerCircle.CenterPoint.Y,
+                InnerCircle.CenterPoint.X + InnerCircle.Rectangle.Width / 2, InnerCircle.CenterPoint.Y);
+        }
+    }
+}
