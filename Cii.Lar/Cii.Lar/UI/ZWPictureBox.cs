@@ -433,6 +433,8 @@ namespace Cii.Lar.UI
             settingCtrl.UpdateSimulatorImageHandler += UpdateSimulatorImageHandler;
             //settingCtrl.UpdateTimerStatesHandler += UpdateTimerStatesHandler;
             controls.Add(settingCtrl);
+			
+            controls.Add(new LaserAlignment());
         }
 
         private void UpdateSimulatorImageHandler(int selectIndex)
@@ -566,6 +568,9 @@ namespace Cii.Lar.UI
                     break;
                 case "Ruler Appearance":
                     ShowBaseCtrl(true, controls[3]);
+                    break;
+                case "Laser Alignment":
+                    ShowBaseCtrl(true, controls[5]);
                     break;
             }
         }

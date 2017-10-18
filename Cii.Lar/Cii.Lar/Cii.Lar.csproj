@@ -114,6 +114,11 @@
     <Compile Include="MessageBoxManager.cs" />
     <Compile Include="MiniDump.cs" />
     <Compile Include="NativeMethods.cs" />
+    <Compile Include="Res\LaserAlignment.Designer.cs">
+      <DependentUpon>LaserAlignment.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Res\LaserCtrl.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -152,6 +157,12 @@
     </Compile>
     <Compile Include="UI\ImageTracker.Designer.cs">
       <DependentUpon>ImageTracker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\LaserAlignment.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\LaserAlignment.Designer.cs">
+      <DependentUpon>LaserAlignment.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\VideoForm.cs">
       <SubType>Form</SubType>
@@ -294,10 +305,15 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.zh-CN.resx" />
+    <EmbeddedResource Include="Res\LaserAlignment.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LaserAlignment.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Res\LaserCtrl.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LaserCtrl.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Res\LaserAlignment.zh-CN.resx" />
     <EmbeddedResource Include="Res\LaserCtrl.zh-CN.resx" />
     <EmbeddedResource Include="UI\BaseCtrl.resx">
       <DependentUpon>BaseCtrl.cs</DependentUpon>
@@ -317,6 +333,10 @@
     <EmbeddedResource Include="UI\ImageTracker.resx">
       <DependentUpon>ImageTracker.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\LaserAlignment.resx">
+      <DependentUpon>LaserAlignment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\LaserAlignment.zh-CN.resx" />
     <EmbeddedResource Include="UI\LaserAppearanceCtrl.zh-CN.resx">
       <DependentUpon>LaserAppearanceCtrl.cs</DependentUpon>
     </EmbeddedResource>

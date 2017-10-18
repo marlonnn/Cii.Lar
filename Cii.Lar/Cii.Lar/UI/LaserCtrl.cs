@@ -52,7 +52,7 @@ namespace Cii.Lar.UI
 
         private void btnAlignLaser_Click(object sender, EventArgs e)
         {
-
+            ClickDelegateHandler?.Invoke(sender, "Laser Alignment");
         }
 
         private void btnHoleSize_Click(object sender, EventArgs e)

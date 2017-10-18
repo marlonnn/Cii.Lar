@@ -117,43 +117,94 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="labelItem1Str" xml:space="preserve">
-    <value>准备就绪</value>
+  <data name="StrAlignLaser" xml:space="preserve">
+    <value>Align Laser</value>
   </data>
-  <data name="labelItemLanguageStr" xml:space="preserve">
-    <value>语言</value>
+  <data name="StrFinish" xml:space="preserve">
+    <value>Finish</value>
   </data>
-  <data name="StrCreateReport" xml:space="preserve">
-    <value>点击报告按钮创建技术支持请求。</value>
+  <data name="StrNext" xml:space="preserve">
+    <value>Next</value>
   </data>
-  <data name="StrOK" xml:space="preserve">
-    <value>确认</value>
+  <data name="StrPreSet0" xml:space="preserve">
+    <value>Remove any embryos from the  field of view.
+Place an empty Petri dish or slide onto the microscope stage.</value>
   </data>
-  <data name="StrOutOfMemory" xml:space="preserve">
-    <value>程序内存不足，请重启程序。</value>
+  <data name="StrPreSet1" xml:space="preserve">
+    <value>The pilot is now switched on. Adjust the focus if necessary so that the Pilot laser spot appears as small as possible on the monitor.
+If the red spot appears too faint then reduce the intensity of the illumination or adjust the brightness of the pilot laser using the rear panel control.
+Click the pilot laser on screen.</value>
   </data>
-  <data name="StrReport" xml:space="preserve">
-    <value>报告</value>
+  <data name="StrSave" xml:space="preserve">
+    <value>Save</value>
   </data>
-  <data name="StrUnknownErrorMsg" xml:space="preserve">
-    <value>遇到未知错误，请重启程序。</value>
+  <data name="StrStepComplete" xml:space="preserve">
+    <value>Calibration of the laser has now been complete.
+
+Click Finish to save the calibration.</value>
   </data>
-  <data name="StrSetting" xml:space="preserve">
-    <value>设置</value>
+  <data name="StrStepFive" xml:space="preserve">
+    <value>The pilot laser has moved.
+
+Click the centre of the pilot laser on screen.</value>
   </data>
-  <data name="StrStatisticsTitle" xml:space="preserve">
-    <value>统计信息</value>
+  <data name="StrStepFour" xml:space="preserve">
+    <value>The pilot laser has moved.
+
+Click the centre of the pilot laser on screen.</value>
   </data>
-  <data name="StrRulerAppearanceTitle" xml:space="preserve">
-    <value>测量工具属性</value>
+  <data name="StrStepOne" xml:space="preserve">
+    <value>The pilot laser is in position whitch should be visible on the screen.
+Check you can see the pilot laser on screen.
+Adjust the focus if necessary so that the Pilot laser spot appears as small as possible on the monitor.
+If the red spot appears too faint then reduce the intensity of the illumination or adjust the brightness of the pilot laser using the rear panel control.
+Click the pilot laser on screen.</value>
   </data>
-  <data name="StrLaserCtrlTitle" xml:space="preserve">
-    <value>激光器控制</value>
+  <data name="StrStepSeven" xml:space="preserve">
+    <value>The pilot laser has moved.
+
+Click the centre of the pilot laser on screen.</value>
   </data>
-  <data name="StrLaserAppearanceTitle" xml:space="preserve">
-    <value>激光属性</value>
+  <data name="StrStepSix" xml:space="preserve">
+    <value>The pilot laser has moved.
+
+Click the centre of the pilot laser on screen.</value>
   </data>
-  <data name="StrLaserAlignmentTitle" xml:space="preserve">
-    <value>激光目标对齐</value>
+  <data name="StrStepThree" xml:space="preserve">
+    <value>The pilot laser has now moved by a small amount.
+
+Click the centre of the pilot laser on screen.</value>
+  </data>
+  <data name="StrStepTitleComplete" xml:space="preserve">
+    <value>Laser Target Alignment - Step Complete</value>
+  </data>
+  <data name="StrStepTitleFive" xml:space="preserve">
+    <value>Laser Target Alignment - Step Five</value>
+  </data>
+  <data name="StrStepTitleFour" xml:space="preserve">
+    <value>Laser Target Alignment - Step Four</value>
+  </data>
+  <data name="StrStepTitleOne" xml:space="preserve">
+    <value>Laser Target Alignment - Step One</value>
+  </data>
+  <data name="StrStepTitleSeven" xml:space="preserve">
+    <value>Laser Target Alignment - Step Seven</value>
+  </data>
+  <data name="StrStepTitleSix" xml:space="preserve">
+    <value>Laser Target Alignment - Step Six</value>
+  </data>
+  <data name="StrStepTitleThree" xml:space="preserve">
+    <value>Laser Target Alignment - Step Three</value>
+  </data>
+  <data name="StrStepTitleTwo" xml:space="preserve">
+    <value>Laser Target Alignment - Step Two</value>
+  </data>
+  <data name="StrStepTwo" xml:space="preserve">
+    <value>The pilot laser has now moved by a small amount.
+
+Click the centre of the pilot laser on screen.</value>
+  </data>
+  <data name="StrTitle" xml:space="preserve">
+    <value>Laser Target Alignment</value>
   </data>
 </root>

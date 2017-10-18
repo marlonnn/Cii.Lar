@@ -100,6 +100,11 @@ namespace Cii.Lar.UI
                 {
                     resources.ApplyResources(lblX, lblX.Name);
                 }
+                Label lbl = item as Label;
+                if (lbl != null)
+                {
+                    resources.ApplyResources(lbl, lbl.Name);
+                }
             }
         }
 

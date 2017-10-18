@@ -117,43 +117,95 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="labelItem1Str" xml:space="preserve">
-    <value>准备就绪</value>
+  <data name="StrAlignLaser" xml:space="preserve">
+    <value>激光校准</value>
   </data>
-  <data name="labelItemLanguageStr" xml:space="preserve">
-    <value>语言</value>
+  <data name="StrFinish" xml:space="preserve">
+    <value>完成</value>
   </data>
-  <data name="StrCreateReport" xml:space="preserve">
-    <value>点击报告按钮创建技术支持请求。</value>
+  <data name="StrNext" xml:space="preserve">
+    <value>下一步</value>
   </data>
-  <data name="StrOK" xml:space="preserve">
-    <value>确认</value>
+  <data name="StrPreSet0" xml:space="preserve">
+    <value>请在视野范围内移走所有的胚胎。
+请放置一个空的培养皿或玻璃片在显微镜的载物台上。</value>
   </data>
-  <data name="StrOutOfMemory" xml:space="preserve">
-    <value>程序内存不足，请重启程序。</value>
+  <data name="StrPreSet1" xml:space="preserve">
+    <value>引导激光现在已经开启。
+
+如果有需要，请调节焦点，以便引导激光点在控制器上显示得尽可能小。
+如果红点太模糊，请降低光源的强度或者用后控制面板调节激光亮度。
+点击在屏幕上的引导激光。</value>
   </data>
-  <data name="StrReport" xml:space="preserve">
-    <value>报告</value>
+  <data name="StrSave" xml:space="preserve">
+    <value>保存</value>
   </data>
-  <data name="StrUnknownErrorMsg" xml:space="preserve">
-    <value>遇到未知错误，请重启程序。</value>
+  <data name="StrStepComplete" xml:space="preserve">
+    <value>激光的调整已经完成。
+
+点击“完成”保存校正结果</value>
   </data>
-  <data name="StrSetting" xml:space="preserve">
-    <value>设置</value>
+  <data name="StrStepFive" xml:space="preserve">
+    <value>现在引导激光已移动。
+
+对齐引导激光中心红点并点击。</value>
   </data>
-  <data name="StrStatisticsTitle" xml:space="preserve">
-    <value>统计信息</value>
+  <data name="StrStepFour" xml:space="preserve">
+    <value>现在引导激光已移动。
+
+对齐引导激光中心红点并点击。</value>
   </data>
-  <data name="StrRulerAppearanceTitle" xml:space="preserve">
-    <value>测量工具属性</value>
+  <data name="StrStepOne" xml:space="preserve">
+    <value>引导激光应显示在屏幕上。
+检查您是否可以在屏幕上可到引导激光。
+如果有需要，请调节焦点，以便引导激光点在控制器上显示得尽可能小。
+如果红点太模糊，请降低光源的强度或者用后控制面板调节激光亮度。</value>
   </data>
-  <data name="StrLaserCtrlTitle" xml:space="preserve">
-    <value>激光器控制</value>
+  <data name="StrStepSeven" xml:space="preserve">
+    <value>现在引导激光已移动。
+
+对齐引导激光中心红点并点击。</value>
   </data>
-  <data name="StrLaserAppearanceTitle" xml:space="preserve">
-    <value>激光属性</value>
+  <data name="StrStepSix" xml:space="preserve">
+    <value>现在引导激光已移动。
+
+对齐引导激光中心红点并点击。</value>
   </data>
-  <data name="StrLaserAlignmentTitle" xml:space="preserve">
+  <data name="StrStepThree" xml:space="preserve">
+    <value>现在引导激光已小量移动。
+
+对齐引导激光中心红点并点击。</value>
+  </data>
+  <data name="StrStepTitleComplete" xml:space="preserve">
+    <value>完成</value>
+  </data>
+  <data name="StrStepTitleFive" xml:space="preserve">
+    <value>步骤五</value>
+  </data>
+  <data name="StrStepTitleFour" xml:space="preserve">
+    <value>步骤四</value>
+  </data>
+  <data name="StrStepTitleOne" xml:space="preserve">
+    <value>步骤一</value>
+  </data>
+  <data name="StrStepTitleSeven" xml:space="preserve">
+    <value>步骤七</value>
+  </data>
+  <data name="StrStepTitleSix" xml:space="preserve">
+    <value>步骤六</value>
+  </data>
+  <data name="StrStepTitleThree" xml:space="preserve">
+    <value>步骤三</value>
+  </data>
+  <data name="StrStepTitleTwo" xml:space="preserve">
+    <value>步骤二</value>
+  </data>
+  <data name="StrStepTwo" xml:space="preserve">
+    <value>现在引导激光已小量移动。
+
+对齐引导激光中心红点并点击。</value>
+  </data>
+  <data name="StrTitle" xml:space="preserve">
     <value>激光目标对齐</value>
   </data>
 </root>
