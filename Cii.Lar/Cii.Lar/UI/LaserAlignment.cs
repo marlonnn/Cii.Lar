@@ -189,6 +189,10 @@ namespace Cii.Lar.UI
             {
                 Index = -2;
             }
+            else
+            {
+                Program.ExpManager.LaserType = ExpClass.LaserType.SaturnFixed;
+            }
         }
     }
 }

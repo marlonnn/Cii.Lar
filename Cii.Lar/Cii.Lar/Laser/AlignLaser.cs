@@ -64,10 +64,22 @@ namespace Cii.Lar.Laser
             circles = JsonFile.GetConfigFromJsonText<List<Circle>>(jsonConfig);
         }
 
+        bool zoom = false;
         public override void OnMouseDown(ZWPictureBox pictureBox, MouseEventArgs e)
         {
-
+            if (e.Button == MouseButtons.Left)
+            {
+                zoom = !zoom;
+                ZoomHandler?.Invoke(e, zoom);
+                if (!zoom)
+                {
+                    //step next
+                }
+            }
         }
+
+        public delegate void Zoom(MouseEventArgs e, bool zoom);
+        public Zoom ZoomHandler;
 
         public override void OnMouseMove(ZWPictureBox pictureBox, MouseEventArgs e)
         {

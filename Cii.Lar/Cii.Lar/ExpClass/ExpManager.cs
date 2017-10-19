@@ -58,7 +58,9 @@ namespace Cii.Lar.ExpClass
                             this.pictureBox.Laser = new ActiveLaser(this.pictureBox);
                             break;
                         case LaserType.Alignment:
-                            this.pictureBox.Laser = new AlignLaser(this.pictureBox);
+                            AlignLaser alignLaser = new AlignLaser(this.pictureBox);
+                            alignLaser.ZoomHandler += this.pictureBox.ZoomHandler;
+                            this.pictureBox.Laser = alignLaser;
                             break;
                     }
                 }

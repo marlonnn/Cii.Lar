@@ -433,8 +433,8 @@ namespace Cii.Lar.UI
             settingCtrl.UpdateSimulatorImageHandler += UpdateSimulatorImageHandler;
             //settingCtrl.UpdateTimerStatesHandler += UpdateTimerStatesHandler;
             controls.Add(settingCtrl);
-			
             controls.Add(new LaserAlignment(this));
+
         }
 
         private void UpdateSimulatorImageHandler(int selectIndex)
@@ -929,6 +929,25 @@ namespace Cii.Lar.UI
                 ZoomOnMouseCenter(args, oldzoom);
                 this.imageTracker.ScalePercent = zoom * 100;
                 this.Invalidate();
+            }
+        }
+
+        public void ZoomHandler(MouseEventArgs e,bool zoomIn)
+        {
+            if (zoomIn)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    float oldzoom = zoom;
+                    zoom += 1F;
+                    ZoomOnMouseCenter(e, oldzoom);
+                    this.imageTracker.ScalePercent = oldzoom * 100;
+                    this.Invalidate();
+                }
+            }
+            else
+            {
+                ZoomFit();
             }
         }
 
