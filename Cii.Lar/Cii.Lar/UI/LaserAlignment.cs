@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Cii.Lar.Laser;
 
 namespace Cii.Lar.UI
 {
@@ -25,35 +26,69 @@ namespace Cii.Lar.UI
                 if (value != this.index)
                 {
                     this.index = value;
-                    if (!(value < 0))
-                    {
-                        this.Title = helper.AlignmentInfo(index, true, this);
-                        this.Invalidate();
-                    }
+                    helper.AlignmentInfo(index, true);
+                    this.Invalidate();
                 }
             }
         }
 
         private AlignInfoHelper helper;
-        public LaserAlignment() :base()
+        private ZWPictureBox pictureBox;
+
+        public Label LabelInfo
+        {
+            get { return this.lblInfo; }
+        }
+        public LaserAlignment(ZWPictureBox pictureBox) :base()
         {
             resources = new ComponentResourceManager(typeof(LaserAlignment));
+            this.pictureBox = pictureBox;
             InitializeComponent();
-            helper = new AlignInfoHelper();
+            helper = new AlignInfoHelper(this);
             this.Load += LaserAlignment_Load;
-            index = -2;
+            Index = -2;
         }
 
 
         private void LaserAlignment_Load(object sender, System.EventArgs e)
         {
             this.lblInfo.Text = Res.LaserAlignment.StrPreSet0;
+            Program.ExpManager.LaserType = ExpClass.LaserType.Alignment;
+            this.pictureBox.Invalidate();
         }
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            Index++;
-            this.lblInfo.Text = helper.AlignmentInfo(index, index < 0,  this);
+            if (Index != 7)
+            {
+                Index++;
+                helper.AlignmentInfo(index, index < 0);
+                if (Index == -1)
+                {
+                    this.btnNext.Text = Res.LaserAlignment.StrAlignLaser;
+                }
+                else if (Index == 7)
+                {
+                    this.btnNext.Text = Res.LaserAlignment.StrSave;
+                }
+                else
+                {
+                    this.btnNext.Text = Res.LaserAlignment.StrNext;
+                }
+                if (Index > -1 && Index < 7)
+                {
+                    AlignLaser laser = this.pictureBox.Laser as AlignLaser;
+                    if (laser != null)
+                    {
+                        laser.Index = Index;
+                    }
+                }
+            }
+            else
+            {
+                this.Visible = false;
+                this.Enabled = false;
+            }
         }
 
         protected override void RefreshUI()
@@ -65,63 +100,95 @@ namespace Cii.Lar.UI
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            Index--;
-            this.lblInfo.Text = helper.AlignmentInfo(index, index < 0, this);
+            if (Index != -2)
+            {
+                Index--;
+                helper.AlignmentInfo(index, index < 0);
+                if (Index > -1 && Index < 7)
+                {
+                    AlignLaser laser = this.pictureBox.Laser as AlignLaser;
+                    if (laser != null)
+                    {
+                        laser.Index = Index;
+                    }
+                }
+            }
+            else
+            {
+                this.Visible = false;
+                this.Enabled = false;
+                this.pictureBox.ShowBaseCtrl(true, 0);
+            }
         }
 
         public class AlignInfoHelper
         {
-            public AlignInfoHelper()
-            {
+            private LaserAlignment laserAlignment;
 
-            }
-            public string AlignmentInfo(int index, bool isTitle, LaserAlignment laserAlignment)
+            public AlignInfoHelper(LaserAlignment laserAlignment)
             {
-                string info = "";
+                this.laserAlignment = laserAlignment;
+            }
+            public void AlignmentInfo(int index, bool isTitle)
+            {
                 switch (index)
                 {
                     case -2:
-                        info = Res.LaserAlignment.StrPreSet0;
+                        laserAlignment.Title = Res.LaserAlignment.StrTitle;
+                        laserAlignment.LabelInfo.Text = Res.LaserAlignment.StrPreSet0;
                         break;
                     case -1:
-                        info = Res.LaserAlignment.StrPreSet1;
+                        laserAlignment.Title = Res.LaserAlignment.StrTitle;
+                        laserAlignment.LabelInfo.Text = Res.LaserAlignment.StrPreSet1;
                         break;
                     case 0:
-                        info = isTitle ? Res.LaserAlignment.StrStepTitleOne : Res.LaserAlignment.StrStepOne;
-                        //laserAlignment.Title = Res.LaserAlignment.StrStepTitleOne;
+                        laserAlignment.Title = Res.LaserAlignment.StrStepTitleOne;
+                        laserAlignment.LabelInfo.Text = Res.LaserAlignment.StrStepOne;
                         break;
                     case 1:
-                        info = isTitle ? Res.LaserAlignment.StrStepTitleTwo : Res.LaserAlignment.StrStepTwo;
-                        //laserAlignment.Title = Res.LaserAlignment.StrStepTitleTwo;
+                        laserAlignment.Title = Res.LaserAlignment.StrStepTitleTwo;
+                        laserAlignment.LabelInfo.Text = Res.LaserAlignment.StrStepTwo;
                         break;
                     case 2:
-                        info = isTitle ? Res.LaserAlignment.StrStepTitleThree : Res.LaserAlignment.StrStepThree;
-                        //laserAlignment.Title = Res.LaserAlignment.StrStepTitleThree;
+                        laserAlignment.Title = Res.LaserAlignment.StrStepTitleThree;
+                        laserAlignment.LabelInfo.Text = Res.LaserAlignment.StrStepThree;
                         break;
                     case 3:
-                        info = isTitle ? Res.LaserAlignment.StrStepTitleFour : Res.LaserAlignment.StrStepFour;
-                        //laserAlignment.Title = Res.LaserAlignment.StrStepTitleFour;
+                        laserAlignment.Title = Res.LaserAlignment.StrStepTitleFour;
+                        laserAlignment.LabelInfo.Text = Res.LaserAlignment.StrStepFour;
                         break;
                     case 4:
-                        info = isTitle ? Res.LaserAlignment.StrStepTitleFive : Res.LaserAlignment.StrStepFive;
-                        //laserAlignment.Title = Res.LaserAlignment.StrStepTitleFive;
+                        laserAlignment.Title = Res.LaserAlignment.StrStepTitleFive;
+                        laserAlignment.LabelInfo.Text = Res.LaserAlignment.StrStepFive;
                         break;
                     case 5:
-                        info = isTitle ? Res.LaserAlignment.StrStepTitleSix : Res.LaserAlignment.StrStepSix;
-                        //laserAlignment.Title = Res.LaserAlignment.StrStepTitleSix;
+                        laserAlignment.Title = Res.LaserAlignment.StrStepTitleSix;
+                        laserAlignment.LabelInfo.Text = Res.LaserAlignment.StrStepSix;
                         break;
                     case 6:
-                        info = isTitle ? Res.LaserAlignment.StrStepTitleSeven : Res.LaserAlignment.StrStepSeven;
-                        //laserAlignment.Title = Res.LaserAlignment.StrStepTitleSeven;
+                        laserAlignment.Title = Res.LaserAlignment.StrStepTitleSeven;
+                        laserAlignment.LabelInfo.Text = Res.LaserAlignment.StrStepSeven;
                         break;
                     case 7:
-                        info = isTitle ? Res.LaserAlignment.StrStepTitleComplete : Res.LaserAlignment.StrStepComplete;
-                        //laserAlignment.Title = Res.LaserAlignment.StrStepTitleComplete;
+                        laserAlignment.Title = Res.LaserAlignment.StrStepTitleComplete;
+                        laserAlignment.LabelInfo.Text = Res.LaserAlignment.StrStepComplete;
                         break;
                 }
-                return info;
             }
 
+        }
+
+        private void LaserAlignment_VisibleChanged(object sender, EventArgs e)
+        {
+            AlignLaser laser = this.pictureBox.Laser as AlignLaser;
+            if (laser != null)
+            {
+                laser.IsAlign = this.Visible;
+            }
+            if (this.Visible)
+            {
+                Index = -2;
+            }
         }
     }
 }

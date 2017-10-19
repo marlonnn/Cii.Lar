@@ -127,7 +127,9 @@
     <value>Next</value>
   </data>
   <data name="StrPreSet0" xml:space="preserve">
-    <value>Remove any embryos from the  field of view.
+    <value>
+Remove any embryos from the  field of view.
+
 Place an empty Petri dish or slide onto the microscope stage.</value>
   </data>
   <data name="StrPreSet1" xml:space="preserve">
@@ -139,17 +141,20 @@ Click the pilot laser on screen.</value>
     <value>Save</value>
   </data>
   <data name="StrStepComplete" xml:space="preserve">
-    <value>Calibration of the laser has now been complete.
+    <value>
+Calibration of the laser has now been complete.
 
 Click Finish to save the calibration.</value>
   </data>
   <data name="StrStepFive" xml:space="preserve">
-    <value>The pilot laser has moved.
+    <value>
+The pilot laser has moved.
 
 Click the centre of the pilot laser on screen.</value>
   </data>
   <data name="StrStepFour" xml:space="preserve">
-    <value>The pilot laser has moved.
+    <value>
+The pilot laser has moved.
 
 Click the centre of the pilot laser on screen.</value>
   </data>
@@ -161,17 +166,20 @@ If the red spot appears too faint then reduce the intensity of the illumination 
 Click the pilot laser on screen.</value>
   </data>
   <data name="StrStepSeven" xml:space="preserve">
-    <value>The pilot laser has moved.
+    <value>
+The pilot laser has moved.
 
 Click the centre of the pilot laser on screen.</value>
   </data>
   <data name="StrStepSix" xml:space="preserve">
-    <value>The pilot laser has moved.
+    <value>
+The pilot laser has moved.
 
 Click the centre of the pilot laser on screen.</value>
   </data>
   <data name="StrStepThree" xml:space="preserve">
-    <value>The pilot laser has now moved by a small amount.
+    <value>
+The pilot laser has now moved by a small amount.
 
 Click the centre of the pilot laser on screen.</value>
   </data>
@@ -200,7 +208,8 @@ Click the centre of the pilot laser on screen.</value>
     <value>Laser Target Alignment - Step Two</value>
   </data>
   <data name="StrStepTwo" xml:space="preserve">
-    <value>The pilot laser has now moved by a small amount.
+    <value>
+The pilot laser has now moved by a small amount.
 
 Click the centre of the pilot laser on screen.</value>
   </data>

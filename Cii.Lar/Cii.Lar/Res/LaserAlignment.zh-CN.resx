@@ -127,7 +127,9 @@
     <value>下一步</value>
   </data>
   <data name="StrPreSet0" xml:space="preserve">
-    <value>请在视野范围内移走所有的胚胎。
+    <value>
+请在视野范围内移走所有的胚胎。
+
 请放置一个空的培养皿或玻璃片在显微镜的载物台上。</value>
   </data>
   <data name="StrPreSet1" xml:space="preserve">
@@ -141,17 +143,20 @@
     <value>保存</value>
   </data>
   <data name="StrStepComplete" xml:space="preserve">
-    <value>激光的调整已经完成。
+    <value>
+激光的调整已经完成。
 
 点击“完成”保存校正结果</value>
   </data>
   <data name="StrStepFive" xml:space="preserve">
-    <value>现在引导激光已移动。
+    <value>
+现在引导激光已移动。
 
 对齐引导激光中心红点并点击。</value>
   </data>
   <data name="StrStepFour" xml:space="preserve">
-    <value>现在引导激光已移动。
+    <value>
+现在引导激光已移动。
 
 对齐引导激光中心红点并点击。</value>
   </data>
@@ -162,17 +167,20 @@
 如果红点太模糊，请降低光源的强度或者用后控制面板调节激光亮度。</value>
   </data>
   <data name="StrStepSeven" xml:space="preserve">
-    <value>现在引导激光已移动。
+    <value>
+现在引导激光已移动。
 
 对齐引导激光中心红点并点击。</value>
   </data>
   <data name="StrStepSix" xml:space="preserve">
-    <value>现在引导激光已移动。
+    <value>
+现在引导激光已移动。
 
 对齐引导激光中心红点并点击。</value>
   </data>
   <data name="StrStepThree" xml:space="preserve">
-    <value>现在引导激光已小量移动。
+    <value>
+现在引导激光已小量移动。
 
 对齐引导激光中心红点并点击。</value>
   </data>
@@ -201,7 +209,8 @@
     <value>步骤二</value>
   </data>
   <data name="StrStepTwo" xml:space="preserve">
-    <value>现在引导激光已小量移动。
+    <value>
+现在引导激光已小量移动。
 
 对齐引导激光中心红点并点击。</value>
   </data>

@@ -68,6 +68,7 @@ namespace Cii.Lar.UI
             this.Controls.Add(this.btnBack);
             this.Name = "LaserAlignment";
             this.Title = global::Cii.Lar.Properties.Resources.StrLaserCtrlTitle;
+            this.VisibleChanged += new System.EventHandler(this.LaserAlignment_VisibleChanged);
             this.Controls.SetChildIndex(this.closeButton, 0);
             this.Controls.SetChildIndex(this.btnBack, 0);
             this.Controls.SetChildIndex(this.btnNext, 0);

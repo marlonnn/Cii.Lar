@@ -434,7 +434,7 @@ namespace Cii.Lar.UI
             //settingCtrl.UpdateTimerStatesHandler += UpdateTimerStatesHandler;
             controls.Add(settingCtrl);
 			
-            controls.Add(new LaserAlignment());
+            controls.Add(new LaserAlignment(this));
         }
 
         private void UpdateSimulatorImageHandler(int selectIndex)
@@ -603,7 +603,15 @@ namespace Cii.Lar.UI
         {
             foreach (var ctrl in this.controls)
             {
-                ctrl.Location = new Point(this.Width - ctrl.Width - 5, 30);
+                if (ctrl.Name == "LaserAlignment")
+                {
+                    ctrl.Location = new Point(this.Width - ctrl.Width - 5, this.Height - ctrl.Height + 10);
+                }
+                else
+                {
+                    ctrl.Location = new Point(this.Width - ctrl.Width - 5, 30);
+                }
+                //ctrl.Location = new Point(this.Width - ctrl.Width - 5, 30);
                 ctrl.ClickDelegateHandler += new BaseCtrl.ClickDelegate(this.ClickDelegateHandler);
                 ctrl.MouseDown += BaseCtrl_MouseDown;
                 ctrl.MouseMove += BaseCtrl_MouseMove;
@@ -796,6 +804,7 @@ namespace Cii.Lar.UI
         {
             if (e.Button == MouseButtons.Left)
             {
+                var v = e.Location;
                 if (!mousePressed)
                 {
                     if (LaserFunction)

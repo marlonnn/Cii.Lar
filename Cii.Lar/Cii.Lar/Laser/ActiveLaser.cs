@@ -14,6 +14,7 @@ namespace Cii.Lar.Laser
     public class ActiveLaser : BaseLaser
     {
         private Point mouseDownPoint;
+        private Point endPoint;
 
         private Circle outterCircle = null;
         public Circle OutterCircle
@@ -131,12 +132,14 @@ namespace Cii.Lar.Laser
 
         public override void OnMouseMove(ZWPictureBox pictureBox, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            //if (e.Button == MouseButtons.Left)
             {
                 Point point = new Point((int)(e.X / pictureBox.Zoom - pictureBox.OffsetX),
                     (int)(e.Y / pictureBox.Zoom - pictureBox.OffsetY));
 
                 Point mousePosNow = e.Location;
+
+                endPoint = point;
 
                 int dx = mousePosNow.X - mouseDownPoint.X;
                 int dy = mousePosNow.Y - mouseDownPoint.Y;
@@ -207,6 +210,7 @@ namespace Cii.Lar.Laser
             }
             region1.Exclude(region2);
             g.FillRegion(brush, region1);
+            DrawLine(g);
             brush.Dispose();
             path1.Dispose();
             path2.Dispose();
@@ -222,6 +226,15 @@ namespace Cii.Lar.Laser
             g.DrawLine(new Pen(Color.Black, 1f),
                 InnerCircle.CenterPoint.X - InnerCircle.Rectangle.Width / 2, InnerCircle.CenterPoint.Y,
                 InnerCircle.CenterPoint.X + InnerCircle.Rectangle.Width / 2, InnerCircle.CenterPoint.Y);
+        }
+
+        private void DrawLine(Graphics g)
+        {
+            if (CenterPoint.IsEmpty || endPoint.IsEmpty)
+            {
+                return;
+            }
+            g.DrawLine(new Pen(Color.Black, 1f), CenterPoint, endPoint);
         }
     }
 }

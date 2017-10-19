@@ -108,6 +108,7 @@
     <Compile Include="ExpClass\ReportPage.cs" />
     <Compile Include="ExpClass\ReportPictureItem.cs" />
     <Compile Include="Laser\ActiveLaser.cs" />
+    <Compile Include="Laser\AlignLaser.cs" />
     <Compile Include="Laser\FixedLaser.cs" />
     <Compile Include="Laser\BaseLaser.cs" />
     <Compile Include="LogHelper.cs" />
@@ -421,6 +422,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ZWPictureBox.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Config\config.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

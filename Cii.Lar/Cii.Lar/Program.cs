@@ -1,7 +1,9 @@
-﻿using Cii.Lar.ExpClass;
+﻿using Cii.Lar.DrawTools;
+using Cii.Lar.ExpClass;
 using Cii.Lar.SysClass;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
@@ -39,6 +41,21 @@ namespace Cii.Lar
         [STAThread]
         static void Main()
         {
+            //int diameter1 = 20;
+            //List<Circle> circles = new List<Circle>();
+            //circles.Add(new Circle(new PointF(1023, 675), new Size(diameter1, diameter1)));
+            //circles.Add(new Circle(new PointF(691, 541), new Size(diameter1, diameter1)));
+            //circles.Add(new Circle(new PointF(975, 278), new Size(diameter1, diameter1)));
+            //circles.Add(new Circle(new PointF(1209, 182), new Size(diameter1, diameter1)));
+            //circles.Add(new Circle(new PointF(1153, 805), new Size(diameter1, diameter1)));
+            //circles.Add(new Circle(new PointF(367, 762), new Size(diameter1, diameter1)));
+            //circles.Add(new Circle(new PointF(408, 142), new Size(diameter1, diameter1)));
+            //var v = JsonFile.GetJsonTextFromConfig(circles);
+            //JsonFile.WriteConfigToLocal(v);
+            //List<Circle> circles2 = new List<Circle>();
+
+            //var v2 = JsonFile.ReadJsonConfigString();
+            //circles2 = JsonFile.GetConfigFromJsonText<List<Circle>>(v2);
             MiniDump.Init();
             Initialize(SysConfig.GetSysConfig().GetSysDefaultCulture());
 

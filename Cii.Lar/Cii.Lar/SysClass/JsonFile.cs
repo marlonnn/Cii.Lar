@@ -17,7 +17,7 @@ namespace Cii.Lar.SysClass
         /// <summary>
         /// json config file name
         /// </summary>
-        public static string fileName = string.Format("{0}\\config.json", System.Environment.CurrentDirectory);
+        public static string fileName = string.Format("{0}\\Config\\config.json", System.Environment.CurrentDirectory);
         
         /// <summary>
         /// get config from json string
@@ -69,19 +69,20 @@ namespace Cii.Lar.SysClass
         /// write json config to local file
         /// </summary>
         /// <param name="jsonConfig"></param>
-        public void WriteConfigToLocal(string jsonConfig)
+        public static void WriteConfigToLocal(string jsonConfig)
         {
-            if (File.Exists(fileName))
+            try
             {
-                try
+                if (!File.Exists(fileName))
                 {
-                    File.WriteAllText(fileName, jsonConfig);
+                    File.Create(fileName);
                 }
-                catch (Exception ee)
-                {
-                    LogHelper.GetLogger<JsonFile>().Error(ee.Message);
-                    LogHelper.GetLogger<JsonFile>().Error(ee.StackTrace);
-                }
+                File.WriteAllText(fileName, jsonConfig);
+            }
+            catch (Exception ee)
+            {
+                LogHelper.GetLogger<JsonFile>().Error(ee.Message);
+                LogHelper.GetLogger<JsonFile>().Error(ee.StackTrace);
             }
         }
     }

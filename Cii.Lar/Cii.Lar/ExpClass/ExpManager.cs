@@ -16,7 +16,8 @@ namespace Cii.Lar.ExpClass
     public enum LaserType
     {
         SaturnFixed,
-        SaturnActive
+        SaturnActive,
+        Alignment
     }
     /// <summary>
     /// ExpManager to set measure tool to scalable picture box
@@ -55,6 +56,9 @@ namespace Cii.Lar.ExpClass
                             break;
                         case LaserType.SaturnActive:
                             this.pictureBox.Laser = new ActiveLaser(this.pictureBox);
+                            break;
+                        case LaserType.Alignment:
+                            this.pictureBox.Laser = new AlignLaser(this.pictureBox);
                             break;
                     }
                 }
