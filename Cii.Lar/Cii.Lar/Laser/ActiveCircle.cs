@@ -70,6 +70,7 @@ namespace Cii.Lar.Laser
             this.pictureBox = pictureBox;
             InnerCircleSize = new Size(38, 38);
             clickCount = 0;
+            innerCircles = new List<Circle>();
         }
 
         public void OnMouseDown(Point point)
@@ -85,21 +86,64 @@ namespace Cii.Lar.Laser
             CalculateContinuousCircle(dx, dy);
         }
 
+        private void GenerateInnerCircles()
+        {
+
+        }
+
+        private List<Circle> innerCircles;
+
+        private int minHoleNum = 0;
+        private int maxHoleNum = 0;
+        private int holeNum = 0;
+
+        /// <summary>
+        /// L/D + 1 < N < 2L/D + 2
+        /// L:Line length
+        /// D:Circle diameter
+        /// N:Number of holes
+        /// </summary>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         private void CalculateContinuousCircle(int dx, int dy)
         {
             var length = Math.Sqrt(dx * dx + dy * dy);
-            int num = (int)(length / InnerCircleSize.Width);
+            var num = length / InnerCircleSize.Width;
+
+            Console.WriteLine("num: " + num);
             if (dx == 0)
             {
-                if (length > num * this.InnerCircleSize.Width && length <= (num + 1) * this.InnerCircleSize.Width)
+                if (length >  (int)num * this.InnerCircleSize.Width && length <= ((int)num + 1) * this.InnerCircleSize.Width)
                 {
                     if (dy > 0)
                     {
-                        var count = (int)(2 * length / InnerCircleSize.Width);
+                        if (num > 1)
+                        {
+                            innerCircles.Clear();
+                            int innerCircleNum = (int)num;
+                            //var gap = length / (innerCircleNum + 1);
+                            //for (int i=0; i<innerCircleNum; i++)
+                            //{
+                            //    Circle c = new Circle(new PointF(startCircle.CenterPoint.X, (float)(startCircle.CenterPoint.Y + i * gap)),
+                            //        InnerCircleSize);
+                            //    innerCircles.Add(c);
+                            //}
+                        }
                     }
                     else
                     {
-
+                        if (num > 1)
+                        {
+                            innerCircles.Clear();
+                            int innerCircleNum = (int)num + 1;
+                            //var gap = length / innerCircleNum;
+                            //for (int i = 0; i < innerCircleNum; i++)
+                            //{
+                            //    Circle c = new Circle(new PointF(startCircle.CenterPoint.X, (float)(startCircle.CenterPoint.Y - i * gap)),
+                            //        InnerCircleSize);
+                            //    innerCircles.Add(c);
+                            //}
+                        }
                     }
                 }
             }
@@ -145,6 +189,13 @@ namespace Cii.Lar.Laser
                 //draw connect Line
                 g.DrawLine(pen, startCircle.CenterPoint, endCircle.CenterPoint);
 
+                if (innerCircles != null && innerCircles.Count > 0)
+                {
+                    for (int i=0; i<innerCircles.Count; i++)
+                    {
+                        g.DrawEllipse(circlePen, innerCircles[i].Rectangle);
+                    }
+                }
                 //draw end circle
                 g.DrawEllipse(circlePen, EndCircle.Rectangle);
             }
