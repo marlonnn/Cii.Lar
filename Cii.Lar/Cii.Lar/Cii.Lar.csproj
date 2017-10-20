@@ -107,6 +107,7 @@
     <Compile Include="ExpClass\ReportItemBase.cs" />
     <Compile Include="ExpClass\ReportPage.cs" />
     <Compile Include="ExpClass\ReportPictureItem.cs" />
+    <Compile Include="Laser\ActiveCircle.cs" />
     <Compile Include="Laser\ActiveLaser.cs" />
     <Compile Include="Laser\AlignLaser.cs" />
     <Compile Include="Laser\FixedLaser.cs" />
