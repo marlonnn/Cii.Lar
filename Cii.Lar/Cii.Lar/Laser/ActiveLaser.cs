@@ -53,6 +53,8 @@ namespace Cii.Lar.Laser
         public override void OnMouseUp(ZWPictureBox pictureBox, MouseEventArgs e)
         {
             base.OnMouseUp(pictureBox, e);
+            activeCircle.OnMouseUp();
+            //this.pictureBox.Invalidate();
         }
 
         public override void OnPaint(PaintEventArgs e)
