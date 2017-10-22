@@ -3,6 +3,7 @@ using Cii.Lar.UI;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,38 @@ namespace Cii.Lar.Laser
 {
     public class ActiveCircle
     {
+        /// <summary>
+        /// GraphicsPropertiesManager: include all the draw object graphics properties
+        /// </summary>
+        private GraphicsPropertiesManager graphicsPropertiesManager = GraphicsPropertiesManager.GraphicsManagerSingleInstance();
+        public GraphicsPropertiesManager GraphicsPropertiesManager
+        {
+            get
+            {
+                return graphicsPropertiesManager;
+            }
+            set
+            {
+                graphicsPropertiesManager = value;
+            }
+        }
+
+        /// <summary>
+        /// GraphicsProperties of this draw object 
+        /// </summary>
+        private GraphicsProperties graphicsProperties;
+        public GraphicsProperties GraphicsProperties
+        {
+            get
+            {
+                return graphicsProperties;
+            }
+            set
+            {
+                graphicsProperties = value;
+            }
+        }
+
         private Point startPoint;
         public Point StartPoint
         {
@@ -70,11 +103,22 @@ namespace Cii.Lar.Laser
         {
             isMouseUp = false;
             this.pictureBox = pictureBox;
+            InitializeGraphicsProperties();
             InnerCircleSize = new Size(38, 38);
             OutterCircleSize = new Size(48, 48);
             clickCount = 0;
             innerCircles = new List<Circle>();
             outterCircles = new List<Circle>();
+
+            realInnerCircles = new List<Circle>();
+            realOutterCircles = new List<Circle>();
+
+        }
+
+        private void InitializeGraphicsProperties()
+        {
+            this.GraphicsProperties = GraphicsPropertiesManager.GetPropertiesByName("Circle");
+            this.GraphicsProperties.Color = Color.Yellow;
         }
 
         public void OnMouseDown(Point point)
@@ -109,6 +153,9 @@ namespace Cii.Lar.Laser
 
         private List<Circle> innerCircles;
         private List<Circle> outterCircles;
+
+        private List<Circle> realInnerCircles;
+        private List<Circle> realOutterCircles;
 
         private int minHoleNum = 0;
         public int MinHoleNum
@@ -174,8 +221,15 @@ namespace Cii.Lar.Laser
 
             minHoleNum = (int) (length / InnerCircleSize.Width) + 1;
             maxHoleNum = (int)(2 * length / InnerCircleSize.Width) + 2;
+            realInnerCircles.Clear();
+            realOutterCircles.Clear();
+
             if (minHoleNum == 1)
             {
+                realInnerCircles.Add(startCircle);
+                realOutterCircles.Add(new Circle(startPoint, OutterCircleSize));
+                realInnerCircles.Add(endCircle);
+                realOutterCircles.Add(new Circle(endPoint, OutterCircleSize));
                 return;
             }
             else
@@ -235,6 +289,24 @@ namespace Cii.Lar.Laser
                         outterCircles.Add(new Circle(new PointF(x, y), OutterCircleSize));
                     }
                 }
+                for (int i=0; i < holeNum + 2; i++)
+                {
+                    if (i == 0)
+                    {
+                        realInnerCircles.Add(startCircle);
+                        realOutterCircles.Add(new Circle(startPoint, OutterCircleSize));
+                    }
+                    else if (i == holeNum + 1)
+                    {
+                        realInnerCircles.Add(endCircle);
+                        realOutterCircles.Add(new Circle(endPoint, OutterCircleSize));
+                    }
+                    else
+                    {
+                        realInnerCircles.Add(innerCircles[i - 1]);
+                        realOutterCircles.Add(outterCircles[i - 1]);
+                    }
+                }
             }
         }
 
@@ -250,38 +322,51 @@ namespace Cii.Lar.Laser
 
         private void DrawCross(Graphics g)
         {
-            using (Pen circlePen = new Pen(Color.Yellow, 2f))
-            using (Pen pen = new Pen(Color.Black, 1f))
+            Pen pen = new Pen(Color.Black, 1f);
+            //draw start point cross
+            g.DrawLine(pen, startCircle.CenterPoint.X, startCircle.CenterPoint.Y - startCircle.Rectangle.Width / 2,
+            startCircle.CenterPoint.X, startCircle.CenterPoint.Y + startCircle.Rectangle.Width / 2);
+            g.DrawLine(pen, startCircle.CenterPoint.X - startCircle.Rectangle.Width / 2, startCircle.CenterPoint.Y,
+                startCircle.CenterPoint.X + startCircle.Rectangle.Width / 2, startCircle.CenterPoint.Y);
+
+            //draw connect Line
+            g.DrawLine(pen, startCircle.CenterPoint, endCircle.CenterPoint);
+
+            //draw multiple circles
+            SolidBrush brush = new SolidBrush(this.GraphicsProperties.Color);
+            GraphicsPath path1 = new GraphicsPath();
+            GraphicsPath path2 = new GraphicsPath();
+            Region region1 = new Region();
+            Region region2 = new Region();
+            for (int i = 0; i < realInnerCircles.Count; i++)
             {
-                //draw start circle
-                g.DrawEllipse(circlePen, startCircle.Rectangle);
-                g.DrawEllipse(circlePen, (new Circle(startPoint, OutterCircleSize)).Rectangle);
-                //draw start point cross
-                g.DrawLine(pen, startCircle.CenterPoint.X, startCircle.CenterPoint.Y - startCircle.Rectangle.Width / 2,
-                startCircle.CenterPoint.X, startCircle.CenterPoint.Y + startCircle.Rectangle.Width / 2);
-                g.DrawLine(pen, startCircle.CenterPoint.X - startCircle.Rectangle.Width / 2, startCircle.CenterPoint.Y,
-                    startCircle.CenterPoint.X + startCircle.Rectangle.Width / 2, startCircle.CenterPoint.Y);
-                //draw end point cross
-                g.DrawLine(pen, EndCircle.CenterPoint.X, EndCircle.CenterPoint.Y - EndCircle.Rectangle.Width / 2,
-                    EndCircle.CenterPoint.X, EndCircle.CenterPoint.Y + EndCircle.Rectangle.Width / 2);
-                g.DrawLine(pen, EndCircle.CenterPoint.X - EndCircle.Rectangle.Width / 2, EndCircle.CenterPoint.Y,
-                    EndCircle.CenterPoint.X + EndCircle.Rectangle.Width / 2, EndCircle.CenterPoint.Y);
+                path1.AddEllipse(realOutterCircles[i].Rectangle.X, realOutterCircles[i].Rectangle.Y,
+                    realOutterCircles[i].Rectangle.Width, realOutterCircles[i].Rectangle.Height);
 
-                //draw connect Line
-                g.DrawLine(pen, startCircle.CenterPoint, endCircle.CenterPoint);
-
-                if (innerCircles != null && innerCircles.Count > 0)
+                path2.AddEllipse(realInnerCircles[i].Rectangle.X, realInnerCircles[i].Rectangle.Y,
+                    realInnerCircles[i].Rectangle.Width, realInnerCircles[i].Rectangle.Height);
+                if (i == 0)
                 {
-                    for (int i=0; i<innerCircles.Count; i++)
-                    {
-                        g.DrawEllipse(circlePen, innerCircles[i].Rectangle);
-                        g.DrawEllipse(circlePen, outterCircles[i].Rectangle);
-                    }
+                    region1 = new Region(path1);
+                    region2 = new Region(path2);
                 }
-                //draw end circle
-                g.DrawEllipse(circlePen, EndCircle.Rectangle);
-                g.DrawEllipse(circlePen, (new Circle(endPoint, OutterCircleSize)).Rectangle);
+                region1.Union(new Region(path1));
+                region2.Union(new Region(path2));
             }
+            region1.Exclude(region2);
+            g.FillRegion(brush, region1);
+
+            //draw end point cross
+            g.DrawLine(pen, EndCircle.CenterPoint.X, EndCircle.CenterPoint.Y - EndCircle.Rectangle.Width / 2,
+                EndCircle.CenterPoint.X, EndCircle.CenterPoint.Y + EndCircle.Rectangle.Width / 2);
+            g.DrawLine(pen, EndCircle.CenterPoint.X - EndCircle.Rectangle.Width / 2, EndCircle.CenterPoint.Y,
+                EndCircle.CenterPoint.X + EndCircle.Rectangle.Width / 2, EndCircle.CenterPoint.Y);
+
+            pen.Dispose();
+            brush.Dispose();
+            path1.Dispose();
+            path2.Dispose();
+            region1.Dispose();
         }
 
 
