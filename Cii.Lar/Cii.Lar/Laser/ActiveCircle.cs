@@ -170,7 +170,7 @@ namespace Cii.Lar.Laser
 
         public ActiveCircle(ZWPictureBox pictureBox)
         {
-            isMouseUp = false;
+            IsMouseUp = false;
             InTheHole = false;
             this.pictureBox = pictureBox;
             InitializeGraphicsProperties();
@@ -193,15 +193,18 @@ namespace Cii.Lar.Laser
 
         public void OnMouseDown(Point point)
         {
-            isMouseUp = false;
-            clickCount++;
-            StartPoint = point;
-            EndPoint = point;
+            if (!InTheHole)
+            {
+                IsMouseUp = false;
+                clickCount++;
+                StartPoint = point;
+                EndPoint = point;
+            }
         }
 
         public void OnMouseMove(Point point, int dx, int dy)
         {
-            if (!isMouseUp)
+            if (!IsMouseUp)
             {
                 EndPoint = point;
                 CalculateContinuousCircle(dx, dy);
@@ -212,6 +215,10 @@ namespace Cii.Lar.Laser
                 {
                     RectangleF rect = new RectangleF(CenterPoint, OutterCircleSize);
                     InTheHole = rect.Contains(point);
+                    if (InTheHole)
+                    {
+                        MoveToArc();
+                    }
                 }
             }
         }
@@ -220,15 +227,16 @@ namespace Cii.Lar.Laser
         {
             if (clickCount % 2 == 0)
             {
-                isMouseUp = true;
-            }
-            else
-            {
-                if (realOutterCircles != null && realOutterCircles.Count > 0)
+                if (!InTheHole)
                 {
-                    var index = realOutterCircles.Count / 2;
+                    IsMouseUp = true;
                 }
             }
+        }
+
+        private void MoveToArc()
+        {
+
         }
 
         /// <summary>
