@@ -99,58 +99,6 @@ namespace Cii.Lar.Laser
 
         private int clickCount;
 
-        public ActiveCircle(ZWPictureBox pictureBox)
-        {
-            isMouseUp = false;
-            this.pictureBox = pictureBox;
-            InitializeGraphicsProperties();
-            InnerCircleSize = new Size(38, 38);
-            OutterCircleSize = new Size(48, 48);
-            clickCount = 0;
-            innerCircles = new List<Circle>();
-            outterCircles = new List<Circle>();
-
-            realInnerCircles = new List<Circle>();
-            realOutterCircles = new List<Circle>();
-
-        }
-
-        private void InitializeGraphicsProperties()
-        {
-            this.GraphicsProperties = GraphicsPropertiesManager.GetPropertiesByName("Circle");
-            this.GraphicsProperties.Color = Color.Yellow;
-        }
-
-        public void OnMouseDown(Point point)
-        {
-            isMouseUp = false;
-            clickCount++;
-            StartPoint = point;
-            EndPoint = point;
-        }
-
-        public void OnMouseMove(Point point, int dx, int dy)
-        {
-            if (!isMouseUp)
-            {
-                EndPoint = point;
-                CalculateContinuousCircle(dx, dy);
-            }
-        }
-
-        public void OnMouseUp()
-        {
-            if (clickCount % 2 == 0)
-            {
-                isMouseUp = true;
-            }
-        }
-
-        private void GenerateInnerCircles()
-        {
-
-        }
-
         private List<Circle> innerCircles;
         private List<Circle> outterCircles;
 
@@ -200,6 +148,88 @@ namespace Cii.Lar.Laser
             }
         }
 
+        private bool inTheHole;
+        public bool InTheHole
+        {
+            get { return this.inTheHole; }
+            set
+            {
+                if (value != this.inTheHole)
+                {
+                    this.inTheHole = value;
+                }
+            }
+        }
+
+        private PointF centerPoint;
+        public PointF CenterPoint
+        {
+            get { return this.centerPoint; }
+            set { this.centerPoint = value; }
+        }
+
+        public ActiveCircle(ZWPictureBox pictureBox)
+        {
+            isMouseUp = false;
+            InTheHole = false;
+            this.pictureBox = pictureBox;
+            InitializeGraphicsProperties();
+            InnerCircleSize = new Size(38, 38);
+            OutterCircleSize = new Size(48, 48);
+            clickCount = 0;
+            innerCircles = new List<Circle>();
+            outterCircles = new List<Circle>();
+
+            realInnerCircles = new List<Circle>();
+            realOutterCircles = new List<Circle>();
+
+        }
+
+        private void InitializeGraphicsProperties()
+        {
+            this.GraphicsProperties = GraphicsPropertiesManager.GetPropertiesByName("Circle");
+            this.GraphicsProperties.Color = Color.Yellow;
+        }
+
+        public void OnMouseDown(Point point)
+        {
+            isMouseUp = false;
+            clickCount++;
+            StartPoint = point;
+            EndPoint = point;
+        }
+
+        public void OnMouseMove(Point point, int dx, int dy)
+        {
+            if (!isMouseUp)
+            {
+                EndPoint = point;
+                CalculateContinuousCircle(dx, dy);
+            }
+            else
+            {
+                if (!CenterPoint.IsEmpty)
+                {
+                    RectangleF rect = new RectangleF(CenterPoint, OutterCircleSize);
+                    InTheHole = rect.Contains(point);
+                }
+            }
+        }
+
+        public void OnMouseUp()
+        {
+            if (clickCount % 2 == 0)
+            {
+                isMouseUp = true;
+            }
+            else
+            {
+                if (realOutterCircles != null && realOutterCircles.Count > 0)
+                {
+                    var index = realOutterCircles.Count / 2;
+                }
+            }
+        }
 
         /// <summary>
         /// L/D + 1 < N < 2L/D + 2
@@ -247,6 +277,7 @@ namespace Cii.Lar.Laser
                             innerCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y + gap * i)), InnerCircleSize));
                             outterCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y + gap * i)), OutterCircleSize));
                         }
+                        CenterPoint = new PointF(StartCircle.CenterPoint.X, StartCircle.CenterPoint.Y + dy / 2);
                     }
                     else if (dy < 0)
                     {
@@ -255,6 +286,7 @@ namespace Cii.Lar.Laser
                             innerCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y - gap * i)), InnerCircleSize));
                             outterCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y - gap * i)), OutterCircleSize));
                         }
+                        CenterPoint = new PointF(StartCircle.CenterPoint.X, StartCircle.CenterPoint.Y - dy / 2);
                     }
                 }
                 else if (dy == 0)
@@ -266,6 +298,7 @@ namespace Cii.Lar.Laser
                             innerCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X + gap * i), StartCircle.CenterPoint.Y), InnerCircleSize));
                             outterCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X + gap * i), StartCircle.CenterPoint.Y), OutterCircleSize));
                         }
+                        CenterPoint = new PointF(StartCircle.CenterPoint.X + dx / 2, StartCircle.CenterPoint.Y);
                     }
                     else if (dx < 0)
                     {
@@ -274,6 +307,7 @@ namespace Cii.Lar.Laser
                             innerCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X - gap * i), StartCircle.CenterPoint.Y), InnerCircleSize));
                             outterCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X - gap * i), StartCircle.CenterPoint.Y), OutterCircleSize));
                         }
+                        CenterPoint = new PointF(StartCircle.CenterPoint.X - dx / 2, StartCircle.CenterPoint.Y);
                     }
                 }
                 else
@@ -288,6 +322,7 @@ namespace Cii.Lar.Laser
                         innerCircles.Add(new Circle(new PointF(x, y), InnerCircleSize));
                         outterCircles.Add(new Circle(new PointF(x, y), OutterCircleSize));
                     }
+                    CenterPoint = new PointF(StartCircle.CenterPoint.X + dx / 2, StartCircle.CenterPoint.Y + dy / 2);
                 }
                 for (int i=0; i < holeNum + 2; i++)
                 {
@@ -331,6 +366,18 @@ namespace Cii.Lar.Laser
 
             //draw connect Line
             g.DrawLine(pen, startCircle.CenterPoint, endCircle.CenterPoint);
+
+            //draw center cross point
+            if (!CenterPoint.IsEmpty && InTheHole)
+            {
+                using (Pen centerPen = new Pen(Color.Red, 1f))
+                {
+                    g.DrawLine(centerPen, CenterPoint.X, CenterPoint.Y - startCircle.Rectangle.Width / 2,
+                        CenterPoint.X, CenterPoint.Y + startCircle.Rectangle.Width / 2);
+                    g.DrawLine(centerPen, CenterPoint.X - startCircle.Rectangle.Width / 2, CenterPoint.Y,
+                        CenterPoint.X + startCircle.Rectangle.Width / 2, CenterPoint.Y);
+                }
+            }
 
             //draw multiple circles
             SolidBrush brush = new SolidBrush(this.GraphicsProperties.Color);
