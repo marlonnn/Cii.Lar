@@ -13,6 +13,7 @@ namespace Cii.Lar.Laser
 {
     public class ActiveCircle
     {
+        private CircleData circleData;
         /// <summary>
         /// GraphicsPropertiesManager: include all the draw object graphics properties
         /// </summary>
@@ -173,6 +174,7 @@ namespace Cii.Lar.Laser
             IsMouseUp = false;
             InTheHole = false;
             this.pictureBox = pictureBox;
+            circleData = new CircleData();
             InitializeGraphicsProperties();
             InnerCircleSize = new Size(38, 38);
             OutterCircleSize = new Size(48, 48);
@@ -202,7 +204,7 @@ namespace Cii.Lar.Laser
             }
         }
 
-        public void OnMouseMove(Point point, int dx, int dy)
+        public void OnMouseMove(MouseEventArgs e, Point point, int dx, int dy)
         {
             if (!IsMouseUp)
             {
@@ -215,12 +217,107 @@ namespace Cii.Lar.Laser
                 {
                     RectangleF rect = new RectangleF(CenterPoint, OutterCircleSize);
                     InTheHole = rect.Contains(point);
-                    if (InTheHole)
+                    if (/*InTheHole && */(e.Button == MouseButtons.Left))
                     {
-                        MoveToArc();
+                        CalcAngle(point, dx, dy);
                     }
                 }
             }
+        }
+
+        private void CalcAngle(Point point, int dx, int dy)
+        {
+            //vector (a1, b1)
+            int a1 = StartPoint.X - point.X;
+            int b1 = StartPoint.Y - point.Y;
+
+            //vactor (a2, b2)
+            int a2 = EndPoint.X - point.X;
+            int b2 = EndPoint.Y - point.Y;
+
+            var value = (a1 * b2 - a2 * b1) / (Math.Sqrt(a1 * a1 + b1 * b1) * Math.Sqrt(a2 * a2 + b2 * b2));
+            var angle = Math.PI - Math.Asin(value);
+            //Console.WriteLine("angle: " + angle);
+
+            var v1 = angle * (180 / Math.PI);
+            //Console.WriteLine("real angle: " + v1);
+            //Console.WriteLine("length / 2: " + Length / 2);
+
+            var halfLenght = Length / 2;
+            var temp = (halfLenght) / Math.Tan(angle / 2);
+            //Console.WriteLine("temp: " + temp);
+            var radius = (Math.Pow(halfLenght, 2) + Math.Pow(temp, 2)) / (2 * temp);
+            Console.WriteLine("radius: " + radius);
+            var angleArc = 2 * (Math.Asin(halfLenght / Math.Abs(radius)));
+
+            var lengthArc = angleArc * Math.Abs(radius);
+
+            CalcCircleCenter(StartPoint, point, EndPoint);
+        }
+
+        /// <summary>
+        /// 参考：http://blog.csdn.net/lijiayu2015/article/details/52541730
+        /// 通过三个点到圆心距离相等建立方程：
+        ///  (pt1.x-center.x)²-(pt1.y-center.y)²=radius²     式子(1)
+        ///  (pt2.x-center.x)²-(pt2.y-center.y)²=radius²     式子(2)
+        ///  (pt3.x-center.x)²-(pt3.y-center.y)²=radius²     式子(3)
+        /// 
+        ///  式子(1)-式子(2)得：
+        ///  pt1.x²+pt2.y²-pt1.y²-pt2.x²+2*center.x* pt2.x-2*center.x* pt1.x+2*center.y* pt1.y-2*center.y* pt2.y-=0
+        ///  式子(2)-式子(3)得：
+        ///  pt2.x²+pt3.y²-pt2.y²-pt3.x²+2*center.x* pt3.x-2*center.x* pt2.x+2*center.y* pt2.y-2*center.y* pt3.y-=0
+        /// 
+        ///  整理上面的两个式子得到：
+        ///  (2*pt2.x-2*pt1.x)*center.x+(2*pt1.y-2*pt2.y)*center.y=pt1.y²+pt2.x²-pt1.x²-pt2.y²
+        ///  (2*pt3.x-2*pt2.x)*center.x+(2*pt2.y-2*pt3.y)*center.y=pt2.y²+pt3.x²-pt2.x²-pt3.y²
+        ///  令：
+        ///  A1=2*pt2.x-2*pt1.x B1 = 2 * pt1.y - 2 * pt2.y       C1=pt1.y²+pt2.x²-pt1.x²-pt2.y²
+        ///  A2=2*pt3.x-2*pt2.x B2 = 2 * pt2.y - 2 * pt3.y       C2=pt2.y²+pt3.x²-pt2.x²-pt3.y²
+        /// 
+        ///  则上述方程组变成一下形式：
+        ///  A1* center.x+B1* center.y= C1；
+        ///  A2* center.x+B2* center.y= C2
+        ///  联立以上方程组可以求出：
+        ///  center.x = (C1 * B2 - C2 * B1) / A1 * B2 - A2 * B1;
+        ///          center.y = (A1* C2 - A2* C1) / A1* B2 - A2* B1;
+        ///  （为了方便编写程序，令temp = A1* B2 - A2* B1）
+        /// </summary>
+        /// <param name="pt1"></param>
+        /// <param name="pt2"></param>
+        /// <param name="pt3"></param>
+        private void CalcCircleCenter(Point pt1, Point pt2, Point pt3)
+        {
+            float A1, A2, B1, B2, temp;
+            double C1, C2;
+            A1 = pt1.X - pt2.X;
+            B1 = pt1.Y - pt2.Y;
+            C1 = (Math.Pow(pt1.X, 2) - Math.Pow(pt2.X, 2) + Math.Pow(pt1.Y, 2) - Math.Pow(pt2.Y, 2)) / 2;
+            A2 = pt3.X - pt2.X;
+            B2 = pt3.Y - pt2.Y;
+            C2 = (Math.Pow(pt3.X, 2) - Math.Pow(pt2.X, 2) + Math.Pow(pt3.Y, 2) - Math.Pow(pt2.Y, 2)) / 2;
+
+            //为了方便编写程序，令temp = A1*B2 - A2*B1  
+            temp = A1 * B2 - A2 * B1;
+            //定义一个圆的数据的结构体对象CD  
+            PointF centerPt = new PointF();
+            //判断三点是否共线  
+            if (temp == 0)
+            {
+                //共线则将第一个点pt1作为圆心  
+                centerPt.X = pt1.X;
+                centerPt.Y = pt1.Y;
+            }
+            else
+            {
+                //不共线则求出圆心：  
+                //center.X = (C1*B2 - C2*B1) / A1*B2 - A2*B1;  
+                //center.Y = (A1*C2 - A2*C1) / A1*B2 - A2*B1;  
+                centerPt.X = (float)((C1 * B2 - C2 * B1) / temp);
+                centerPt.Y = (float)((A1 * C2 - A2 * C1) / temp);
+            }
+            circleData.CenterPt = centerPt;
+            var radius = Math.Sqrt((circleData.CenterPt.X - pt1.X) * (circleData.CenterPt.X - pt1.X) + (circleData.CenterPt.Y - pt1.Y) * (circleData.CenterPt.Y - pt1.Y));
+            Console.WriteLine("new radius2: " + radius);
         }
 
         public void OnMouseUp()
@@ -238,7 +335,12 @@ namespace Cii.Lar.Laser
         {
 
         }
-
+        private double length;
+        public double Length
+        {
+            get { return this.length; }
+            set { this.length = value; }
+        }
         /// <summary>
         /// L/D + 1 < N < 2L/D + 2
         /// L:Line length
@@ -254,8 +356,7 @@ namespace Cii.Lar.Laser
             {
                 return;
             }
-            var length = Math.Sqrt(dx * dx + dy * dy);
-
+            Length = Math.Sqrt(dx * dx + dy * dy);
 
             minHoleNum = (int) (length / InnerCircleSize.Width) + 1;
             maxHoleNum = (int)(2 * length / InnerCircleSize.Width) + 2;

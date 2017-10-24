@@ -110,6 +110,7 @@
     <Compile Include="Laser\ActiveCircle.cs" />
     <Compile Include="Laser\ActiveLaser.cs" />
     <Compile Include="Laser\AlignLaser.cs" />
+    <Compile Include="Laser\CircleData.cs" />
     <Compile Include="Laser\FixedLaser.cs" />
     <Compile Include="Laser\BaseLaser.cs" />
     <Compile Include="LogHelper.cs" />

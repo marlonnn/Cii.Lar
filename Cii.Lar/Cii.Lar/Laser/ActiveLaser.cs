@@ -46,7 +46,7 @@ namespace Cii.Lar.Laser
             int dx = mousePosNow.X - mouseDownPoint.X;
             int dy = mousePosNow.Y - mouseDownPoint.Y;
             var length = Math.Sqrt(dx * dx + dy * dy);
-            activeCircle.OnMouseMove(point, dx, dy);
+            activeCircle.OnMouseMove(e, point, dx, dy);
             this.pictureBox.Invalidate();
         }
 

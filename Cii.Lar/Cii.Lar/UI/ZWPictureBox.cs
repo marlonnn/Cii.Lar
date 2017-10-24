@@ -579,12 +579,12 @@ namespace Cii.Lar.UI
 
         public void LoadImage()
         {
-            this.Image = Image.FromFile(string.Format("{0}\\Resources\\Simulator\\egg.bmp", System.Environment.CurrentDirectory));
-            StartOffsetX = (this.Width - this.Image.Width) / 2;
-            this.OffsetX = StartOffsetX;
-            this.OffsetY = (this.Height - this.Image.Height) / 2 + 25;
+            //this.Image = Image.FromFile(string.Format("{0}\\Resources\\Simulator\\egg.bmp", System.Environment.CurrentDirectory));
+            //StartOffsetX = (this.Width - this.Image.Width) / 2;
+            //this.OffsetX = StartOffsetX;
+            //this.OffsetY = (this.Height - this.Image.Height) / 2 + 25;
             InitializeBaseCtrls();
-            imageTracker.Picture = this.Image;
+            //imageTracker.Picture = this.Image;
         }
 
         public void LoadImage(string imageFile)
