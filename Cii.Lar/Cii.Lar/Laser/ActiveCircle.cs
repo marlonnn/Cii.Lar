@@ -252,7 +252,53 @@ namespace Cii.Lar.Laser
 
             var lengthArc = angleArc * Math.Abs(radius);
 
-            CalcCircleCenter(StartPoint, point, EndPoint);
+            CalcCircleCenter(point, StartPoint, EndPoint);
+
+            minHoleNum = (int)(lengthArc / InnerCircleSize.Width) + 1;
+            maxHoleNum = (int)(2 * lengthArc / InnerCircleSize.Width) + 2;
+            realInnerCircles.Clear();
+            realOutterCircles.Clear();
+            if (minHoleNum == 1)
+            {
+                realInnerCircles.Add(startCircle);
+                realOutterCircles.Add(new Circle(startPoint, OutterCircleSize));
+                realInnerCircles.Add(endCircle);
+                realOutterCircles.Add(new Circle(endPoint, OutterCircleSize));
+                return;
+            }
+            else
+            {
+                holeNum = maxHoleNum;
+                innerCircles.Clear();
+                outterCircles.Clear();
+                var angleArcUnit = angleArc / holeNum;
+                for (int i=1; i<=holeNum; i++)
+                {
+
+                    PointF p = CalcCirclePoint(StartPoint, angleArcUnit, i);
+                    innerCircles.Add(new Circle(p, InnerCircleSize));
+                    outterCircles.Add(new Circle(p, OutterCircleSize));
+                }
+
+                for (int i = 0; i < holeNum + 2; i++)
+                {
+                    if (i == 0)
+                    {
+                        realInnerCircles.Add(startCircle);
+                        realOutterCircles.Add(new Circle(startPoint, OutterCircleSize));
+                    }
+                    else if (i == holeNum + 1)
+                    {
+                        realInnerCircles.Add(endCircle);
+                        realOutterCircles.Add(new Circle(endPoint, OutterCircleSize));
+                    }
+                    else
+                    {
+                        realInnerCircles.Add(innerCircles[i - 1]);
+                        realOutterCircles.Add(outterCircles[i - 1]);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -318,6 +364,34 @@ namespace Cii.Lar.Laser
             circleData.CenterPt = centerPt;
             var radius = Math.Sqrt((circleData.CenterPt.X - pt1.X) * (circleData.CenterPt.X - pt1.X) + (circleData.CenterPt.Y - pt1.Y) * (circleData.CenterPt.Y - pt1.Y));
             Console.WriteLine("new radius2: " + radius);
+        }
+
+        private PointF CalcCirclePoint(Point startPt, double angleArcUnit, int divideIndex)
+        {
+            PointF centerPt = circleData.CenterPt;
+            double radius = circleData.Radius;
+            var u = (startPt.Y - centerPt.Y) / (startPt.X - centerPt.X);
+            var v = (Math.Pow(radius, 2) * Math.Sin(angleArcUnit * divideIndex) + startPt.X * centerPt.Y - centerPoint.X * startPt.Y) 
+                / (startPt.X - centerPt.X);
+
+            var a = 1 + Math.Pow(u, 2);
+            var b = (2 * u * (v - centerPt.Y) - 2 * centerPt.X);
+            var c = Math.Pow(centerPt.X, 2) + Math.Pow((v - centerPt.Y), 2) - Math.Pow(radius, 2);
+            var delta = Math.Pow(b, 2) - 4 * a * c;
+            double x = 0, y = 0;
+            if (delta < 0)
+            {
+                return PointF.Empty;
+            }
+            else
+            {
+                x = (-b + Math.Sqrt(delta)) / (2 * a);
+                y = u * x + v;
+
+                var x2 = (-b + Math.Sqrt(delta)) / (2 * a);
+                var y2 = u * x2 + v;
+            }
+            return new PointF((float)x, (float)y);
         }
 
         public void OnMouseUp()
