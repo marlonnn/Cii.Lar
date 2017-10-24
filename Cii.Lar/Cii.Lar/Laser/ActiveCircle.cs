@@ -272,13 +272,8 @@ namespace Cii.Lar.Laser
                 innerCircles.Clear();
                 outterCircles.Clear();
                 var angleArcUnit = angleArc / holeNum;
-                for (int i=1; i<=holeNum; i++)
-                {
-
-                    PointF p = CalcCirclePoint(StartPoint, angleArcUnit, i);
-                    innerCircles.Add(new Circle(p, InnerCircleSize));
-                    outterCircles.Add(new Circle(p, OutterCircleSize));
-                }
+                double slice = angleArc / holeNum;
+                CirclePoints(circleData.CenterPt, StartPoint, EndPoint, radius, -1, holeNum);
 
                 for (int i = 0; i < holeNum + 2; i++)
                 {
@@ -364,6 +359,80 @@ namespace Cii.Lar.Laser
             circleData.CenterPt = centerPt;
             var radius = Math.Sqrt((circleData.CenterPt.X - pt1.X) * (circleData.CenterPt.X - pt1.X) + (circleData.CenterPt.Y - pt1.Y) * (circleData.CenterPt.Y - pt1.Y));
             Console.WriteLine("new radius2: " + radius);
+        }
+
+        private void DrawCirclePoints(int points, double radius, PointF center)
+        {
+            double slice = 2 * Math.PI / points;
+            for (int i = 0; i < points; i++)
+            {
+                double angle = slice * i;
+                int newX = (int)(center.X + radius * Math.Cos(angle));
+                int newY = (int)(center.Y + radius * Math.Sin(angle));
+                Point p = new Point(newX, newY);
+                Console.WriteLine(p);
+            }
+        }
+
+        private Point CirclePoints(double slice, double radius, PointF center, int index)
+        {
+            double angle = slice * index;
+            int newX = (int)(center.X + radius * Math.Cos(angle));
+            int newY = (int)(center.Y + radius * Math.Sin(angle));
+            return new Point(newX, newY);
+        }
+
+        private bool CirclePoints(PointF center, Point startPt, Point endPt, double Radii, int ccw, int count)
+        {
+            if (count < 1)
+            {
+                return false;
+            }
+            double vCenterBegin_x = startPt.X - center.X;                                 // 圆心与起点连线矢量
+            double vCenterBegin_y = startPt.Y - center.Y;                                 // 圆心与起点连线矢量
+            double vCenterEnd_x = endPt.X - center.X;                                     // 圆心与终点连线矢量
+            double vCenterEnd_y = endPt.Y - center.Y;                                       // 圆心与终点连线矢量
+
+            double Length_Begin = Math.Sqrt(vCenterBegin_x * vCenterBegin_x +
+                vCenterBegin_y * vCenterBegin_y);
+            double Length_End = Math.Sqrt(vCenterEnd_x * vCenterEnd_x +
+                vCenterEnd_y * vCenterEnd_y);
+
+            vCenterBegin_x = vCenterBegin_x * Radii / Length_Begin;                     // 改变模长
+            vCenterBegin_y = vCenterBegin_y * Radii / Length_Begin;                     // 改变模长
+            vCenterEnd_x = vCenterEnd_x * Radii / Length_End;                           // 改变模长
+            vCenterEnd_y = vCenterEnd_y * Radii / Length_End;                           // 改变模长
+
+            double angle;                                                               // 要求的弧度
+            double sinangleY = vCenterBegin_x * vCenterEnd_y - vCenterBegin_y * vCenterEnd_x;   // 差乘得sin<a, 乘m_ccw后的到需要的角的sin, 左右对称, asin弧度范围在 -PI/2 ~ PI/2之间
+            double sinangleX = vCenterBegin_x * vCenterEnd_x + vCenterBegin_y * vCenterEnd_y;   // 点乘得cos<a, 乘m_ccw后的到需要的角的cos, 上下对称, acos弧度范围在 0 ~ PI之间
+            if (sinangleY == 0.0 && sinangleX == 0.0)                                   // 起点在圆心处
+                angle = 0.0;															// 起点弧度
+            else
+            {
+                angle = Math.Atan2(sinangleY, sinangleX);                                    // [ radianBegin: 起点与圆心连线和x轴的角的弧度 ][ atan2(y,x): 计算y/x的反正切值, 按照参数的符号计算所在的象限, atan2弧度范围在 -PI ~ PI之间 ]
+                if (angle < 0.0)
+                    angle = angle + 2.0 * Math.PI;                                          // 弧度范围控制在0 ~ 2*PI之间, 对应角度为0 ~ 360 . 此处只能用atan2, 不能仅用asin或仅用acos
+
+                if (-1 == ccw)
+                    angle = 2.0 * Math.PI - angle;											// 取另一边
+            }
+
+            double theta = angle / (double)(count - 1);                                 // 要求的点与圆心连线矢量和圆心与起点连线矢量的角的弧度, 每一小段弧长弧度
+            for (int i = 0; i < count; i++)
+            {
+                // 得到相对圆心的位置, 用圆心与起点连线矢量来旋转, ccw为1时逆时针旋转, 为－1时正时针旋转
+                double Dots_x = vCenterBegin_x * Math.Cos((double)ccw * theta * (double)i) -
+                    vCenterBegin_y * Math.Sin((double)ccw * theta * (double)i);
+                double Dots_y = vCenterBegin_x * Math.Sin((double)ccw * theta * (double)i) +
+                    vCenterBegin_y * Math.Cos((double)ccw * theta * (double)i);
+                Dots_x += center.X;                                                  // 得到相对原点的位置
+                Dots_y += center.Y;                                                  // 得到相对原点的位置
+                PointF p = new PointF((float)Dots_x, (float)Dots_y);
+                innerCircles.Add(new Circle(p, InnerCircleSize));
+                outterCircles.Add(new Circle(p, OutterCircleSize));
+            }
+            return true;
         }
 
         private PointF CalcCirclePoint(Point startPt, double angleArcUnit, int divideIndex)
