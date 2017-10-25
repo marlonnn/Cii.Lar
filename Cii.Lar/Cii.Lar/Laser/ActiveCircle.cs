@@ -239,9 +239,9 @@ namespace Cii.Lar.Laser
             {
                 if (!CenterPoint.IsEmpty)
                 {
-                    RectangleF rect = new RectangleF(CenterPoint, new Size(60, 60));
+                    RectangleF rect = new RectangleF(new PointF(CenterPoint.X - 50, CenterPoint.Y - 50), new Size(100, 100));
                     InTheHole = rect.Contains(point);
-                    if (/*InTheHole && */(e.Button == MouseButtons.Left))
+                    if (InTheHole && (e.Button == MouseButtons.Left))
                     {
                         CalcAngle(point, dx, dy);
                         shape = LaserShape.Arc;

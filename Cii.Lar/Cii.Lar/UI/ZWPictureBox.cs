@@ -899,9 +899,12 @@ namespace Cii.Lar.UI
 
         public void ZoomFit()
         {
-            this.OffsetX = (this.Width - this.Image.Width) / 2;
-            //this.OffsetY = 0;
-            this.OffsetY = (this.Height - this.Image.Height) / 2;
+            if (this.Image != null)
+            {
+                this.OffsetX = (this.Width - this.Image.Width) / 2;
+                //this.OffsetY = 0;
+                this.OffsetY = (this.Height - this.Image.Height) / 2;
+            }
             this.zoom = 1;
             this.imageTracker.ScalePercent = zoom * 100;
             this.Invalidate();
