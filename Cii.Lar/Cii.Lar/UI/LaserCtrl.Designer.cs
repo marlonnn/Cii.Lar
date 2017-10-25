@@ -41,6 +41,7 @@ namespace Cii.Lar.UI
             this.btnAlignLaser = new System.Windows.Forms.Button();
             this.btnHoleSize = new System.Windows.Forms.Button();
             this.btnAppearance = new System.Windows.Forms.Button();
+            this.holesSlider = new DevComponents.DotNetBar.Controls.Slider();
             this.SuspendLayout();
             // 
             // closeButton
@@ -89,9 +90,10 @@ namespace Cii.Lar.UI
             // btnFire
             // 
             this.btnFire.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnFire.BackColor = System.Drawing.Color.LightYellow;
             resources.ApplyResources(this.btnFire, "btnFire");
             this.btnFire.Name = "btnFire";
-            this.btnFire.BackColor = System.Drawing.Color.LightYellow;
+            this.btnFire.UseVisualStyleBackColor = false;
             this.btnFire.Click += new System.EventHandler(this.btnFire_Click);
             // 
             // line2
@@ -121,10 +123,24 @@ namespace Cii.Lar.UI
             this.btnAppearance.Name = "btnAppearance";
             this.btnAppearance.Click += new System.EventHandler(this.btnAppearance_Click);
             // 
+            // holesSlider
+            // 
+            // 
+            // 
+            // 
+            this.holesSlider.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.holesSlider.LabelPosition = DevComponents.DotNetBar.eSliderLabelPosition.Right;
+            resources.ApplyResources(this.holesSlider, "holesSlider");
+            this.holesSlider.Name = "holesSlider";
+            this.holesSlider.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.holesSlider.Value = 0;
+            this.holesSlider.ValueChanged += new System.EventHandler(this.holesSlider_ValueChanged);
+            // 
             // LaserCtrl
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.holesSlider);
             this.Controls.Add(this.btnAppearance);
             this.Controls.Add(this.btnHoleSize);
             this.Controls.Add(this.btnAlignLaser);
@@ -148,6 +164,7 @@ namespace Cii.Lar.UI
             this.Controls.SetChildIndex(this.btnHoleSize, 0);
             this.Controls.SetChildIndex(this.btnAppearance, 0);
             this.Controls.SetChildIndex(this.closeButton, 0);
+            this.Controls.SetChildIndex(this.holesSlider, 0);
             this.ResumeLayout(false);
 
         }
@@ -163,5 +180,6 @@ namespace Cii.Lar.UI
         private System.Windows.Forms.Button btnAlignLaser;
         private System.Windows.Forms.Button btnHoleSize;
         private System.Windows.Forms.Button btnAppearance;
+        private DevComponents.DotNetBar.Controls.Slider holesSlider;
     }
 }

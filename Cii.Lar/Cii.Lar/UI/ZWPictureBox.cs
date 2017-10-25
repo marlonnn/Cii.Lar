@@ -127,6 +127,15 @@ namespace Cii.Lar.UI
         /// </summary>
         private Point lastBaseCtrlMousePos;
 
+        public void UpdateHoleNumber(int value)
+        {
+            ActiveLaser activeLaser = Laser as ActiveLaser;
+            if (activeLaser != null)
+            {
+                activeLaser.UpdateHoleNumber(value);
+            }
+        }
+
         /// <summary>
         /// the new area where the Statistics control to be dragged
         /// </summary>
@@ -422,14 +431,14 @@ namespace Cii.Lar.UI
         private void InitializeControls()
         {
             controls = new List<BaseCtrl>();
-            controls.Add(new LaserCtrl());
+            controls.Add(new LaserCtrl(this));
             controls.Add(new LaserAppearanceCtrl());
             controls.Add(new StatisticsCtrl());
             RulerAppearanceCtrl rulerAppearance = new RulerAppearanceCtrl();
             //rulerAppearance.UpdateTimerStatesHandler += UpdateTimerStatesHandler;
             controls.Add(rulerAppearance);
 
-            settingCtrl = new SettingCtrl();
+            settingCtrl = new SettingCtrl(this);
             settingCtrl.UpdateSimulatorImageHandler += UpdateSimulatorImageHandler;
             //settingCtrl.UpdateTimerStatesHandler += UpdateTimerStatesHandler;
             controls.Add(settingCtrl);
@@ -940,6 +949,18 @@ namespace Cii.Lar.UI
                 ZoomOnMouseCenter(args, oldzoom);
                 this.imageTracker.ScalePercent = zoom * 100;
                 this.Invalidate();
+            }
+        }
+
+        public void HolesInfoChangeHandler(HolesInfo holesInfo)
+        {
+            if (holesInfo != null)
+            {
+                LaserCtrl laserCtrl = controls[0] as LaserCtrl;
+                if (laserCtrl != null)
+                {
+                    laserCtrl.UpdateHolesInfo(holesInfo);
+                }
             }
         }
 

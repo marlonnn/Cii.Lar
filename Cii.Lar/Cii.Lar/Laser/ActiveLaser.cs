@@ -82,5 +82,9 @@ namespace Cii.Lar.Laser
             activeCircle.OnPaint(g);
         }
 
+        public void UpdateHoleNumber(int value)
+        {
+            activeCircle.HolesInfo.HoleNum = value;
+        }
     }
 }

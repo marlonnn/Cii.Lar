@@ -202,6 +202,7 @@ namespace Cii.Lar.UI
             resources.ApplyResources(this.btnSimulator, "btnSimulator");
             this.btnSimulator.Name = "btnSimulator";
             this.btnSimulator.UseVisualStyleBackColor = false;
+            this.btnSimulator.Click += new System.EventHandler(this.btnSimulator_Click);
             // 
             // labelItemCamera
             // 

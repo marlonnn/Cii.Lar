@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using Cii.Lar.DrawTools;
+using Cii.Lar.Laser;
 
 namespace Cii.Lar.UI
 {
@@ -22,12 +23,22 @@ namespace Cii.Lar.UI
 
         private GraphicsProperties graphicsProperties;
 
-        public LaserCtrl() : base()
+        private ZWPictureBox pictureBox;
+        public LaserCtrl(ZWPictureBox pictureBox) : base()
         {
             resources = new ComponentResourceManager(typeof(LaserCtrl));
+            this.pictureBox = pictureBox;
             this.ShowIndex = 0;
             graphicsProperties = graphicsPropertiesManager.GetPropertiesByName("Circle");
             InitializeComponent();
+        }
+
+        public void UpdateHolesInfo(HolesInfo holesInfo)
+        {
+            this.holesSlider.Maximum = holesInfo.MaxHoleNum;
+            this.holesSlider.Minimum = holesInfo.MinHoleNum;
+            this.holesSlider.Value = holesInfo.HoleNum;
+            this.holesSlider.Text = string.Format("{0}holes", holesInfo.HoleNum);
         }
 
         /// <summary>
@@ -95,6 +106,11 @@ namespace Cii.Lar.UI
         {
             base.RefreshUI();
             this.Title = global::Cii.Lar.Properties.Resources.StrLaserCtrlTitle;
+        }
+
+        private void holesSlider_ValueChanged(object sender, EventArgs e)
+        {
+            pictureBox.UpdateHoleNumber(this.holesSlider.Value);
         }
     }
 }

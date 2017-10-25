@@ -136,6 +136,18 @@
   <data name="labelItemLanguage.Text" xml:space="preserve">
     <value>Language</value>
   </data>
+  <data name="comboItem1.Text" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="comboItem1.Value" xml:space="preserve">
+    <value>en-US</value>
+  </data>
+  <data name="comboItem2.Text" xml:space="preserve">
+    <value>简体中文</value>
+  </data>
+  <data name="comboItem2.Value" xml:space="preserve">
+    <value>zh-CN</value>
+  </data>
   <data name="itemPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 247</value>
   </data>
@@ -160,18 +172,6 @@
   </data>
   <data name="&gt;&gt;itemPanel1.ZOrder" xml:space="preserve">
     <value>6</value>
-  </data>
-  <data name="comboItem1.Text" xml:space="preserve">
-    <value>English</value>
-  </data>
-  <data name="comboItem1.Value" xml:space="preserve">
-    <value>en-US</value>
-  </data>
-  <data name="comboItem2.Text" xml:space="preserve">
-    <value>简体中文</value>
-  </data>
-  <data name="comboItem2.Value" xml:space="preserve">
-    <value>zh-CN</value>
   </data>
   <data name="buttonSelect.Location" type="System.Drawing.Point, System.Drawing">
     <value>165, 20</value>
@@ -287,6 +287,18 @@
   <data name="lblSimulator.Text" xml:space="preserve">
     <value>Simulator Image</value>
   </data>
+  <data name="comboItem7.Text" xml:space="preserve">
+    <value>Embyro</value>
+  </data>
+  <data name="comboItem8.Text" xml:space="preserve">
+    <value>Sperm</value>
+  </data>
+  <data name="comboItem9.Text" xml:space="preserve">
+    <value>Embyro 8 Cell</value>
+  </data>
+  <data name="comboItem10.Text" xml:space="preserve">
+    <value>Egg</value>
+  </data>
   <data name="itemPanelCamera.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 57</value>
   </data>
@@ -310,18 +322,6 @@
   </data>
   <data name="&gt;&gt;itemPanelCamera.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="comboItem7.Text" xml:space="preserve">
-    <value>Embyro</value>
-  </data>
-  <data name="comboItem8.Text" xml:space="preserve">
-    <value>Sperm</value>
-  </data>
-  <data name="comboItem9.Text" xml:space="preserve">
-    <value>Embyro 8 Cell</value>
-  </data>
-  <data name="comboItem10.Text" xml:space="preserve">
-    <value>Egg</value>
   </data>
   <data name="buttonItemSimulator.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>

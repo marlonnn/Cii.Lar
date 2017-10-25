@@ -13,6 +13,7 @@ namespace Cii.Lar.UI
 {
     public partial class SettingCtrl : BaseCtrl
     {
+        private ZWPictureBox pictureBox;
         private SystemInfoForm systemInfoForm;
 
         public delegate void UpdateTimerState(bool enable);
@@ -23,8 +24,9 @@ namespace Cii.Lar.UI
 
         public delegate void UpdateSimulatorImage(int selectIndex);
         public UpdateSimulatorImage UpdateSimulatorImageHandler;
-        public SettingCtrl() : base()
+        public SettingCtrl(ZWPictureBox pictureBox) : base()
         {
+            this.pictureBox = pictureBox;
             this.ShowIndex = 4;
             InitializeComponent();
             resources = new ComponentResourceManager(typeof(SettingCtrl));
@@ -210,6 +212,12 @@ namespace Cii.Lar.UI
                     Program.ExpManager.LaserType = ExpClass.LaserType.SaturnActive;
                     break;
             }
+        }
+
+        private void btnSimulator_Click(object sender, EventArgs e)
+        {
+            this.pictureBox.LoadImage(string.Format("{0}\\Resources\\Simulator\\Embryo.bmp", System.Environment.CurrentDirectory));
+            this.cmbImage.SelectedIndex = 0;
         }
     }
 }
