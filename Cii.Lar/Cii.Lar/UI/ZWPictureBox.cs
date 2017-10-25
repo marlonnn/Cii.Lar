@@ -484,15 +484,23 @@ namespace Cii.Lar.UI
         {
             if (this.drawObject == null || drawObject.Name != this.drawObject.Name)
             {
-                this.drawObject = drawObject;
-                ListViewItem lvi = new ListViewItem();
-                lvi.Text = drawObject.Name;
-                lvi.SubItems.Add(statistics.Circumference.ToString());
-                lvi.SubItems.Add(statistics.Area.ToString());
-                StatisticsControl.StatisticsListView.Items.Add(lvi);
-                ListViewItemEx listViewItemEx = new ListViewItemEx(lvi, drawObject);
-                AddEmbeddedControlToListView(listViewItemEx);
-                EnableAppearanceButton();
+                try
+                {
+                    this.drawObject = drawObject;
+                    ListViewItem lvi = new ListViewItem();
+                    lvi.Text = drawObject.Name;
+                    lvi.SubItems.Add(statistics.Circumference.ToString());
+                    lvi.SubItems.Add(statistics.Area.ToString());
+                    StatisticsControl.StatisticsListView.Items.Add(lvi);
+                    ListViewItemEx listViewItemEx = new ListViewItemEx(lvi, drawObject);
+                    AddEmbeddedControlToListView(listViewItemEx);
+                    EnableAppearanceButton();
+                }
+                catch (Exception ee)
+                {
+                    LogHelper.GetLogger<ZWPictureBox>().Error(ee.Message);
+                    LogHelper.GetLogger<ZWPictureBox>().Error(ee.StackTrace);
+                }
             }
         }
 
