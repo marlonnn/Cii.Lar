@@ -39,6 +39,12 @@ namespace Cii.Lar.UI
         {
             get { return this.lblInfo; }
         }
+
+        public void ButtenNext(bool isEnable)
+        {
+            this.btnNext.Enabled = isEnable;
+        }
+
         public LaserAlignment(ZWPictureBox pictureBox) :base()
         {
             resources = new ComponentResourceManager(typeof(LaserAlignment));
@@ -82,12 +88,14 @@ namespace Cii.Lar.UI
                     {
                         laser.Index = Index;
                     }
+                    //this.pictureBox.ZoomFit();
                 }
             }
             else
             {
                 this.Visible = false;
                 this.Enabled = false;
+                this.pictureBox.ZoomFit();
             }
         }
 

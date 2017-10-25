@@ -51,11 +51,40 @@ namespace Cii.Lar.Laser
                 {
                     this.index = value;
                     this.CurrentCircle = circles[value];
+                    this.IsShowCross = false;
+                    ButtonStateHandler?.Invoke(false);
+                    this.pictureBox.ZoomFit();
                     this.pictureBox.Invalidate();
                 }
             }
         }
 
+        private bool isShowCross = false;
+        public bool IsShowCross
+        {
+            get { return this.isShowCross; }
+            set
+            {
+                if (value != this.isShowCross)
+                {
+                    this.isShowCross = value;
+                    this.pictureBox.Invalidate();
+                }
+            }
+        }
+
+        private int count = 0;
+        public int Count
+        {
+            get { return this.count; }
+            set
+            {
+                if (value != this.count)
+                {
+                    count = value;
+                }
+            }
+        }
         public AlignLaser(ZWPictureBox pictureBox) :base()
         {
             this.pictureBox = pictureBox;
@@ -64,16 +93,23 @@ namespace Cii.Lar.Laser
             circles = JsonFile.GetConfigFromJsonText<List<Circle>>(jsonConfig);
         }
 
-        bool zoom = false;
+        public delegate void ButtonState(bool enable);
+        public  ButtonState ButtonStateHandler;
         public override void OnMouseDown(ZWPictureBox pictureBox, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left && IsClickLaser(e.Location))
+            if (e.Button == MouseButtons.Left /*&& IsClickLaser(e.Location)*/)
             {
-                zoom = !zoom;
-                ZoomHandler?.Invoke(e, zoom);
-                if (!zoom)
+                count++;
+                if (count == 1)
                 {
-                    //step next
+                    ZoomHandler?.Invoke(e, true);
+                    ButtonStateHandler?.Invoke(false);
+                }
+                else if (count == 2)
+                {
+                    IsShowCross = true;
+                    Count = 0;
+                    ButtonStateHandler?.Invoke(true);
                 }
             }
         }
@@ -122,14 +158,15 @@ namespace Cii.Lar.Laser
                 Graphics g = e.Graphics;
                 g.CompositingQuality = CompositingQuality.HighQuality;
                 g.SmoothingMode = SmoothingMode.AntiAlias;
-                g.DrawEllipse(new Pen(Color.WhiteSmoke, 2f), CurrentCircle.Rectangle);
+                g.DrawEllipse(new Pen(Color.Orange, 2f), CurrentCircle.Rectangle);
                 Circle circle2 = new Circle(CurrentCircle.CenterPoint, 
                     new Size((int)(1.4 * CurrentCircle.Rectangle.Width), (int)(1.4 * CurrentCircle.Rectangle.Width)));
                 Circle circle3 = new Circle(CurrentCircle.CenterPoint, 
                     new Size((int)(1.4 * circle2.Rectangle.Width), (int)(1.4 * circle2.Rectangle.Width)));
                 g.DrawEllipse(new Pen(Color.Orange, 2f), circle2.Rectangle);
-                g.DrawEllipse(new Pen(Color.Yellow, 2f), circle3.Rectangle);
-                DrawCross(g);
+                g.DrawEllipse(new Pen(Color.Orange, 2f), circle3.Rectangle);
+                if (IsShowCross)
+                    DrawCross(g);
             }
         }
 

@@ -613,7 +613,7 @@ namespace Cii.Lar.UI
             {
                 if (ctrl.Name == "LaserAlignment")
                 {
-                    ctrl.Location = new Point(this.Width - ctrl.Width - 5, this.Height - ctrl.Height + 10);
+                    ctrl.Location = new Point(this.Width - ctrl.Width - 5, this.Height - ctrl.Height - 20);
                 }
                 else
                 {
@@ -942,6 +942,16 @@ namespace Cii.Lar.UI
                 this.Invalidate();
             }
         }
+
+        public void ButtonStateHandler(bool isEnable)
+        {
+            LaserAlignment laserAlignment = controls[5] as LaserAlignment;
+            if (laserAlignment != null)
+            {
+                laserAlignment.ButtenNext(isEnable);
+            }
+        }
+
 
         public void ZoomHandler(MouseEventArgs e,bool zoomIn)
         {
