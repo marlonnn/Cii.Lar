@@ -67,7 +67,7 @@ namespace Cii.Lar.Laser
         bool zoom = false;
         public override void OnMouseDown(ZWPictureBox pictureBox, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left && IsClickLaser(e.Location))
             {
                 zoom = !zoom;
                 ZoomHandler?.Invoke(e, zoom);
@@ -75,6 +75,26 @@ namespace Cii.Lar.Laser
                 {
                     //step next
                 }
+            }
+        }
+
+        private bool IsClickLaser(Point point)
+        {
+            if (currentCircle != null)
+            {
+                RectangleF r = new RectangleF(currentCircle.CenterPoint.X - currentCircle.Rectangle.Width / 2, currentCircle.CenterPoint.Y - currentCircle.Rectangle.Height / 2, currentCircle.Rectangle.Width, currentCircle.Rectangle.Height);
+                if (r.Contains(point))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
             }
         }
 

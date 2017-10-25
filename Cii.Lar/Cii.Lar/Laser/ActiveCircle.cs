@@ -13,6 +13,13 @@ namespace Cii.Lar.Laser
 {
     public class ActiveCircle
     {
+        public enum LaserShape
+        {
+            Line,
+            Arc
+        }
+        private LaserShape shape;
+
         private CircleData circleData;
         /// <summary>
         /// GraphicsPropertiesManager: include all the draw object graphics properties
@@ -104,7 +111,18 @@ namespace Cii.Lar.Laser
         private List<Circle> outterCircles;
 
         private List<Circle> realInnerCircles;
+        public List<Circle> RealInnerCircle
+        {
+            get { return this.realInnerCircles; }
+            set { this.realInnerCircles = value; }
+        }
+
         private List<Circle> realOutterCircles;
+        public List<Circle> RealOutterCircle
+        {
+            get { return this.realOutterCircles; }
+            set { this.realOutterCircles = value; }
+        }
 
         private int minHoleNum = 0;
         public int MinHoleNum
@@ -169,15 +187,20 @@ namespace Cii.Lar.Laser
             set { this.centerPoint = value; }
         }
 
+        private Size crossSize;
+
         public ActiveCircle(ZWPictureBox pictureBox)
         {
+            shape = LaserShape.Line;
             IsMouseUp = false;
             InTheHole = false;
             this.pictureBox = pictureBox;
+
             circleData = new CircleData();
             InitializeGraphicsProperties();
             InnerCircleSize = new Size(38, 38);
             OutterCircleSize = new Size(48, 48);
+            crossSize = new Size(38, 38);
             clickCount = 0;
             innerCircles = new List<Circle>();
             outterCircles = new List<Circle>();
@@ -210,19 +233,33 @@ namespace Cii.Lar.Laser
             {
                 EndPoint = point;
                 CalculateContinuousCircle(dx, dy);
+                shape = LaserShape.Line;
             }
             else
             {
                 if (!CenterPoint.IsEmpty)
                 {
-                    RectangleF rect = new RectangleF(CenterPoint, OutterCircleSize);
+                    RectangleF rect = new RectangleF(new PointF(CenterPoint.X - 50, CenterPoint.Y - 50), new Size(100, 100));
                     InTheHole = rect.Contains(point);
-                    if (/*InTheHole && */(e.Button == MouseButtons.Left))
+                    if (InTheHole && (e.Button == MouseButtons.Left))
                     {
                         CalcAngle(point, dx, dy);
+                        shape = LaserShape.Arc;
                     }
                 }
             }
+        }
+
+        public double ArcLength()
+        {
+            double lengthArc = 0;
+            var halfLenght = Length / 2;
+            if (shape == LaserShape.Arc && circleData != null)
+            {
+                var angleArc = 2 * (Math.Asin(halfLenght / Math.Abs(circleData.Radius)));
+                lengthArc = angleArc * Math.Abs(circleData.Radius);
+            }
+            return lengthArc;
         }
 
         private void CalcAngle(Point point, int dx, int dy)
@@ -247,7 +284,7 @@ namespace Cii.Lar.Laser
             var temp = (halfLenght) / Math.Tan(angle / 2);
             //Console.WriteLine("temp: " + temp);
             var radius = (Math.Pow(halfLenght, 2) + Math.Pow(temp, 2)) / (2 * temp);
-            Console.WriteLine("radius: " + radius);
+            //Console.WriteLine("radius: " + radius);
             var angleArc = 2 * (Math.Asin(halfLenght / Math.Abs(radius)));
 
             var lengthArc = angleArc * Math.Abs(radius);
@@ -272,27 +309,10 @@ namespace Cii.Lar.Laser
                 innerCircles.Clear();
                 outterCircles.Clear();
                 var angleArcUnit = angleArc / holeNum;
-                double slice = angleArc / holeNum;
-                CirclePoints(circleData.CenterPt, StartPoint, EndPoint, radius, -1, holeNum);
-
-                for (int i = 0; i < holeNum + 2; i++)
-                {
-                    if (i == 0)
-                    {
-                        realInnerCircles.Add(startCircle);
-                        realOutterCircles.Add(new Circle(startPoint, OutterCircleSize));
-                    }
-                    else if (i == holeNum + 1)
-                    {
-                        realInnerCircles.Add(endCircle);
-                        realOutterCircles.Add(new Circle(endPoint, OutterCircleSize));
-                    }
-                    else
-                    {
-                        realInnerCircles.Add(innerCircles[i - 1]);
-                        realOutterCircles.Add(outterCircles[i - 1]);
-                    }
-                }
+                if (radius > 0)
+                    CalcCirclePoint(circleData.CenterPt, StartPoint, EndPoint, circleData.Radius, -1, holeNum);
+                else
+                    CalcCirclePoint(circleData.CenterPt, StartPoint, EndPoint, circleData.Radius, 1, holeNum);
             }
         }
 
@@ -358,45 +378,23 @@ namespace Cii.Lar.Laser
             }
             circleData.CenterPt = centerPt;
             var radius = Math.Sqrt((circleData.CenterPt.X - pt1.X) * (circleData.CenterPt.X - pt1.X) + (circleData.CenterPt.Y - pt1.Y) * (circleData.CenterPt.Y - pt1.Y));
-            Console.WriteLine("new radius2: " + radius);
+            circleData.Radius = radius;
+            //Console.WriteLine("new radius2: " + radius);
         }
 
-        private void DrawCirclePoints(int points, double radius, PointF center)
+        private void CalcCirclePoint(PointF centerPt, Point startPt, Point endPt, double Radii, int ccw, int count)
         {
-            double slice = 2 * Math.PI / points;
-            for (int i = 0; i < points; i++)
+            if (count <= 1)
             {
-                double angle = slice * i;
-                int newX = (int)(center.X + radius * Math.Cos(angle));
-                int newY = (int)(center.Y + radius * Math.Sin(angle));
-                Point p = new Point(newX, newY);
-                Console.WriteLine(p);
+                return;
             }
-        }
+            double vCenterBegin_x = startPt.X - centerPt.X;                                 // 圆心与起点连线矢量
+            double vCenterBegin_y = startPt.Y - centerPt.Y;                                 // 圆心与起点连线矢量
+            double vCenterEnd_x = endPt.X - centerPt.X;                                     // 圆心与终点连线矢量
+            double vCenterEnd_y = endPt.Y - centerPt.Y;                                     // 圆心与终点连线矢量
 
-        private Point CirclePoints(double slice, double radius, PointF center, int index)
-        {
-            double angle = slice * index;
-            int newX = (int)(center.X + radius * Math.Cos(angle));
-            int newY = (int)(center.Y + radius * Math.Sin(angle));
-            return new Point(newX, newY);
-        }
-
-        private bool CirclePoints(PointF center, Point startPt, Point endPt, double Radii, int ccw, int count)
-        {
-            if (count < 1)
-            {
-                return false;
-            }
-            double vCenterBegin_x = startPt.X - center.X;                                 // 圆心与起点连线矢量
-            double vCenterBegin_y = startPt.Y - center.Y;                                 // 圆心与起点连线矢量
-            double vCenterEnd_x = endPt.X - center.X;                                     // 圆心与终点连线矢量
-            double vCenterEnd_y = endPt.Y - center.Y;                                       // 圆心与终点连线矢量
-
-            double Length_Begin = Math.Sqrt(vCenterBegin_x * vCenterBegin_x +
-                vCenterBegin_y * vCenterBegin_y);
-            double Length_End = Math.Sqrt(vCenterEnd_x * vCenterEnd_x +
-                vCenterEnd_y * vCenterEnd_y);
+            double Length_Begin = Math.Sqrt(vCenterBegin_x * vCenterBegin_x + vCenterBegin_y * vCenterBegin_y);
+            double Length_End = Math.Sqrt(vCenterEnd_x * vCenterEnd_x + vCenterEnd_y * vCenterEnd_y);
 
             vCenterBegin_x = vCenterBegin_x * Radii / Length_Begin;                     // 改变模长
             vCenterBegin_y = vCenterBegin_y * Radii / Length_Begin;                     // 改变模长
@@ -407,18 +405,21 @@ namespace Cii.Lar.Laser
             double sinangleY = vCenterBegin_x * vCenterEnd_y - vCenterBegin_y * vCenterEnd_x;   // 差乘得sin<a, 乘m_ccw后的到需要的角的sin, 左右对称, asin弧度范围在 -PI/2 ~ PI/2之间
             double sinangleX = vCenterBegin_x * vCenterEnd_x + vCenterBegin_y * vCenterEnd_y;   // 点乘得cos<a, 乘m_ccw后的到需要的角的cos, 上下对称, acos弧度范围在 0 ~ PI之间
             if (sinangleY == 0.0 && sinangleX == 0.0)                                   // 起点在圆心处
-                angle = 0.0;															// 起点弧度
-            else
+                angle = 0.0;                                                            // 起点弧度
+            else                                                                        // 起点不在圆心处
             {
                 angle = Math.Atan2(sinangleY, sinangleX);                                    // [ radianBegin: 起点与圆心连线和x轴的角的弧度 ][ atan2(y,x): 计算y/x的反正切值, 按照参数的符号计算所在的象限, atan2弧度范围在 -PI ~ PI之间 ]
                 if (angle < 0.0)
                     angle = angle + 2.0 * Math.PI;                                          // 弧度范围控制在0 ~ 2*PI之间, 对应角度为0 ~ 360 . 此处只能用atan2, 不能仅用asin或仅用acos
 
                 if (-1 == ccw)
-                    angle = 2.0 * Math.PI - angle;											// 取另一边
+                {
+                    angle = 2.0 * Math.PI - angle;                                          // 取另一边
+                }
             }
 
-            double theta = angle / (double)(count - 1);                                 // 要求的点与圆心连线矢量和圆心与起点连线矢量的角的弧度, 每一小段弧长弧度
+            double theta = angle / (double)(count - 1);									// 要求的点与圆心连线矢量和圆心与起点连线矢量的角的弧度, 每一小段弧长弧度
+
             for (int i = 0; i < count; i++)
             {
                 // 得到相对圆心的位置, 用圆心与起点连线矢量来旋转, ccw为1时逆时针旋转, 为－1时正时针旋转
@@ -426,41 +427,13 @@ namespace Cii.Lar.Laser
                     vCenterBegin_y * Math.Sin((double)ccw * theta * (double)i);
                 double Dots_y = vCenterBegin_x * Math.Sin((double)ccw * theta * (double)i) +
                     vCenterBegin_y * Math.Cos((double)ccw * theta * (double)i);
-                Dots_x += center.X;                                                  // 得到相对原点的位置
-                Dots_y += center.Y;                                                  // 得到相对原点的位置
+                Dots_x+= centerPt.X;                                                  // 得到相对原点的位置
+                Dots_y += centerPt.Y;													// 得到相对原点的位置
                 PointF p = new PointF((float)Dots_x, (float)Dots_y);
-                innerCircles.Add(new Circle(p, InnerCircleSize));
-                outterCircles.Add(new Circle(p, OutterCircleSize));
+                realInnerCircles.Add(new Circle(p, InnerCircleSize));
+                realOutterCircles.Add(new Circle(p, OutterCircleSize));
             }
-            return true;
-        }
-
-        private PointF CalcCirclePoint(Point startPt, double angleArcUnit, int divideIndex)
-        {
-            PointF centerPt = circleData.CenterPt;
-            double radius = circleData.Radius;
-            var u = (startPt.Y - centerPt.Y) / (startPt.X - centerPt.X);
-            var v = (Math.Pow(radius, 2) * Math.Sin(angleArcUnit * divideIndex) + startPt.X * centerPt.Y - centerPoint.X * startPt.Y) 
-                / (startPt.X - centerPt.X);
-
-            var a = 1 + Math.Pow(u, 2);
-            var b = (2 * u * (v - centerPt.Y) - 2 * centerPt.X);
-            var c = Math.Pow(centerPt.X, 2) + Math.Pow((v - centerPt.Y), 2) - Math.Pow(radius, 2);
-            var delta = Math.Pow(b, 2) - 4 * a * c;
-            double x = 0, y = 0;
-            if (delta < 0)
-            {
-                return PointF.Empty;
-            }
-            else
-            {
-                x = (-b + Math.Sqrt(delta)) / (2 * a);
-                y = u * x + v;
-
-                var x2 = (-b + Math.Sqrt(delta)) / (2 * a);
-                var y2 = u * x2 + v;
-            }
-            return new PointF((float)x, (float)y);
+            CenterPoint = realInnerCircles[count / 2].CenterPoint;
         }
 
         public void OnMouseUp()
@@ -474,10 +447,6 @@ namespace Cii.Lar.Laser
             }
         }
 
-        private void MoveToArc()
-        {
-
-        }
         private double length;
         public double Length
         {
@@ -604,30 +573,56 @@ namespace Cii.Lar.Laser
                 return;
             }
 
-            DrawCross(g);
+            Draw(g);
         }
 
-        private void DrawCross(Graphics g)
+        private void DrawCross(Graphics g, Pen pen, Circle circle, Size size)
+        {
+            //draw start point cross
+            g.DrawLine(pen, circle.CenterPoint.X, circle.CenterPoint.Y - size.Width / 2,
+                circle.CenterPoint.X, circle.CenterPoint.Y + size.Width / 2);
+            g.DrawLine(pen, circle.CenterPoint.X - size.Width / 2, circle.CenterPoint.Y,
+                circle.CenterPoint.X + size.Width / 2, circle.CenterPoint.Y);
+        }
+
+        private void DrawConnectLine(Graphics g, Pen pen, Circle startCircle, Circle endCircle, CircleData circleData, bool isArc)
+        {
+            //if (shape == LaserShape.Arc)
+            //{
+            //    //draw connect arc
+            //    var x = circleData.CenterPt.X - circleData.Radius;
+            //    var y = circleData.CenterPt.Y - circleData.Radius;
+            //    var width = 2 * circleData.Radius;
+            //    var height = 2 * circleData.Radius;
+            //    var startAngle = 180 / Math.PI * Math.Atan2(startCircle.CenterPoint.Y - circleData.CenterPt.Y, 
+            //        startCircle.CenterPoint.X - circleData.CenterPt.X);
+            //    var endAngle = 180 / Math.PI * Math.Atan2(endCircle.CenterPoint.Y - circleData.CenterPt.Y, 
+            //        endCircle.CenterPoint.X - circleData.CenterPt.X);
+            //    g.DrawArc(pen, (float)x, (float)y, (float)width, (float)height, (float)startAngle, (float)endAngle);
+            //}
+            //else if (shape == LaserShape.Line)
+            //{
+            //    //draw connect Line
+            //    g.DrawLine(pen, startCircle.CenterPoint, endCircle.CenterPoint);
+            //}
+        }
+
+        private void Draw(Graphics g)
         {
             Pen pen = new Pen(Color.Black, 1f);
             //draw start point cross
-            g.DrawLine(pen, startCircle.CenterPoint.X, startCircle.CenterPoint.Y - startCircle.Rectangle.Width / 2,
-            startCircle.CenterPoint.X, startCircle.CenterPoint.Y + startCircle.Rectangle.Width / 2);
-            g.DrawLine(pen, startCircle.CenterPoint.X - startCircle.Rectangle.Width / 2, startCircle.CenterPoint.Y,
-                startCircle.CenterPoint.X + startCircle.Rectangle.Width / 2, startCircle.CenterPoint.Y);
+            DrawCross(g, pen, StartCircle, crossSize);
 
             //draw connect Line
-            g.DrawLine(pen, startCircle.CenterPoint, endCircle.CenterPoint);
+            //g.DrawLine(pen, startCircle.CenterPoint, endCircle.CenterPoint);
+            DrawConnectLine(g, pen, StartCircle, EndCircle, circleData, !CenterPoint.IsEmpty && InTheHole);
 
             //draw center cross point
             if (!CenterPoint.IsEmpty && InTheHole)
             {
                 using (Pen centerPen = new Pen(Color.Red, 1f))
                 {
-                    g.DrawLine(centerPen, CenterPoint.X, CenterPoint.Y - startCircle.Rectangle.Width / 2,
-                        CenterPoint.X, CenterPoint.Y + startCircle.Rectangle.Width / 2);
-                    g.DrawLine(centerPen, CenterPoint.X - startCircle.Rectangle.Width / 2, CenterPoint.Y,
-                        CenterPoint.X + startCircle.Rectangle.Width / 2, CenterPoint.Y);
+                    DrawCross(g, centerPen, new Circle(CenterPoint, crossSize), crossSize);
                 }
             }
 
@@ -656,10 +651,7 @@ namespace Cii.Lar.Laser
             g.FillRegion(brush, region1);
 
             //draw end point cross
-            g.DrawLine(pen, EndCircle.CenterPoint.X, EndCircle.CenterPoint.Y - EndCircle.Rectangle.Width / 2,
-                EndCircle.CenterPoint.X, EndCircle.CenterPoint.Y + EndCircle.Rectangle.Width / 2);
-            g.DrawLine(pen, EndCircle.CenterPoint.X - EndCircle.Rectangle.Width / 2, EndCircle.CenterPoint.Y,
-                EndCircle.CenterPoint.X + EndCircle.Rectangle.Width / 2, EndCircle.CenterPoint.Y);
+            DrawCross(g, pen, EndCircle, crossSize);
 
             pen.Dispose();
             brush.Dispose();
@@ -667,7 +659,6 @@ namespace Cii.Lar.Laser
             path2.Dispose();
             region1.Dispose();
         }
-
 
     }
 }

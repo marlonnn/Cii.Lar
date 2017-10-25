@@ -21,6 +21,21 @@ namespace Cii.Lar.Laser
         {
             this.pictureBox = pictureBox;
             activeCircle = new ActiveCircle(pictureBox);
+            this.GraphicsProperties.GraphicsPropertiesChangedHandler += GraphicsPropertiesChangedHandler;
+        }
+
+        private void GraphicsPropertiesChangedHandler(DrawObject drawObject, GraphicsProperties graphicsProperties)
+        {
+            activeCircle.OutterCircleSize = new Size((60 + this.GraphicsProperties.ExclusionSize) * this.GraphicsProperties.TargetSize,
+                (60 + this.GraphicsProperties.ExclusionSize) * this.GraphicsProperties.TargetSize);
+            activeCircle.InnerCircleSize = new Size(38 * this.GraphicsProperties.TargetSize, 38 * this.GraphicsProperties.TargetSize);
+
+            for (int i=0; i< activeCircle.RealInnerCircle.Count; i++)
+            {
+                activeCircle.RealInnerCircle[i] = new Circle(activeCircle.RealInnerCircle[i].CenterPoint, activeCircle.InnerCircleSize);
+                activeCircle.RealOutterCircle[i] = new Circle(activeCircle.RealOutterCircle[i].CenterPoint, activeCircle.OutterCircleSize);
+            }
+            this.pictureBox.Invalidate();
         }
 
         public override void OnMouseDown(ZWPictureBox pictureBox, MouseEventArgs e)

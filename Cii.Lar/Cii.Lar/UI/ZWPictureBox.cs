@@ -484,15 +484,23 @@ namespace Cii.Lar.UI
         {
             if (this.drawObject == null || drawObject.Name != this.drawObject.Name)
             {
-                this.drawObject = drawObject;
-                ListViewItem lvi = new ListViewItem();
-                lvi.Text = drawObject.Name;
-                lvi.SubItems.Add(statistics.Circumference.ToString());
-                lvi.SubItems.Add(statistics.Area.ToString());
-                StatisticsControl.StatisticsListView.Items.Add(lvi);
-                ListViewItemEx listViewItemEx = new ListViewItemEx(lvi, drawObject);
-                AddEmbeddedControlToListView(listViewItemEx);
-                EnableAppearanceButton();
+                try
+                {
+                    this.drawObject = drawObject;
+                    ListViewItem lvi = new ListViewItem();
+                    lvi.Text = drawObject.Name;
+                    lvi.SubItems.Add(statistics.Circumference.ToString());
+                    lvi.SubItems.Add(statistics.Area.ToString());
+                    StatisticsControl.StatisticsListView.Items.Add(lvi);
+                    ListViewItemEx listViewItemEx = new ListViewItemEx(lvi, drawObject);
+                    AddEmbeddedControlToListView(listViewItemEx);
+                    EnableAppearanceButton();
+                }
+                catch (Exception ee)
+                {
+                    LogHelper.GetLogger<ZWPictureBox>().Error(ee.Message);
+                    LogHelper.GetLogger<ZWPictureBox>().Error(ee.StackTrace);
+                }
             }
         }
 
@@ -891,9 +899,12 @@ namespace Cii.Lar.UI
 
         public void ZoomFit()
         {
-            this.OffsetX = (this.Width - this.Image.Width) / 2;
-            //this.OffsetY = 0;
-            this.OffsetY = (this.Height - this.Image.Height) / 2;
+            if (this.Image != null)
+            {
+                this.OffsetX = (this.Width - this.Image.Width) / 2;
+                //this.OffsetY = 0;
+                this.OffsetY = (this.Height - this.Image.Height) / 2;
+            }
             this.zoom = 1;
             this.imageTracker.ScalePercent = zoom * 100;
             this.Invalidate();
