@@ -13,6 +13,13 @@ namespace Cii.Lar.Laser
 {
     public class ActiveCircle
     {
+        public enum LaserShape
+        {
+            Line,
+            Arc
+        }
+        private LaserShape shape;
+
         private CircleData circleData;
         /// <summary>
         /// GraphicsPropertiesManager: include all the draw object graphics properties
@@ -104,7 +111,18 @@ namespace Cii.Lar.Laser
         private List<Circle> outterCircles;
 
         private List<Circle> realInnerCircles;
+        public List<Circle> RealInnerCircle
+        {
+            get { return this.realInnerCircles; }
+            set { this.realInnerCircles = value; }
+        }
+
         private List<Circle> realOutterCircles;
+        public List<Circle> RealOutterCircle
+        {
+            get { return this.realOutterCircles; }
+            set { this.realOutterCircles = value; }
+        }
 
         private int minHoleNum = 0;
         public int MinHoleNum
@@ -173,6 +191,7 @@ namespace Cii.Lar.Laser
 
         public ActiveCircle(ZWPictureBox pictureBox)
         {
+            shape = LaserShape.Line;
             IsMouseUp = false;
             InTheHole = false;
             this.pictureBox = pictureBox;
@@ -214,19 +233,33 @@ namespace Cii.Lar.Laser
             {
                 EndPoint = point;
                 CalculateContinuousCircle(dx, dy);
+                shape = LaserShape.Line;
             }
             else
             {
                 if (!CenterPoint.IsEmpty)
                 {
-                    RectangleF rect = new RectangleF(CenterPoint, OutterCircleSize);
+                    RectangleF rect = new RectangleF(CenterPoint, new Size(60, 60));
                     InTheHole = rect.Contains(point);
                     if (/*InTheHole && */(e.Button == MouseButtons.Left))
                     {
                         CalcAngle(point, dx, dy);
+                        shape = LaserShape.Arc;
                     }
                 }
             }
+        }
+
+        public double ArcLength()
+        {
+            double lengthArc = 0;
+            var halfLenght = Length / 2;
+            if (shape == LaserShape.Arc && circleData != null)
+            {
+                var angleArc = 2 * (Math.Asin(halfLenght / Math.Abs(circleData.Radius)));
+                lengthArc = angleArc * Math.Abs(circleData.Radius);
+            }
+            return lengthArc;
         }
 
         private void CalcAngle(Point point, int dx, int dy)
@@ -400,6 +433,7 @@ namespace Cii.Lar.Laser
                 realInnerCircles.Add(new Circle(p, InnerCircleSize));
                 realOutterCircles.Add(new Circle(p, OutterCircleSize));
             }
+            CenterPoint = realInnerCircles[count / 2].CenterPoint;
         }
 
         public void OnMouseUp()
@@ -553,22 +587,24 @@ namespace Cii.Lar.Laser
 
         private void DrawConnectLine(Graphics g, Pen pen, Circle startCircle, Circle endCircle, CircleData circleData, bool isArc)
         {
-            //if (isArc)
+            //if (shape == LaserShape.Arc)
             //{
             //    //draw connect arc
             //    var x = circleData.CenterPt.X - circleData.Radius;
             //    var y = circleData.CenterPt.Y - circleData.Radius;
             //    var width = 2 * circleData.Radius;
             //    var height = 2 * circleData.Radius;
-            //    var startAngle = 180 / Math.PI * Math.Atan2(startCircle.CenterPoint.Y - circleData.CenterPt.Y, startCircle.CenterPoint.X - circleData.CenterPt.X);
-            //    var endAngle = 180 / Math.PI * Math.Atan2(endCircle.CenterPoint.Y - circleData.CenterPt.Y, endCircle.CenterPoint.X - circleData.CenterPt.X);
+            //    var startAngle = 180 / Math.PI * Math.Atan2(startCircle.CenterPoint.Y - circleData.CenterPt.Y, 
+            //        startCircle.CenterPoint.X - circleData.CenterPt.X);
+            //    var endAngle = 180 / Math.PI * Math.Atan2(endCircle.CenterPoint.Y - circleData.CenterPt.Y, 
+            //        endCircle.CenterPoint.X - circleData.CenterPt.X);
             //    g.DrawArc(pen, (float)x, (float)y, (float)width, (float)height, (float)startAngle, (float)endAngle);
             //}
-            //else
-            {
-                //draw connect Line
-                g.DrawLine(pen, startCircle.CenterPoint, endCircle.CenterPoint);
-            }
+            //else if (shape == LaserShape.Line)
+            //{
+            //    //draw connect Line
+            //    g.DrawLine(pen, startCircle.CenterPoint, endCircle.CenterPoint);
+            //}
         }
 
         private void Draw(Graphics g)
@@ -623,9 +659,6 @@ namespace Cii.Lar.Laser
             path2.Dispose();
             region1.Dispose();
         }
-
-
-
 
     }
 }
