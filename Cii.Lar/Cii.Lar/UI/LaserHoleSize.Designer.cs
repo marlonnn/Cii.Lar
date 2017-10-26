@@ -110,12 +110,14 @@
             this.btnSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             resources.ApplyResources(this.btnSave, "btnSave");
             this.btnSave.Name = "btnSave";
+            this.btnSave.Visible = false;
             // 
             // btnDelete
             // 
             this.btnDelete.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             resources.ApplyResources(this.btnDelete, "btnDelete");
             this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Visible = false;
             // 
             // LaserHoleSize
             // 
