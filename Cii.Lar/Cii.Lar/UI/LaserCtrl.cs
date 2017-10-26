@@ -73,7 +73,7 @@ namespace Cii.Lar.UI
 
         private void btnHoleSize_Click(object sender, EventArgs e)
         {
-
+            ClickDelegateHandler?.Invoke(sender, "Laser Hole Size");
         }
 
         private void btnAppearance_Click(object sender, EventArgs e)

@@ -52,6 +52,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -166,6 +167,12 @@
     </Compile>
     <Compile Include="UI\LaserAlignment.Designer.cs">
       <DependentUpon>LaserAlignment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\LaserHoleSize.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\LaserHoleSize.Designer.cs">
+      <DependentUpon>LaserHoleSize.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\VideoForm.cs">
       <SubType>Form</SubType>
@@ -352,6 +359,10 @@
     <EmbeddedResource Include="UI\LaserCtrl.zh-CN.resx">
       <DependentUpon>LaserCtrl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\LaserHoleSize.resx">
+      <DependentUpon>LaserHoleSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\LaserHoleSize.zh-CN.resx" />
     <EmbeddedResource Include="UI\RulerAppearanceCtrl.resx">
       <DependentUpon>RulerAppearanceCtrl.cs</DependentUpon>
     </EmbeddedResource>

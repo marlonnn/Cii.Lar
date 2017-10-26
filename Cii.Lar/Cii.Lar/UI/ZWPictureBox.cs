@@ -443,7 +443,7 @@ namespace Cii.Lar.UI
             //settingCtrl.UpdateTimerStatesHandler += UpdateTimerStatesHandler;
             controls.Add(settingCtrl);
             controls.Add(new LaserAlignment(this));
-
+            controls.Add(new LaserHoleSize());
         }
 
         private void UpdateSimulatorImageHandler(int selectIndex)
@@ -588,6 +588,9 @@ namespace Cii.Lar.UI
                     break;
                 case "Laser Alignment":
                     ShowBaseCtrl(true, controls[5]);
+                    break;
+                case "Laser Hole Size":
+                    ShowBaseCtrl(true, controls[6]);
                     break;
             }
         }

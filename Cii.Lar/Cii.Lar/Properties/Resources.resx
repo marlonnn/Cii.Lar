@@ -259,4 +259,7 @@
   <data name="StrLaserAlignmentTitle" xml:space="preserve">
     <value>Laser Target Alignment</value>
   </data>
+  <data name="StrLaserHoleSizeCalibration" xml:space="preserve">
+    <value>Laser Hole Size Calibration</value>
+  </data>
 </root>
