@@ -84,7 +84,8 @@ namespace Cii.Lar.Laser
 
         public void UpdateHoleNumber(int value)
         {
-            activeCircle.HolesInfo.HoleNum = value;
+            activeCircle.UpdateHoleNum(value);
+            this.pictureBox.Invalidate();
         }
     }
 }

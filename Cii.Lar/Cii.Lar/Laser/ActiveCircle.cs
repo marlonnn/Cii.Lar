@@ -62,6 +62,14 @@ namespace Cii.Lar.Laser
         public void UpdateHoleNum(int holes)
         {
             this.holesInfo.UpdateHoleNum(holes);
+            if (shape == LaserShape.Line)
+            {
+                CalculateContinuousCircle();
+            }
+            else if (shape == LaserShape.Arc)
+            {
+                CalcAngle();
+            }
         }
         public enum LaserShape
         {
@@ -216,6 +224,27 @@ namespace Cii.Lar.Laser
 
         private Size crossSize;
 
+        private double radius;
+        public double Radius
+        {
+            get { return this.radius; }
+            set { this.radius = value; }
+        }
+
+        private double angleArc;
+        public double AngleArc
+        {
+            get { return this.angleArc; }
+            set { this.angleArc = value; }
+        }
+
+        private double lengthArc;
+        public double LengthArc
+        {
+            get { return this.lengthArc; }
+            set { this.lengthArc = value; }
+        }
+
         public ActiveCircle(ZWPictureBox pictureBox)
         {
             shape = LaserShape.Line;
@@ -291,6 +320,30 @@ namespace Cii.Lar.Laser
             return lengthArc;
         }
 
+        private void CalcAngle()
+        {
+            realInnerCircles.Clear();
+            realOutterCircles.Clear();
+            if (HolesInfo.MinHoleNum == 1)
+            {
+                realInnerCircles.Add(startCircle);
+                realOutterCircles.Add(new Circle(startPoint, OutterCircleSize));
+                realInnerCircles.Add(endCircle);
+                realOutterCircles.Add(new Circle(endPoint, OutterCircleSize));
+                return;
+            }
+            else
+            {
+                innerCircles.Clear();
+                outterCircles.Clear();
+                var angleArcUnit = angleArc / HolesInfo.HoleNum;
+                if (radius > 0)
+                    CalcCirclePoint(circleData.CenterPt, StartPoint, EndPoint, circleData.Radius, -1, HolesInfo.HoleNum);
+                else
+                    CalcCirclePoint(circleData.CenterPt, StartPoint, EndPoint, circleData.Radius, 1, HolesInfo.HoleNum);
+            }
+        }
+
         private void CalcAngle(Point point, int dx, int dy)
         {
             //vector (a1, b1)
@@ -312,11 +365,11 @@ namespace Cii.Lar.Laser
             var halfLenght = Length / 2;
             var temp = (halfLenght) / Math.Tan(angle / 2);
             //Console.WriteLine("temp: " + temp);
-            var radius = (Math.Pow(halfLenght, 2) + Math.Pow(temp, 2)) / (2 * temp);
+            radius = (Math.Pow(halfLenght, 2) + Math.Pow(temp, 2)) / (2 * temp);
             //Console.WriteLine("radius: " + radius);
-            var angleArc = 2 * (Math.Asin(halfLenght / Math.Abs(radius)));
+            angleArc = 2 * (Math.Asin(halfLenght / Math.Abs(radius)));
 
-            var lengthArc = angleArc * Math.Abs(radius);
+            lengthArc = angleArc * Math.Abs(radius);
 
             CalcCircleCenter(point, StartPoint, EndPoint);
 
@@ -482,6 +535,104 @@ namespace Cii.Lar.Laser
             get { return this.length; }
             set { this.length = value; }
         }
+
+        /// <summary>
+        /// ReCalculate circle when change holes number 
+        /// </summary>
+        public void CalculateContinuousCircle()
+        {
+            if (startCircle == null || endCircle == null)
+            {
+                return;
+            }
+            realInnerCircles.Clear();
+            realOutterCircles.Clear();
+
+            if (HolesInfo.MinHoleNum == 1)
+            {
+                realInnerCircles.Add(startCircle);
+                realOutterCircles.Add(new Circle(startPoint, OutterCircleSize));
+                realInnerCircles.Add(endCircle);
+                realOutterCircles.Add(new Circle(endPoint, OutterCircleSize));
+                return;
+            }
+            else
+            {
+                var gap = length / HolesInfo.HoleNum;
+                innerCircles.Clear();
+                outterCircles.Clear();
+                if (StartPoint.X == EndPoint.X)
+                {
+                    if (EndPoint.Y - StartPoint.Y > 0)
+                    {
+                        for (int i = 0; i < HolesInfo.HoleNum; i++)
+                        {
+                            innerCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y + gap * i)), InnerCircleSize));
+                            outterCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y + gap * i)), OutterCircleSize));
+                        }
+                    }
+                    else if (EndPoint.Y - StartPoint.Y < 0)
+                    {
+                        for (int i = 0; i < HolesInfo.HoleNum; i++)
+                        {
+                            innerCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y - gap * i)), InnerCircleSize));
+                            outterCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y - gap * i)), OutterCircleSize));
+                        }
+                    }
+                }
+                else if (StartPoint.Y == EndPoint.Y)
+                {
+                    if (EndPoint.X - StartPoint.X > 0)
+                    {
+                        for (int i = 0; i < HolesInfo.HoleNum; i++)
+                        {
+                            innerCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X + gap * i), StartCircle.CenterPoint.Y), InnerCircleSize));
+                            outterCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X + gap * i), StartCircle.CenterPoint.Y), OutterCircleSize));
+                        }
+                    }
+                    else if (EndPoint.X - StartPoint.X < 0)
+                    {
+                        for (int i = 0; i < HolesInfo.HoleNum; i++)
+                        {
+                            innerCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X - gap * i), StartCircle.CenterPoint.Y), InnerCircleSize));
+                            outterCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X - gap * i), StartCircle.CenterPoint.Y), OutterCircleSize));
+                        }
+                    }
+                }
+                else
+                {
+                    var k = (EndPoint.Y - StartPoint.Y) / (EndPoint.X - StartPoint.X);
+                    var xGap = (endCircle.CenterPoint.X - startCircle.CenterPoint.X) / HolesInfo.HoleNum;
+                    var yGap = (endCircle.CenterPoint.Y - startCircle.CenterPoint.Y) / HolesInfo.HoleNum;
+                    for (int i = 0; i < HolesInfo.HoleNum; i++)
+                    {
+                        var x = (float)(StartCircle.CenterPoint.X + i * xGap);
+                        var y = (float)(StartCircle.CenterPoint.Y + i * yGap);
+                        innerCircles.Add(new Circle(new PointF(x, y), InnerCircleSize));
+                        outterCircles.Add(new Circle(new PointF(x, y), OutterCircleSize));
+                    }
+                }
+                for (int i = 0; i < HolesInfo.HoleNum + 2; i++)
+                {
+                    if (i == 0)
+                    {
+                        realInnerCircles.Add(startCircle);
+                        realOutterCircles.Add(new Circle(startPoint, OutterCircleSize));
+                    }
+                    else if (i == HolesInfo.HoleNum + 1)
+                    {
+                        realInnerCircles.Add(endCircle);
+                        realOutterCircles.Add(new Circle(endPoint, OutterCircleSize));
+                    }
+                    else
+                    {
+                        realInnerCircles.Add(innerCircles[i - 1]);
+                        realOutterCircles.Add(outterCircles[i - 1]);
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// L/D + 1 < N < 2L/D + 2
         /// L:Line length

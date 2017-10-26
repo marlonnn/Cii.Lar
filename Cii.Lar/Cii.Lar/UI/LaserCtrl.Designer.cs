@@ -63,7 +63,6 @@ namespace Cii.Lar.UI
             // 
             resources.ApplyResources(this.sliderCtrl, "sliderCtrl");
             this.sliderCtrl.Name = "sliderCtrl";
-            this.sliderCtrl.SliderValueChangedHandler += SliderValueChangedHandler;
             // 
             // line1
             // 
