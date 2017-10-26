@@ -212,6 +212,7 @@ namespace Cii.Lar.UI
                     Program.ExpManager.LaserType = ExpClass.LaserType.SaturnActive;
                     break;
             }
+            this.pictureBox.HolesNumberSlider(Program.ExpManager.LaserType == ExpClass.LaserType.SaturnActive);
         }
 
         private void btnSimulator_Click(object sender, EventArgs e)

@@ -25,6 +25,20 @@ namespace Cii.Lar.Laser
             set { this.centerPt = value; }
         }
 
+        private double angleArc;
+        public double AngleArc
+        {
+            get { return this.angleArc; }
+            set { this.angleArc = value; }
+        }
+
+        private double lengthArc;
+        public double LengthArc
+        {
+            get { return this.lengthArc; }
+            set { this.lengthArc = value; }
+        }
+
         public CircleData()
         {
             radius = 0;

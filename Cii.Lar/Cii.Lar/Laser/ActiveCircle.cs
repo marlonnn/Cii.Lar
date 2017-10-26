@@ -224,26 +224,12 @@ namespace Cii.Lar.Laser
 
         private Size crossSize;
 
-        private double radius;
-        public double Radius
-        {
-            get { return this.radius; }
-            set { this.radius = value; }
-        }
-
-        private double angleArc;
-        public double AngleArc
-        {
-            get { return this.angleArc; }
-            set { this.angleArc = value; }
-        }
-
-        private double lengthArc;
-        public double LengthArc
-        {
-            get { return this.lengthArc; }
-            set { this.lengthArc = value; }
-        }
+        //private double radius;
+        //public double Radius
+        //{
+        //    get { return this.radius; }
+        //    set { this.radius = value; }
+        //}
 
         public ActiveCircle(ZWPictureBox pictureBox)
         {
@@ -336,11 +322,11 @@ namespace Cii.Lar.Laser
             {
                 innerCircles.Clear();
                 outterCircles.Clear();
-                var angleArcUnit = angleArc / HolesInfo.HoleNum;
-                if (radius > 0)
+                var angleArcUnit = circleData.AngleArc / HolesInfo.HoleNum;
+                if (circleData.Radius > 0)
                     CalcCirclePoint(circleData.CenterPt, StartPoint, EndPoint, circleData.Radius, -1, HolesInfo.HoleNum);
                 else
-                    CalcCirclePoint(circleData.CenterPt, StartPoint, EndPoint, circleData.Radius, 1, HolesInfo.HoleNum);
+                    CalcCirclePoint(circleData.CenterPt, StartPoint, EndPoint, Math.Abs(circleData.Radius), 1, HolesInfo.HoleNum);
             }
         }
 
@@ -365,16 +351,16 @@ namespace Cii.Lar.Laser
             var halfLenght = Length / 2;
             var temp = (halfLenght) / Math.Tan(angle / 2);
             //Console.WriteLine("temp: " + temp);
-            radius = (Math.Pow(halfLenght, 2) + Math.Pow(temp, 2)) / (2 * temp);
+            circleData.Radius = (Math.Pow(halfLenght, 2) + Math.Pow(temp, 2)) / (2 * temp);
             //Console.WriteLine("radius: " + radius);
-            angleArc = 2 * (Math.Asin(halfLenght / Math.Abs(radius)));
+            circleData.AngleArc = 2 * (Math.Asin(halfLenght / Math.Abs(circleData.Radius)));
 
-            lengthArc = angleArc * Math.Abs(radius);
+            circleData.LengthArc = circleData.AngleArc * Math.Abs(circleData.Radius);
 
             CalcCircleCenter(point, StartPoint, EndPoint);
 
-            HolesInfo.MinHoleNum = (int)(lengthArc / InnerCircleSize.Width) + 1;
-            HolesInfo.MaxHoleNum = (int)(2 * lengthArc / InnerCircleSize.Width) + 2;
+            HolesInfo.MinHoleNum = (int)(circleData.LengthArc / InnerCircleSize.Width) + 1;
+            HolesInfo.MaxHoleNum = (int)(2 * circleData.LengthArc / InnerCircleSize.Width) + 2;
             realInnerCircles.Clear();
             realOutterCircles.Clear();
             if (HolesInfo.MinHoleNum == 1)
@@ -390,11 +376,11 @@ namespace Cii.Lar.Laser
                 HolesInfo.HoleNum = HolesInfo.MaxHoleNum;
                 innerCircles.Clear();
                 outterCircles.Clear();
-                var angleArcUnit = angleArc / HolesInfo.HoleNum;
-                if (radius > 0)
+                var angleArcUnit = circleData.AngleArc / HolesInfo.HoleNum;
+                if (circleData.Radius > 0)
                     CalcCirclePoint(circleData.CenterPt, StartPoint, EndPoint, circleData.Radius, -1, HolesInfo.HoleNum);
                 else
-                    CalcCirclePoint(circleData.CenterPt, StartPoint, EndPoint, circleData.Radius, 1, HolesInfo.HoleNum);
+                    CalcCirclePoint(circleData.CenterPt, StartPoint, EndPoint, Math.Abs(circleData.Radius), 1, HolesInfo.HoleNum);
             }
         }
 
@@ -460,7 +446,7 @@ namespace Cii.Lar.Laser
             }
             circleData.CenterPt = centerPt;
             var radius = Math.Sqrt((circleData.CenterPt.X - pt1.X) * (circleData.CenterPt.X - pt1.X) + (circleData.CenterPt.Y - pt1.Y) * (circleData.CenterPt.Y - pt1.Y));
-            circleData.Radius = radius;
+            //circleData.Radius = radius;
             //Console.WriteLine("new radius2: " + radius);
         }
 

@@ -33,6 +33,11 @@ namespace Cii.Lar.UI
             InitializeComponent();
         }
 
+        public void HolesNumberSlider(bool isShow)
+        {
+            this.holesSlider.Visible = isShow;
+        }
+
         public void UpdateHolesInfo(HolesInfo holesInfo)
         {
             this.holesSlider.Maximum = holesInfo.MaxHoleNum;

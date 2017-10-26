@@ -952,6 +952,15 @@ namespace Cii.Lar.UI
             }
         }
 
+        public void HolesNumberSlider(bool isShow)
+        {
+            LaserCtrl laserCtrl = controls[0] as LaserCtrl;
+            if (laserCtrl != null)
+            {
+                laserCtrl.HolesNumberSlider(isShow);
+            }
+        }
+
         public void HolesInfoChangeHandler(HolesInfo holesInfo)
         {
             if (holesInfo != null)
