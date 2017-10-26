@@ -597,7 +597,7 @@ namespace Cii.Lar.Laser
 
         public void OnPaint(Graphics g)
         {
-            if (startCircle.CenterPoint.IsEmpty || endCircle.CenterPoint.IsEmpty)
+            if (startCircle ==null || endCircle == null || startCircle.CenterPoint.IsEmpty || endCircle.CenterPoint.IsEmpty)
             {
                 return;
             }
