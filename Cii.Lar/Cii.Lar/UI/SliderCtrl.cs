@@ -52,5 +52,25 @@ namespace Cii.Lar.UI
         {
             SliderValueChangedHandler?.Invoke(sender, e);
         }
+
+        public void SetMinMaxValue(int min, int max)
+        {
+            this.slider.Minimum = min;
+            this.slider.Maximum = max;
+        }
+
+        public void SetValue(int value, string unit)
+        {
+            switch (unit)
+            {
+                case "um":
+                    this.PulseHoleWS.Text = string.Format("{0} {1}", value / 10f, unit);
+                    break;
+                case "ms":
+                    this.PulseHoleWS.Text = string.Format("{0} {1}", value / 1000f, unit);
+                    break;
+            }
+        }
+
     }
 }

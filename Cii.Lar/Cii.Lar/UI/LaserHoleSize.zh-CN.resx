@@ -117,7 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="btnDelete.Text" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="btnFire.Text" xml:space="preserve">
+    <value>射击</value>
+  </data>
   <data name="btnLaserCtrl.Text" xml:space="preserve">
     <value>激光器控制</value>
+  </data>
+  <data name="btnSave.Text" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="lblAdjustHole.Text" xml:space="preserve">
+    <value>调节孔的大小</value>
+  </data>
+  <data name="lblAdjustPulse.Text" xml:space="preserve">
+    <value>调节脉冲宽度</value>
   </data>
 </root>

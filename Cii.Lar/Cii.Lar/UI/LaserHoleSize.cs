@@ -17,6 +17,30 @@ namespace Cii.Lar.UI
             resources = new ComponentResourceManager(typeof(LaserHoleSize));
             this.ShowIndex = 6;
             InitializeComponent();
+            InitializeSlider();
+        }
+
+        private void InitializeSlider()
+        {
+            this.sliderPulse.SetMinMaxValue(5, 2500);
+            this.sliderPulse.SetValue(5, "ms");
+            this.sliderPulse.SliderValueChangedHandler += PulseSliderValueChangedHandler;
+
+            this.sliderHole.SetMinMaxValue(1, 534);
+            this.sliderHole.SetValue(1, "um");
+            this.sliderHole.SliderValueChangedHandler += HoleSliderValueChangedHandler;
+        }
+
+        private void HoleSliderValueChangedHandler(object sender, EventArgs e)
+        {
+            var value = this.sliderHole.Slider.Value;
+            this.sliderHole.SetValue(value, "um");
+        }
+
+        private void PulseSliderValueChangedHandler(object sender, EventArgs e)
+        {
+            var value = this.sliderPulse.Slider.Value;
+            this.sliderPulse.SetValue(value, "ms");
         }
 
         protected override void RefreshUI()
