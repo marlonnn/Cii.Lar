@@ -112,6 +112,7 @@
             this.sliderThickness.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.sliderThickness.LabelVisible = false;
             resources.ApplyResources(this.sliderThickness, "sliderThickness");
+            this.sliderThickness.Maximum = 5;
             this.sliderThickness.Name = "sliderThickness";
             this.sliderThickness.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.sliderThickness.Value = 0;

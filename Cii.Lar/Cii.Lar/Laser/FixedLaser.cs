@@ -57,9 +57,9 @@ namespace Cii.Lar.Laser
         }
         private void GraphicsPropertiesChangedHandler(DrawObject drawObject, GraphicsProperties graphicsProperties)
         {
-            OutterCircleSize = new Size((60 + this.GraphicsProperties.ExclusionSize) * this.GraphicsProperties.TargetSize,
-                (60 + this.GraphicsProperties.ExclusionSize) * this.GraphicsProperties.TargetSize);
-            InnerCircleSize = new Size(38 * this.GraphicsProperties.TargetSize, 38 * this.GraphicsProperties.TargetSize);
+            OutterCircleSize = new Size(60 + this.GraphicsProperties.ExclusionSize,
+                60 + this.GraphicsProperties.ExclusionSize);
+            InnerCircleSize = new Size(38, 38);
             OutterCircle = new Circle(CenterPoint, OutterCircleSize);
             InnerCircle = new Circle(CenterPoint, InnerCircleSize);
             this.pictureBox.Invalidate();
@@ -111,13 +111,13 @@ namespace Cii.Lar.Laser
 
         private void DrawCross(Graphics g)
         {
-            g.DrawLine(new Pen(Color.Black, 1f),
-                InnerCircle.CenterPoint.X, InnerCircle.CenterPoint.Y - InnerCircle.Rectangle.Width / 2,
-                InnerCircle.CenterPoint.X, InnerCircle.CenterPoint.Y + InnerCircle.Rectangle.Width / 2);
+            g.DrawLine(new Pen(Color.Black, this.GraphicsProperties.PenWidth),
+                InnerCircle.CenterPoint.X, InnerCircle.CenterPoint.Y - 10 * this.GraphicsProperties.TargetSize,
+                InnerCircle.CenterPoint.X, InnerCircle.CenterPoint.Y + 10 *this.GraphicsProperties.TargetSize);
 
-            g.DrawLine(new Pen(Color.Black, 1f),
-                InnerCircle.CenterPoint.X - InnerCircle.Rectangle.Width / 2, InnerCircle.CenterPoint.Y,
-                InnerCircle.CenterPoint.X + InnerCircle.Rectangle.Width / 2, InnerCircle.CenterPoint.Y);
+            g.DrawLine(new Pen(Color.Black, this.GraphicsProperties.PenWidth),
+                InnerCircle.CenterPoint.X - 10 * this.GraphicsProperties.TargetSize, InnerCircle.CenterPoint.Y,
+                InnerCircle.CenterPoint.X + 10 * this.GraphicsProperties.TargetSize, InnerCircle.CenterPoint.Y);
         }
     }
 }
