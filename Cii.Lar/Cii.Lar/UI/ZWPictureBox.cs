@@ -360,7 +360,7 @@ namespace Cii.Lar.UI
         {
             this.imageTracker = new ImageTracker();
             this.imageTracker.Location = new System.Drawing.Point(5, 30);
-            this.imageTracker.Size = new System.Drawing.Size(137, 102);
+            this.imageTracker.Size = new System.Drawing.Size(137, 152);
             this.imageTracker.TabIndex = 1;
             //this.imageTracker.ScalePercent = 0;
             this.imageTracker.MouseDown += new System.Windows.Forms.MouseEventHandler(this.imageTracker_MouseDown);

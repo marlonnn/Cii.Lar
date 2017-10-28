@@ -252,7 +252,7 @@
     <value>7</value>
   </data>
   <data name="btnFire.Location" type="System.Drawing.Point, System.Drawing">
-    <value>88, 133</value>
+    <value>88, 153</value>
   </data>
   <data name="btnFire.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -276,7 +276,7 @@
     <value>6</value>
   </data>
   <data name="line2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 156</value>
+    <value>3, 184</value>
   </data>
   <data name="line2.Size" type="System.Drawing.Size, System.Drawing">
     <value>261, 10</value>
@@ -300,7 +300,7 @@
     <value>5</value>
   </data>
   <data name="btnAlignLaser.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 189</value>
+    <value>41, 203</value>
   </data>
   <data name="btnAlignLaser.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 23</value>
@@ -324,7 +324,7 @@
     <value>4</value>
   </data>
   <data name="btnHoleSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 218</value>
+    <value>41, 232</value>
   </data>
   <data name="btnHoleSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 23</value>
@@ -348,7 +348,7 @@
     <value>3</value>
   </data>
   <data name="btnAppearance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 247</value>
+    <value>41, 261</value>
   </data>
   <data name="btnAppearance.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 23</value>
@@ -372,7 +372,7 @@
     <value>2</value>
   </data>
   <data name="holesSlider.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 108</value>
+    <value>3, 115</value>
   </data>
   <data name="holesSlider.Size" type="System.Drawing.Size, System.Drawing">
     <value>189, 23</value>
@@ -399,10 +399,10 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>6, 12</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 293</value>
+    <value>267, 289</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>LaserCtrl</value>

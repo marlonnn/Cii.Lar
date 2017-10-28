@@ -174,7 +174,7 @@
     <value>btnLaserCtrl</value>
   </data>
   <data name="&gt;&gt;btnLaserCtrl.Type" xml:space="preserve">
-    <value>DevComponents.DotNetBar.ButtonX, DevComponents.DotNetBar2, Version=11.1.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnLaserCtrl.Parent" xml:space="preserve">
     <value>$this</value>
@@ -471,10 +471,10 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>6, 12</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>315, 245</value>
+    <value>315, 235</value>
   </data>
   <data name="&gt;&gt;comboItem1.Name" xml:space="preserve">
     <value>comboItem1</value>

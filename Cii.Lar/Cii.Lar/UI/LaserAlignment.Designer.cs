@@ -44,14 +44,12 @@ namespace Cii.Lar.UI
             // 
             resources.ApplyResources(this.btnBack, "btnBack");
             this.btnBack.Name = "btnBack";
-            this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnNext
             // 
             resources.ApplyResources(this.btnNext, "btnNext");
             this.btnNext.Name = "btnNext";
-            this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // lblInfo
