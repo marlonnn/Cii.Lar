@@ -44,9 +44,9 @@ namespace Cii.Lar.Laser
             set;
         }
 
-        public Size OutterCircleSize { get; set; }
+        public SizeF OutterCircleSize { get; set; }
 
-        public Size InnerCircleSize { get; set; }
+        public SizeF InnerCircleSize { get; set; }
 
         public FixedLaser(ZWPictureBox pictureBox) : base()
         {
@@ -57,9 +57,9 @@ namespace Cii.Lar.Laser
         }
         private void GraphicsPropertiesChangedHandler(DrawObject drawObject, GraphicsProperties graphicsProperties)
         {
-            OutterCircleSize = new Size(60 + this.GraphicsProperties.ExclusionSize,
-                60 + this.GraphicsProperties.ExclusionSize);
-            InnerCircleSize = new Size(38, 38);
+            OutterCircleSize = new SizeF(60 + this.GraphicsProperties.ExclusionSize + this.GraphicsProperties.PulseSize,
+                60 + this.GraphicsProperties.ExclusionSize + this.GraphicsProperties.PulseSize);
+            InnerCircleSize = new SizeF(38 + this.GraphicsProperties.PulseSize, 38 + this.GraphicsProperties.PulseSize);
             OutterCircle = new Circle(CenterPoint, OutterCircleSize);
             InnerCircle = new Circle(CenterPoint, InnerCircleSize);
             this.pictureBox.Invalidate();

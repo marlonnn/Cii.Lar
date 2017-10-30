@@ -132,6 +132,23 @@ namespace Cii.Lar.DrawTools
                 }
             }
         }
+
+        private float pulseSize = 1;
+        public float PulseSize
+        {
+            get { return this.pulseSize; }
+            set
+            {
+                //real value is value /= 1000f;
+                value /= 10f;
+                if (value != this.pulseSize)
+                {
+                    this.pulseSize = value;
+                    GraphicsPropertiesChangedHandler?.Invoke(DrawObject, this);
+                }
+            }
+        }
+
         private DrawObject drawObject;
 
         public DrawObject DrawObject

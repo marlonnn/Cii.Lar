@@ -7,15 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Cii.Lar.DrawTools;
 
 namespace Cii.Lar.UI
 {
     public partial class LaserHoleSize : BaseCtrl
     {
+        private GraphicsPropertiesManager graphicsPropertiesManager = GraphicsPropertiesManager.GraphicsManagerSingleInstance();
+
+        private GraphicsProperties graphicsProperties;
+
         public LaserHoleSize()
         {
             resources = new ComponentResourceManager(typeof(LaserHoleSize));
             this.ShowIndex = 6;
+            graphicsProperties = graphicsPropertiesManager.GetPropertiesByName("Circle");
             InitializeComponent();
             InitializeSlider();
             InitializeChartSeries();
@@ -65,6 +71,10 @@ namespace Cii.Lar.UI
         {
             var value = this.sliderPulse.Slider.Value;
             this.sliderPulse.SetValue(value, "ms");
+            if (this.graphicsProperties != null)
+            {
+                this.graphicsProperties.PulseSize = value;
+            }
         }
 
         protected override void RefreshUI()

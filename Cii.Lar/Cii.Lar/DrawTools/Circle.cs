@@ -19,7 +19,7 @@ namespace Cii.Lar.DrawTools
             set;
         }
 
-        public Size DrawAreaSize
+        public SizeF DrawAreaSize
         {
             get;
             set;
@@ -33,7 +33,7 @@ namespace Cii.Lar.DrawTools
             }
         }
 
-        public Circle(PointF centerPoint, Size drawAreaSize)
+        public Circle(PointF centerPoint, SizeF drawAreaSize)
         {
             CenterPoint = centerPoint;
             DrawAreaSize = drawAreaSize;
