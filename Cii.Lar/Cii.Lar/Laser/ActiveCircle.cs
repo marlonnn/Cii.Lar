@@ -464,6 +464,56 @@ namespace Cii.Lar.Laser
         }
 
         /// <summary>
+        /// add circle to circles
+        /// </summary>
+        /// <param name="length"></param>
+        /// <param name="holeNum"></param>
+        /// <param name="minHoleNum"></param>
+        private void Add2Circles(double length, int holeNum, int minHoleNum)
+        {
+            innerCircles.Clear();
+            outterCircles.Clear();
+
+            int dx = EndPoint.X - StartPoint.X;
+            int dy = EndPoint.Y - StartPoint.Y;
+
+            double gapX = 0;
+            double gapY = 0;
+            innerCircles.Add(startCircle);
+            outterCircles.Add(new Circle(startPoint, OutterCircleSize));
+            if (minHoleNum != 1)
+            {
+                if (dx == 0)
+                {
+                    gapX = 0;
+                    gapY = (length / holeNum) * (dy / Math.Abs(dy));
+                    CenterPoint = new PointF(StartCircle.CenterPoint.X, StartCircle.CenterPoint.Y + Math.Abs(dy / 2));
+                }
+                else if (dy == 0)
+                {
+                    gapX = (length / holeNum) * (dx / Math.Abs(dx));
+                    gapY = 0;
+                    CenterPoint = new PointF(StartCircle.CenterPoint.X + Math.Abs(dx / 2), StartCircle.CenterPoint.Y);
+                }
+                else
+                {
+                    var k = dy / dx;
+                    gapX = (endCircle.CenterPoint.X - startCircle.CenterPoint.X) / HolesInfo.HoleNum;
+                    gapY = (endCircle.CenterPoint.Y - startCircle.CenterPoint.Y) / HolesInfo.HoleNum;
+                    CenterPoint = new PointF(StartCircle.CenterPoint.X + dx / 2, StartCircle.CenterPoint.Y + dy / 2);
+                }
+                for (int i = 0; i < holeNum; i++)
+                {
+                    innerCircles.Add(new Circle(new PointF((float)(StartCircle.CenterPoint.X + gapX * i), (float)(StartCircle.CenterPoint.Y + gapY * i)), InnerCircleSize));
+                    outterCircles.Add(new Circle(new PointF((float)(StartCircle.CenterPoint.X + gapX * i), (float)(StartCircle.CenterPoint.Y + gapY * i)), OutterCircleSize));
+                }
+            }
+
+            innerCircles.Add(endCircle);
+            outterCircles.Add(new Circle(endPoint, OutterCircleSize));
+        }
+
+        /// <summary>
         /// ReCalculate circle when change holes number 
         /// </summary>
         public void CalculateContinuousCircle()
@@ -472,94 +522,8 @@ namespace Cii.Lar.Laser
             {
                 return;
             }
-            innerCircles.Clear();
-            outterCircles.Clear();
 
-            if (HolesInfo.MinHoleNum == 1)
-            {
-                innerCircles.Add(startCircle);
-                outterCircles.Add(new Circle(startPoint, OutterCircleSize));
-                innerCircles.Add(endCircle);
-                outterCircles.Add(new Circle(endPoint, OutterCircleSize));
-                return;
-            }
-            else
-            {
-                var gap = length / HolesInfo.HoleNum;
-                innerCircles.Clear();
-                outterCircles.Clear();
-                if (StartPoint.X == EndPoint.X)
-                {
-                    if (EndPoint.Y - StartPoint.Y > 0)
-                    {
-                        innerCircles.Add(startCircle);
-                        outterCircles.Add(new Circle(startPoint, OutterCircleSize));
-                        for (int i = 0; i < HolesInfo.HoleNum; i++)
-                        {
-                            innerCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y + gap * i)), InnerCircleSize));
-                            outterCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y + gap * i)), OutterCircleSize));
-                        }
-                        innerCircles.Add(endCircle);
-                        outterCircles.Add(new Circle(endPoint, OutterCircleSize));
-                    }
-                    else if (EndPoint.Y - StartPoint.Y < 0)
-                    {
-                        innerCircles.Add(startCircle);
-                        outterCircles.Add(new Circle(startPoint, OutterCircleSize));
-                        for (int i = 0; i < HolesInfo.HoleNum; i++)
-                        {
-                            innerCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y - gap * i)), InnerCircleSize));
-                            outterCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y - gap * i)), OutterCircleSize));
-                        }
-                        innerCircles.Add(endCircle);
-                        outterCircles.Add(new Circle(endPoint, OutterCircleSize));
-                    }
-                }
-                else if (StartPoint.Y == EndPoint.Y)
-                {
-                    if (EndPoint.X - StartPoint.X > 0)
-                    {
-                        innerCircles.Add(startCircle);
-                        outterCircles.Add(new Circle(startPoint, OutterCircleSize));
-                        for (int i = 0; i < HolesInfo.HoleNum; i++)
-                        {
-                            innerCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X + gap * i), StartCircle.CenterPoint.Y), InnerCircleSize));
-                            outterCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X + gap * i), StartCircle.CenterPoint.Y), OutterCircleSize));
-                        }
-                        innerCircles.Add(endCircle);
-                        outterCircles.Add(new Circle(endPoint, OutterCircleSize));
-                    }
-                    else if (EndPoint.X - StartPoint.X < 0)
-                    {
-                        innerCircles.Add(startCircle);
-                        outterCircles.Add(new Circle(startPoint, OutterCircleSize));
-                        for (int i = 0; i < HolesInfo.HoleNum; i++)
-                        {
-                            innerCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X - gap * i), StartCircle.CenterPoint.Y), InnerCircleSize));
-                            outterCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X - gap * i), StartCircle.CenterPoint.Y), OutterCircleSize));
-                        }
-                        innerCircles.Add(endCircle);
-                        outterCircles.Add(new Circle(endPoint, OutterCircleSize));
-                    }
-                }
-                else
-                {
-                    var k = (EndPoint.Y - StartPoint.Y) / (EndPoint.X - StartPoint.X);
-                    var xGap = (endCircle.CenterPoint.X - startCircle.CenterPoint.X) / HolesInfo.HoleNum;
-                    var yGap = (endCircle.CenterPoint.Y - startCircle.CenterPoint.Y) / HolesInfo.HoleNum;
-                    innerCircles.Add(startCircle);
-                    outterCircles.Add(new Circle(startPoint, OutterCircleSize));
-                    for (int i = 0; i < HolesInfo.HoleNum; i++)
-                    {
-                        var x = (float)(StartCircle.CenterPoint.X + i * xGap);
-                        var y = (float)(StartCircle.CenterPoint.Y + i * yGap);
-                        innerCircles.Add(new Circle(new PointF(x, y), InnerCircleSize));
-                        outterCircles.Add(new Circle(new PointF(x, y), OutterCircleSize));
-                    }
-                    innerCircles.Add(endCircle);
-                    outterCircles.Add(new Circle(endPoint, OutterCircleSize));
-                }
-            }
+            Add2Circles(length, HolesInfo.HoleNum, HolesInfo.MinHoleNum);
         }
 
         /// <summary>
@@ -581,100 +545,10 @@ namespace Cii.Lar.Laser
 
             HolesInfo.MinHoleNum = (int) (length / InnerCircleSize.Width) + 1;
             HolesInfo.MaxHoleNum = (int)(2 * length / InnerCircleSize.Width) + 2;
-            innerCircles.Clear();
-            outterCircles.Clear();
+            HolesInfo.HoleNum = HolesInfo.MaxHoleNum;
 
-            if (HolesInfo.MinHoleNum == 1)
-            {
-                innerCircles.Add(startCircle);
-                outterCircles.Add(new Circle(startPoint, OutterCircleSize));
-                innerCircles.Add(endCircle);
-                outterCircles.Add(new Circle(endPoint, OutterCircleSize));
-                return;
-            }
-            else
-            {
-                HolesInfo.HoleNum = HolesInfo.MaxHoleNum;
-                var gap = length / HolesInfo.HoleNum;
-                innerCircles.Clear();
-                outterCircles.Clear();
-                if (dx == 0)
-                {
-                    if (dy > 0)
-                    {
-                        innerCircles.Add(startCircle);
-                        outterCircles.Add(new Circle(startPoint, OutterCircleSize));
-                        for (int i= 0; i < HolesInfo.HoleNum; i ++)
-                        {
-                            innerCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y + gap * i)), InnerCircleSize));
-                            outterCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y + gap * i)), OutterCircleSize));
-                        }
-                        innerCircles.Add(startCircle);
-                        outterCircles.Add(new Circle(startPoint, OutterCircleSize));
-                        CenterPoint = new PointF(StartCircle.CenterPoint.X, StartCircle.CenterPoint.Y + dy / 2);
-                    }
-                    else if (dy < 0)
-                    {
-                        innerCircles.Add(startCircle);
-                        outterCircles.Add(new Circle(startPoint, OutterCircleSize));
-                        for (int i = 0; i < HolesInfo.HoleNum; i++)
-                        {
-                            innerCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y - gap * i)), InnerCircleSize));
-                            outterCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y - gap * i)), OutterCircleSize));
-                        }
-                        innerCircles.Add(endCircle);
-                        outterCircles.Add(new Circle(endPoint, OutterCircleSize));
-                        CenterPoint = new PointF(StartCircle.CenterPoint.X, StartCircle.CenterPoint.Y - dy / 2);
-                    }
-                }
-                else if (dy == 0)
-                {
-                    if (dx > 0)
-                    {
-                        innerCircles.Add(startCircle);
-                        outterCircles.Add(new Circle(startPoint, OutterCircleSize));
-                        for (int i = 0; i < HolesInfo.HoleNum; i++)
-                        {
-                            innerCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X + gap * i), StartCircle.CenterPoint.Y), InnerCircleSize));
-                            outterCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X + gap * i), StartCircle.CenterPoint.Y), OutterCircleSize));
-                        }
-                        innerCircles.Add(endCircle);
-                        outterCircles.Add(new Circle(endPoint, OutterCircleSize));
-                        CenterPoint = new PointF(StartCircle.CenterPoint.X + dx / 2, StartCircle.CenterPoint.Y);
-                    }
-                    else if (dx < 0)
-                    {
-                        innerCircles.Add(startCircle);
-                        outterCircles.Add(new Circle(startPoint, OutterCircleSize));
-                        for (int i = 0; i < HolesInfo.HoleNum; i++)
-                        {
-                            innerCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X - gap * i), StartCircle.CenterPoint.Y), InnerCircleSize));
-                            outterCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X - gap * i), StartCircle.CenterPoint.Y), OutterCircleSize));
-                        }
-                        innerCircles.Add(endCircle);
-                        outterCircles.Add(new Circle(endPoint, OutterCircleSize));
-                        CenterPoint = new PointF(StartCircle.CenterPoint.X - dx / 2, StartCircle.CenterPoint.Y);
-                    }
-                }
-                else
-                {
-                    var k = dy / dx;
-                    var xGap = (endCircle.CenterPoint.X - startCircle.CenterPoint.X) / HolesInfo.HoleNum;
-                    var yGap = (endCircle.CenterPoint.Y - startCircle.CenterPoint.Y) / HolesInfo.HoleNum;
-                    innerCircles.Add(startCircle);
-                    outterCircles.Add(new Circle(startPoint, OutterCircleSize));
-                    for (int i = 0; i < HolesInfo.HoleNum; i++)
-                    {
-                        var x = (float)(StartCircle.CenterPoint.X + i * xGap);
-                        var y = (float)(StartCircle.CenterPoint.Y + i * yGap);
-                        innerCircles.Add(new Circle(new PointF(x, y), InnerCircleSize));
-                        outterCircles.Add(new Circle(new PointF(x, y), OutterCircleSize));
-                    }
-                    innerCircles.Add(endCircle);
-                    outterCircles.Add(new Circle(endPoint, OutterCircleSize));
-                    CenterPoint = new PointF(StartCircle.CenterPoint.X + dx / 2, StartCircle.CenterPoint.Y + dy / 2);
-                }
-            }
+            Add2Circles(length, HolesInfo.HoleNum, HolesInfo.MinHoleNum);
+
         }
 
         public void OnPaint(Graphics g)
