@@ -30,10 +30,10 @@ namespace Cii.Lar.Laser
                 (60 + this.GraphicsProperties.ExclusionSize) * this.GraphicsProperties.TargetSize);
             activeCircle.InnerCircleSize = new Size(38 * this.GraphicsProperties.TargetSize, 38 * this.GraphicsProperties.TargetSize);
 
-            for (int i=0; i< activeCircle.RealInnerCircle.Count; i++)
+            for (int i=0; i< activeCircle.InnerCircles.Count; i++)
             {
-                activeCircle.RealInnerCircle[i] = new Circle(activeCircle.RealInnerCircle[i].CenterPoint, activeCircle.InnerCircleSize);
-                activeCircle.RealOutterCircle[i] = new Circle(activeCircle.RealOutterCircle[i].CenterPoint, activeCircle.OutterCircleSize);
+                activeCircle.InnerCircles[i] = new Circle(activeCircle.InnerCircles[i].CenterPoint, activeCircle.InnerCircleSize);
+                activeCircle.OutterCircle[i] = new Circle(activeCircle.OutterCircle[i].CenterPoint, activeCircle.OutterCircleSize);
             }
             this.pictureBox.Invalidate();
         }

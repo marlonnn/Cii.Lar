@@ -11,52 +11,6 @@ using System.Windows.Forms;
 
 namespace Cii.Lar.Laser
 {
-    public class HolesInfo
-    {
-        public delegate void HolesInfoChange(HolesInfo holesInfo);
-        public HolesInfoChange HolesInfoChangeHandler;
-        private int minHoleNum = 0;
-        public int MinHoleNum
-        {
-            get { return this.minHoleNum; }
-            set
-            {
-                this.minHoleNum = value;
-            }
-        }
-
-        private int maxHoleNum = 0;
-        public int MaxHoleNum
-        {
-            get { return this.maxHoleNum; }
-            set
-            {
-                this.maxHoleNum = value;
-            }
-        }
-
-        private int holeNum = 0;
-        public int HoleNum
-        {
-            get { return this.holeNum; }
-            set
-            {
-                this.holeNum = value;
-                HolesInfoChangeHandler?.Invoke(this);
-            }
-        }
-
-        public HolesInfo()
-        {
-
-        }
-
-        public void UpdateHoleNum(int holes)
-        {
-            this.holeNum = holes;
-        }
-    }
-
     public class ActiveCircle
     {
         public void UpdateHoleNum(int holes)
@@ -173,20 +127,17 @@ namespace Cii.Lar.Laser
         private int clickCount;
 
         private List<Circle> innerCircles;
-        private List<Circle> outterCircles;
-
-        private List<Circle> realInnerCircles;
-        public List<Circle> RealInnerCircle
+        public List<Circle> InnerCircles
         {
-            get { return this.realInnerCircles; }
-            set { this.realInnerCircles = value; }
+            get { return this.innerCircles; }
+            set { this.innerCircles = value; }
         }
 
-        private List<Circle> realOutterCircles;
-        public List<Circle> RealOutterCircle
+        private List<Circle> outterCircles;
+        public List<Circle> OutterCircle
         {
-            get { return this.realOutterCircles; }
-            set { this.realOutterCircles = value; }
+            get { return this.outterCircles; }
+            set { this.outterCircles = value; }
         }
 
         private bool isMouseUp;
@@ -224,13 +175,6 @@ namespace Cii.Lar.Laser
 
         private Size crossSize;
 
-        //private double radius;
-        //public double Radius
-        //{
-        //    get { return this.radius; }
-        //    set { this.radius = value; }
-        //}
-
         public ActiveCircle(ZWPictureBox pictureBox)
         {
             shape = LaserShape.Line;
@@ -246,11 +190,9 @@ namespace Cii.Lar.Laser
             OutterCircleSize = new Size(48, 48);
             crossSize = new Size(38, 38);
             clickCount = 0;
+
             innerCircles = new List<Circle>();
             outterCircles = new List<Circle>();
-
-            realInnerCircles = new List<Circle>();
-            realOutterCircles = new List<Circle>();
 
         }
 
@@ -308,20 +250,18 @@ namespace Cii.Lar.Laser
 
         private void CalcAngle()
         {
-            realInnerCircles.Clear();
-            realOutterCircles.Clear();
+            innerCircles.Clear();
+            outterCircles.Clear();
             if (HolesInfo.MinHoleNum == 1)
             {
-                realInnerCircles.Add(startCircle);
-                realOutterCircles.Add(new Circle(startPoint, OutterCircleSize));
-                realInnerCircles.Add(endCircle);
-                realOutterCircles.Add(new Circle(endPoint, OutterCircleSize));
+                innerCircles.Add(startCircle);
+                outterCircles.Add(new Circle(startPoint, OutterCircleSize));
+                innerCircles.Add(endCircle);
+                outterCircles.Add(new Circle(endPoint, OutterCircleSize));
                 return;
             }
             else
             {
-                innerCircles.Clear();
-                outterCircles.Clear();
                 var angleArcUnit = circleData.AngleArc / HolesInfo.HoleNum;
                 if (circleData.Radius > 0)
                     CalcCirclePoint(circleData.CenterPt, StartPoint, EndPoint, circleData.Radius, -1, HolesInfo.HoleNum);
@@ -361,21 +301,19 @@ namespace Cii.Lar.Laser
 
             HolesInfo.MinHoleNum = (int)(circleData.LengthArc / InnerCircleSize.Width) + 1;
             HolesInfo.MaxHoleNum = (int)(2 * circleData.LengthArc / InnerCircleSize.Width) + 2;
-            realInnerCircles.Clear();
-            realOutterCircles.Clear();
+            innerCircles.Clear();
+            outterCircles.Clear();
             if (HolesInfo.MinHoleNum == 1)
             {
-                realInnerCircles.Add(startCircle);
-                realOutterCircles.Add(new Circle(startPoint, OutterCircleSize));
-                realInnerCircles.Add(endCircle);
-                realOutterCircles.Add(new Circle(endPoint, OutterCircleSize));
+                innerCircles.Add(startCircle);
+                outterCircles.Add(new Circle(startPoint, OutterCircleSize));
+                innerCircles.Add(endCircle);
+                outterCircles.Add(new Circle(endPoint, OutterCircleSize));
                 return;
             }
             else
             {
                 HolesInfo.HoleNum = HolesInfo.MaxHoleNum;
-                innerCircles.Clear();
-                outterCircles.Clear();
                 var angleArcUnit = circleData.AngleArc / HolesInfo.HoleNum;
                 if (circleData.Radius > 0)
                     CalcCirclePoint(circleData.CenterPt, StartPoint, EndPoint, circleData.Radius, -1, HolesInfo.HoleNum);
@@ -486,8 +424,9 @@ namespace Cii.Lar.Laser
                 }
             }
 
-            double theta = angle / (double)(count - 1);									// 要求的点与圆心连线矢量和圆心与起点连线矢量的角的弧度, 每一小段弧长弧度
-
+            double theta = angle / (double)(count - 1);                                 // 要求的点与圆心连线矢量和圆心与起点连线矢量的角的弧度, 每一小段弧长弧度
+            innerCircles.Add(startCircle);
+            outterCircles.Add(new Circle(startPoint, OutterCircleSize));
             for (int i = 0; i < count; i++)
             {
                 // 得到相对圆心的位置, 用圆心与起点连线矢量来旋转, ccw为1时逆时针旋转, 为－1时正时针旋转
@@ -498,10 +437,12 @@ namespace Cii.Lar.Laser
                 Dots_x+= centerPt.X;                                                  // 得到相对原点的位置
                 Dots_y += centerPt.Y;													// 得到相对原点的位置
                 PointF p = new PointF((float)Dots_x, (float)Dots_y);
-                realInnerCircles.Add(new Circle(p, InnerCircleSize));
-                realOutterCircles.Add(new Circle(p, OutterCircleSize));
+                innerCircles.Add(new Circle(p, InnerCircleSize));
+                outterCircles.Add(new Circle(p, OutterCircleSize));
             }
-            CenterPoint = realInnerCircles[count / 2].CenterPoint;
+            innerCircles.Add(endCircle);
+            outterCircles.Add(new Circle(endPoint, OutterCircleSize));
+            CenterPoint = innerCircles[count / 2].CenterPoint;
         }
 
         public void OnMouseUp()
@@ -531,15 +472,15 @@ namespace Cii.Lar.Laser
             {
                 return;
             }
-            realInnerCircles.Clear();
-            realOutterCircles.Clear();
+            innerCircles.Clear();
+            outterCircles.Clear();
 
             if (HolesInfo.MinHoleNum == 1)
             {
-                realInnerCircles.Add(startCircle);
-                realOutterCircles.Add(new Circle(startPoint, OutterCircleSize));
-                realInnerCircles.Add(endCircle);
-                realOutterCircles.Add(new Circle(endPoint, OutterCircleSize));
+                innerCircles.Add(startCircle);
+                outterCircles.Add(new Circle(startPoint, OutterCircleSize));
+                innerCircles.Add(endCircle);
+                outterCircles.Add(new Circle(endPoint, OutterCircleSize));
                 return;
             }
             else
@@ -551,38 +492,54 @@ namespace Cii.Lar.Laser
                 {
                     if (EndPoint.Y - StartPoint.Y > 0)
                     {
+                        innerCircles.Add(startCircle);
+                        outterCircles.Add(new Circle(startPoint, OutterCircleSize));
                         for (int i = 0; i < HolesInfo.HoleNum; i++)
                         {
                             innerCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y + gap * i)), InnerCircleSize));
                             outterCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y + gap * i)), OutterCircleSize));
                         }
+                        innerCircles.Add(endCircle);
+                        outterCircles.Add(new Circle(endPoint, OutterCircleSize));
                     }
                     else if (EndPoint.Y - StartPoint.Y < 0)
                     {
+                        innerCircles.Add(startCircle);
+                        outterCircles.Add(new Circle(startPoint, OutterCircleSize));
                         for (int i = 0; i < HolesInfo.HoleNum; i++)
                         {
                             innerCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y - gap * i)), InnerCircleSize));
                             outterCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y - gap * i)), OutterCircleSize));
                         }
+                        innerCircles.Add(endCircle);
+                        outterCircles.Add(new Circle(endPoint, OutterCircleSize));
                     }
                 }
                 else if (StartPoint.Y == EndPoint.Y)
                 {
                     if (EndPoint.X - StartPoint.X > 0)
                     {
+                        innerCircles.Add(startCircle);
+                        outterCircles.Add(new Circle(startPoint, OutterCircleSize));
                         for (int i = 0; i < HolesInfo.HoleNum; i++)
                         {
                             innerCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X + gap * i), StartCircle.CenterPoint.Y), InnerCircleSize));
                             outterCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X + gap * i), StartCircle.CenterPoint.Y), OutterCircleSize));
                         }
+                        innerCircles.Add(endCircle);
+                        outterCircles.Add(new Circle(endPoint, OutterCircleSize));
                     }
                     else if (EndPoint.X - StartPoint.X < 0)
                     {
+                        innerCircles.Add(startCircle);
+                        outterCircles.Add(new Circle(startPoint, OutterCircleSize));
                         for (int i = 0; i < HolesInfo.HoleNum; i++)
                         {
                             innerCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X - gap * i), StartCircle.CenterPoint.Y), InnerCircleSize));
                             outterCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X - gap * i), StartCircle.CenterPoint.Y), OutterCircleSize));
                         }
+                        innerCircles.Add(endCircle);
+                        outterCircles.Add(new Circle(endPoint, OutterCircleSize));
                     }
                 }
                 else
@@ -590,6 +547,8 @@ namespace Cii.Lar.Laser
                     var k = (EndPoint.Y - StartPoint.Y) / (EndPoint.X - StartPoint.X);
                     var xGap = (endCircle.CenterPoint.X - startCircle.CenterPoint.X) / HolesInfo.HoleNum;
                     var yGap = (endCircle.CenterPoint.Y - startCircle.CenterPoint.Y) / HolesInfo.HoleNum;
+                    innerCircles.Add(startCircle);
+                    outterCircles.Add(new Circle(startPoint, OutterCircleSize));
                     for (int i = 0; i < HolesInfo.HoleNum; i++)
                     {
                         var x = (float)(StartCircle.CenterPoint.X + i * xGap);
@@ -597,24 +556,8 @@ namespace Cii.Lar.Laser
                         innerCircles.Add(new Circle(new PointF(x, y), InnerCircleSize));
                         outterCircles.Add(new Circle(new PointF(x, y), OutterCircleSize));
                     }
-                }
-                for (int i = 0; i < HolesInfo.HoleNum + 2; i++)
-                {
-                    if (i == 0)
-                    {
-                        realInnerCircles.Add(startCircle);
-                        realOutterCircles.Add(new Circle(startPoint, OutterCircleSize));
-                    }
-                    else if (i == HolesInfo.HoleNum + 1)
-                    {
-                        realInnerCircles.Add(endCircle);
-                        realOutterCircles.Add(new Circle(endPoint, OutterCircleSize));
-                    }
-                    else
-                    {
-                        realInnerCircles.Add(innerCircles[i - 1]);
-                        realOutterCircles.Add(outterCircles[i - 1]);
-                    }
+                    innerCircles.Add(endCircle);
+                    outterCircles.Add(new Circle(endPoint, OutterCircleSize));
                 }
             }
         }
@@ -638,15 +581,15 @@ namespace Cii.Lar.Laser
 
             HolesInfo.MinHoleNum = (int) (length / InnerCircleSize.Width) + 1;
             HolesInfo.MaxHoleNum = (int)(2 * length / InnerCircleSize.Width) + 2;
-            realInnerCircles.Clear();
-            realOutterCircles.Clear();
+            innerCircles.Clear();
+            outterCircles.Clear();
 
             if (HolesInfo.MinHoleNum == 1)
             {
-                realInnerCircles.Add(startCircle);
-                realOutterCircles.Add(new Circle(startPoint, OutterCircleSize));
-                realInnerCircles.Add(endCircle);
-                realOutterCircles.Add(new Circle(endPoint, OutterCircleSize));
+                innerCircles.Add(startCircle);
+                outterCircles.Add(new Circle(startPoint, OutterCircleSize));
+                innerCircles.Add(endCircle);
+                outterCircles.Add(new Circle(endPoint, OutterCircleSize));
                 return;
             }
             else
@@ -659,20 +602,28 @@ namespace Cii.Lar.Laser
                 {
                     if (dy > 0)
                     {
+                        innerCircles.Add(startCircle);
+                        outterCircles.Add(new Circle(startPoint, OutterCircleSize));
                         for (int i= 0; i < HolesInfo.HoleNum; i ++)
                         {
                             innerCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y + gap * i)), InnerCircleSize));
                             outterCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y + gap * i)), OutterCircleSize));
                         }
+                        innerCircles.Add(startCircle);
+                        outterCircles.Add(new Circle(startPoint, OutterCircleSize));
                         CenterPoint = new PointF(StartCircle.CenterPoint.X, StartCircle.CenterPoint.Y + dy / 2);
                     }
                     else if (dy < 0)
                     {
+                        innerCircles.Add(startCircle);
+                        outterCircles.Add(new Circle(startPoint, OutterCircleSize));
                         for (int i = 0; i < HolesInfo.HoleNum; i++)
                         {
                             innerCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y - gap * i)), InnerCircleSize));
                             outterCircles.Add(new Circle(new PointF(StartCircle.CenterPoint.X, (float)(StartCircle.CenterPoint.Y - gap * i)), OutterCircleSize));
                         }
+                        innerCircles.Add(endCircle);
+                        outterCircles.Add(new Circle(endPoint, OutterCircleSize));
                         CenterPoint = new PointF(StartCircle.CenterPoint.X, StartCircle.CenterPoint.Y - dy / 2);
                     }
                 }
@@ -680,20 +631,28 @@ namespace Cii.Lar.Laser
                 {
                     if (dx > 0)
                     {
+                        innerCircles.Add(startCircle);
+                        outterCircles.Add(new Circle(startPoint, OutterCircleSize));
                         for (int i = 0; i < HolesInfo.HoleNum; i++)
                         {
                             innerCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X + gap * i), StartCircle.CenterPoint.Y), InnerCircleSize));
                             outterCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X + gap * i), StartCircle.CenterPoint.Y), OutterCircleSize));
                         }
+                        innerCircles.Add(endCircle);
+                        outterCircles.Add(new Circle(endPoint, OutterCircleSize));
                         CenterPoint = new PointF(StartCircle.CenterPoint.X + dx / 2, StartCircle.CenterPoint.Y);
                     }
                     else if (dx < 0)
                     {
+                        innerCircles.Add(startCircle);
+                        outterCircles.Add(new Circle(startPoint, OutterCircleSize));
                         for (int i = 0; i < HolesInfo.HoleNum; i++)
                         {
                             innerCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X - gap * i), StartCircle.CenterPoint.Y), InnerCircleSize));
                             outterCircles.Add(new Circle(new PointF((int)(StartCircle.CenterPoint.X - gap * i), StartCircle.CenterPoint.Y), OutterCircleSize));
                         }
+                        innerCircles.Add(endCircle);
+                        outterCircles.Add(new Circle(endPoint, OutterCircleSize));
                         CenterPoint = new PointF(StartCircle.CenterPoint.X - dx / 2, StartCircle.CenterPoint.Y);
                     }
                 }
@@ -702,6 +661,8 @@ namespace Cii.Lar.Laser
                     var k = dy / dx;
                     var xGap = (endCircle.CenterPoint.X - startCircle.CenterPoint.X) / HolesInfo.HoleNum;
                     var yGap = (endCircle.CenterPoint.Y - startCircle.CenterPoint.Y) / HolesInfo.HoleNum;
+                    innerCircles.Add(startCircle);
+                    outterCircles.Add(new Circle(startPoint, OutterCircleSize));
                     for (int i = 0; i < HolesInfo.HoleNum; i++)
                     {
                         var x = (float)(StartCircle.CenterPoint.X + i * xGap);
@@ -709,25 +670,9 @@ namespace Cii.Lar.Laser
                         innerCircles.Add(new Circle(new PointF(x, y), InnerCircleSize));
                         outterCircles.Add(new Circle(new PointF(x, y), OutterCircleSize));
                     }
+                    innerCircles.Add(endCircle);
+                    outterCircles.Add(new Circle(endPoint, OutterCircleSize));
                     CenterPoint = new PointF(StartCircle.CenterPoint.X + dx / 2, StartCircle.CenterPoint.Y + dy / 2);
-                }
-                for (int i=0; i < HolesInfo.HoleNum + 2; i++)
-                {
-                    if (i == 0)
-                    {
-                        realInnerCircles.Add(startCircle);
-                        realOutterCircles.Add(new Circle(startPoint, OutterCircleSize));
-                    }
-                    else if (i == HolesInfo.HoleNum + 1)
-                    {
-                        realInnerCircles.Add(endCircle);
-                        realOutterCircles.Add(new Circle(endPoint, OutterCircleSize));
-                    }
-                    else
-                    {
-                        realInnerCircles.Add(innerCircles[i - 1]);
-                        realOutterCircles.Add(outterCircles[i - 1]);
-                    }
                 }
             }
         }
@@ -798,13 +743,13 @@ namespace Cii.Lar.Laser
             GraphicsPath path2 = new GraphicsPath();
             Region region1 = new Region();
             Region region2 = new Region();
-            for (int i = 0; i < realInnerCircles.Count; i++)
+            for (int i = 0; i < innerCircles.Count; i++)
             {
-                path1.AddEllipse(realOutterCircles[i].Rectangle.X, realOutterCircles[i].Rectangle.Y,
-                    realOutterCircles[i].Rectangle.Width, realOutterCircles[i].Rectangle.Height);
+                path1.AddEllipse(outterCircles[i].Rectangle.X, outterCircles[i].Rectangle.Y,
+                    outterCircles[i].Rectangle.Width, outterCircles[i].Rectangle.Height);
 
-                path2.AddEllipse(realInnerCircles[i].Rectangle.X, realInnerCircles[i].Rectangle.Y,
-                    realInnerCircles[i].Rectangle.Width, realInnerCircles[i].Rectangle.Height);
+                path2.AddEllipse(innerCircles[i].Rectangle.X, innerCircles[i].Rectangle.Y,
+                    innerCircles[i].Rectangle.Width, innerCircles[i].Rectangle.Height);
                 if (i == 0)
                 {
                     region1 = new Region(path1);

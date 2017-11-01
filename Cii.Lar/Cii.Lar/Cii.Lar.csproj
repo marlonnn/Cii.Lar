@@ -114,6 +114,7 @@
     <Compile Include="Laser\CircleData.cs" />
     <Compile Include="Laser\FixedLaser.cs" />
     <Compile Include="Laser\BaseLaser.cs" />
+    <Compile Include="Laser\HolesInfo.cs" />
     <Compile Include="LogHelper.cs" />
     <Compile Include="MessageBoxManager.cs" />
     <Compile Include="MiniDump.cs" />
