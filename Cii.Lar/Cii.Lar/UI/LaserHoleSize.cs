@@ -32,10 +32,6 @@ namespace Cii.Lar.UI
             this.sliderPulse.SetMinMaxValue(5, 2500);
             this.sliderPulse.SetValue(5, "ms");
             this.sliderPulse.SliderValueChangedHandler += PulseSliderValueChangedHandler;
-
-            this.sliderHole.SetMinMaxValue(1, 534);
-            this.sliderHole.SetValue(1, "um");
-            this.sliderHole.SliderValueChangedHandler += HoleSliderValueChangedHandler;
         }
 
         private void InitializeChartSeries()
@@ -50,21 +46,16 @@ namespace Cii.Lar.UI
             CalcPoint();
         }
 
+        private double k;
         private void CalcPoint()
         {
-            var k = (0.1 - 53.4) / (0.005 - 2.5);
+            k = (0.1 - 53.4) / (0.005 - 2.5);
             for (int i = 5; i<2500; i++)
             {
                 var x = i / 1000;
                 var y = k * (x - 0.005) + 0.1;
                 this.chart1.Series[0].Points.AddXY(x, y);
             }
-        }
-
-        private void HoleSliderValueChangedHandler(object sender, EventArgs e)
-        {
-            var value = this.sliderHole.Slider.Value;
-            this.sliderHole.SetValue(value, "um");
         }
 
         private void PulseSliderValueChangedHandler(object sender, EventArgs e)
@@ -75,6 +66,7 @@ namespace Cii.Lar.UI
             {
                 this.graphicsProperties.PulseSize = value;
             }
+            this.upDownHoleSize.Value = Convert.ToDecimal(k * (value / 1000d - 0.005) + 0.1);
         }
 
         protected override void RefreshUI()

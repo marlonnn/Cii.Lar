@@ -29,19 +29,21 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LaserHoleSize));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.btnLaserCtrl = new System.Windows.Forms.Button();
             this.lblAdjustPulse = new DevComponents.DotNetBar.LabelX();
             this.lblAdjustHole = new DevComponents.DotNetBar.LabelX();
             this.sliderPulse = new Cii.Lar.UI.SliderCtrl();
-            this.sliderHole = new Cii.Lar.UI.SliderCtrl();
             this.btnFire = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.upDownHoleSize = new System.Windows.Forms.NumericUpDown();
+            this.labelX1 = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownHoleSize)).BeginInit();
             this.SuspendLayout();
             // 
             // closeButton
@@ -51,18 +53,18 @@
             // chart1
             // 
             this.chart1.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chart1.Legends.Add(legend3);
             resources.ApplyResources(this.chart1, "chart1");
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            series1.YValuesPerPoint = 2;
-            this.chart1.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            series3.YValuesPerPoint = 2;
+            this.chart1.Series.Add(series3);
             // 
             // btnLaserCtrl
             // 
@@ -94,11 +96,6 @@
             resources.ApplyResources(this.sliderPulse, "sliderPulse");
             this.sliderPulse.Name = "sliderPulse";
             // 
-            // sliderHole
-            // 
-            resources.ApplyResources(this.sliderHole, "sliderHole");
-            this.sliderHole.Name = "sliderHole";
-            // 
             // btnFire
             // 
             this.btnFire.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -110,23 +107,36 @@
             this.btnSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             resources.ApplyResources(this.btnSave, "btnSave");
             this.btnSave.Name = "btnSave";
-            this.btnSave.Visible = false;
             // 
             // btnDelete
             // 
             this.btnDelete.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             resources.ApplyResources(this.btnDelete, "btnDelete");
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Visible = false;
+            // 
+            // upDownHoleSize
+            // 
+            resources.ApplyResources(this.upDownHoleSize, "upDownHoleSize");
+            this.upDownHoleSize.Name = "upDownHoleSize";
+            // 
+            // labelX1
+            // 
+            // 
+            // 
+            // 
+            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            resources.ApplyResources(this.labelX1, "labelX1");
+            this.labelX1.Name = "labelX1";
             // 
             // LaserHoleSize
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.labelX1);
+            this.Controls.Add(this.upDownHoleSize);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnFire);
-            this.Controls.Add(this.sliderHole);
             this.Controls.Add(this.sliderPulse);
             this.Controls.Add(this.lblAdjustHole);
             this.Controls.Add(this.lblAdjustPulse);
@@ -140,11 +150,13 @@
             this.Controls.SetChildIndex(this.lblAdjustHole, 0);
             this.Controls.SetChildIndex(this.sliderPulse, 0);
             this.Controls.SetChildIndex(this.closeButton, 0);
-            this.Controls.SetChildIndex(this.sliderHole, 0);
             this.Controls.SetChildIndex(this.btnFire, 0);
             this.Controls.SetChildIndex(this.btnSave, 0);
             this.Controls.SetChildIndex(this.btnDelete, 0);
+            this.Controls.SetChildIndex(this.upDownHoleSize, 0);
+            this.Controls.SetChildIndex(this.labelX1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownHoleSize)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -156,9 +168,10 @@
         private DevComponents.DotNetBar.LabelX lblAdjustPulse;
         private DevComponents.DotNetBar.LabelX lblAdjustHole;
         private SliderCtrl sliderPulse;
-        private SliderCtrl sliderHole;
         private System.Windows.Forms.Button btnFire;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.NumericUpDown upDownHoleSize;
+        private DevComponents.DotNetBar.LabelX labelX1;
     }
 }

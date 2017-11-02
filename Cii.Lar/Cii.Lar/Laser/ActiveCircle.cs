@@ -442,7 +442,55 @@ namespace Cii.Lar.Laser
             }
             innerCircles.Add(endCircle);
             outterCircles.Add(new Circle(endPoint, OutterCircleSize));
-            CenterPoint = innerCircles[count / 2].CenterPoint;
+            //CenterPoint = innerCircles[count / 2].CenterPoint;
+            CalCenterPoint();
+            Console.WriteLine("X : " + CenterPoint.X + " Y : " + CenterPoint);
+        }
+
+        /// <summary>
+        /// 1.通过圆弧上的点与圆心组成的向量与起点和终点组成的向量垂直
+        /// 2.向量的模长为半径
+        /// 令向量(x-center.x, y-center.y) 和向量(pt2.x - pt1.x, pt2.y - pt1.y)，则：
+        /// (x-center.x, y-center.y) * (pt2.x - pt1.x, pt2.y - pt1.y) = 0 式子(1)
+        /// (x-center.x)² + (y-center.y)² = R²                            式子(2)
+        /// </summary>
+        private void CalCenterPoint()
+        {
+            //double A1, A2, B1, B2;
+            double x = 0;
+            double y = 0;
+            //A1 = x - circleData.CenterPt.X;
+            //B1 = y - circleData.CenterPt.Y;
+            //A2 = EndPoint.X - StartPoint.X;
+            //B2 = EndPoint.Y - StartPoint.Y;
+
+            //A1 * A2 + B1 * B2 =0;
+            //Math.Pow(A1, 2) + Math.Pow(B1, 2) == Math.Pow(circleData.Radius, 2);
+            if (EndPoint.Y - StartPoint.Y == 0)
+            {
+                x = circleData.CenterPt.X;
+                y = circleData.CenterPt.Y + circleData.Radius;
+            }
+            else if (EndPoint.X - StartPoint.X == 0)
+            {
+                if (circleData.Radius < 0)
+                {
+                    x = circleData.CenterPt.X + circleData.Radius;
+                }
+                else if (circleData.Radius > 0)
+                {
+                    x = circleData.CenterPt.X - circleData.Radius;
+                }
+                y = circleData.CenterPt.Y;
+            }
+            else
+            {
+                var u = (StartPoint.X - EndPoint.X) / (EndPoint.Y - StartPoint.Y);
+                x = circleData.CenterPt.X - Math.Abs(circleData.Radius) / Math.Sqrt(1 + u * u);
+                y = u * (x - circleData.CenterPt.X) + circleData.CenterPt.Y;
+            }
+            Console.WriteLine("X : " + x + "Y : " + y);
+            CenterPoint = new PointF((float)x, (float)y);
         }
 
         public void OnMouseUp()
