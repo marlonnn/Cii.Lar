@@ -157,6 +157,12 @@
     <Compile Include="UI\AssignForm.designer.cs">
       <DependentUpon>AssignForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\HoleSizeCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\HoleSizeCtrl.Designer.cs">
+      <DependentUpon>HoleSizeCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\ImageTracker.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -338,6 +344,9 @@
     <EmbeddedResource Include="UI\ControlCtrl.zh-CN.resx">
       <DependentUpon>ControlCtrl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\HoleSizeCtrl.resx">
+      <DependentUpon>HoleSizeCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\ImageForm.resx">
       <DependentUpon>ImageForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -467,6 +476,7 @@
     <Content Include="DrawTools\Rectangle.cur" />
     <Content Include="Reference\log4net.dll" />
     <Content Include="Reference\Newtonsoft.Json.dll" />
+    <Content Include="Resources\down.png" />
     <Content Include="Resources\exclamation.png" />
     <Content Include="Resources\hand.png" />
     <Content Include="Resources\image.png" />
@@ -505,6 +515,7 @@
     <Content Include="Resources\Rulers.RulerOriginSnap.png" />
     <Content Include="Resources\screenshort.png" />
     <Content Include="Resources\um.png" />
+    <Content Include="Resources\up.png" />
     <Content Include="Resources\view.png" />
     <Content Include="Resources\Zoom in.png" />
     <Content Include="Resources\Zoom out.png" />

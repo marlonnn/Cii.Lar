@@ -66,7 +66,9 @@ namespace Cii.Lar.UI
             {
                 this.graphicsProperties.PulseSize = value;
             }
-            this.upDownHoleSize.Value = Convert.ToDecimal(k * (value / 1000d - 0.005) + 0.1);
+            var v = k * (value / 1000d - 0.005) + 0.1;
+            this.holeSizeCtrl.UpdateHoleSize(v);
+            //this.upDownHoleSize.Value = Convert.ToDecimal(k * (value / 1000d - 0.005) + 0.1);
         }
 
         protected override void RefreshUI()
