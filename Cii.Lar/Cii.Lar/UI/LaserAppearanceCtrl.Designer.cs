@@ -43,6 +43,7 @@
             this.lblZoneColour = new DevComponents.DotNetBar.LabelX();
             this.sliderZoneColour = new DevComponents.DotNetBar.Controls.Slider();
             this.btnLaserCtrl = new System.Windows.Forms.Button();
+            this.btnDefault = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // closeButton
@@ -194,10 +195,18 @@
             this.btnLaserCtrl.Name = "btnLaserCtrl";
             this.btnLaserCtrl.Click += new System.EventHandler(this.btnLaserCtrl_Click);
             // 
+            // btnDefault
+            // 
+            this.btnDefault.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            resources.ApplyResources(this.btnDefault, "btnDefault");
+            this.btnDefault.Name = "btnDefault";
+            this.btnDefault.Click += new System.EventHandler(this.btnDefault_Click);
+            // 
             // LaserAppearanceCtrl
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnDefault);
             this.Controls.Add(this.btnLaserCtrl);
             this.Controls.Add(this.sliderZoneColour);
             this.Controls.Add(this.lblZoneColour);
@@ -229,6 +238,7 @@
             this.Controls.SetChildIndex(this.lblZoneColour, 0);
             this.Controls.SetChildIndex(this.sliderZoneColour, 0);
             this.Controls.SetChildIndex(this.btnLaserCtrl, 0);
+            this.Controls.SetChildIndex(this.btnDefault, 0);
             this.ResumeLayout(false);
 
         }
@@ -249,5 +259,6 @@
         private DevComponents.DotNetBar.Controls.Slider sliderZoneSize;
         private DevComponents.DotNetBar.Controls.Slider sliderZoneColour;
         private System.Windows.Forms.Button btnLaserCtrl;
+        private System.Windows.Forms.Button btnDefault;
     }
 }

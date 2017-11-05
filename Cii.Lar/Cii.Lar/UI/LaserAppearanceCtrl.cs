@@ -85,5 +85,14 @@ namespace Cii.Lar.UI
             base.RefreshUI();
             this.Title = global::Cii.Lar.Properties.Resources.StrLaserCtrlTitle;
         }
+
+        private void btnDefault_Click(object sender, EventArgs e)
+        {
+            graphicsProperties.Alpha = 0xFF;
+            graphicsProperties.PenWidth = 1;
+            graphicsProperties.ExclusionSize = 2;
+            graphicsProperties.TargetSize = 1;
+            graphicsProperties.Color = Color.Yellow;
+        }
     }
 }
