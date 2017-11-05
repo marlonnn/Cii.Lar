@@ -309,10 +309,10 @@ namespace Cii.Lar.Laser
                     shape = LaserShape.Arc;
                     break;
                 case InHoleType.StartHole:
-                    MoveStartPoint(point);
                     if (shape == LaserShape.Line)
                     {
-                        CalculateContinuousCircle();
+                        MoveStartPoint(point);
+                        CalculateContinuousCircle(dx, dy);
                     }
                     else if (shape == LaserShape.Arc)
                     {
@@ -320,10 +320,10 @@ namespace Cii.Lar.Laser
                     }
                     break;
                 case InHoleType.EndHole:
-                    MoveEndPoint(point);
                     if (shape == LaserShape.Line)
                     {
-                        CalculateContinuousCircle();
+                        MoveEndPoint(point);
+                        CalculateContinuousCircle(dx, dy);
                     }
                     else if (shape == LaserShape.Arc)
                     {
