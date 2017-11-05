@@ -11,8 +11,29 @@ using System.Windows.Forms;
 
 namespace Cii.Lar.Laser
 {
+    public enum InHoleType
+    {
+        StartHole,
+        CenterHole,
+        EndHole,
+        Empty
+    }
+
     public class ActiveCircle
     {
+        private InHoleType holeType;
+        public InHoleType HoleType
+        {
+            get { return this.holeType; }
+            set
+            {
+                if (value != this.holeType)
+                {
+                    this.holeType = value;
+                }
+            }
+        }
+
         public void UpdateHoleNum(int holes)
         {
             this.holesInfo.UpdateHoleNum(holes);
@@ -73,18 +94,34 @@ namespace Cii.Lar.Laser
         }
 
         private Point startPoint;
+
+        public void MoveStartPoint(Point p)
+        {
+            if (!p.IsEmpty)
+            {
+                this.startPoint = p;
+                StartCircle = new Circle(p, InnerCircleSize);
+            }
+        }
+
+        public void MoveEndPoint(Point p)
+        {
+            if (!p.IsEmpty)
+            {
+                this.endPoint = p;
+                EndCircle = new Circle(p, InnerCircleSize);
+            }
+        }
+
         public Point StartPoint
         {
             get { return startPoint; }
             set
             {
-                if (value != Point.Empty)
+                if (value != Point.Empty && clickCount % 2 == 1)
                 {
-                    if (clickCount % 2 == 1)
-                    {
-                        startPoint = value;
-                        StartCircle = new Circle(value, InnerCircleSize);
-                    }
+                    startPoint = value;
+                    StartCircle = new Circle(value, InnerCircleSize);
                 }
             }
         }
@@ -177,6 +214,7 @@ namespace Cii.Lar.Laser
 
         public ActiveCircle(ZWPictureBox pictureBox)
         {
+            HoleType = InHoleType.CenterHole;
             shape = LaserShape.Line;
             HolesInfo = new HolesInfo();
             HolesInfo.HolesInfoChangeHandler += pictureBox.HolesInfoChangeHandler;
@@ -213,6 +251,10 @@ namespace Cii.Lar.Laser
             }
         }
 
+        private bool centerHole = false;
+        private bool startHole = false;
+        private bool endHole = false;
+
         public void OnMouseMove(MouseEventArgs e, Point point, int dx, int dy)
         {
             if (!IsMouseUp)
@@ -226,13 +268,68 @@ namespace Cii.Lar.Laser
                 if (!CenterPoint.IsEmpty)
                 {
                     RectangleF rect = new RectangleF(new PointF(CenterPoint.X - 50, CenterPoint.Y - 50), new Size(100, 100));
-                    InTheHole = rect.Contains(point);
-                    if (InTheHole && (e.Button == MouseButtons.Left))
+                    centerHole = rect.Contains(point);
+                    if (centerHole)
                     {
-                        CalcAngle(point, dx, dy);
-                        shape = LaserShape.Arc;
+                        HoleType = InHoleType.CenterHole;
                     }
                 }
+                if (!StartPoint.IsEmpty)
+                {
+                    RectangleF rect = new RectangleF(new PointF(StartPoint.X - 50, StartPoint.Y - 50), new Size(100, 100));
+                    startHole = rect.Contains(point);
+                    if (startHole)
+                    {
+                        HoleType = InHoleType.StartHole;
+                    }
+                }
+                if (!EndPoint.IsEmpty)
+                {
+                    RectangleF rect = new RectangleF(new PointF(EndPoint.X - 50, EndPoint.Y - 50), new Size(100, 100));
+                    endHole = rect.Contains(point);
+                    if (endHole)
+                    {
+                        HoleType = InHoleType.EndHole;
+                    }
+                }
+                InTheHole = startHole || centerHole || endHole;
+                if (InTheHole && (e.Button == MouseButtons.Left))
+                {
+                    MoveCircle(point, dx, dy);
+                }
+            }
+        }
+
+        private void MoveCircle(Point point, int dx, int dy)
+        {
+            switch (HoleType)
+            {
+                case InHoleType.CenterHole:
+                    CalcAngle(point, dx, dy);
+                    shape = LaserShape.Arc;
+                    break;
+                case InHoleType.StartHole:
+                    MoveStartPoint(point);
+                    if (shape == LaserShape.Line)
+                    {
+                        CalculateContinuousCircle();
+                    }
+                    else if (shape == LaserShape.Arc)
+                    {
+                        //CalcAngle(point, dx, dy);
+                    }
+                    break;
+                case InHoleType.EndHole:
+                    MoveEndPoint(point);
+                    if (shape == LaserShape.Line)
+                    {
+                        CalculateContinuousCircle();
+                    }
+                    else if (shape == LaserShape.Arc)
+                    {
+                        //CalcAngle(point, dx, dy);
+                    }
+                    break;
             }
         }
 
@@ -442,9 +539,9 @@ namespace Cii.Lar.Laser
             }
             innerCircles.Add(endCircle);
             outterCircles.Add(new Circle(endPoint, OutterCircleSize));
-            //CenterPoint = innerCircles[count / 2].CenterPoint;
-            CalCenterPoint();
-            Console.WriteLine("X : " + CenterPoint.X + " Y : " + CenterPoint);
+            CenterPoint = innerCircles[count / 2].CenterPoint;
+            //CalCenterPoint();
+            //Console.WriteLine("X : " + CenterPoint.X + " Y : " + CenterPoint);
         }
 
         /// <summary>
@@ -640,6 +737,40 @@ namespace Cii.Lar.Laser
             //}
         }
 
+        private void DrawCrossPoint(Graphics g)
+        {
+            switch (HoleType)
+            {
+                case InHoleType.StartHole:
+                    if (!StartPoint.IsEmpty && InTheHole)
+                    {
+                        using (Pen centerPen = new Pen(Color.Red, 1f))
+                        {
+                            DrawCross(g, centerPen, new Circle(StartPoint, crossSize), crossSize);
+                        }
+                    }
+                    break;
+                case InHoleType.CenterHole:
+                    if (!CenterPoint.IsEmpty && InTheHole)
+                    {
+                        using (Pen centerPen = new Pen(Color.Red, 1f))
+                        {
+                            DrawCross(g, centerPen, new Circle(CenterPoint, crossSize), crossSize);
+                        }
+                    }
+                    break;
+                case InHoleType.EndHole:
+                    if (!EndPoint.IsEmpty && InTheHole)
+                    {
+                        using (Pen centerPen = new Pen(Color.Red, 1f))
+                        {
+                            DrawCross(g, centerPen, new Circle(EndPoint, crossSize), crossSize);
+                        }
+                    }
+                    break;
+            }
+        }
+
         private void Draw(Graphics g)
         {
             Pen pen = new Pen(Color.Black, 1f);
@@ -651,13 +782,13 @@ namespace Cii.Lar.Laser
             DrawConnectLine(g, pen, StartCircle, EndCircle, circleData, !CenterPoint.IsEmpty && InTheHole);
 
             //draw center cross point
-            if (!CenterPoint.IsEmpty && InTheHole)
-            {
-                using (Pen centerPen = new Pen(Color.Red, 1f))
-                {
-                    DrawCross(g, centerPen, new Circle(CenterPoint, crossSize), crossSize);
-                }
-            }
+            //if (!CenterPoint.IsEmpty && InTheHole)
+            //{
+            //    using (Pen centerPen = new Pen(Color.Red, 1f))
+            //    {
+            //        DrawCross(g, centerPen, new Circle(CenterPoint, crossSize), crossSize);
+            //    }
+            //}
 
             //draw multiple circles
             SolidBrush brush = new SolidBrush(this.GraphicsProperties.Color);
@@ -685,6 +816,8 @@ namespace Cii.Lar.Laser
 
             //draw end point cross
             DrawCross(g, pen, EndCircle, crossSize);
+
+            DrawCrossPoint(g);
 
             pen.Dispose();
             brush.Dispose();
