@@ -82,6 +82,11 @@ namespace Cii.Lar.Laser
             base.OnMouseUp(pictureBox, e);
         }
 
+        private void FlickerColor(int cycle)
+        {
+            this.brush = new SolidBrush(cycle % 2 == 0 ? this.GraphicsProperties.Color : Color.Red);
+        }
+
         public override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -98,6 +103,10 @@ namespace Cii.Lar.Laser
             using (GraphicsPath path = new GraphicsPath())
             {
                 brush = new SolidBrush(this.GraphicsProperties.Color);
+                if (Flashing)
+                {
+                    FlickerColor(this._flickCount);
+                }
 
                 path.AddEllipse(OutterCircle.Rectangle.X, OutterCircle.Rectangle.Y,
                     OutterCircle.Rectangle.Width, OutterCircle.Rectangle.Height);

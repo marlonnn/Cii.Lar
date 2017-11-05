@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -211,10 +212,11 @@ namespace Cii.Lar.Laser
         }
 
         private Size crossSize;
-
-        public ActiveCircle(ZWPictureBox pictureBox)
+        private ActiveLaser laser;
+        public ActiveCircle(ZWPictureBox pictureBox, ActiveLaser laser)
         {
             HoleType = InHoleType.CenterHole;
+            this.laser = laser;
             shape = LaserShape.Line;
             HolesInfo = new HolesInfo();
             HolesInfo.HolesInfoChangeHandler += pictureBox.HolesInfoChangeHandler;
@@ -770,6 +772,18 @@ namespace Cii.Lar.Laser
                     break;
             }
         }
+        private SolidBrush brush;
+        private void DrawCircle(Graphics g, SolidBrush brush, int i)
+        {
+            using (GraphicsPath path = new GraphicsPath())
+            {
+                path.AddEllipse(OutterCircle[i].Rectangle.X, OutterCircle[i].Rectangle.Y,
+                    OutterCircle[i].Rectangle.Width, OutterCircle[i].Rectangle.Height);
+                path.AddEllipse(InnerCircles[i].Rectangle.X, InnerCircles[i].Rectangle.Y,
+                    InnerCircles[i].Rectangle.Width, InnerCircles[i].Rectangle.Height);
+                g.FillPath(brush, path);
+            }
+        }
 
         private void Draw(Graphics g)
         {
@@ -791,7 +805,7 @@ namespace Cii.Lar.Laser
             //}
 
             //draw multiple circles
-            SolidBrush brush = new SolidBrush(this.GraphicsProperties.Color);
+            brush = new SolidBrush(this.GraphicsProperties.Color);
             GraphicsPath path1 = new GraphicsPath();
             GraphicsPath path2 = new GraphicsPath();
             Region region1 = new Region();
@@ -818,6 +832,16 @@ namespace Cii.Lar.Laser
             DrawCross(g, pen, EndCircle, crossSize);
 
             DrawCrossPoint(g);
+
+            if (laser.Flashing)
+            {
+                laser.FlickerColor(this.laser.FlickCount);
+                //brush = laser.Brush;
+                if (this.laser.FlickCount > -1 && this.laser.FlickCount < this.innerCircles.Count)
+                {
+                    DrawCircle(g, laser.Brush, this.laser.FlickCount);
+                }
+            }
 
             pen.Dispose();
             brush.Dispose();

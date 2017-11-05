@@ -20,7 +20,7 @@ namespace Cii.Lar.Laser
         public ActiveLaser(ZWPictureBox pictureBox) : base()
         {
             this.pictureBox = pictureBox;
-            activeCircle = new ActiveCircle(pictureBox);
+            activeCircle = new ActiveCircle(pictureBox, this);
             this.GraphicsProperties.GraphicsPropertiesChangedHandler += GraphicsPropertiesChangedHandler;
         }
 
@@ -80,6 +80,22 @@ namespace Cii.Lar.Laser
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
             activeCircle.OnPaint(g);
+        }
+
+        public void FlickerColor(int cycle)
+        {
+            //this.brush = new SolidBrush(cycle % 2 == 0 ? this.GraphicsProperties.Color : Color.Red);
+            this.brush = new SolidBrush(Color.Red);
+        }
+
+        protected override void FlashTimer_Tick(object sender, EventArgs e)
+        {
+            _flickCount++;
+            this.pictureBox.Invalidate();
+            if (_flickCount == this.activeCircle.InnerCircles.Count)
+            {
+                Flashing = false;
+            }
         }
 
         public void UpdateHoleNumber(int value)

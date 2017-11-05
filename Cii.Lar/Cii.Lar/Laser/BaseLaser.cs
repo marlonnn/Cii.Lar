@@ -12,6 +12,37 @@ namespace Cii.Lar.Laser
 {
     public class BaseLaser
     {
+        private Timer FlashTimer;
+
+        protected int _flickCount;
+        public int FlickCount
+        {
+            get { return this._flickCount; }
+        }
+
+        private bool _flashing;
+        public bool Flashing
+        {
+            get { return this._flashing; }
+            set
+            {
+                _flickCount = 0;
+                this._flashing = value;
+                if (value)
+                {
+                    this.FlashTimer.Enabled = value;
+                    this.FlashTimer.Start();
+                    _flickCount = -1;
+                    this.FlashTimer_Tick(null, null);
+                }
+                else
+                {
+                    this.FlashTimer.Enabled = value;
+                    this.FlashTimer.Stop();
+                }
+                this.pictureBox.Invalidate();
+            }
+        }
         protected ZWPictureBox pictureBox;
         /// <summary>
         /// GraphicsProperties of this draw object 
@@ -46,10 +77,27 @@ namespace Cii.Lar.Laser
         }
 
         protected SolidBrush brush;
+        public SolidBrush Brush
+        {
+            get { return this.brush; }
+        }
 
         public BaseLaser()
         {
             InitializeGraphicsProperties();
+            this.FlashTimer = new Timer();
+            this.FlashTimer.Interval = 500;
+            this.FlashTimer.Tick += new System.EventHandler(this.FlashTimer_Tick);
+        }
+
+        protected virtual void FlashTimer_Tick(object sender, EventArgs e)
+        {
+            _flickCount++;
+            this.pictureBox.Invalidate();
+            if (_flickCount == 6)
+            {
+                Flashing = false;
+            }
         }
 
         private void InitializeGraphicsProperties()

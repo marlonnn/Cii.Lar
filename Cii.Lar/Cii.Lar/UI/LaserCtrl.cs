@@ -56,6 +56,7 @@ namespace Cii.Lar.UI
 
         }
 
+        bool flashing = false;
         /// <summary>
         /// fire laser
         /// </summary>
@@ -63,7 +64,7 @@ namespace Cii.Lar.UI
         /// <param name="e"></param>
         private void btnFire_Click(object sender, EventArgs e)
         {
-
+            this.pictureBox.Laser.Flashing = !flashing;
         }
 
         private void btnAlignLaser_Click(object sender, EventArgs e)
