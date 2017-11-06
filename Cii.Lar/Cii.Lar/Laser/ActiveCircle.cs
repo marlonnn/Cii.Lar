@@ -335,18 +335,6 @@ namespace Cii.Lar.Laser
             }
         }
 
-        public double ArcLength()
-        {
-            double lengthArc = 0;
-            var halfLenght = Length / 2;
-            if (shape == LaserShape.Arc && circleData != null)
-            {
-                var angleArc = 2 * (Math.Asin(halfLenght / Math.Abs(circleData.Radius)));
-                lengthArc = angleArc * Math.Abs(circleData.Radius);
-            }
-            return lengthArc;
-        }
-
         private void CalcAngle()
         {
             innerCircles.Clear();

@@ -141,6 +141,14 @@ namespace Cii.Lar.DrawTools
             graphicsList.Remove(drawObject);
         }
 
+        public void DeleteAll()
+        {
+            if (graphicsList != null && graphicsList.Count > 0)
+            {
+                graphicsList.Clear();
+            }
+        }
+
         public void UnselectAll()
         {
             foreach (DrawObject o in graphicsList)

@@ -49,24 +49,30 @@ namespace Cii.Lar.ExpClass
                 if (value != this.laserType)
                 {
                     laserType = value;
-                    switch (value)
-                    {
-                        case LaserType.SaturnFixed:
-                            this.pictureBox.Laser = new FixedLaser(this.pictureBox);
-                            break;
-                        case LaserType.SaturnActive:
-                            this.pictureBox.Laser = new ActiveLaser(this.pictureBox);
-                            break;
-                        case LaserType.Alignment:
-                            AlignLaser alignLaser = new AlignLaser(this.pictureBox);
-                            alignLaser.ZoomHandler += this.pictureBox.ZoomHandler;
-                            alignLaser.ButtonStateHandler += this.pictureBox.ButtonStateHandler;
-                            this.pictureBox.Laser = alignLaser;
-                            break;
-                    }
+                    CreateLaser(value);
                 }
             }
         }
+
+        private void CreateLaser(LaserType type)
+        {
+            switch (type)
+            {
+                case LaserType.SaturnFixed:
+                    this.pictureBox.Laser = new FixedLaser(this.pictureBox);
+                    break;
+                case LaserType.SaturnActive:
+                    this.pictureBox.Laser = new ActiveLaser(this.pictureBox);
+                    break;
+                case LaserType.Alignment:
+                    AlignLaser alignLaser = new AlignLaser(this.pictureBox);
+                    alignLaser.ZoomHandler += this.pictureBox.ZoomHandler;
+                    alignLaser.ButtonStateHandler += this.pictureBox.ButtonStateHandler;
+                    this.pictureBox.Laser = alignLaser;
+                    break;
+            }
+        }
+
         private FilesForm filesForm;
 
         public ExpManager()
@@ -114,8 +120,10 @@ namespace Cii.Lar.ExpClass
                 case ToolStripAction.Ellipse:
                 case ToolStripAction.Polygon:
                     this.ZWPictureBox.LaserFunction = false;
+                    this.ZWPictureBox.Laser = null;
                     SetMeasureTool(e.Action, false);
                     this.ZWPictureBox.ShowBaseCtrl(true, 2);
+                    this.ZWPictureBox.Invalidate();
                     break;
                 case ToolStripAction.Move:
                     SetMeasureTool(e.Action, false);
@@ -123,7 +131,10 @@ namespace Cii.Lar.ExpClass
                 case ToolStripAction.Laser:
                     //SetMeasureTool(e.Action, false);
                     this.ZWPictureBox.LaserFunction = true;
+                    CreateLaser(LaserType);
                     this.ZWPictureBox.ShowBaseCtrl(true, 0);
+                    this.ZWPictureBox.GraphicsList.DeleteAll();
+                    this.ZWPictureBox.Invalidate();
                     break;
                 case ToolStripAction.Setting:
                     this.ZWPictureBox.LaserFunction = false;
