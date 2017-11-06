@@ -117,7 +117,7 @@ namespace Cii.Lar.DrawTools
             cancelNewFlag = true;
 
             pictureBox.GraphicsList[0].UpdateStatisticsInformation();
-            pictureBox.ActiveTool = DrawToolType.Pointer;
+            pictureBox.ActiveTool = DrawToolType.PolyLine;
         }
 
         private void EndCreating(ZWPictureBox pictureBox)

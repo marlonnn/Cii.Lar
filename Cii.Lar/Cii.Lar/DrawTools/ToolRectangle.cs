@@ -26,8 +26,13 @@ namespace Cii.Lar.DrawTools
 
         public override void OnMouseDown(ZWPictureBox pictureBox, MouseEventArgs e)
         {
-            Point point = new Point((int)(e.X / pictureBox.Zoom - pictureBox.OffsetX), (int)(e.Y / pictureBox.Zoom - pictureBox.OffsetY));
-            AddNewObject(pictureBox, new DrawRectangle(pictureBox, point.X, point.Y, 1, 1));
+            clickCount++;
+            if (clickCount % 2 == 1)
+            {
+                startPoint = new Point((int)(e.X / pictureBox.Zoom - pictureBox.OffsetX), (int)(e.Y / pictureBox.Zoom - pictureBox.OffsetY));
+                drawObject = new DrawRectangle(pictureBox, startPoint.X, startPoint.Y, 1, 1);
+                AddNewObject(pictureBox, drawObject);
+            }
         }
 
         public override void OnMouseMove(ZWPictureBox pictureBox, MouseEventArgs e)
@@ -36,11 +41,30 @@ namespace Cii.Lar.DrawTools
 
             if (pictureBox.CreatingDrawObject)
             {
-                if (e.Button == MouseButtons.Left)
+                if (clickCount % 2 == 1)
                 {
                     Point point = new Point((int)(e.X / pictureBox.Zoom - pictureBox.OffsetX), (int)(e.Y / pictureBox.Zoom - pictureBox.OffsetY));
                     pictureBox.GraphicsList[0].MoveHandleTo(pictureBox, point, 5);
                     pictureBox.Refresh();
+                }
+            }
+        }
+
+        public override void OnMouseUp(ZWPictureBox pictureBox, MouseEventArgs e)
+        {
+            if (clickCount % 2 == 0)
+            {
+                endPoint = new Point((int)(e.X / pictureBox.Zoom - pictureBox.OffsetX), (int)(e.Y / pictureBox.Zoom - pictureBox.OffsetY));
+                Rectangle rectangle = new Rectangle(new Point(startPoint.X - 1, startPoint.Y - 1), new Size(2, 2));
+                if (rectangle.Contains(endPoint))
+                {
+                    pictureBox.GraphicsList.DeleteDrawObject(drawObject);
+                    pictureBox.Invalidate();
+                }
+                else
+                {
+                    pictureBox.GraphicsList[0].UpdateStatisticsInformation();
+                    pictureBox.ActiveTool = DrawToolType.Rectangle;
                 }
             }
         }
