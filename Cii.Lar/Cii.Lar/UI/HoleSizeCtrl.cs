@@ -12,6 +12,8 @@ namespace Cii.Lar.UI
 {
     public partial class HoleSizeCtrl : UserControl
     {
+        public delegate void UpdownClick(bool isUp);
+        public UpdownClick UpdownClickHandler;
         public HoleSizeCtrl()
         {
             InitializeComponent();
@@ -25,12 +27,12 @@ namespace Cii.Lar.UI
 
         private void btnUp_Click(object sender, EventArgs e)
         {
-
+            UpdownClickHandler?.Invoke(true);
         }
 
         private void btnDown_Click(object sender, EventArgs e)
         {
-
+            UpdownClickHandler?.Invoke(false);
         }
     }
 }

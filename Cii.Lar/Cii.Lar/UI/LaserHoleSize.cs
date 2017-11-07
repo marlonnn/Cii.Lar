@@ -8,11 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cii.Lar.DrawTools;
+using Cii.Lar.SysClass;
 
 namespace Cii.Lar.UI
 {
     public partial class LaserHoleSize : BaseCtrl
     {
+        private List<HolePulsePoint> holePulsePoints;
         private GraphicsPropertiesManager graphicsPropertiesManager = GraphicsPropertiesManager.GraphicsManagerSingleInstance();
 
         private GraphicsProperties graphicsProperties;
@@ -25,6 +27,41 @@ namespace Cii.Lar.UI
             InitializeComponent();
             InitializeSlider();
             InitializeChartSeries();
+            InitializeHolePulsePoints();
+            this.holeSizeCtrl.UpdownClickHandler += UpdownClickHandler;
+        }
+
+        private double currentX;
+        private double currentY;
+        public double CurrentY
+        {
+            get { return this.currentY; }
+            set
+            {
+                if (value != this.currentY)
+                {
+                    this.currentY = value;
+                }
+            }
+        }
+
+        private HolePulsePoint currentPoint;
+        public HolePulsePoint CurrentPoint
+        {
+            get { return this.currentPoint; }
+            set
+            {
+                if (value.X == this.currentPoint.X && value.Y != this.currentPoint.Y)
+                {
+                    this.currentPoint.Y = value.Y;
+                    AddHolePulsePoints(value);
+                }
+            }
+        }
+
+        private void UpdownClickHandler(bool isUp)
+        {
+            CurrentPoint = new HolePulsePoint((float)currentX, isUp ? (float)(currentY++) : (float)(currentY--));
         }
 
         private void InitializeSlider()
@@ -43,19 +80,93 @@ namespace Cii.Lar.UI
             this.chart1.ChartAreas[0].AxisY.Maximum = 50d;
             this.chart1.ChartAreas[0].AxisY.Minimum = 0.1d;
             this.chart1.ChartAreas[0].AxisY.Title = "um";
-            CalcPoint();
+            //CalcPoint();
         }
 
-        private double k;
-        private void CalcPoint()
+        private void AddHolePulsePoints(HolePulsePoint point)
         {
-            k = (0.1 - 53.4) / (0.005 - 2.5);
-            for (int i = 5; i<2500; i++)
+            bool exist = false;
+            if (holePulsePoints != null && holePulsePoints.Count > 0)
             {
-                var x = i / 1000;
-                var y = k * (x - 0.005) + 0.1;
+                for (int i = 0; i < holePulsePoints.Count; i++)
+                {
+                    if (holePulsePoints[i].X == point.X && holePulsePoints[i].Y == point.Y)
+                    {
+                        exist = true;
+                    }
+                    else if (holePulsePoints[i].X == point.X && holePulsePoints[i].Y != point.Y)
+                    {
+                        exist = false;
+                    }
+                }
+                if (!exist)
+                {
+                    holePulsePoints.Add(point);
+                    CalPiecewiseFunction();
+                }
+            }
+        }
+
+        private void InitializeHolePulsePoints()
+        {
+            holePulsePoints = new List<HolePulsePoint>();
+            holePulsePoints.Add(new HolePulsePoint(0.005f, 0.1f));
+            holePulsePoints.Add(new HolePulsePoint(2.5f, 50f));
+            CalPiecewiseFunction();
+        }
+
+        private void CalPiecewiseFunction()
+        {
+            holePulsePoints.Sort((p1, p2) => { return (int)(p1.X - p2.X); });
+            if (holePulsePoints != null && holePulsePoints.Count > 0)
+            {
+                for (int i=0; i<holePulsePoints.Count; i++)
+                {
+                    if (i + 1 < holePulsePoints.Count)
+                    {
+                        CalSlopeFunction(holePulsePoints[i], holePulsePoints[i + 1]);
+                    }
+                }
+            }
+        }
+
+        private void CalSlopeFunction(HolePulsePoint p1, HolePulsePoint p2)
+        {
+            double k = 0;
+            k = (p2.Y - p1.Y) / (p2.X - p1.X);
+            int startX = (int)(p1.X * 1000);
+            int endX = (int)(p2.X * 1000);
+            for (int i = startX; i <= endX; i++)
+            {
+                var x = i / 1000d;
+                var y = k * (x - p1.X) + p1.Y;
                 this.chart1.Series[0].Points.AddXY(x, y);
             }
+        }
+
+        private void CalY(float value)
+        {
+            var c = GetPiecewiseCount();
+            for (int i=0; i < c; i++)
+            {
+                if (i + 1 < holePulsePoints.Count)
+                {
+                    //if (Math.Abs(holePulsePoints[i + 1].X - value) < 0.00002)
+                    {
+                        currentX = value;
+                        double k = (holePulsePoints[i + 1].Y - holePulsePoints[i].Y) / (holePulsePoints[i + 1].X - holePulsePoints[i].X);
+                        currentY = k * (currentX - holePulsePoints[i].X) + holePulsePoints[i].Y;
+                        currentPoint = new HolePulsePoint((float)currentX, (float)currentY);
+                        this.holeSizeCtrl.UpdateHoleSize(currentY);
+                        //this.chart1.Series[0].Points.AddXY(x, y);
+                    }
+                }
+            }
+        }
+
+        private int GetPiecewiseCount()
+        {
+            return holePulsePoints.Count - 1;
         }
 
         private void PulseSliderValueChangedHandler(object sender, EventArgs e)
@@ -66,8 +177,9 @@ namespace Cii.Lar.UI
             {
                 this.graphicsProperties.PulseSize = value;
             }
-            var v = k * (value / 1000d - 0.005) + 0.1;
-            this.holeSizeCtrl.UpdateHoleSize(v);
+            CalY(value / 1000f);
+            //var v = k * (value / 1000d - 0.005) + 0.1;
+            //this.holeSizeCtrl.UpdateHoleSize(v);
             //this.upDownHoleSize.Value = Convert.ToDecimal(k * (value / 1000d - 0.005) + 0.1);
         }
 
