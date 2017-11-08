@@ -14,16 +14,32 @@ namespace Cii.Lar.UI
     {
         public delegate void UpdownClick(bool isUp);
         public UpdownClick UpdownClickHandler;
+
+        private double holeSize;
+        public double HoleSize
+        {
+            get { return this.holeSize; }
+            set
+            {
+                if (value != this.holeSize)
+                {
+                    this.holeSize = value;
+                    string v = holeSize.ToString("0.00");
+                    this.lblHoleSize.Text = string.Format("{0}um", v);
+                }
+            }
+        }
         public HoleSizeCtrl()
         {
             InitializeComponent();
         }
 
-        public void UpdateHoleSize(double value)
-        {
-            var v = value.ToString("0.00");
-            this.lblHoleSize.Text = string.Format("{0}um", v);
-        }
+        //public void UpdateHoleSize(double value)
+        //{
+        //    holeSize = value;
+        //    string v = holeSize.ToString("0.00");
+        //    this.lblHoleSize.Text = string.Format("{0}um", v);
+        //}
 
         private void btnUp_Click(object sender, EventArgs e)
         {

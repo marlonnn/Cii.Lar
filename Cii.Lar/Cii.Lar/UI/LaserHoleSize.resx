@@ -346,7 +346,7 @@
     <value>121, 339</value>
   </data>
   <data name="holeSizeCtrl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 34</value>
+    <value>97, 34</value>
   </data>
   <data name="holeSizeCtrl.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>

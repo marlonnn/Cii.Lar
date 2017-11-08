@@ -37,9 +37,9 @@
             // 
             this.btnUp.BackColor = System.Drawing.Color.Transparent;
             this.btnUp.Image = global::Cii.Lar.Properties.Resources.up;
-            this.btnUp.Location = new System.Drawing.Point(50, 2);
+            this.btnUp.Location = new System.Drawing.Point(66, 2);
             this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(28, 16);
+            this.btnUp.Size = new System.Drawing.Size(28, 17);
             this.btnUp.TabIndex = 0;
             this.btnUp.UseVisualStyleBackColor = false;
             this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
@@ -47,9 +47,9 @@
             // lblHoleSize
             // 
             this.lblHoleSize.AutoSize = true;
-            this.lblHoleSize.Location = new System.Drawing.Point(3, 10);
+            this.lblHoleSize.Location = new System.Drawing.Point(3, 11);
             this.lblHoleSize.Name = "lblHoleSize";
-            this.lblHoleSize.Size = new System.Drawing.Size(47, 12);
+            this.lblHoleSize.Size = new System.Drawing.Size(48, 13);
             this.lblHoleSize.TabIndex = 1;
             this.lblHoleSize.Text = "0.001um";
             // 
@@ -57,22 +57,22 @@
             // 
             this.btnDown.BackColor = System.Drawing.Color.Transparent;
             this.btnDown.Image = global::Cii.Lar.Properties.Resources.down;
-            this.btnDown.Location = new System.Drawing.Point(50, 17);
+            this.btnDown.Location = new System.Drawing.Point(66, 18);
             this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(28, 16);
+            this.btnDown.Size = new System.Drawing.Size(28, 17);
             this.btnDown.TabIndex = 2;
             this.btnDown.UseVisualStyleBackColor = false;
             this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
             // 
             // HoleSizeCtrl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btnDown);
             this.Controls.Add(this.lblHoleSize);
             this.Controls.Add(this.btnUp);
             this.Name = "HoleSizeCtrl";
-            this.Size = new System.Drawing.Size(81, 34);
+            this.Size = new System.Drawing.Size(100, 37);
             this.ResumeLayout(false);
             this.PerformLayout();
 
