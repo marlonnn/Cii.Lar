@@ -40,6 +40,7 @@ namespace Cii.Lar.UI
             InitializeChartSeries();
             InitializeHolePulsePoints();
             this.holeSizeCtrl.UpdownClickHandler += UpdownClickHandler;
+
         }
 
         private void InitializeHolePulsePoints()
@@ -79,8 +80,21 @@ namespace Cii.Lar.UI
             {
                 AddPoint(CurrentPoint);
             }
-            //ReCalculate PiecewiseFunction
-            CalPiecewiseFunction();
+        }
+
+        private void RemovePoint(HolePulsePoint point)
+        {
+            if (holePulsePoints != null)
+            {
+                for (int i = 0; i < holePulsePoints.Count; i++)
+                {
+                    if (holePulsePoints[i].X == point.X)
+                    {
+                        holePulsePoints.Remove(holePulsePoints[i]);
+                    }
+                }
+                CalPiecewiseFunction();
+            }
         }
 
         private void AddPoint(HolePulsePoint point)
@@ -88,6 +102,7 @@ namespace Cii.Lar.UI
             if (holePulsePoints != null)
             {
                 holePulsePoints.Add(point);
+                CalPiecewiseFunction();
             }
         }
 
@@ -102,6 +117,7 @@ namespace Cii.Lar.UI
                         holePulsePoints[i].Y = point.Y;
                     }
                 }
+                CalPiecewiseFunction();
             }
         }
 
@@ -113,6 +129,22 @@ namespace Cii.Lar.UI
                 for (int i=0; i< holePulsePoints.Count; i++)
                 {
                     if (holePulsePoints[i].X == point.X)
+                    {
+                        exist = true;
+                    }
+                }
+            }
+            return exist;
+        }
+
+        private bool CheckPoint(float x)
+        {
+            bool exist = false;
+            if (holePulsePoints != null && holePulsePoints.Count > 0)
+            {
+                for (int i = 0; i < holePulsePoints.Count; i++)
+                {
+                    if (holePulsePoints[i].X == x)
                     {
                         exist = true;
                     }
@@ -156,11 +188,6 @@ namespace Cii.Lar.UI
             }
         }
 
-        private int GetPiecewiseCount()
-        {
-            return holePulsePoints.Count - 1;
-        }
-
         private void PulseSliderValueChangedHandler(object sender, EventArgs e)
         {
             var value = this.sliderPulse.Slider.Value;
@@ -169,22 +196,26 @@ namespace Cii.Lar.UI
             {
                 this.graphicsProperties.PulseSize = value;
             }
-            CalXY(value / 1000f);
+            var x = value / 1000f;
+            CalXY(x);
+            SaveDeleteButtonVisiable(CheckPoint(x));
         }
 
         private void CalXY(float value)
         {
-            var c = GetPiecewiseCount();
-            for (int i = 0; i < c; i++)
+            for (int i = 0; i < holePulsePoints.Count - 1; i++)
             {
-                if (i + 1 < holePulsePoints.Count)
-                {
-                    var x = value;
-                    double k = (holePulsePoints[i + 1].Y - holePulsePoints[i].Y) / (holePulsePoints[i + 1].X - holePulsePoints[i].X);
-                    var y = k * (value - holePulsePoints[i].X) + holePulsePoints[i].Y;
-                    CurrentPoint = new HolePulsePoint(x, (float)y);
-                }
+                var x = value;
+                double k = (holePulsePoints[i + 1].Y - holePulsePoints[i].Y) / (holePulsePoints[i + 1].X - holePulsePoints[i].X);
+                var y = k * (value - holePulsePoints[i].X) + holePulsePoints[i].Y;
+                CurrentPoint = new HolePulsePoint(x, (float)y);
             }
+        }
+
+        private void SaveDeleteButtonVisiable(bool isVisiable)
+        {
+            this.btnSave.Visible = isVisiable;
+            this.btnDelete.Visible = isVisiable;
         }
 
         protected override void RefreshUI()
@@ -196,6 +227,12 @@ namespace Cii.Lar.UI
         private void btnLaserCtrl_Click(object sender, EventArgs e)
         {
             ClickDelegateHandler?.Invoke(sender, "Laser Control");
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            RemovePoint(CurrentPoint);
+            SaveDeleteButtonVisiable(false);
         }
     }
 }

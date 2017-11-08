@@ -57,7 +57,6 @@
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Name = "Series1";
-            series1.YValuesPerPoint = 2;
             this.chart1.Series.Add(series1);
             // 
             // btnLaserCtrl
@@ -107,9 +106,11 @@
             this.btnDelete.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             resources.ApplyResources(this.btnDelete, "btnDelete");
             this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // holeSizeCtrl
             // 
+            this.holeSizeCtrl.HoleSize = 0D;
             resources.ApplyResources(this.holeSizeCtrl, "holeSizeCtrl");
             this.holeSizeCtrl.Name = "holeSizeCtrl";
             // 
