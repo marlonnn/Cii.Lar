@@ -62,6 +62,7 @@ namespace Cii.Lar.UI
         {
             this.chart1.ChartAreas[0].AxisX.Maximum = 2.500d;
             this.chart1.ChartAreas[0].AxisX.Minimum = 0.005d;
+            this.chart1.ChartAreas[0].AxisX.LabelStyle.Format = "0.00";
             this.chart1.ChartAreas[0].AxisX.Title = "ms";
 
             this.chart1.ChartAreas[0].AxisY.Maximum = 50d;
@@ -71,6 +72,7 @@ namespace Cii.Lar.UI
 
         private void UpdownClickHandler(bool isUp)
         {
+            SaveDeleteButtonVisiable(true);
             CurrentPoint = new HolePulsePoint(CurrentPoint.X, isUp ? CurrentPoint.Y + 0.2f : CurrentPoint.Y - 0.2f);
             if (CheckPoint(CurrentPoint))
             {
@@ -176,16 +178,8 @@ namespace Cii.Lar.UI
 
         private void CalSlopeFunction(HolePulsePoint p1, HolePulsePoint p2)
         {
-            double k = 0;
-            k = (p2.Y - p1.Y) / (p2.X - p1.X);
-            int startX = (int)(p1.X * 1000);
-            int endX = (int)(p2.X * 1000);
-            for (int i = startX; i <= endX; i++)
-            {
-                var x = i / 1000d;
-                var y = k * (x - p1.X) + p1.Y;
-                this.chart1.Series[0].Points.AddXY(x, y);
-            }
+            this.chart1.Series[0].Points.AddXY(p1.X, p1.Y);
+            this.chart1.Series[0].Points.AddXY(p2.X, p2.Y);
         }
 
         private void PulseSliderValueChangedHandler(object sender, EventArgs e)
