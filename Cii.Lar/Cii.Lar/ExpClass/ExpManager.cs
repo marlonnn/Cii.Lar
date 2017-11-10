@@ -49,27 +49,9 @@ namespace Cii.Lar.ExpClass
                 if (value != this.laserType)
                 {
                     laserType = value;
-                    CreateLaser(value);
+                    //CreateLaser(value);
+                    LaserFactory.GetInstance(this.pictureBox).SetLaserByType(value);
                 }
-            }
-        }
-
-        private void CreateLaser(LaserType type)
-        {
-            switch (type)
-            {
-                case LaserType.SaturnFixed:
-                    this.pictureBox.Laser = new FixedLaser(this.pictureBox);
-                    break;
-                case LaserType.SaturnActive:
-                    this.pictureBox.Laser = new ActiveLaser(this.pictureBox);
-                    break;
-                case LaserType.Alignment:
-                    AlignLaser alignLaser = new AlignLaser(this.pictureBox);
-                    alignLaser.ZoomHandler += this.pictureBox.ZoomHandler;
-                    alignLaser.ButtonStateHandler += this.pictureBox.ButtonStateHandler;
-                    this.pictureBox.Laser = alignLaser;
-                    break;
             }
         }
 
@@ -120,7 +102,6 @@ namespace Cii.Lar.ExpClass
                 case ToolStripAction.Ellipse:
                 case ToolStripAction.Polygon:
                     this.ZWPictureBox.LaserFunction = false;
-                    this.ZWPictureBox.Laser = null;
                     SetMeasureTool(e.Action, false);
                     this.ZWPictureBox.ShowBaseCtrl(true, 2);
                     this.ZWPictureBox.Invalidate();
@@ -129,9 +110,7 @@ namespace Cii.Lar.ExpClass
                     SetMeasureTool(e.Action, false);
                     break;
                 case ToolStripAction.Laser:
-                    //SetMeasureTool(e.Action, false);
                     this.ZWPictureBox.LaserFunction = true;
-                    CreateLaser(LaserType);
                     this.ZWPictureBox.ShowBaseCtrl(true, 0);
                     this.ZWPictureBox.GraphicsList.DeleteAll();
                     this.ZWPictureBox.Invalidate();

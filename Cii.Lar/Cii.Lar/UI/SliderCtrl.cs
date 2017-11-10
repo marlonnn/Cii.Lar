@@ -59,18 +59,10 @@ namespace Cii.Lar.UI
             this.slider.Maximum = max;
         }
 
-        public void SetValue(int value, string unit)
+        public void SetValue(float value)
         {
-            switch (unit)
-            {
-                case "um":
-                    this.PulseHoleWS.Text = string.Format("{0} {1}", value / 10f, unit);
-                    break;
-                case "ms":
-                    this.PulseHoleWS.Text = string.Format("{0} {1}", value / 1000f, unit);
-                    break;
-            }
+            this.PulseHoleWS.Text = string.Format("{0} ms", value);
+            this.slider.Value = (int)(value * 1000);
         }
-
     }
 }

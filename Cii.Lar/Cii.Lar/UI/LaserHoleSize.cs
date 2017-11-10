@@ -45,16 +45,14 @@ namespace Cii.Lar.UI
 
         private void InitializeHolePulsePoints()
         {
-            holePulsePoints = new List<HolePulsePoint>();
-            holePulsePoints.Add(new HolePulsePoint(0.005f, 0.1f));
-            holePulsePoints.Add(new HolePulsePoint(2.5f, 50f));
+            holePulsePoints = SysConfig.GetSysConfig().LaserConfig.HolePulsePoints;
             CalPiecewiseFunction();
         }
 
         private void InitializeSlider()
         {
             this.sliderPulse.SetMinMaxValue(5, 2500);
-            this.sliderPulse.SetValue(5, "ms");
+            this.sliderPulse.SetValue(5);
             this.sliderPulse.SliderValueChangedHandler += PulseSliderValueChangedHandler;
         }
 
@@ -185,13 +183,14 @@ namespace Cii.Lar.UI
         private void PulseSliderValueChangedHandler(object sender, EventArgs e)
         {
             var value = this.sliderPulse.Slider.Value;
-            this.sliderPulse.SetValue(value, "ms");
+            var x = value / 1000f;
+            this.sliderPulse.PulseHole.Text = string.Format("{0:N} ms", x);
+            //this.sliderPulse.SetValue(x);
+            CalXY(x);
             if (this.graphicsProperties != null)
             {
-                this.graphicsProperties.PulseSize = value;
+                SysConfig.GetSysConfig().LaserConfig.UpdatePulseWidth(CurrentPoint.Y);
             }
-            var x = value / 1000f;
-            CalXY(x);
             SaveDeleteButtonVisiable(CheckPoint(x));
         }
 

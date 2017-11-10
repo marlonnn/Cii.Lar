@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using Cii.Lar.DrawTools;
 using Cii.Lar.Laser;
+using Cii.Lar.SysClass;
 
 namespace Cii.Lar.UI
 {
@@ -19,18 +20,31 @@ namespace Cii.Lar.UI
     /// </summary>
     public partial class LaserCtrl : BaseCtrl
     {
+        private List<HolePulsePoint> holePulsePoints;
+
         private GraphicsPropertiesManager graphicsPropertiesManager = GraphicsPropertiesManager.GraphicsManagerSingleInstance();
 
         private GraphicsProperties graphicsProperties;
 
         private ZWPictureBox pictureBox;
+
         public LaserCtrl(ZWPictureBox pictureBox) : base()
         {
             resources = new ComponentResourceManager(typeof(LaserCtrl));
+            holePulsePoints = SysConfig.GetSysConfig().LaserConfig.HolePulsePoints;
             this.pictureBox = pictureBox;
             this.ShowIndex = 0;
             graphicsProperties = graphicsPropertiesManager.GetPropertiesByName("Circle");
             InitializeComponent();
+            InitializeSlider();
+        }
+
+        private void InitializeSlider()
+        {
+            this.sliderCtrl.SetMinMaxValue(5, 2500);
+            this.sliderCtrl.SetValue(0.5f);
+            this.btnFire.BackColor = Color.LightYellow;
+            this.btnFire.Text = Res.LaserCtrl.StrFire;
         }
 
         public void HolesNumberSlider(bool isShow)
@@ -85,13 +99,25 @@ namespace Cii.Lar.UI
         private void SliderValueChangedHandler(object sender, EventArgs e)
         {
             var value = this.sliderCtrl.Slider.Value;
-            this.sliderCtrl.PulseHole.Text = string.Format("{0}ms {1}um", 5 + (value * 0.1), 10 + (value * 0.1));
-            if (value > 8)
+            double y = CalSlopeFunction(value);
+            this.sliderCtrl.PulseHole.Text = string.Format("{0:N}ms {1:N}um", value / 1000d, y);
+
+            CheckPulse((int)y);
+
+            if (graphicsProperties != null && SysConfig.GetSysConfig().LaserConfig != null)
+            {
+                SysConfig.GetSysConfig().LaserConfig.UpdatePulseWidth((float)y);
+            }
+        }
+
+        private void CheckPulse(int value)
+        {
+            if (value > SysConfig.GetSysConfig().LaserConfig.MaxPulseWidth)
             {
                 this.btnFire.BackColor = Color.LightSalmon;
                 this.btnFire.Text = Res.LaserCtrl.StrBigPulse;
             }
-            else if (value < 2)
+            else if (value < SysConfig.GetSysConfig().LaserConfig.MinPulseWidth)
             {
                 this.btnFire.BackColor = Color.LightSalmon;
                 this.btnFire.Text = Res.LaserCtrl.StrSmallPulse;
@@ -102,10 +128,52 @@ namespace Cii.Lar.UI
                 this.btnFire.Text = Res.LaserCtrl.StrFire;
             }
             this.btnFire.Invalidate();
-            if (graphicsProperties != null)
+        }
+
+        public void UpdateSlideCtrlValueHandler(float value)
+        {
+            this.sliderCtrl.SetValue((int)value);
+        }
+
+        private double CalSlopeFunction(int value)
+        {
+            double y = 0;
+            int index = GetValueIndex(value);
+            if (index != -1)
             {
-                graphicsProperties.TargetSize = value;
+                y = CalSlopeFunction(holePulsePoints[index], holePulsePoints[index + 1], value);
             }
+            return y;
+        }
+
+        private double CalSlopeFunction(HolePulsePoint p1, HolePulsePoint p2, int value)
+        {
+            double k = 0;
+            k = (p2.Y - p1.Y) / (p2.X - p1.X);
+            int startX = (int)(p1.X * 1000);
+            int endX = (int)(p2.X * 1000);
+            var x = value / 1000d;
+            return  k * (x - p2.X) + p2.Y;
+        }
+
+        private int GetValueIndex(int value)
+        {
+            int index = -1;
+            var x = value / 1000d;
+            if (holePulsePoints != null && holePulsePoints.Count > 0)
+            {
+                for (int i = 0; i < holePulsePoints.Count - 1; i++)
+                {
+                    var v1 = x - holePulsePoints[i].X;
+                    var v2 = holePulsePoints[i + 1].X - x;
+                    if (v1 > 0 && v2 >= 0)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+            }
+            return index;
         }
 
         protected override void RefreshUI()

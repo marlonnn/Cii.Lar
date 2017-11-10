@@ -16,6 +16,12 @@ namespace Cii.Lar.SysClass
     [Serializable]
     public class SysConfig
     {
+        private LaserConfig laserConfig;
+        public LaserConfig LaserConfig
+        {
+            get { return this.laserConfig; }
+        }
+
         public static SysConfig systemConfig;
 
         private string storagePath;
@@ -130,6 +136,7 @@ namespace Cii.Lar.SysClass
             this.storagePath = string.Format("{0}\\Archive",System.Environment.CurrentDirectory);
             this.archivePath = string.Format("{0}\\Archive", System.Environment.CurrentDirectory);
             lenses = new List<Lense>();
+            this.laserConfig = LaserConfig.GetLaserConfig();
         }
 
         public CultureInfo GetSysDefaultCulture()

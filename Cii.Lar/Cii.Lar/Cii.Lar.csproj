@@ -104,6 +104,7 @@
     <Compile Include="DrawTools\ToolPolyLine.cs" />
     <Compile Include="DrawTools\ToolRectangle.cs" />
     <Compile Include="ExpClass\ExpManager.cs" />
+    <Compile Include="ExpClass\LaserFactory.cs" />
     <Compile Include="ExpClass\Report.cs" />
     <Compile Include="ExpClass\ReportItemBase.cs" />
     <Compile Include="ExpClass\ReportPage.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="SysClass\HandleTaskBar.cs" />
     <Compile Include="SysClass\HolePulsePoint.cs" />
     <Compile Include="SysClass\JsonFile.cs" />
+    <Compile Include="SysClass\LaserConfig.cs" />
     <Compile Include="SysClass\Lense.cs" />
     <Compile Include="SysClass\Patient.cs" />
     <Compile Include="SysClass\SysConfig.cs" />

@@ -1,4 +1,5 @@
 ﻿using Cii.Lar.DrawTools;
+using Cii.Lar.SysClass;
 using Cii.Lar.UI;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,13 @@ namespace Cii.Lar.Laser
             }
         }
         protected ZWPictureBox pictureBox;
+
+        protected SolidBrush brush;
+        public SolidBrush Brush
+        {
+            get { return this.brush; }
+        }
+
         /// <summary>
         /// GraphicsProperties of this draw object 
         /// </summary>
@@ -60,34 +68,12 @@ namespace Cii.Lar.Laser
             }
         }
 
-        /// <summary>
-        /// GraphicsPropertiesManager: include all the draw object graphics properties
-        /// </summary>
-        private GraphicsPropertiesManager graphicsPropertiesManager = GraphicsPropertiesManager.GraphicsManagerSingleInstance();
-        public GraphicsPropertiesManager GraphicsPropertiesManager
-        {
-            get
-            {
-                return graphicsPropertiesManager;
-            }
-            set
-            {
-                graphicsPropertiesManager = value;
-            }
-        }
-
-        protected SolidBrush brush;
-        public SolidBrush Brush
-        {
-            get { return this.brush; }
-        }
-
         public BaseLaser()
         {
-            InitializeGraphicsProperties();
             this.FlashTimer = new Timer();
             this.FlashTimer.Interval = 500;
             this.FlashTimer.Tick += new System.EventHandler(this.FlashTimer_Tick);
+            GraphicsProperties = SysConfig.GetSysConfig().LaserConfig.GraphicsProperties;
         }
 
         protected virtual void FlashTimer_Tick(object sender, EventArgs e)
@@ -98,12 +84,6 @@ namespace Cii.Lar.Laser
             {
                 Flashing = false;
             }
-        }
-
-        private void InitializeGraphicsProperties()
-        {
-            this.GraphicsProperties = GraphicsPropertiesManager.GetPropertiesByName("Circle");
-            this.GraphicsProperties.Color = Color.Yellow;
         }
 
         /// <summary>

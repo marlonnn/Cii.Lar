@@ -139,11 +139,10 @@ namespace Cii.Lar.DrawTools
             get { return this.pulseSize; }
             set
             {
-                //real value is value /= 1000f;
-                value /= 10f;
                 if (value != this.pulseSize)
                 {
                     this.pulseSize = value;
+                    Console.WriteLine("graphic pulse size: " + value);
                     GraphicsPropertiesChangedHandler?.Invoke(DrawObject, this);
                 }
             }

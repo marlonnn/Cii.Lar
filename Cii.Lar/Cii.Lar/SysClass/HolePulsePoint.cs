@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cii.Lar.SysClass
 {
+    [Serializable]
     public class HolePulsePoint
     {
         private float x;
