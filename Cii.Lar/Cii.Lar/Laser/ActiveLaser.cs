@@ -26,9 +26,9 @@ namespace Cii.Lar.Laser
 
         private void GraphicsPropertiesChangedHandler(DrawObject drawObject, GraphicsProperties graphicsProperties)
         {
-            activeCircle.OutterCircleSize = new Size((60 + this.GraphicsProperties.ExclusionSize) * this.GraphicsProperties.TargetSize,
-                (60 + this.GraphicsProperties.ExclusionSize) * this.GraphicsProperties.TargetSize);
-            activeCircle.InnerCircleSize = new Size(38 * this.GraphicsProperties.TargetSize, 38 * this.GraphicsProperties.TargetSize);
+            activeCircle.OutterCircleSize = new SizeF(60 + this.GraphicsProperties.ExclusionSize + this.GraphicsProperties.PulseSize,
+                60 + this.GraphicsProperties.ExclusionSize + this.GraphicsProperties.PulseSize);
+            activeCircle.InnerCircleSize = new SizeF(38 + this.GraphicsProperties.PulseSize, 38 + this.GraphicsProperties.PulseSize);
 
             for (int i=0; i< activeCircle.InnerCircles.Count; i++)
             {
@@ -76,7 +76,7 @@ namespace Cii.Lar.Laser
         {
             Graphics g = e.Graphics;
 
-            g.CompositingQuality = CompositingQuality.HighQuality;
+            g.CompositingQuality = CompositingQuality.HighSpeed;
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
             activeCircle.OnPaint(g);

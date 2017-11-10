@@ -157,8 +157,8 @@ namespace Cii.Lar.Laser
             set { this.endCircle = value; }
         }
 
-        public Size InnerCircleSize { get; set; }
-        public Size OutterCircleSize { get; set; }
+        public SizeF InnerCircleSize { get; set; }
+        public SizeF OutterCircleSize { get; set; }
 
         private ZWPictureBox pictureBox;
 
@@ -307,14 +307,14 @@ namespace Cii.Lar.Laser
             switch (HoleType)
             {
                 case InHoleType.CenterHole:
-                    CalcAngle(point, dx, dy);
+                    MoveCenterArc(point, dx, dy);
                     shape = LaserShape.Arc;
                     break;
                 case InHoleType.StartHole:
+                    MoveStartPoint(point);
                     if (shape == LaserShape.Line)
                     {
-                        MoveStartPoint(point);
-                        CalculateContinuousCircle(dx, dy);
+                        MoveToContinuousCircle();
                     }
                     else if (shape == LaserShape.Arc)
                     {
@@ -322,10 +322,10 @@ namespace Cii.Lar.Laser
                     }
                     break;
                 case InHoleType.EndHole:
+                    MoveEndPoint(point);
                     if (shape == LaserShape.Line)
                     {
-                        MoveEndPoint(point);
-                        CalculateContinuousCircle(dx, dy);
+                        MoveToContinuousCircle();
                     }
                     else if (shape == LaserShape.Arc)
                     {
@@ -357,7 +357,13 @@ namespace Cii.Lar.Laser
             }
         }
 
-        private void CalcAngle(Point point, int dx, int dy)
+        /// <summary>
+        /// Move center of arc
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        private void MoveCenterArc(Point point, int dx, int dy)
         {
             //vector (a1, b1)
             int a1 = StartPoint.X - point.X;
@@ -400,7 +406,7 @@ namespace Cii.Lar.Laser
             }
             else
             {
-                HolesInfo.HoleNum = HolesInfo.MaxHoleNum;
+                HolesInfo.HoleNum = (HolesInfo.MinHoleNum + HolesInfo.MaxHoleNum) / 2;
                 var angleArcUnit = circleData.AngleArc / HolesInfo.HoleNum;
                 if (circleData.Radius > 0)
                     CalcCirclePoint(circleData.CenterPt, StartPoint, EndPoint, circleData.Radius, -1, HolesInfo.HoleNum);
@@ -680,7 +686,25 @@ namespace Cii.Lar.Laser
 
             HolesInfo.MinHoleNum = (int) (length / InnerCircleSize.Width) + 1;
             HolesInfo.MaxHoleNum = (int)(2 * length / InnerCircleSize.Width) + 2;
-            HolesInfo.HoleNum = HolesInfo.MaxHoleNum;
+            HolesInfo.HoleNum = (HolesInfo.MinHoleNum + HolesInfo.MaxHoleNum) / 2;
+
+            Add2Circles(length, HolesInfo.HoleNum, HolesInfo.MinHoleNum);
+
+        }
+
+        private void MoveToContinuousCircle()
+        {
+            if (startCircle == null || endCircle == null)
+            {
+                return;
+            }
+            var dx = EndPoint.X - StartPoint.X;
+            var dy = EndPoint.Y - StartPoint.Y;
+            Length = Math.Sqrt(dx * dx + dy * dy);
+
+            HolesInfo.MinHoleNum = (int)(length / InnerCircleSize.Width) + 1;
+            HolesInfo.MaxHoleNum = (int)(2 * length / InnerCircleSize.Width) + 2;
+            HolesInfo.HoleNum = (HolesInfo.MinHoleNum + HolesInfo.MaxHoleNum) / 2;
 
             Add2Circles(length, HolesInfo.HoleNum, HolesInfo.MinHoleNum);
 
