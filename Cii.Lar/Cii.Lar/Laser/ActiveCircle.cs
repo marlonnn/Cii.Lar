@@ -1,4 +1,5 @@
 ﻿using Cii.Lar.DrawTools;
+using Cii.Lar.SysClass;
 using Cii.Lar.UI;
 using System;
 using System.Collections.Generic;
@@ -226,8 +227,10 @@ namespace Cii.Lar.Laser
 
             circleData = new CircleData();
             InitializeGraphicsProperties();
-            InnerCircleSize = new Size(38, 38);
-            OutterCircleSize = new Size(48, 48);
+            float pulseSize = SysConfig.GetSysConfig().LaserConfig.PulseSize;
+            OutterCircleSize = new SizeF(pulseSize + SysConfig.GetSysConfig().LaserConfig.GraphicsProperties.ExclusionSize,
+                pulseSize + SysConfig.GetSysConfig().LaserConfig.GraphicsProperties.ExclusionSize);
+            InnerCircleSize = new SizeF(pulseSize, pulseSize);
             crossSize = new Size(38, 38);
             clickCount = 0;
 

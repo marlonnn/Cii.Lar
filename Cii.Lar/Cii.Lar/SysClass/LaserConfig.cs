@@ -13,6 +13,20 @@ namespace Cii.Lar.SysClass
     /// </summary>
     public class LaserConfig
     {
+        private int pulseSizeRatio;
+        public int PulseSizeRatio
+        {
+            get { return this.pulseSizeRatio; }
+        }
+
+        public float PulseSize
+        {
+            get
+            {
+                return this.pulseSizeRatio * this.GraphicsProperties.PulseSize;
+            }
+        }
+
         private int minPulseWidth;
         public int MinPulseWidth
         {
@@ -70,6 +84,7 @@ namespace Cii.Lar.SysClass
         {
             this.minPulseWidth = 8;
             this.maxPulseWidth = 40;
+            pulseSizeRatio = 2;
             InitializeGraphicsProperties();
             InitializeHolePulsePoints();
         }

@@ -118,7 +118,7 @@ namespace Cii.Lar.DrawTools
         /// <summary>
         /// use for laser circle exclusion target size
         /// </summary>
-        private int exclusionSize = 2;
+        private int exclusionSize = 20;
 
         public int ExclusionSize
         {

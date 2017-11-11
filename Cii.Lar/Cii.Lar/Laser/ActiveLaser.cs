@@ -1,4 +1,5 @@
 ﻿using Cii.Lar.DrawTools;
+using Cii.Lar.SysClass;
 using Cii.Lar.UI;
 using System;
 using System.Collections.Generic;
@@ -26,9 +27,10 @@ namespace Cii.Lar.Laser
 
         private void GraphicsPropertiesChangedHandler(DrawObject drawObject, GraphicsProperties graphicsProperties)
         {
-            activeCircle.OutterCircleSize = new SizeF(60 + this.GraphicsProperties.ExclusionSize + this.GraphicsProperties.PulseSize,
-                60 + this.GraphicsProperties.ExclusionSize + this.GraphicsProperties.PulseSize);
-            activeCircle.InnerCircleSize = new SizeF(38 + this.GraphicsProperties.PulseSize, 38 + this.GraphicsProperties.PulseSize);
+            float pulseSize = SysConfig.GetSysConfig().LaserConfig.PulseSize;
+            activeCircle.OutterCircleSize = new SizeF(this.GraphicsProperties.ExclusionSize + pulseSize,
+                this.GraphicsProperties.ExclusionSize + pulseSize);
+            activeCircle.InnerCircleSize = new SizeF(pulseSize, pulseSize);
 
             for (int i=0; i< activeCircle.InnerCircles.Count; i++)
             {

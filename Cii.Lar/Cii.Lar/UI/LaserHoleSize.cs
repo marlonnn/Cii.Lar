@@ -80,6 +80,10 @@ namespace Cii.Lar.UI
             {
                 AddPoint(CurrentPoint);
             }
+            if (this.graphicsProperties != null)
+            {
+                SysConfig.GetSysConfig().LaserConfig.UpdatePulseWidth(CurrentPoint.Y);
+            }
         }
 
         private void RemovePoint(HolePulsePoint point)

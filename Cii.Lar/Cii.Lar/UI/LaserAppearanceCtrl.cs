@@ -90,7 +90,7 @@ namespace Cii.Lar.UI
         {
             graphicsProperties.Alpha = 0xFF;
             graphicsProperties.PenWidth = 1;
-            graphicsProperties.ExclusionSize = 2;
+            graphicsProperties.ExclusionSize = 20;
             graphicsProperties.TargetSize = 1;
             graphicsProperties.Color = Color.Yellow;
         }
