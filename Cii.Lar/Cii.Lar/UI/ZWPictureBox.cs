@@ -983,7 +983,7 @@ namespace Cii.Lar.UI
             LaserAlignment laserAlignment = controls[5] as LaserAlignment;
             if (laserAlignment != null)
             {
-                laserAlignment.ButtenNext(isEnable);
+                laserAlignment.ButtonNext(isEnable);
             }
         }
 

@@ -97,7 +97,8 @@ namespace Cii.Lar.Laser
         public  ButtonState ButtonStateHandler;
         public override void OnMouseDown(ZWPictureBox pictureBox, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left /*&& IsClickLaser(e.Location)*/)
+            LaserAlignment laserAlignment = CtrlFactory.GetCtrlFactory().GetCtrlByType<LaserAlignment>(CtrlType.LaserAlignment);
+            if (e.Button == MouseButtons.Left /*&& IsClickLaser(e.Location)*/ && laserAlignment.Index > -1)
             {
                 count++;
                 if (count == 1)

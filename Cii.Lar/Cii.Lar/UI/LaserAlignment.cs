@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cii.Lar.Laser;
+using Cii.Lar.ExpClass;
 
 namespace Cii.Lar.UI
 {
@@ -40,7 +41,12 @@ namespace Cii.Lar.UI
             get { return this.lblInfo; }
         }
 
-        public void ButtenNext(bool isEnable)
+        public void ButtonBack(bool isEnable)
+        {
+            this.btnBack.Enabled = isEnable;
+        }
+
+        public void ButtonNext(bool isEnable)
         {
             this.btnNext.Enabled = isEnable;
         }
@@ -188,14 +194,17 @@ namespace Cii.Lar.UI
 
         private void LaserAlignment_VisibleChanged(object sender, EventArgs e)
         {
-            AlignLaser laser = this.pictureBox.Laser as AlignLaser;
-            if (laser != null)
-            {
-                laser.IsAlign = this.Visible;
-            }
+            Index = -2;
             if (this.Visible)
             {
-                Index = -2;
+                AlignLaser laser = this.pictureBox.Laser as AlignLaser;
+                if (laser != null)
+                {
+                    laser.IsAlign = this.Visible;
+                }
+                ButtonBack(true);
+                ButtonNext(true);
+                Program.ExpManager.LaserType = ExpClass.LaserType.Alignment;
             }
             else
             {
