@@ -108,6 +108,12 @@ namespace Cii.Lar.UI
             {
                 SysConfig.GetSysConfig().LaserConfig.UpdatePulseWidth((float)y);
             }
+            UpdateSliderValueHandler?.Invoke(value / 1000f);
+        }
+
+        public void UpdatePulseWidthSlider(float value)
+        {
+            this.sliderCtrl.UpdateValue(value);
         }
 
         private void CheckPulse(int value)
@@ -128,11 +134,6 @@ namespace Cii.Lar.UI
                 this.btnFire.Text = Res.LaserCtrl.StrFire;
             }
             this.btnFire.Invalidate();
-        }
-
-        public void UpdateSlideCtrlValueHandler(float value)
-        {
-            this.sliderCtrl.SetValue((int)value);
         }
 
         private double CalSlopeFunction(int value)

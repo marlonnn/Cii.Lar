@@ -52,6 +52,16 @@ namespace Cii.Lar.UI
             this.statisticsCtrl = new StatisticsCtrl();
             this.rulerAppearanceCtrl = new RulerAppearanceCtrl();
             this.settingCtrl = new SettingCtrl(pictureBox);
+            InitializeHandler();
+        }
+
+        /// <summary>
+        /// LaserCtrl and LaserHoleSizeCtrl shold update slider value when sliding
+        /// </summary>
+        private void InitializeHandler()
+        {
+            this.laserCtrl.UpdateSliderValueHandler += this.laserHoleSize.UpdatePulseWidthSlider;
+            this.laserHoleSize.UpdateSliderValueHandler += this.laserCtrl.UpdatePulseWidthSlider;
         }
 
         /// <summary>

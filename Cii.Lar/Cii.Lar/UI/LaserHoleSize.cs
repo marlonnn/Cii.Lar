@@ -195,7 +195,13 @@ namespace Cii.Lar.UI
             {
                 SysConfig.GetSysConfig().LaserConfig.UpdatePulseWidth(CurrentPoint.Y);
             }
+            UpdateSliderValueHandler?.Invoke(x);
             SaveDeleteButtonVisiable(CheckPoint(x));
+        }
+
+        public void UpdatePulseWidthSlider(float value)
+        {
+            this.sliderPulse.UpdateValue(value);
         }
 
         private void CalXY(float value)

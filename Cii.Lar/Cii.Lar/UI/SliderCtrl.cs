@@ -64,5 +64,11 @@ namespace Cii.Lar.UI
             this.PulseHoleWS.Text = string.Format("{0} ms", value);
             this.slider.Value = (int)(value * 1000);
         }
+
+        public void UpdateValue(float value)
+        {
+            this.PulseHoleWS.Text = string.Format("{0} ms", value);
+            this.slider.Value = (int)(value * 1000);
+        }
     }
 }

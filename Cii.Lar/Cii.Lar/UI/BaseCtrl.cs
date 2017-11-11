@@ -18,6 +18,9 @@ namespace Cii.Lar.UI
     /// </summary>
     public partial class BaseCtrl : UserControl
     {
+        public delegate void UpdateSliderValue(float value);
+        public UpdateSliderValue UpdateSliderValueHandler;
+
         protected ComponentResourceManager resources;
         protected SysConfig sysConfig;
 
