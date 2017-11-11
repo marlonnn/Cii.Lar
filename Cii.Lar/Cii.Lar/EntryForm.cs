@@ -29,6 +29,7 @@ namespace Cii.Lar
         {
             InitializeComponent();
             Program.ExpManager.ZWPictureBox = this.zwPictureBox;
+            //CtrlFactory.InitializeCtrlFactory(this.zwPictureBox);
             this.controlCtrl.StripButtonClickHandler += Program.ExpManager.StripButtonClickHandler;
             this.WindowState = FormWindowState.Maximized;
             resources = new ComponentResourceManager(typeof(EntryForm));

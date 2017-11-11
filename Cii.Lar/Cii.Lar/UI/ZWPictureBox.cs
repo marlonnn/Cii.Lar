@@ -430,20 +430,19 @@ namespace Cii.Lar.UI
         /// </summary>
         private void InitializeControls()
         {
+            CtrlFactory.InitializeCtrlFactory(this);
             controls = new List<BaseCtrl>();
-            controls.Add(new LaserCtrl(this));
-            controls.Add(new LaserAppearanceCtrl());
-            controls.Add(new StatisticsCtrl());
-            RulerAppearanceCtrl rulerAppearance = new RulerAppearanceCtrl();
-            //rulerAppearance.UpdateTimerStatesHandler += UpdateTimerStatesHandler;
-            controls.Add(rulerAppearance);
+            controls.Add(CtrlFactory.GetCtrlFactory().GetCtrlByType<LaserCtrl>(CtrlType.LaserCtrl));
+            controls.Add(CtrlFactory.GetCtrlFactory().GetCtrlByType<LaserAppearanceCtrl>(CtrlType.LaserAppreance));
+            controls.Add(CtrlFactory.GetCtrlFactory().GetCtrlByType<StatisticsCtrl>(CtrlType.StatisticsCtrl));
+            controls.Add(CtrlFactory.GetCtrlFactory().GetCtrlByType<RulerAppearanceCtrl>(CtrlType.RulerAppearanceCtrl));
 
-            settingCtrl = new SettingCtrl(this);
+            settingCtrl = CtrlFactory.GetCtrlFactory().GetCtrlByType<SettingCtrl>(CtrlType.SettingCtrl);
             settingCtrl.UpdateSimulatorImageHandler += UpdateSimulatorImageHandler;
             //settingCtrl.UpdateTimerStatesHandler += UpdateTimerStatesHandler;
             controls.Add(settingCtrl);
-            controls.Add(new LaserAlignment(this));
-            controls.Add(new LaserHoleSize());
+            controls.Add(CtrlFactory.GetCtrlFactory().GetCtrlByType<LaserAlignment>(CtrlType.LaserAlignment));
+            controls.Add(CtrlFactory.GetCtrlFactory().GetCtrlByType<LaserHoleSize>(CtrlType.LaserHoleSize));
         }
 
         private void UpdateSimulatorImageHandler(int selectIndex)
@@ -957,10 +956,13 @@ namespace Cii.Lar.UI
 
         public void HolesNumberSlider(bool isShow)
         {
-            LaserCtrl laserCtrl = controls[0] as LaserCtrl;
-            if (laserCtrl != null)
+            if (controls != null && controls.Count > 0)
             {
-                laserCtrl.HolesNumberSlider(isShow);
+                LaserCtrl laserCtrl = controls[0] as LaserCtrl;
+                if (laserCtrl != null)
+                {
+                    laserCtrl.HolesNumberSlider(isShow);
+                }
             }
         }
 

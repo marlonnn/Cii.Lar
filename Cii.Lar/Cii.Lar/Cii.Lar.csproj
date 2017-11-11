@@ -160,6 +160,7 @@
     <Compile Include="UI\AssignForm.designer.cs">
       <DependentUpon>AssignForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\CtrlFactory.cs" />
     <Compile Include="UI\HoleSizeCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
