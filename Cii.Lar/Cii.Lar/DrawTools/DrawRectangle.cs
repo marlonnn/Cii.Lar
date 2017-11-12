@@ -238,7 +238,7 @@ namespace Cii.Lar.DrawTools
         private string GetArea()
         {
             var area = (rectangle.Width / UnitOfMeasureFactor) * (rectangle.Height / UnitOfMeasureFactor);
-            return string.Format("{0:F2} {1}²", area, pictureBox.UnitOfMeasure.ToString());
+            return string.Format("{0:F2} {1}²", Math.Abs(area), pictureBox.UnitOfMeasure.ToString());
         }
 
         private void SetRectangle(Rectangle r)

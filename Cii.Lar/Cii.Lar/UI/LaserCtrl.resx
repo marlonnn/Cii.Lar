@@ -228,7 +228,7 @@
     <value>8</value>
   </data>
   <data name="btnSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 87</value>
+    <value>198, 115</value>
   </data>
   <data name="btnSave.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 23</value>
@@ -286,6 +286,9 @@
   </data>
   <data name="line2.Text" xml:space="preserve">
     <value>line2</value>
+  </data>
+  <data name="line2.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;line2.Name" xml:space="preserve">
     <value>line2</value>
@@ -384,7 +387,7 @@
     <value>holesSlider</value>
   </data>
   <data name="&gt;&gt;holesSlider.Type" xml:space="preserve">
-    <value>Cii.Lar.UI.SliderCtrl, Cii.Lar, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>DevComponents.DotNetBar.Controls.Slider, DevComponents.DotNetBar2, Version=11.1.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04</value>
   </data>
   <data name="&gt;&gt;holesSlider.Parent" xml:space="preserve">
     <value>$this</value>
@@ -396,10 +399,10 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>6, 12</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 313</value>
+    <value>267, 289</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>LaserCtrl</value>
