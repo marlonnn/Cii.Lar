@@ -50,7 +50,8 @@ namespace Cii.Lar.UI
 
         private void Slide_ValueChanged(object sender, EventArgs e)
         {
-            SliderValueChangedHandler?.Invoke(sender, e);
+            if (Update)
+                SliderValueChangedHandler?.Invoke(sender, e);
         }
 
         public void SetMinMaxValue(int min, int max)
@@ -65,6 +66,18 @@ namespace Cii.Lar.UI
             this.slider.Value = (int)(value * 1000);
         }
 
+        private bool update = true;
+        public bool Update
+        {
+            get { return this.update; }
+            set
+            {
+                if (value != this.update)
+                {
+                    this.update = value;
+                }
+            }
+        }
         public void UpdateValue(float value)
         {
             this.PulseHoleWS.Text = string.Format("{0} ms", value);

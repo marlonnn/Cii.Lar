@@ -108,7 +108,9 @@ namespace Cii.Lar.UI
             {
                 SysConfig.GetSysConfig().LaserConfig.UpdatePulseWidth((float)y);
             }
+            this.sliderCtrl.Update = false;
             UpdateSliderValueHandler?.Invoke(value / 1000f);
+            this.sliderCtrl.Update = true;
         }
 
         public void UpdatePulseWidthSlider(float value)
