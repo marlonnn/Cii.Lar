@@ -58,6 +58,12 @@
             this.toolStripButtonLaser = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSetting = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonOpen = new System.Windows.Forms.ToolStripButton();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.openCameraLive = new System.Windows.Forms.ToolStripMenuItem();
+            this.openCameraAndStop = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeCameraTool = new System.Windows.Forms.ToolStripMenuItem();
+            this.freeRun = new System.Windows.Forms.ToolStripMenuItem();
+            this.snapshot = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -91,7 +97,8 @@
             this.toolStripSeparator5,
             this.toolStripButtonLaser,
             this.toolStripButtonSetting,
-            this.toolStripButtonOpen});
+            this.toolStripButtonOpen,
+            this.toolStripDropDownButton1});
             this.toolStrip1.Name = "toolStrip1";
             // 
             // toolStripButtonCapture
@@ -296,6 +303,48 @@
             this.toolStripButtonOpen.Name = "toolStripButtonOpen";
             this.toolStripButtonOpen.Click += new System.EventHandler(this.toolStripButtonClick);
             // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openCameraLive,
+            this.openCameraAndStop,
+            this.closeCameraTool,
+            this.freeRun,
+            this.snapshot});
+            resources.ApplyResources(this.toolStripDropDownButton1, "toolStripDropDownButton1");
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            // 
+            // openCameraLive
+            // 
+            this.openCameraLive.Name = "openCameraLive";
+            resources.ApplyResources(this.openCameraLive, "openCameraLive");
+            this.openCameraLive.Click += new System.EventHandler(this.openCameraLive_Click);
+            // 
+            // openCameraAndStop
+            // 
+            this.openCameraAndStop.Name = "openCameraAndStop";
+            resources.ApplyResources(this.openCameraAndStop, "openCameraAndStop");
+            this.openCameraAndStop.Click += new System.EventHandler(this.openCameraAndStop_Click);
+            // 
+            // closeCameraTool
+            // 
+            this.closeCameraTool.Name = "closeCameraTool";
+            resources.ApplyResources(this.closeCameraTool, "closeCameraTool");
+            this.closeCameraTool.Click += new System.EventHandler(this.closeCamera_Click);
+            // 
+            // freeRun
+            // 
+            this.freeRun.Name = "freeRun";
+            resources.ApplyResources(this.freeRun, "freeRun");
+            this.freeRun.Click += new System.EventHandler(this.freeRun_Click);
+            // 
+            // snapshot
+            // 
+            this.snapshot.Name = "snapshot";
+            resources.ApplyResources(this.snapshot, "snapshot");
+            this.snapshot.Click += new System.EventHandler(this.snapshot_Click);
+            // 
             // ControlCtrl
             // 
             resources.ApplyResources(this, "$this");
@@ -343,5 +392,11 @@
         private System.Windows.Forms.ToolStripMenuItem btnMm;
         private System.Windows.Forms.ToolStripMenuItem btnCm;
         private System.Windows.Forms.ToolStripButton toolStripButtonMove;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem openCameraLive;
+        private System.Windows.Forms.ToolStripMenuItem openCameraAndStop;
+        private System.Windows.Forms.ToolStripMenuItem closeCameraTool;
+        private System.Windows.Forms.ToolStripMenuItem freeRun;
+        private System.Windows.Forms.ToolStripMenuItem snapshot;
     }
 }

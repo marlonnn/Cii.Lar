@@ -1,3 +1,4 @@
+using Cii.Lar.Operation;
 using Cii.Lar.SysClass;
 using Cii.Lar.UI;
 using DevComponents.DotNetBar;
@@ -7,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Cii.Lar
@@ -25,6 +27,9 @@ namespace Cii.Lar
             }
         }
 
+        private OperationTask operationTask;
+        private Thread operationThread;
+
         public EntryForm()
         {
             InitializeComponent();
@@ -35,6 +40,8 @@ namespace Cii.Lar
             resources = new ComponentResourceManager(typeof(EntryForm));
             sysConfig = SysConfig.GetSysConfig();
             this.SizeChanged += EntryForm_SizeChanged;
+            this.FormClosing += EntryForm_FormClosing;
+            operationTask = new OperationTask();
         }
 
         protected override void OnLoad(EventArgs e)
@@ -47,6 +54,26 @@ namespace Cii.Lar
             this.zwPictureBox.EscapeFullScreenHandler += EscapeFullScreenHandler;
             sysConfig.PropertyChanged += EntryForm_PropertyChanged;
             fullScreen.ShowFullScreen();
+            InitializeOperationTask();
+        }
+
+        private void EntryForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            StopOperationTask();
+        }
+
+        private void InitializeOperationTask()
+        {
+            operationThread = new Thread(new ThreadStart(operationTask.ExecuteInternal));
+            operationThread.IsBackground = true;
+            operationThread.Priority = ThreadPriority.Highest;
+            operationThread.Start();
+        }
+
+        public void StopOperationTask()
+        {
+            operationTask.Execute = false;
+            operationThread.Abort();
         }
 
         private void EscapeFullScreenHandler()

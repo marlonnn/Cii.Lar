@@ -363,6 +363,87 @@
   <data name="toolStripButtonOpen.Text" xml:space="preserve">
     <value>Open</value>
   </data>
+  <data name="openCameraLive.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="openCameraLive.Text" xml:space="preserve">
+    <value>Open camera live</value>
+  </data>
+  <data name="openCameraAndStop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="openCameraAndStop.Text" xml:space="preserve">
+    <value>Open camera and stop</value>
+  </data>
+  <data name="closeCameraTool.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="closeCameraTool.Text" xml:space="preserve">
+    <value>Close camera</value>
+  </data>
+  <data name="freeRun.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="freeRun.Text" xml:space="preserve">
+    <value>Free run</value>
+  </data>
+  <data name="snapshot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="snapshot.Text" xml:space="preserve">
+    <value>Snapshot</value>
+  </data>
+  <data name="toolStripDropDownButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+</value>
+  </data>
+  <data name="toolStripDropDownButton1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripDropDownButton1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 22</value>
+  </data>
+  <data name="toolStripDropDownButton1.Text" xml:space="preserve">
+    <value>toolStripDropDownButton1</value>
+  </data>
   <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -563,6 +644,42 @@
   </data>
   <data name="&gt;&gt;toolStripButtonOpen.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripDropDownButton1.Name" xml:space="preserve">
+    <value>toolStripDropDownButton1</value>
+  </data>
+  <data name="&gt;&gt;toolStripDropDownButton1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;openCameraLive.Name" xml:space="preserve">
+    <value>openCameraLive</value>
+  </data>
+  <data name="&gt;&gt;openCameraLive.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;openCameraAndStop.Name" xml:space="preserve">
+    <value>openCameraAndStop</value>
+  </data>
+  <data name="&gt;&gt;openCameraAndStop.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;closeCameraTool.Name" xml:space="preserve">
+    <value>closeCameraTool</value>
+  </data>
+  <data name="&gt;&gt;closeCameraTool.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;freeRun.Name" xml:space="preserve">
+    <value>freeRun</value>
+  </data>
+  <data name="&gt;&gt;freeRun.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;snapshot.Name" xml:space="preserve">
+    <value>snapshot</value>
+  </data>
+  <data name="&gt;&gt;snapshot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ControlCtrl</value>

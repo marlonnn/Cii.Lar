@@ -9,11 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cii.Lar.DrawTools;
 using Cii.Lar.SysClass;
+using Cii.Lar.Operation;
 
 namespace Cii.Lar.UI
 {
     public partial class ControlCtrl : BaseCtrl
     {
+        private CommandFactory commandFactory;
+        public CommandFactory CommandFactory
+        {
+            get { return this.commandFactory; }
+            set { this.commandFactory = value; }
+        }
         public delegate void StripButtonClick(object sender, ToolStripEventArgs e);
         public StripButtonClick StripButtonClickHandler;
 
@@ -44,6 +51,7 @@ namespace Cii.Lar.UI
             InitializeComponent();
             InitializeToolStrip();
             InitializeLenses();
+            commandFactory = CommandFactory.GetCommandFactory();
         }
 
         private void InitializeToolStrip()
@@ -155,6 +163,35 @@ namespace Cii.Lar.UI
                     }
                 }
             }
+        }
+
+        private void openCameraLive_Click(object sender, EventArgs e)
+        {
+            CommandCameraStart command = CommandFactory.CreateCommand<CommandCameraStart>("Start Camera");
+            command.IntPtr = this.pictureBox.Handle;
+            CommandFactory.CommandQueue.Push(command);
+        }
+
+        private void openCameraAndStop_Click(object sender, EventArgs e)
+        {
+            CommandCameraPause command = CommandFactory.CreateCommand<CommandCameraPause>("Pause Camera");
+            CommandFactory.CommandQueue.Push(command);
+        }
+
+        private void closeCamera_Click(object sender, EventArgs e)
+        {
+            CommandCameraClose command = CommandFactory.CreateCommand<CommandCameraClose>("Close Camera");
+            CommandFactory.CommandQueue.Push(command);
+        }
+
+        private void freeRun_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void snapshot_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -62,8 +62,21 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="uEyeDotNet, Version=1.6.4.1, Culture=neutral, PublicKeyToken=c3038f81def77884, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Reference\uEyeDotNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Operation\Camera.cs" />
+    <Compile Include="Operation\Command.cs" />
+    <Compile Include="Operation\CommandCameraCapture.cs" />
+    <Compile Include="Operation\CommandCameraClose.cs" />
+    <Compile Include="Operation\CommandCameraPause.cs" />
+    <Compile Include="Operation\CommandCameraStart.cs" />
+    <Compile Include="Operation\CommandFactory.cs" />
+    <Compile Include="Operation\ConcurrentQueue.cs" />
+    <Compile Include="Operation\IDSCamera.cs" />
     <Compile Include="DrawTools\Circle.cs" />
     <Compile Include="DrawTools\DrawMultipleCircle.cs" />
     <Compile Include="DrawTools\MeasureSystem.cs" />
@@ -120,6 +133,7 @@
     <Compile Include="MessageBoxManager.cs" />
     <Compile Include="MiniDump.cs" />
     <Compile Include="NativeMethods.cs" />
+    <Compile Include="Operation\OperationTask.cs" />
     <Compile Include="Res\LaserAlignment.Designer.cs">
       <DependentUpon>LaserAlignment.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -480,6 +494,8 @@
     <Content Include="DrawTools\Rectangle.cur" />
     <Content Include="Reference\log4net.dll" />
     <Content Include="Reference\Newtonsoft.Json.dll" />
+    <Content Include="Reference\uEyeDotNet.dll" />
+    <Content Include="Resources\idscamera.png" />
     <Content Include="Resources\down.png" />
     <Content Include="Resources\exclamation.png" />
     <Content Include="Resources\hand.png" />
@@ -556,6 +572,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
