@@ -13,6 +13,12 @@ namespace Cii.Lar.Operation
     public class IDSCamera : Camera
     {
         private uEye.Camera camera;
+        public uEye.Camera uEyeCamera
+        {
+            get { return this.camera; }
+            private set { this.camera = value; }
+        }
+
         private IntPtr displayHandle;
 
         /// <summary>

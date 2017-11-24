@@ -69,6 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Operation\Camera.cs" />
+    <Compile Include="Operation\CameraManager.cs" />
+    <Compile Include="Operation\CameraSizeControl.cs" />
     <Compile Include="Operation\Command.cs" />
     <Compile Include="Operation\CommandCameraCapture.cs" />
     <Compile Include="Operation\CommandCameraClose.cs" />
