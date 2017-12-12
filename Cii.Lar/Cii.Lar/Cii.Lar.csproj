@@ -196,6 +196,12 @@
     <Compile Include="UI\BaseCtrl.Designer.cs">
       <DependentUpon>BaseCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\CameraChooseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\CameraChooseForm.designer.cs">
+      <DependentUpon>CameraChooseForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\ControlCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -261,6 +267,12 @@
     </Compile>
     <Compile Include="UI\RulerAppearanceCtrl.Designer.cs">
       <DependentUpon>RulerAppearanceCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SerialPortForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SerialPortForm.designer.cs">
+      <DependentUpon>SerialPortForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\SliderCtrl.cs">
       <SubType>UserControl</SubType>
@@ -381,6 +393,9 @@
     <EmbeddedResource Include="UI\BaseCtrl.resx">
       <DependentUpon>BaseCtrl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\CameraChooseForm.resx">
+      <DependentUpon>CameraChooseForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\ControlCtrl.resx">
       <DependentUpon>ControlCtrl.cs</DependentUpon>
     </EmbeddedResource>
@@ -424,6 +439,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\RulerAppearanceCtrl.zh-CN.resx">
       <DependentUpon>RulerAppearanceCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SerialPortForm.resx">
+      <DependentUpon>SerialPortForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\SettingCtrl.zh-CN.resx">
       <DependentUpon>SettingCtrl.cs</DependentUpon>
