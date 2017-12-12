@@ -20,7 +20,7 @@ namespace Cii.Lar
     {
         private AssignForm assignForm;
         private ReportForm reportFrom;
-        private VideoForm videoForm;
+        //private VideoForm videoForm;
         private List<string> videoFiles;
         public FilesForm()
         {
@@ -152,8 +152,8 @@ namespace Cii.Lar
                     {
                         string fileName = item.FileName;
                         //int v = videoFiles.FindIndex(file => { return file == fileName; });
-                        videoForm = new VideoForm(videoFiles, fileName);
-                        videoForm.ShowDialog();
+                        //videoForm = new VideoForm(videoFiles, fileName);
+                        //videoForm.ShowDialog();
                     }
                     else if (fileExtension == ".png")
                     {
