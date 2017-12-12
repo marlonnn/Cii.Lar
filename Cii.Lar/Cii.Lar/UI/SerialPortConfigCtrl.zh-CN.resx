@@ -165,10 +165,4 @@
   <data name="label9.Text" xml:space="preserve">
     <value>握手：</value>
   </data>
-  <data name="laserOpenCloseSpbtn.Text" xml:space="preserve">
-    <value>打开</value>
-  </data>
-  <data name="motorOpenCloseSpbtn.Text" xml:space="preserve">
-    <value>打开</value>
-  </data>
 </root>

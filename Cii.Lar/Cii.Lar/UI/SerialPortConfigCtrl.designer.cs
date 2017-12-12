@@ -44,8 +44,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.laserStopBitsCbx = new System.Windows.Forms.ComboBox();
-            this.btnConfirm = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.groupBoxMotor = new System.Windows.Forms.GroupBox();
             this.motorStatus = new System.Windows.Forms.Label();
             this.motorHandshakingcbx = new System.Windows.Forms.ComboBox();
@@ -61,7 +59,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.motorStopBitsCbx = new System.Windows.Forms.ComboBox();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.groupBoxLaser.SuspendLayout();
             this.groupBoxMotor.SuspendLayout();
             this.SuspendLayout();
@@ -169,20 +166,6 @@
             resources.ApplyResources(this.laserStopBitsCbx, "laserStopBitsCbx");
             this.laserStopBitsCbx.Name = "laserStopBitsCbx";
             // 
-            // btnConfirm
-            // 
-            resources.ApplyResources(this.btnConfirm, "btnConfirm");
-            this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.UseVisualStyleBackColor = true;
-            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
-            // 
-            // btnCancel
-            // 
-            resources.ApplyResources(this.btnCancel, "btnCancel");
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
             // groupBoxMotor
             // 
             this.groupBoxMotor.Controls.Add(this.motorStatus);
@@ -282,29 +265,16 @@
             resources.ApplyResources(this.motorStopBitsCbx, "motorStopBitsCbx");
             this.motorStopBitsCbx.Name = "motorStopBitsCbx";
             // 
-            // btnRefresh
-            // 
-            resources.ApplyResources(this.btnRefresh, "btnRefresh");
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
             // SerialPortConfigCtrl
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.groupBoxMotor);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.groupBoxLaser);
             this.Name = "SerialPortConfigCtrl";
             this.Title = "Serial Port Config";
             this.Controls.SetChildIndex(this.groupBoxLaser, 0);
-            this.Controls.SetChildIndex(this.btnConfirm, 0);
-            this.Controls.SetChildIndex(this.btnCancel, 0);
             this.Controls.SetChildIndex(this.groupBoxMotor, 0);
-            this.Controls.SetChildIndex(this.btnRefresh, 0);
             this.Controls.SetChildIndex(this.closeButton, 0);
             this.groupBoxLaser.ResumeLayout(false);
             this.groupBoxLaser.PerformLayout();
@@ -330,8 +300,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox laserStopBitsCbx;
-        private System.Windows.Forms.Button btnConfirm;
-        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.GroupBox groupBoxMotor;
         private System.Windows.Forms.ComboBox motorHandshakingcbx;
         private System.Windows.Forms.Label label1;
@@ -348,6 +316,5 @@
         private System.Windows.Forms.ComboBox motorStopBitsCbx;
         private System.Windows.Forms.Label laserStatus;
         private System.Windows.Forms.Label motorStatus;
-        private System.Windows.Forms.Button btnRefresh;
     }
 }

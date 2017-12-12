@@ -19,8 +19,6 @@ namespace Cii.Lar
         private ComponentResourceManager resources;
         private SysConfig sysConfig;
         private IDSCamera camera;
-        private IController controller;
-        private SerialPortConfigCtrl serialConfigForm;
 
         public ControlCtrl ControlCtrl
         {
@@ -43,8 +41,6 @@ namespace Cii.Lar
             this.FormClosing += EntryForm_FormClosing;
             camera = new IDSCamera(this.zwPictureBox);
             camera.CameraSizeControl.AOIChanged += OnDisplayChanged;
-            serialConfigForm = new SerialPortConfigCtrl();
-            controller = new IController(serialConfigForm);
         }
 
         private void OnDisplayChanged(object sender, EventArgs e)

@@ -157,6 +157,8 @@ namespace Cii.Lar.UI
 
         private List<BaseCtrl> controls;
         private SettingCtrl settingCtrl;
+        private SerialPortConfigCtrl serialPortConfigCtrl;
+        private IController controller;
 
         [BrowsableAttribute(false)]
         [System.ComponentModel.Localizable(false)]
@@ -443,7 +445,9 @@ namespace Cii.Lar.UI
             controls.Add(settingCtrl);
             controls.Add(CtrlFactory.GetCtrlFactory().GetCtrlByType<LaserAlignment>(CtrlType.LaserAlignment));
             controls.Add(CtrlFactory.GetCtrlFactory().GetCtrlByType<LaserHoleSize>(CtrlType.LaserHoleSize));
-            controls.Add(CtrlFactory.GetCtrlFactory().GetCtrlByType<SerialPortConfigCtrl>(CtrlType.SerialPort));
+            serialPortConfigCtrl = CtrlFactory.GetCtrlFactory().GetCtrlByType<SerialPortConfigCtrl>(CtrlType.SerialPort);
+            controller = new IController(serialPortConfigCtrl);
+            controls.Add(serialPortConfigCtrl);
         }
 
         private void UpdateSimulatorImageHandler(int selectIndex)
