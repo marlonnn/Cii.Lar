@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +9,11 @@ namespace Cii.Lar.Operation
 {
     public interface Camera
     {
-        bool InitCamera();
+        bool InitCamera(int s32Cam);
 
         bool ExitCamera();
+
+        bool DisplayLive();
 
         bool DisplayLive(IntPtr controlHandler);
 
@@ -23,5 +26,9 @@ namespace Cii.Lar.Operation
         bool StopRecordVedio();
 
         bool SaveImage(string path, string imageName);
+
+        bool IsOpened();
+
+        void SetSize(out Rectangle rect);
     }
 }

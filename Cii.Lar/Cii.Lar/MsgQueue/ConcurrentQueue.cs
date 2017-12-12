@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cii.Lar.Operation
+namespace Cii.Lar.MsgQueue
 {
     /// <summary>
     /// 安全队列
