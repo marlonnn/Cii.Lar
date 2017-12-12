@@ -299,5 +299,13 @@ namespace Cii.Lar.UI
         {
             //this.Close();
         }
+
+        protected override void RefreshUI()
+        {
+            base.RefreshUI();
+            this.Title = global::Cii.Lar.Properties.Resources.StrSerialPortConfigTitle;
+            ////resources.ApplyResources(this.btnLaserCtrl, btnLaserCtrl.Name);
+            //this.Invalidate();
+        }
     }
 }

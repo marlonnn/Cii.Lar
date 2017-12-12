@@ -430,6 +430,15 @@ namespace Cii.Lar.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Serial port config.
+        /// </summary>
+        internal static string StrSerialPortConfigTitle {
+            get {
+                return ResourceManager.GetString("StrSerialPortConfigTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Setting.
         /// </summary>
         internal static string StrSetting {

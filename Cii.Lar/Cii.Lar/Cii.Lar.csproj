@@ -443,6 +443,7 @@
     <EmbeddedResource Include="UI\RulerAppearanceCtrl.zh-CN.resx">
       <DependentUpon>RulerAppearanceCtrl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\SerialPortConfigCtrl.zh-CN.resx" />
     <EmbeddedResource Include="UI\SerialPortConfigCtrl.resx">
       <DependentUpon>SerialPortConfigCtrl.cs</DependentUpon>
     </EmbeddedResource>

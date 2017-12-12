@@ -117,49 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="labelItem1Str" xml:space="preserve">
-    <value>准备就绪</value>
+  <data name="btnCancel.Text" xml:space="preserve">
+    <value>取消</value>
   </data>
-  <data name="labelItemLanguageStr" xml:space="preserve">
-    <value>语言</value>
+  <data name="btnConfirm.Text" xml:space="preserve">
+    <value>确定</value>
   </data>
-  <data name="StrCreateReport" xml:space="preserve">
-    <value>点击报告按钮创建技术支持请求。</value>
+  <data name="groupBoxLaser.Text" xml:space="preserve">
+    <value>激光器串口</value>
   </data>
-  <data name="StrOK" xml:space="preserve">
-    <value>确认</value>
+  <data name="groupBoxMotor.Text" xml:space="preserve">
+    <value>电机串口</value>
   </data>
-  <data name="StrOutOfMemory" xml:space="preserve">
-    <value>程序内存不足，请重启程序。</value>
+  <data name="label1.Text" xml:space="preserve">
+    <value>握手：</value>
   </data>
-  <data name="StrReport" xml:space="preserve">
-    <value>报告</value>
+  <data name="label10.Text" xml:space="preserve">
+    <value>波特率：</value>
   </data>
-  <data name="StrUnknownErrorMsg" xml:space="preserve">
-    <value>遇到未知错误，请重启程序。</value>
+  <data name="label11.Text" xml:space="preserve">
+    <value>数据位：</value>
   </data>
-  <data name="StrSetting" xml:space="preserve">
-    <value>设置</value>
+  <data name="label12.Text" xml:space="preserve">
+    <value>停止位：</value>
   </data>
-  <data name="StrStatisticsTitle" xml:space="preserve">
-    <value>统计信息</value>
+  <data name="label2.Text" xml:space="preserve">
+    <value>串口名：</value>
   </data>
-  <data name="StrRulerAppearanceTitle" xml:space="preserve">
-    <value>测量工具属性</value>
+  <data name="label3.Text" xml:space="preserve">
+    <value>串口名：</value>
   </data>
-  <data name="StrLaserCtrlTitle" xml:space="preserve">
-    <value>激光器控制</value>
+  <data name="label4.Text" xml:space="preserve">
+    <value>波特率：</value>
   </data>
-  <data name="StrLaserAppearanceTitle" xml:space="preserve">
-    <value>激光属性</value>
+  <data name="label5.Text" xml:space="preserve">
+    <value>数据位：</value>
   </data>
-  <data name="StrLaserAlignmentTitle" xml:space="preserve">
-    <value>激光目标对齐</value>
+  <data name="label6.Text" xml:space="preserve">
+    <value>停止位：</value>
   </data>
-  <data name="StrLaserHoleSizeCalibration" xml:space="preserve">
-    <value>激光孔径校准</value>
+  <data name="label7.Text" xml:space="preserve">
+    <value>奇偶校验：</value>
   </data>
-  <data name="StrSerialPortConfigTitle" xml:space="preserve">
-    <value>串口配置</value>
+  <data name="label8.Text" xml:space="preserve">
+    <value>奇偶校验：</value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value>握手：</value>
+  </data>
+  <data name="laserOpenCloseSpbtn.Text" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="motorOpenCloseSpbtn.Text" xml:space="preserve">
+    <value>打开</value>
   </data>
 </root>
