@@ -43,5 +43,25 @@
     <level value="DEBUG" />
     <appender-ref ref="CameraLogFileAppender" />
   </logger>
+
+  <appender name="SerialPortLogFileAppender" type="log4net.Appender.RollingFileAppender">
+    <file value="./log/SerialPort.log" />
+    <appendToFile value="true" />
+    <rollingStyle value="Date" />
+    <threshold value="DEBUG"/>
+    <lockingModel type="log4net.Appender.FileAppender+MinimalLock"/>
+    <rollingStyle value="Composite" />
+    <datePattern value="yyyyMMdd" />
+    <maxSizeRollBackups value="15" />
+    <maximumFileSize value="10MB" />
+    <layout type="log4net.Layout.PatternLayout">
+      <conversionPattern value="%date [%thread] %-5level %logger - %message%newline" />
+    </layout>
+  </appender>
+
+  <logger name="Cii.Lar.ComTestForm">
+    <level value="DEBUG" />
+    <appender-ref ref="SerialPortLogFileAppender" />
+  </logger>
   
 </log4net>

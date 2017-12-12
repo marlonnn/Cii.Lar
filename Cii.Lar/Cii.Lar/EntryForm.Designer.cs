@@ -29,7 +29,7 @@ namespace Cii.Lar
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EntryForm));
-            this.controlCtrl = new Cii.Lar.UI.ControlCtrl();
+            this.controlCtrl = new Cii.Lar.UI.ControlCtrl(this);
             this.zwPictureBox = new Cii.Lar.UI.ZWPictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.zwPictureBox)).BeginInit();
             this.SuspendLayout();

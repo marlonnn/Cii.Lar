@@ -39,9 +39,17 @@ namespace Cii.Lar.UI
             }
         }
 
-        public ControlCtrl() : base()
+        private EntryForm entryForm;
+        public EntryForm EntryForm
+        {
+            get { return this.entryForm; }
+            private set { this.entryForm = value; }
+        }
+
+        public ControlCtrl(EntryForm entryForm) : base()
         {
             resources = new ComponentResourceManager(typeof(ControlCtrl));
+            this.entryForm = entryForm;
             InitializeComponent();
             InitializeToolStrip();
             InitializeLenses();
@@ -64,6 +72,7 @@ namespace Cii.Lar.UI
             toolStripButtonLaser.Tag = ToolStripAction.Laser;
             toolStripButtonSetting.Tag = ToolStripAction.Setting;
             toolStripButtonOpen.Tag = ToolStripAction.OpenFile;
+            toolStripButtonPort.Tag = ToolStripAction.PortConfig;
         }
 
         private void InitializeLenses()
@@ -160,7 +169,7 @@ namespace Cii.Lar.UI
 
         private void openCameraLive_Click(object sender, EventArgs e)
         {
-
+            this.EntryForm.OpenCamera();
         }
 
         private void openCameraAndStop_Click(object sender, EventArgs e)

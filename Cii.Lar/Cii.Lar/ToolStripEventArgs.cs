@@ -23,7 +23,8 @@ namespace Cii.Lar
         Move,
         Laser,
         Setting,
-        OpenFile
+        OpenFile,
+        PortConfig
     }
     /// <summary>
     /// Tool strip eventargs

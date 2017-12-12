@@ -18,6 +18,9 @@ namespace Cii.Lar
         private FullScreen fullScreen;
         private ComponentResourceManager resources;
         private SysConfig sysConfig;
+        private IDSCamera camera;
+        private IController controller;
+        private SerialPortConfigCtrl serialConfigForm;
 
         public ControlCtrl ControlCtrl
         {
@@ -26,8 +29,6 @@ namespace Cii.Lar
                 return this.controlCtrl;
             }
         }
-
-        private Thread operationThread;
 
         public EntryForm()
         {
@@ -40,6 +41,18 @@ namespace Cii.Lar
             sysConfig = SysConfig.GetSysConfig();
             this.SizeChanged += EntryForm_SizeChanged;
             this.FormClosing += EntryForm_FormClosing;
+            camera = new IDSCamera(this.zwPictureBox);
+            camera.CameraSizeControl.AOIChanged += OnDisplayChanged;
+            serialConfigForm = new SerialPortConfigCtrl();
+            controller = new IController(serialConfigForm);
+        }
+
+        private void OnDisplayChanged(object sender, EventArgs e)
+        {
+            // get image size
+            System.Drawing.Rectangle rect;
+            camera.SetSize(out rect);
+            this.zwPictureBox.Bounds = rect;
         }
 
         protected override void OnLoad(EventArgs e)
@@ -86,6 +99,27 @@ namespace Cii.Lar
 
         private void ZwPictureBox_OnMeasureUnitChanged(DrawTools.enUniMis unit)
         {
+        }
+
+        public void OpenCamera()
+        {
+            CameraChooseForm chooseForm = new CameraChooseForm();
+            if (chooseForm.ShowDialog() == DialogResult.OK)
+            {
+                if (camera.InitCamera(chooseForm.DeviceID | (Int32)uEye.Defines.DeviceEnumeration.UseDeviceID))
+                {
+                    SetCameraSize();
+                    camera.DisplayLive();
+                }
+            }
+        }
+
+        private void SetCameraSize()
+        {
+            if (camera != null && camera.IsOpened())
+            {
+                camera.CameraSizeControl.SetAoiBounds(1392, 1080, (this.zwPictureBox.Width - 1392) / 2, 0);
+            }
         }
     }
 }

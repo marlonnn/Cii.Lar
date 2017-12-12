@@ -443,6 +443,7 @@ namespace Cii.Lar.UI
             controls.Add(settingCtrl);
             controls.Add(CtrlFactory.GetCtrlFactory().GetCtrlByType<LaserAlignment>(CtrlType.LaserAlignment));
             controls.Add(CtrlFactory.GetCtrlFactory().GetCtrlByType<LaserHoleSize>(CtrlType.LaserHoleSize));
+            controls.Add(CtrlFactory.GetCtrlFactory().GetCtrlByType<SerialPortConfigCtrl>(CtrlType.SerialPort));
         }
 
         private void UpdateSimulatorImageHandler(int selectIndex)
@@ -590,6 +591,9 @@ namespace Cii.Lar.UI
                     break;
                 case "Laser Hole Size":
                     ShowBaseCtrl(true, controls[6]);
+                    break;
+                case "Serial Port Config":
+                    ShowBaseCtrl(true, controls[7]);
                     break;
             }
         }

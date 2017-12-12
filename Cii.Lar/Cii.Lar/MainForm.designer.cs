@@ -34,7 +34,7 @@ namespace Cii.Lar
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.metroStatusBar1 = new DevComponents.DotNetBar.Metro.MetroStatusBar();
-            this.controlCtrl = new ControlCtrl();
+            //this.controlCtrl = new ControlCtrl();
             //this.scalablePictureBox = new ScalablePictureBox();
             this.labelItem1 = new DevComponents.DotNetBar.LabelItem();
             this.styleManager1 = new DevComponents.DotNetBar.StyleManager(this.components);

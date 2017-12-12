@@ -14,7 +14,8 @@ namespace Cii.Lar.UI
         LaserHoleSize,
         StatisticsCtrl,
         RulerAppearanceCtrl,
-        SettingCtrl
+        SettingCtrl,
+        SerialPort
     }
 
     /// <summary>
@@ -41,6 +42,7 @@ namespace Cii.Lar.UI
         private StatisticsCtrl statisticsCtrl;
         private RulerAppearanceCtrl rulerAppearanceCtrl;
         private SettingCtrl settingCtrl;
+        private SerialPortConfigCtrl serialPortCtrl;
 
         public CtrlFactory(ZWPictureBox pictureBox)
         {
@@ -52,6 +54,7 @@ namespace Cii.Lar.UI
             this.statisticsCtrl = new StatisticsCtrl();
             this.rulerAppearanceCtrl = new RulerAppearanceCtrl();
             this.settingCtrl = new SettingCtrl(pictureBox);
+            serialPortCtrl = new SerialPortConfigCtrl();
             InitializeHandler();
         }
 
@@ -110,6 +113,9 @@ namespace Cii.Lar.UI
                     break;
                 case CtrlType.SettingCtrl:
                     ctrl = this.settingCtrl as T;
+                    break;
+                case CtrlType.SerialPort:
+                    ctrl = this.serialPortCtrl as T;
                     break;
             }
             return ctrl;

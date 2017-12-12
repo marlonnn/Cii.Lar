@@ -64,6 +64,7 @@
             this.closeCameraTool = new System.Windows.Forms.ToolStripMenuItem();
             this.freeRun = new System.Windows.Forms.ToolStripMenuItem();
             this.snapshot = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButtonPort = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -98,7 +99,8 @@
             this.toolStripButtonLaser,
             this.toolStripButtonSetting,
             this.toolStripButtonOpen,
-            this.toolStripDropDownButton1});
+            this.toolStripDropDownButton1,
+            this.toolStripButtonPort});
             this.toolStrip1.Name = "toolStrip1";
             // 
             // toolStripButtonCapture
@@ -345,6 +347,14 @@
             resources.ApplyResources(this.snapshot, "snapshot");
             this.snapshot.Click += new System.EventHandler(this.snapshot_Click);
             // 
+            // toolStripButtonPort
+            // 
+            this.toolStripButtonPort.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonPort.Image = global::Cii.Lar.Properties.Resources.port;
+            resources.ApplyResources(this.toolStripButtonPort, "toolStripButtonPort");
+            this.toolStripButtonPort.Name = "toolStripButtonPort";
+            this.toolStripButtonPort.Click += new System.EventHandler(this.toolStripButtonClick);
+            // 
             // ControlCtrl
             // 
             resources.ApplyResources(this, "$this");
@@ -398,5 +408,6 @@
         private System.Windows.Forms.ToolStripMenuItem closeCameraTool;
         private System.Windows.Forms.ToolStripMenuItem freeRun;
         private System.Windows.Forms.ToolStripMenuItem snapshot;
+        private System.Windows.Forms.ToolStripButton toolStripButtonPort;
     }
 }

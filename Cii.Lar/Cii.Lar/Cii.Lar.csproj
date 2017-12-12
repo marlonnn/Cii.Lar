@@ -86,6 +86,8 @@
     <Compile Include="Command\LaserC74.cs" />
     <Compile Include="Command\LaserC75.cs" />
     <Compile Include="Command\MotorC60.cs" />
+    <Compile Include="IController.cs" />
+    <Compile Include="IView.cs" />
     <Compile Include="MsgQueue\ConcurrentQueue.cs" />
     <Compile Include="MsgQueue\LaserRxMsgQueue.cs" />
     <Compile Include="MsgQueue\LaserRxQueue.cs" />
@@ -178,6 +180,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LaserCtrl.resx</DependentUpon>
     </Compile>
+    <Compile Include="SerialPortModel.cs" />
     <Compile Include="SimpleLogger.cs" />
     <Compile Include="SysClass\AllPatients.cs" />
     <Compile Include="SysClass\FullScreen.cs" />
@@ -268,11 +271,11 @@
     <Compile Include="UI\RulerAppearanceCtrl.Designer.cs">
       <DependentUpon>RulerAppearanceCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\SerialPortForm.cs">
-      <SubType>Form</SubType>
+    <Compile Include="UI\SerialPortConfigCtrl.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\SerialPortForm.designer.cs">
-      <DependentUpon>SerialPortForm.cs</DependentUpon>
+    <Compile Include="UI\SerialPortConfigCtrl.designer.cs">
+      <DependentUpon>SerialPortConfigCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\SliderCtrl.cs">
       <SubType>UserControl</SubType>
@@ -440,8 +443,8 @@
     <EmbeddedResource Include="UI\RulerAppearanceCtrl.zh-CN.resx">
       <DependentUpon>RulerAppearanceCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\SerialPortForm.resx">
-      <DependentUpon>SerialPortForm.cs</DependentUpon>
+    <EmbeddedResource Include="UI\SerialPortConfigCtrl.resx">
+      <DependentUpon>SerialPortConfigCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\SettingCtrl.zh-CN.resx">
       <DependentUpon>SettingCtrl.cs</DependentUpon>
@@ -543,6 +546,7 @@
     <Content Include="Resources\exclamation.png" />
     <Content Include="Resources\hand.png" />
     <Content Include="Resources\image.png" />
+    <Content Include="Resources\port.png" />
     <Content Include="Resources\Simulator\egg.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -148,7 +148,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonCapture.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 20</value>
   </data>
   <data name="toolStripButtonCapture.Text" xml:space="preserve">
     <value>Capture Screen</value>
@@ -157,7 +157,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonVideo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 20</value>
   </data>
   <data name="toolStripButtonVideo.Text" xml:space="preserve">
     <value>Take Video</value>
@@ -166,25 +166,25 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripFiles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 20</value>
   </data>
   <data name="toolStripFiles.Text" xml:space="preserve">
     <value>Archive File</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 23</value>
   </data>
   <data name="comboBoxLense.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 25</value>
+    <value>80, 23</value>
   </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 23</value>
   </data>
   <data name="toolStripButtonZoomOut.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonZoomOut.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 20</value>
   </data>
   <data name="toolStripButtonZoomOut.Text" xml:space="preserve">
     <value>Zoom Out</value>
@@ -193,7 +193,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonZoomIn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 20</value>
   </data>
   <data name="toolStripButtonZoomIn.Text" xml:space="preserve">
     <value>Zoom In</value>
@@ -202,7 +202,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonFit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 20</value>
   </data>
   <data name="toolStripButtonFit.Text" xml:space="preserve">
     <value>Zoom Fit</value>
@@ -211,25 +211,25 @@
     <value>Zoom Fit</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 23</value>
   </data>
   <data name="toolStripButtonScale.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonScale.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 20</value>
   </data>
   <data name="toolStripButtonScale.Text" xml:space="preserve">
     <value>Measure</value>
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 23</value>
   </data>
   <data name="toolStripButtonMove.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonMove.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 20</value>
   </data>
   <data name="toolStripButtonMove.Text" xml:space="preserve">
     <value>Move</value>
@@ -238,7 +238,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonLine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 20</value>
   </data>
   <data name="toolStripButtonLine.Text" xml:space="preserve">
     <value>Line</value>
@@ -247,7 +247,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonRectangle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 20</value>
   </data>
   <data name="toolStripButtonRectangle.Text" xml:space="preserve">
     <value>Rectangle</value>
@@ -256,7 +256,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonElliptical.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 20</value>
   </data>
   <data name="toolStripButtonElliptical.Text" xml:space="preserve">
     <value>Ellipse</value>
@@ -265,82 +265,28 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonPolygon.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 20</value>
   </data>
   <data name="toolStripButtonPolygon.Text" xml:space="preserve">
     <value>Polygon</value>
-  </data>
-  <data name="btnUm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="btnUm.Text" xml:space="preserve">
-    <value>um</value>
-  </data>
-  <data name="btnUm.ToolTipText" xml:space="preserve">
-    <value>um</value>
-  </data>
-  <data name="btnDmm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="btnDmm.Text" xml:space="preserve">
-    <value>mm/10</value>
-  </data>
-  <data name="btnDmm.ToolTipText" xml:space="preserve">
-    <value>mm/10</value>
-  </data>
-  <data name="btnMm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="btnMm.Text" xml:space="preserve">
-    <value>mm</value>
-  </data>
-  <data name="btnMm.ToolTipText" xml:space="preserve">
-    <value>mm</value>
-  </data>
-  <data name="btnCm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="btnCm.Text" xml:space="preserve">
-    <value>cm</value>
-  </data>
-  <data name="btnCm.ToolTipText" xml:space="preserve">
-    <value>cm</value>
-  </data>
-  <data name="btnInches.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="btnInches.Text" xml:space="preserve">
-    <value>inches</value>
-  </data>
-  <data name="btnInches.ToolTipText" xml:space="preserve">
-    <value>inches</value>
-  </data>
-  <data name="btnMeters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="btnMeters.Text" xml:space="preserve">
-    <value>meters</value>
-  </data>
-  <data name="btnMeters.ToolTipText" xml:space="preserve">
-    <value>meters</value>
   </data>
   <data name="toolStripDropDownButtonUnit.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripDropDownButtonUnit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 22</value>
+    <value>29, 20</value>
   </data>
   <data name="toolStripDropDownButtonUnit.Text" xml:space="preserve">
     <value>Measure Units</value>
   </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 23</value>
   </data>
   <data name="toolStripButtonLaser.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonLaser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 20</value>
   </data>
   <data name="toolStripButtonLaser.Text" xml:space="preserve">
     <value>Laser</value>
@@ -349,7 +295,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonSetting.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 20</value>
   </data>
   <data name="toolStripButtonSetting.Text" xml:space="preserve">
     <value>Setting</value>
@@ -358,10 +304,148 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonOpen.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 20</value>
   </data>
   <data name="toolStripButtonOpen.Text" xml:space="preserve">
     <value>Open</value>
+  </data>
+  <data name="toolStripDropDownButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+</value>
+  </data>
+  <data name="toolStripDropDownButton1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripDropDownButton1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 20</value>
+  </data>
+  <data name="toolStripDropDownButton1.Text" xml:space="preserve">
+    <value>toolStripDropDownButton1</value>
+  </data>
+  <data name="toolStripButtonPort.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButtonPort.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 20</value>
+  </data>
+  <data name="toolStripButtonPort.Text" xml:space="preserve">
+    <value>Serial Port</value>
+  </data>
+  <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>725, 23</value>
+  </data>
+  <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="toolStrip1.Text" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Name" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btnUm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 22</value>
+  </data>
+  <data name="btnUm.Text" xml:space="preserve">
+    <value>um</value>
+  </data>
+  <data name="btnUm.ToolTipText" xml:space="preserve">
+    <value>um</value>
+  </data>
+  <data name="btnDmm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 22</value>
+  </data>
+  <data name="btnDmm.Text" xml:space="preserve">
+    <value>mm/10</value>
+  </data>
+  <data name="btnDmm.ToolTipText" xml:space="preserve">
+    <value>mm/10</value>
+  </data>
+  <data name="btnMm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 22</value>
+  </data>
+  <data name="btnMm.Text" xml:space="preserve">
+    <value>mm</value>
+  </data>
+  <data name="btnMm.ToolTipText" xml:space="preserve">
+    <value>mm</value>
+  </data>
+  <data name="btnCm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 22</value>
+  </data>
+  <data name="btnCm.Text" xml:space="preserve">
+    <value>cm</value>
+  </data>
+  <data name="btnCm.ToolTipText" xml:space="preserve">
+    <value>cm</value>
+  </data>
+  <data name="btnInches.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 22</value>
+  </data>
+  <data name="btnInches.Text" xml:space="preserve">
+    <value>inches</value>
+  </data>
+  <data name="btnInches.ToolTipText" xml:space="preserve">
+    <value>inches</value>
+  </data>
+  <data name="btnMeters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 22</value>
+  </data>
+  <data name="btnMeters.Text" xml:space="preserve">
+    <value>meters</value>
+  </data>
+  <data name="btnMeters.ToolTipText" xml:space="preserve">
+    <value>meters</value>
   </data>
   <data name="openCameraLive.Size" type="System.Drawing.Size, System.Drawing">
     <value>194, 22</value>
@@ -393,89 +477,14 @@
   <data name="snapshot.Text" xml:space="preserve">
     <value>Snapshot</value>
   </data>
-  <data name="toolStripDropDownButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAhiSURBVFhH1VdpUFRXFjZOMjM1S82UpszUJDPjuISl2WQJ
-        CA0tGgiLC4oozdZssg8KCIpoyCgqopIxRB1URFpQY5RgAAGlaWSzZROw7aZBA4hsgsiSUbTPec69z4dg
-        pJxF8yNf1anzCt6933e/e+65r6f9ZMAwzK/7+vrMOzo6XNrbb6++c+eOU1dHh21PT4/p6Ojoe0+fPv09
-        iV+SmE7iLRrc0P8PdLLh4eH5KqUysEwqOZP91Zn2rIyMJ1kZJ/Bk+nEYz5kn0tXkefTUSfHI+a/PfFeY
-        l1d18WJ+iayq8kh9be0OeVNTVGdnp0N/f78RmfNtbvqXQf9JV0JedqyuqjqQeyG7nk5MicZjMvGr8vgz
-        Ecc9p6tPiTMetba2OnF0L2JgYEA7NTW1IjQk5H7c5ljYlZCA+5OS4HBKCpw4doyd5PRJMc1A82SiZwQv
-        CyDk7DMhZsfRTAR4cZQvQlYli03e9zlaLOSjpYUVmptZoBVfgFYWVvCRoTHDN12INtZL0MlxGXi5uWNY
-        UDDExWxiPtsSi5uiojBx5044fiT1uaDJkbw3CeO3xrFibqlUIo5yAsT63+1J3JOz1sUVBVYCjN0UB9nn
-        LmBpSTl8+00eJPx9Jy40NgV9bR001NUHA54e8rS0QVdTm9GarwG7E3YRt/aD09Jl46tlgzpAtyA2Jnr8
-        GVQqlTdHOwGy53qE+LGdrT2USMqgp3sAbrV2QPElKVSUXVV3tHeB5HIpCCwFqKOhpV6go4eEXE0CNed9
-        qN4YsREzxVnqVcudION42vOtoIR7dibAF58nE5E71MePHlEr5PKXHSDHiLdIYP24qFCChBxvylswPDQc
-        58+bDzo8XXBxXoPSohKsr21kPl60GPS0eIyeNo/NOpraoM/TZYgo4sByulJKzow7EBYchNu3bcPN0Rsh
-        OCAAFQrFywIGBwf/HB0V87CXrFypuAXJ+/4Bc/86B/70wQfgYSGAIqc1WCP0gs6zOVhSfAUoGY8QEwHU
-        CdQh22Goa0BqwxPELzqAnu5ulBhsliyB0OAgmLIGRkZG3s35Jvf7rrv3oLa6AVY4Lod3Z84EQ0JUS4jb
-        PXyx3dMPOrwDoLvuBhDLgZJOFmCkZwDeHiKgxDSoEH9fH1jm6AjRUZHgKxKpk3bvmroGaBE2XFeMfne7
-        E66UVoIpKTgqwMnUHNq8/KHd3YcVQONOYrJaKi1DXW22CFGbFCEVQotT5D7hQEbaMXCws4Ol9vYQHRlB
-        a+BZESqVUwr4TWtL26iq+TZeKiwmAkyQCEAnM4tnAqgD41m0DjqamnERX8ASa8ydz+YFRICn0APFk/rA
-        0cOHIDw0lD3/h79MYQUo5XIfjnYCRMCv5Deah+tqGvCrrEy0Fghw5owZaKxngHWunhMO0OzhC93VDeju
-        6sY6QE7BMwFkuzyF7ig+/mJDorZ/FrcF01JTYStpcJWVlVMKeKeqXKZsb7uLOeezcWNEJLz/x/dx9l9m
-        Q7yN/fMaoPmmuw8oqmrQT+RLiRmNufNwQoAHZnKrp0FXTptTeEgoLhZYA2luIJFIphTw9sEvDzX19tyH
-        iiuVkHbkCPvye7NmgYGePhz08MZSNxHkOrtioP1SteJmC65Z5cL2AY0588ZrQD1eA5T4i+T9EOjnD1Z8
-        KyDdFfjmlmoSUHK5ZMpO+NbprNPk1mp+Ipc3Q1lpKZzKzEITIxPQIEVGu6PNx7ZAW3RYSBiQekEzYxPg
-        aWgh70NN1gFahNSBvYm7wd1NiHxzPtvKKel4dl7lfKelpcWMo30RfX2D+uJ08Vh7Wxd0d/XC2NgYlJdX
-        gOsaIVVP7wawt3VAWVUNZIpPIe0D1AEa7BYQB1Yud8Ll4ctw38UkJih5HcO3s6R3C21k7WSBm8lNO4uj
-        exm0EGtqavamHU3v7+7uh0cPx5BiaGgYpSVSzDp5Gq/J6hhiPywRWDP07BNyhgqgdwTtA0sdHJktZzfj
-        P8tTmCTJDiby6xAm+EBgXc+DntkczatBt4J88cy9f3/IbnBw5FL/vQeP73b2QbPyFnZ13YNrV2vRecUq
-        duWcAPYYRkduJMdPDPaf2EHkqXDcW5LAxBdFMzEFQRCSK4SIPN/q6rvV5nR+juo/g7z88ycPn/CHhkbi
-        HzwY3jE0NOQqk8lWHz54+NOtsVszPYVuMgtTswfGBguG9+5KvHUo5dAjH29vVeS59Y+2F8cyMReDmOD8
-        tSj61h6F2QJmxTnjh/vK45PJPDM4itcDETidfK7NJN+Hc6nY3t7eOX3f9/1hS35E15biMAwrcEPfPAdc
-        e8ESV+QsQIccTXTM1UCP/MVKSdslh//Jjf8WVEhMQdjd6GI/DCxwQlG+NTjnGuGyPC1cWagFLhIddJXq
-        onupwVhSTUwqvYO4oW8GVEBEfkBXRLE7+hXaobDAHFcW8HDNJR4jlOqhV4UB+lw1RP9qYwyoNYSYKmEZ
-        GfMzbvjrgwrYcNGPCBAy64psGOFlE6SrFpUbML4yQwyqNWGC6k0xtNEcwxotMKDGaoCO4Ya/PlgBhaKu
-        DVIX9CuxRk+pIXhV6IL/NSMMvm4ClDRcbolRCitYf0Pwr/SWA5+SMW+uFqiAqGLv7sgrLhhYuhi9y03Q
-        j5LXm+HfbvAxQinAKJU1xsrXNlX2li0h70/nhr4ZUAHREp/umMq1GF5hy6y7akb22gTDmyyYCIUAI5W2
-        oydaD2zvZ/p/yw15s6ACNpX7d2+95omR1Y4YXs+HkOsLMeKmJWxr9Kq8PnD9ozdq+Q9BBWyrCulOqPXD
-        uLrVTFSDDYbWWd8/25a2gfyu/AX32o8HIuCdhGtRin0NYRjf6AG7G9cXqUZUWj/qqn+Ihr5a/oGmnefy
-        b5/3p45wf34Fpk37NxQLSY+yRH7VAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="toolStripDropDownButton1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="toolStripDropDownButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 22</value>
-  </data>
-  <data name="toolStripDropDownButton1.Text" xml:space="preserve">
-    <value>toolStripDropDownButton1</value>
-  </data>
-  <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>725, 25</value>
-  </data>
-  <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="toolStrip1.Text" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.Name" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>6, 12</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>725, 25</value>
+    <value>725, 23</value>
   </data>
   <data name="&gt;&gt;toolStripButtonCapture.Name" xml:space="preserve">
     <value>toolStripButtonCapture</value>
@@ -680,6 +689,12 @@
   </data>
   <data name="&gt;&gt;snapshot.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonPort.Name" xml:space="preserve">
+    <value>toolStripButtonPort</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonPort.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ControlCtrl</value>

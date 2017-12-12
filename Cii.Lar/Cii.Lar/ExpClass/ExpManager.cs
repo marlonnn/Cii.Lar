@@ -123,6 +123,9 @@ namespace Cii.Lar.ExpClass
                     this.ZWPictureBox.LaserFunction = false;
                     OpenFile();
                     break;
+                case ToolStripAction.PortConfig:
+                    this.ZWPictureBox.ShowBaseCtrl(true, 7);
+                    break;
             }
         }
 
